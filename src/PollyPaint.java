@@ -1,7 +1,12 @@
-import processing.core.library.PApplet;
+import processing.core.PApplet;
 
 public class PollyPaint extends PApplet {
 
+	public static void main(String[] passedArgs) {
+		String[] appletArgs = new String[] { "PollyPaint" };
+		PApplet.main(appletArgs);
+    }
+		
 	public void settings() {
 		size(500, 500);
 	}
@@ -11,8 +16,4 @@ public class PollyPaint extends PApplet {
 		ellipse(mouseX, mouseY, 20, 20);
 	}
 
-	public static void main(String[] passedArgs) {
-		String[] appletArgs = new String[] { "MySketch" };
-		PApplet.main(appletArgs);
-    }
 }
