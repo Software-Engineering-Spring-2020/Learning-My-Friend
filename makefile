@@ -1,4 +1,4 @@
 make:
-	javac -cp src/core.jar src/PollyPaint.java
+	javac -cp src/core.jar -d bin/ src/BasicInteraction.java
 run:
-	java -cp src/core.jar src/PollyPaint
+	java -cp bin/core.jar bin/BasicInteraction
