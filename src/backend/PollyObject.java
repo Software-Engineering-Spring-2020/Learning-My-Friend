@@ -1,4 +1,4 @@
-package backend;
+package src.backend;
 //import processing.core.*;
 
 abstract class PollyObject{
