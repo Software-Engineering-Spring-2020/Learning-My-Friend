@@ -3,4 +3,7 @@ make:
 run:
 	java -cp ".:bin/core.jar" bin/BasicInteraction
 runWin:
-	java -cp ".;bin/core.jar" bin/BasicInteraction
+	cd bin
+	java -cp ".;./core.jar" BasicInteraction
+	cd ..
+
