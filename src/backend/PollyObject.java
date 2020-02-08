@@ -1,8 +1,11 @@
-abstract class Object{
+package backend;
+//import processing.core.*;
+
+abstract class PollyObject{
   float xpos, ypos, xinit, yinit, rot = 0;
   boolean showBoundary;
   
-  Object(float x, float y){
+  PollyObject(float x, float y){
     xinit = x;
     yinit = y;
     xpos = xinit;

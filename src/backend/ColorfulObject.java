@@ -1,4 +1,7 @@
-abstract class ColorfulObject extends Object{
+package backend;
+//import processing.core.*;
+
+abstract class ColorfulObject extends PollyObject{
   int[] boarderColor = new int[3];
   int[] fillColor = new int[3];
   

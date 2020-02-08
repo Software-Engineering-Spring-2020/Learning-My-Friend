@@ -1,4 +1,8 @@
-class Group extends Object{
+package backend;
+import java.util.ArrayList;
+//import processing.core.*;
+
+class Group extends PollyObject{
   ArrayList<Object> members = new ArrayList<Object>();
   
   Group(float x, float y){

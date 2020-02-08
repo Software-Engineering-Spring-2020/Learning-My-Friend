@@ -1,3 +1,7 @@
+package backend;
+import java.util.ArrayList;
+//import processing.core.*;
+
 class DrawSpace extends ColorfulObject{
   float wBasic, hBasic, wPix, hPix;
   ArrayList<Object> objects = new ArrayList<Object>();
