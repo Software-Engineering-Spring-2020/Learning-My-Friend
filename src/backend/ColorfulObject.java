@@ -1,4 +1,4 @@
-package src.backend;
+package backend;
 //import processing.core.*;
 
 abstract class ColorfulObject extends PollyObject{
