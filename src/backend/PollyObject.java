@@ -1,15 +1,15 @@
 package backend;
-//import processing.core.*;
+import processing.core.PApplet;
 
-abstract class PollyObject{
-  float xpos, ypos, xinit, yinit, rot = 0;
+abstract class PollyObject {
+  PApplet sketch;
+  float xpos, ypos, rot = 0;
   boolean showBoundary;
   
-  PollyObject(float x, float y){
-    xinit = x;
-    yinit = y;
-    xpos = xinit;
-    ypos = yinit;
+  PollyObject(PApplet sketch, float x, float y){
+    this.sketch = sketch;
+    xpos = x;
+    ypos = y;
   }
   
   void setPosition(float x, float y){
@@ -26,5 +26,5 @@ abstract class PollyObject{
     return rot; 
   }
   
-  void display(float[] pos){}
+  void display(){  }
 }

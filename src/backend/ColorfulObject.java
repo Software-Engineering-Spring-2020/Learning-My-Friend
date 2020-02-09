@@ -1,12 +1,14 @@
 package backend;
 //import processing.core.*;
 
+import processing.core.PApplet;
+
 abstract class ColorfulObject extends PollyObject{
   int[] boarderColor = new int[3];
   int[] fillColor = new int[3];
   
-  ColorfulObject(float x, float y){
-    super(x, y);
+  ColorfulObject(PApplet sketch, float x, float y){
+    super(sketch, x, y);
   }
   
   void setBoarderColor(int r, int g, int b){
@@ -26,5 +28,10 @@ abstract class ColorfulObject extends PollyObject{
   }
   int[] getFillColor(){ 
     return fillColor; 
+  }
+
+  void display(){
+    sketch.fill(sketch.color(fillColor[0], fillColor[1], fillColor[2]));
+    sketch.stroke(sketch.color(boarderColor[0], boarderColor[1], boarderColor[2]));
   }
 }

@@ -1,12 +1,13 @@
 package backend;
+import processing.core.PApplet;
+
 import java.util.ArrayList;
-//import processing.core.*;
 
 class Group extends PollyObject{
   ArrayList<Object> members = new ArrayList<Object>();
   
-  Group(float x, float y){
-    super(x, y);
+  Group(PApplet sketch, float x, float y){
+    super(sketch, x, y);
   }
   
   void addMembers(ArrayList<Object> prospectives){
