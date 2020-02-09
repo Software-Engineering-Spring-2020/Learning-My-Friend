@@ -36,13 +36,13 @@ public class BasicInteraction extends PApplet {
 
   public void keyPressed() {
     if (this.key == Character.MAX_VALUE)
-      if (this.keyCode == 38) {
+      if (this.keyCode == 38) { //UP
         this.zoom += 0.03F;
-      } else if (this.keyCode == 40) {
+      } else if (this.keyCode == 40) { //DOWN
         this.zoom -= 0.03F;
-      } else if (this.keyCode == 37) {
+      } else if (this.keyCode == 37) { //LEFT
         this.angle -= 0.03F;
-      } else if (this.keyCode == 39) {
+      } else if (this.keyCode == 39) { //RIGHT  
         this.angle += 0.03F;
       }
     if (this.key == ' ') {
