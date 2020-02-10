@@ -6,7 +6,8 @@ import processing.core.PApplet;
 public abstract class ColorfulObject extends PollyObject{
   protected int[] boarderColor = new int[3];
   protected int[] fillColor = new int[3];
-  
+  protected float alpha = 1;
+
   public ColorfulObject(PApplet sketch, float x, float y){
     super(sketch, x, y);
   }
@@ -24,10 +25,14 @@ public abstract class ColorfulObject extends PollyObject{
   }
 
   protected int[] getBoarderColor(){
-    return boarderColor; 
+    return boarderColor;
   }
-  int[] getFillColor(){ 
-    return fillColor; 
+  protected int[] getFillColor(){
+    return fillColor;
+  }
+
+  protected void setAlpha(float a){
+    this.alpha = a;
   }
 
   protected void display(){
