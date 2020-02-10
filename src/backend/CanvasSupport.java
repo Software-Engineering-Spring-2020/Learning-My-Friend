@@ -1,5 +1,5 @@
 package backend;
-import backend_beta.Shapes.ShapeFactory;
+import backend.Shapes.ShapeFactory;
 import processing.core.PApplet;
 import processing.core.PConstants;
 
