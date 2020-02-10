@@ -2,26 +2,22 @@ package backend.Shapes;
 import backend.ColorfulObject;
 import processing.core.PApplet;
 
-public class ShapeFactory {
-    protected  PApplet sketch;
-    public ShapeFactory(PApplet sketch){
-        this.sketch = sketch;
-    }
+class Ellipse extends ColorfulObject {
+  float pixelWidth, pixelHeight;
+  Ellipse(PApplet sketch, float x, float y, float w, float h, int[] fillColor, int[] boarderColor){
+    super(sketch, x, y, fillColor, boarderColor);
+    this.pixelWidth = w;
+    this.pixelHeight = h;
+  }
+  Ellipse(PApplet sketch, float x, float y, float d, int[] fillColor, int[] boarderColor){
+    this(sketch, x, y, d, d, fillColor, boarderColor);
+  }
+  Ellipse(PApplet sketch, float x, float y, int[] fillColor, int[] boarderColor){
+    this(sketch, x, y, 50, 25, fillColor, boarderColor);
+  }
 
-    public ColorfulObject createShape(float x, float y, char shape){
-        if(shape == 'e') return createCircle(x, y);
-        return null;
-    }
-
-    public Ellipse createEllipse(float x, float y, float w, float h){
-        return new Ellipse(sketch, x, y, w, h);
-    }
-
-    public Ellipse createCircle(float x, float y, float d){
-        return new Ellipse(sketch, x, y, d);
-    } public Ellipse createCircle(float x, float y){
-        return new Ellipse(sketch, x, y);
-    }
-
-
+  protected void display(){
+    super.display();
+    sketch.ellipse(xpos, ypos, pixelWidth, pixelHeight);
+  }
 }

@@ -1,25 +1,23 @@
 package backend.Shapes;
-import backend.ColorfulObject;
+import backend_beta.ColorfulObject;
 import processing.core.PApplet;
 
 class Ellipse extends ColorfulObject {
-  float w = 10, h = 10;
-  Ellipse(PApplet sketch, float x, float y, float w, float h){
-    super(sketch, x, y);
-    this.w = w;
-    this.h = h;
+  float pixelWidth, pixelHeight;
+  Ellipse(PApplet sketch, float x, float y, float w, float h, int[] fillColor, int[] boarderColor){
+    super(sketch, x, y, fillColor, boarderColor);
+    this.pixelWidth = w;
+    this.pixelHeight = h;
   }
-  Ellipse(PApplet sketch, float x, float y, float d){
-    super(sketch, x, y);
-    this.w = d;
-    this.h = d;
+  Ellipse(PApplet sketch, float x, float y, float d, int[] fillColor, int[] boarderColor){
+    this(sketch, x, y, d, d, fillColor, boarderColor);
   }
-  Ellipse(PApplet sketch, float x, float y){
-    super(sketch, x, y);
+  Ellipse(PApplet sketch, float x, float y, int[] fillColor, int[] boarderColor){
+    this(sketch, x, y, 50, 25, fillColor, boarderColor);
   }
-  
+
   protected void display(){
     super.display();
-    sketch.ellipse(xpos, ypos, w, h);
+    sketch.ellipse(xpos, ypos, pixelWidth, pixelHeight);
   }
 }
