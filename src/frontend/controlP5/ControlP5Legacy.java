@@ -28,7 +28,7 @@ package frontend.controlP5;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
-import static controlP5.Controller.*;
+import static frontend.controlP5.Controller.*;
 
 public class ControlP5Legacy {
 

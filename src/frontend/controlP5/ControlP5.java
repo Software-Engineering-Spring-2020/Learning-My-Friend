@@ -50,7 +50,7 @@ import processing.core.PFont;
 import processing.core.PGraphics;
 import processing.event.KeyEvent;
 import processing.event.MouseEvent;
-import controlP5.ControlWindow.Pointer;
+import frontend.controlP5.ControlWindow.Pointer;
 
 /**
  * <p>

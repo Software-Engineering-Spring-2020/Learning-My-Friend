@@ -1,5 +1,5 @@
 import processing.core.PApplet;
-import backend.CanvasSupport;
+import frontend.Frontend;
 
 //import frontend.Frontend;
 
@@ -14,11 +14,7 @@ import backend.CanvasSupport;
  */
 
 public class PollyPaint extends PApplet {
-
-
-
-
-
+Frontend gui;
 
 /**
  * [main is what runs by default. This should not be called by any other class.]
@@ -47,7 +43,7 @@ public class PollyPaint extends PApplet {
  */
 	public void setup(){
 		surface.setResizable(true);
-
+		gui = new Frontend(this);
 	}
 
 /**
@@ -56,6 +52,7 @@ public class PollyPaint extends PApplet {
 	public void draw(){
 		background(64);
 		ellipse(mouseX, mouseY, 20, 20);
+		gui.display();
 	}
 
 

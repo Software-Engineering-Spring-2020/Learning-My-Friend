@@ -25,7 +25,7 @@ package frontend.controlP5;
  * 
  */
 
-import static controlP5.ControlP5.b;
+import static frontend.controlP5.ControlP5.b;
 
 import java.util.ArrayList;
 import java.util.Arrays;

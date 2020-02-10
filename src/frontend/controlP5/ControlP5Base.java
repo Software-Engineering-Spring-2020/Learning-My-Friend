@@ -39,7 +39,7 @@ import java.util.TreeSet;
 import processing.core.PApplet;
 import processing.event.Event;
 
-import static controlP5.Controller.*;
+import static frontend.controlP5.Controller.*;
 
 /**
  * The ControlP5Base supports the ControlP5 class and

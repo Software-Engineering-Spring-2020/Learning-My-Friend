@@ -31,7 +31,7 @@ import java.util.logging.Level;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PGraphics;
-import controlP5.ControlP5.Invisible;
+import frontend.controlP5.ControlP5.Invisible;
 
 /**
  * A range slider works just like a slider but can be adjusted on both ends.

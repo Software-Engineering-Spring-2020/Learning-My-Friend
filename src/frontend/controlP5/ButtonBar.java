@@ -27,7 +27,7 @@ package frontend.controlP5;
  */
 
 
-import static controlP5.ControlP5.b;
+import static frontend.controlP5.ControlP5.b;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,7 +35,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static controlP5.ControlP5.s;
+import static frontend.controlP5.ControlP5.s;
 import processing.core.PGraphics;
 
 public class ButtonBar extends Controller< ButtonBar > {
