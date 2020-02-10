@@ -15,7 +15,6 @@ import frontend.Frontend;
 
 public class PollyPaint extends PApplet {
 Frontend gui;
-
 /**
  * [main is what runs by default. This should not be called by any other class.]
  * @param passedArgs [description]
@@ -44,6 +43,7 @@ Frontend gui;
 	public void setup(){
 		surface.setResizable(true);
 		gui = new Frontend(this);
+		gui.setup();
 	}
 
 /**
