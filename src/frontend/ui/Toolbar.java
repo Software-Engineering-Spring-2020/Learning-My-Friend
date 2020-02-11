@@ -1,6 +1,6 @@
 package frontend.ui;
 import frontend.controlP5.*;
-
+import frontend.handler.Handler;
 /**
   * <h1>Toolbar/h1>
   *
@@ -14,9 +14,12 @@ import frontend.controlP5.*;
 
 public abstract class Toolbar{
   ControlP5 cp5;
+  //Handler is present so the Toolbar can register it's controllers
+  Handler h;
 
-  public Toolbar(ControlP5 cp5){
+  public Toolbar(ControlP5 cp5, Handler h){
     this.cp5 = cp5;
+    this.h = h;
   }
 
 }

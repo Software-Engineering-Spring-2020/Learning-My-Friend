@@ -68,8 +68,6 @@ float canvasX, canvasY, canvasWidth, canvasHeight;
  */
 	public void setup(){
 		surface.setResizable(true);
-		gui = new GUI(this);
-		gui.setup();
 		//Init Canvas Position and Size in center of the screen
 		canvasX = width/4;
 		canvasY = height/4;
@@ -79,6 +77,8 @@ float canvasX, canvasY, canvasWidth, canvasHeight;
 
 		win = new Window(this, canvasX, canvasY, canvasWidth, canvasHeight);
 		h = new Handler(win);
+		gui = new GUI(this, h);
+		gui.setup();
 	}
 
 /**

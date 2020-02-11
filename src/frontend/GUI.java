@@ -13,7 +13,8 @@ package frontend;
 import processing.core.PApplet;
 import frontend.controlP5.*;
 import frontend.ui.*;
-import javax.management.*;
+import java.util.ArrayList;
+import frontend.handler.Handler;
 
 public class GUI{
   int guiHeight;
@@ -21,14 +22,19 @@ public class GUI{
   ControlP5 cp5;
   PApplet sketch;
 
+  //A list of active toolbars
+  ArrayList<Toolbar> tbList;
+  Handler h;
+
 
   /**
    * [GUI constructor]
    * @param sketch [PApplet from sketch]
    */
-  public GUI(PApplet sketch){
+  public GUI(PApplet sketch, Handler h){
     this.sketch = sketch;
     cp5 = new ControlP5(sketch);
+    this.h = h;
   }
 
   /**
@@ -63,11 +69,11 @@ public class GUI{
 
   public Toolbar toolbarFactory(String type){
     if(type.equals("ObjSet"))
-      return new ObjSetToolbar(cp5);
+      return new ObjSetToolbar(cp5, h);
     if(type.equals("ObjCreate"))
-      return new ObjCreateToolbar(cp5);
+      return new ObjCreateToolbar(cp5, h);
     if(type.equals("Workspace"))
-      return new WorkspaceToolbar(cp5);
+      return new WorkspaceToolbar(cp5, h);
     //throw BadStringOperationException
     return null;
   }
