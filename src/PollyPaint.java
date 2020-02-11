@@ -1,4 +1,5 @@
-import processing.core.PApplet;
+import processing.core.*;
+import processing.event.*;
 import frontend.*;
 import frontend.controlP5.*;
 import frontend.handler.*;
@@ -39,6 +40,8 @@ GUI gui;
 Window win;
 Handler h;
 
+//mouse sensitivity for zooming
+float mouseSense = 5;
 float canvasX, canvasY, canvasWidth, canvasHeight;
 
 /**
@@ -108,7 +111,10 @@ float canvasX, canvasY, canvasWidth, canvasHeight;
 	}
 
 
-
+	public void mouseWheel(MouseEvent event) {
+	  //float e = event.getCount();
+	  win.zoom(event.getCount()/mouseSense);
+	}
 
 
 
