@@ -87,7 +87,7 @@ src\frontend\controlP5\Tooltip.java
 
 
 
-src\backend\CanvasSupport.java
+src\backend\Window.java
 src\backend\ColorfulObject.java
 src\backend\DrawSpace.java
 src\backend\Group.java
