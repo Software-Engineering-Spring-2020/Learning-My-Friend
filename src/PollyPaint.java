@@ -2,6 +2,7 @@ import processing.core.PApplet;
 import frontend.*;
 import frontend.controlP5.*;
 import frontend.handler.*;
+import backend.*;
 /**
  *<h1> PollyPaint </h1>
  * This is our primary class. Our `main` method is stored here. When launching the program this is what launches.
@@ -35,6 +36,10 @@ import frontend.handler.*;
 
 public class PollyPaint extends PApplet {
 GUI gui;
+CanvasSupport cs;
+Handler h;
+
+float canvasX, canvasY, canvasWidth, canvasHeight;
 
 /**
  * [main is what runs by default. This should not be called by any other class.]
@@ -65,6 +70,14 @@ GUI gui;
 		surface.setResizable(true);
 		gui = new GUI(this);
 		gui.setup();
+		//Init Canvas Position and Size
+		canvasX = width/2;
+		canvasY = height/2;
+		canvasWidth = width/2;
+		canvasHeight = height/2;
+
+		cs = new CanvasSupport(this, canvasX, canvasY, canvasWidth, canvasHeight);
+		h = new Handler(cs);
 	}
 
 /**
@@ -82,7 +95,7 @@ GUI gui;
 	 * @param theEvent [is passed by ControlP5 and contains the event that was just triggered]
 	 */
 	public void controlEvent(ControlEvent theEvent) {
-    Handler.handle(theEvent);
+    h.handle(theEvent);
 	}
 
 }
