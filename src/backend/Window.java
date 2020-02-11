@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class Window {
-    private Stack<PollyObject> trash = new Stack<PollyObject>();
+    //private Stack<PollyObject> trash = new Stack<PollyObject>();
+    private ArrayList<PollyObject> trash = new ArrayList<PollyObject>();
     private ArrayList<PollyObject> selected = new ArrayList<PollyObject>();
     private PApplet sketch;
     private DrawSpace ds;
@@ -108,12 +109,13 @@ public class Window {
     public boolean undo() {
         if(ds.getNumObjects() <= 0) return false;
         //return trash.push(ds.removeShape(ds.getNumObjects()-1));
-        return false;
+        return trash.add(ds.removeShape(ds.getNumObjects()-1));
     }
 
     public boolean redo() {
         if (trash.isEmpty()) return false;
-        return ds.addShape(trash.pop());
+        //return ds.addShape(trash.pop());
+        return ds.addShape(trash.remove(trash.size()-1));
     }
 
     /*********************************************************
