@@ -79,7 +79,7 @@ float canvasX, canvasY, canvasWidth, canvasHeight;
 
 
 		win = new Window(this, canvasX, canvasY, canvasWidth, canvasHeight);
-		h = new Handler(win);
+		h = new Handler(win, this);
 		gui = new GUI(this, h);
 		gui.setup();
 	}
@@ -100,7 +100,7 @@ float canvasX, canvasY, canvasWidth, canvasHeight;
 	 * @param theEvent [is passed by ControlP5 and contains the event that was just triggered]
 	 */
 	public void controlEvent(ControlEvent theEvent) {
-    h.handle(theEvent);
+    h.handleEvent(theEvent);
 	}
 
 
@@ -111,8 +111,13 @@ float canvasX, canvasY, canvasWidth, canvasHeight;
 	}
 
 
+	public void mouseClicked(){
+		//if the mouse is on the canvas
+		h.clickedCanvas();
+
+	}
+
 	public void mouseWheel(MouseEvent event) {
-	  //float e = event.getCount();
 	  win.zoom(event.getCount()/mouseSense);
 	}
 

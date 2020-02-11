@@ -1,3 +1,4 @@
 .vscode/*
+.idea
 src/.vscode/settings.json
 bin/*.class
