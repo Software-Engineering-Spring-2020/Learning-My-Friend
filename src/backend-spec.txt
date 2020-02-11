@@ -7,11 +7,29 @@ Features:
 		UndoShapeDelete
 		RestoreShapeDelete
 		Delete
+		setting colors for boarder / fill
+
 	Untested:
 		ReCenter
 
 
 Bugs:
 	Delete would work, however the remove function on the ArrayList isn't returning anything
+
+
+TODO:
+	Clear
+	Import
+	New way to Export
+	Pan / Scale Shapes (basis written, have to translate to diff coord (math))
+	Textboxes
+	Comments
+	Grid (have unupploaded code to show it, not to snap)
+	setStroke
+	Curves
+	Triangles
+	SetStroke
+	Freehand Drawing
+
 
 
