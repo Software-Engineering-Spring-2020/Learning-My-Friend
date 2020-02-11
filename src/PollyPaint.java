@@ -1,7 +1,7 @@
 import processing.core.PApplet;
 import frontend.*;
 import frontend.controlP5.*;
-
+import frontend.handler.*;
 /**
  *<h1> PollyPaint </h1>
  * This is our primary class. Our `main` method is stored here. When launching the program this is what launches.
@@ -76,9 +76,13 @@ GUI gui;
 		gui.display();
 	}
 
-	public void controlEvent(ControlEvent theEvent) {
-    System.out.println("got a control event from controller with id Frontend ");
 
+	/**
+	 * [controlEvent is called whenever a controlP5 controller is used]
+	 * @param theEvent [is passed by ControlP5 and contains the event that was just triggered]
+	 */
+	public void controlEvent(ControlEvent theEvent) {
+    Handler.handle(theEvent);
 	}
 
 }
