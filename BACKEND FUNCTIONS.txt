@@ -15,14 +15,17 @@ METHODS:
 		void setFillColor(int r, int g, int b)
 		void setBoarderColor(int r, int g, int b)
 		boolean deleteSelected()
-		boolean undo()
-		boolean redo()
+		boolean deleteLast()
+		boolean restoreLast()
 
 	Untested:
 		void reCenter()
 		void rotate(float ao)
 		void singleSelect(float x, float y)
 		void multiSelect(float x, float y)
+		boolean copy()
+		void paste()
+		void clear()
 
 
 Bugs:
@@ -30,7 +33,6 @@ Bugs:
 
 
 TODO:
-	Clear
 	Import
 	New way to Export
 	Pan / Scale Shapes (basis written, have to translate to diff coord (math))

@@ -10,6 +10,7 @@ public class Window {
     //private Stack<PollyObject> trash = new Stack<PollyObject>();
     private ArrayList<PollyObject> trash = new ArrayList<PollyObject>();
     private ArrayList<PollyObject> selected = new ArrayList<PollyObject>();
+    private ArrayList<PollyObject> copied = new ArrayList<PollyObject>();
     private PApplet sketch;
     private DrawSpace ds;
     private ShapeFactory sf;
@@ -101,21 +102,49 @@ public class Window {
         for (PollyObject shape : selected) {
             trash.add(shape);
             successful = successful || true;
-            sketch.println(ds.indexOf(shape));
+            //sketch.println(ds.indexOf(shape));
         }
         return successful;
     }
 
-    public boolean undo() {
+    public boolean deleteLast() {
         if(ds.getNumObjects() <= 0) return false;
         //return trash.push(ds.removeShape(ds.getNumObjects()-1));
         return trash.add(ds.removeShape(ds.getNumObjects()-1));
     }
 
-    public boolean redo() {
+    public boolean restoreLast() {
         if (trash.isEmpty()) return false;
         //return ds.addShape(trash.pop());
         return ds.addShape(trash.remove(trash.size()-1));
+    }
+
+    public void clear(){
+        for(int i = 0; i<ds.getNumObjects(); i++){
+            trash.add(ds.removeShape(ds.getNumObjects()-1));
+        }
+    }
+
+    public boolean copy(){
+        boolean sucess = true;
+        copied.clear();
+        for(PollyObject shape : selected){
+            sucess = sucess && copied.add(shape);
+        }
+        return sucess;
+    }
+
+    public void paste(){
+        for(PollyObject shape : copied){
+            float[] pos = shape.getPosition();
+            if(shape instanceof ColorfulObject){
+                int[] fill = ((ColorfulObject) shape).getFillColor();
+                int[] boarder = ((ColorfulObject) shape).getBoarderColor();
+                sf.createShape(pos[0]+2, pos[1]+2, 'r', fill, boarder); //not full copy
+            } else{ 
+                //ds.addShape();
+            }
+        }
     }
 
     /*********************************************************

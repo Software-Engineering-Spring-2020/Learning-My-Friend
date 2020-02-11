@@ -4,41 +4,41 @@ import processing.core.PApplet;
 public class BackendDriver extends PApplet {
     boolean save;
     int count = 0;
-    Window canvas;
+    Window window;
     public void setup() {
         this.surface.setResizable(true);
-        canvas = new Window(this, 50, 50, 1000, 500);
+        window = new Window(this, 50, 50, 1000, 500);
     }
 
     public void draw() {
         background(153);
-        this.canvas.display();
+        this.window.display();
     }
 
-    public void keyPressed() {
+    public void keyReleased() {     
         if (this.key == Character.MAX_VALUE) {
             if (this.keyCode == 17)
                 //this.save = true;
-                this.canvas.redo();
+                this.window.restoreLast();
             if (this.keyCode == 38) {
-                this.canvas.zoom(0.03F);
+                this.window.zoom(0.03F);
             } else if (this.keyCode == 40) {
-                this.canvas.zoom(-0.03F);
+                this.window.zoom(-0.03F);
             }
             else if (this.keyCode == 18){
                 //this.canvasSupport.setFillColor((count*10)%255, 80, 200);
-                this.canvas.undo();
+                this.window.deleteLast();
                 //this.canvasSupport.deleteSelected();
             }
         }
     }
 
     public void mouseDragged() {
-        this.canvas.canvasPan((this.mouseX - this.pmouseX), (this.mouseY - this.pmouseY));
+        this.window.canvasPan((this.mouseX - this.pmouseX), (this.mouseY - this.pmouseY));
     }
 
     public void mouseClicked() {
-        this.canvas.createShape(this.mouseX, this.mouseY, 'r');
+        this.window.createShape(this.mouseX, this.mouseY, 'r');
         count++;
     }
 
