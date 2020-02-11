@@ -8,8 +8,10 @@ public abstract class ColorfulObject extends PollyObject{
   protected int[] fillColor = new int[3];
   protected float alpha = 1;
 
-  public ColorfulObject(PApplet sketch, float x, float y){
+  public ColorfulObject(PApplet sketch, float x, float y, int[] fillColor, int[] boarderColor){
     super(sketch, x, y);
+    this.boarderColor = boarderColor;
+    this.fillColor = fillColor;
   }
 
   protected void setBoarderColor(int r, int g, int b){

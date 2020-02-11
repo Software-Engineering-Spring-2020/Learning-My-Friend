@@ -12,6 +12,7 @@ public class CanvasSupport {
     private DrawSpace ds;
     private ShapeFactory sf;
     private float zoom = 1;
+    int[] fillColor = new int[]{0,0,0}, boarderColor = new int[]{0,0,0};
 
     public CanvasSupport(PApplet sketch, float x, float y, float w, float h){
         this.sketch = sketch;
@@ -46,9 +47,8 @@ public class CanvasSupport {
     public boolean createShape(float x, float y, char shape){
         float[] coord = ds.translateCoordinates(x, y, zoom);
         if(ds.withinScope(coord[0], coord[1])) {
-            selected.add(sf.createShape(coord[0], coord[1], 'r'));
-            sketch.println(selected.size());
-            return ds.addShape(sf.createShape(coord[0], coord[1], shape));
+            selected.add(sf.createShape(coord[0], coord[1], 'r', fillColor, boarderColor));
+            return ds.addShape(sf.createShape(coord[0], coord[1], shape, fillColor, boarderColor));
         }
         return false;
     }
