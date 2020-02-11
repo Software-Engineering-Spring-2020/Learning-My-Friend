@@ -1,0 +1,17 @@
+Features:
+	Tested: 
+		Canvas Pan
+		Zoom
+		Create Shapes (Circle, Rectangle)
+		Set Boarder/Fill Color
+		UndoShapeDelete
+		RestoreShapeDelete
+		Delete
+	Untested:
+		ReCenter
+
+
+Bugs:
+	Delete would work, however the remove function on the ArrayList isn't returning anything
+
+

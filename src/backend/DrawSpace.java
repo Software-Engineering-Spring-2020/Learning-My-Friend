@@ -23,7 +23,7 @@ class DrawSpace extends ColorfulObject{
         return objects;
     }
 
-    protected Object getObjectAt(float x, float y, float zoom){
+    protected PollyObject getObjectAt(float x, float y, float zoom){
         float[] pos = translateCoordinates(x, y, zoom);
         return null;
     }
@@ -51,9 +51,9 @@ class DrawSpace extends ColorfulObject{
         sketch.scale(zoom);
         sketch.rect(0, 0, pixelWidth, pixelHeight);
         for(PollyObject obj : objects){
-            sketch.pushMatrix();
+            sketch.push();
             obj.display();
-            sketch.popMatrix();
+            sketch.pop();
         }
     }
 
@@ -65,6 +65,10 @@ class DrawSpace extends ColorfulObject{
         return objects.remove(shape);
     } protected PollyObject removeShape(int i){
         return objects.remove(i);
+    }
+
+    protected int indexOf(PollyObject shape){
+        return objects.indexOf(shape);
     }
 
     protected float[] getDimensions(){
