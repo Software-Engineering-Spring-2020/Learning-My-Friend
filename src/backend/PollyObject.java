@@ -18,6 +18,10 @@ public abstract class PollyObject extends PShape {
         shape = sketch.createShape(PConstants.POINT, xpos, ypos);
     }
 
+    protected float[] getPosition() {
+        return new float[]{xpos, ypos};
+    }
+
     protected void setPosition(float x, float y) {
         xpos = x;
         ypos = y;
