@@ -1,8 +1,0 @@
-src/backend/PollyObject.java
-src/backend/ColorfulObject.java
-src/backend/Group.java
-src/backend/DrawSpace.java
-src/backend/CanvasSupport.java
-src/backend/Shapes/Ellipse.java
-src/backend/Shapes/Rectangle.java
-src/backend/Shapes/ShapeFactory.java

@@ -6,7 +6,7 @@ import processing.core.PApplet;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class CanvasSupport {
+public class Window {
     private Stack<PollyObject> trash = new Stack<PollyObject>();
     private ArrayList<PollyObject> selected = new ArrayList<PollyObject>();
     private PApplet sketch;
@@ -15,7 +15,7 @@ public class CanvasSupport {
     private float zoom = 1;
     private int[] fillColor, boarderColor;
 
-    public CanvasSupport(PApplet sketch, float x, float y, float w, float h) {
+    public Window(PApplet sketch, float x, float y, float w, float h) {
         this.sketch = sketch;
         ds = new DrawSpace(sketch, x, y, w, h);
         sf = new ShapeFactory(sketch);
@@ -42,7 +42,7 @@ public class CanvasSupport {
         this.ds.display(zoom);
     }
 
-    public void pan(float xo, float yo) { //(this.mouseX - this.pmouseX), (this.mouseY - this.pmouseY)
+    public void canvasPan(float xo, float yo) { //(this.mouseX - this.pmouseX), (this.mouseY - this.pmouseY)
         this.ds.pan(xo, yo);
     }
 
