@@ -19,9 +19,6 @@ public class GUI{
   ControlP5 cp5;
   PApplet sketch;
 
-  //test controllers
-  Slider sl;
-  ColorPicker cp;
 
   /**
    * [GUI constructor]
@@ -37,28 +34,13 @@ public class GUI{
    */
   public void setup(){
 
-    //called on setup
-    sl = cp5.addSlider("Slider").setPosition(sketch.width-500,sketch.height-500).setSize(100, 20);
-    cp = cp5.addColorPicker("picker")
-          .setPosition(60, 100)
-          //.setSize(1000,100)
-          .setColorValue(sketch.color(128, 128, 128, 128))
-          ;
-    cp5.addNumberbox("n1")
-      .setValue(0)
-      .setPosition(20, 20)
-      .setSize(100, 20)
-      .setMin(0)
-      .setMax(255)
-      .setId(1);
   }
 
   /**
    * [update is called during during display when the window changes size. It is responsable for communicating scaling.]
    */
   public void update(){
-    sl.setPosition(0, 0).setSize(sketch.width/10, sketch.height/20);
-    cp.setPosition(60, 100).setSize(sketch.width/10, sketch.height/20);
+
   }
 
   /**

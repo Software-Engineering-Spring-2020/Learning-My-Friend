@@ -15,7 +15,7 @@ public class BackendDriver extends PApplet {
         this.canvas.display();
     }
 
-    public void keyPressed() {     
+    public void keyPressed() {
         if (this.key == Character.MAX_VALUE) {
             if (this.keyCode == 17)
                 //this.save = true;

@@ -36,7 +36,7 @@ import backend.*;
 
 public class PollyPaint extends PApplet {
 GUI gui;
-CanvasSupport cs;
+Window win;
 Handler h;
 
 float canvasX, canvasY, canvasWidth, canvasHeight;
@@ -70,14 +70,15 @@ float canvasX, canvasY, canvasWidth, canvasHeight;
 		surface.setResizable(true);
 		gui = new GUI(this);
 		gui.setup();
-		//Init Canvas Position and Size
-		canvasX = width/2;
-		canvasY = height/2;
+		//Init Canvas Position and Size in center of the screen
+		canvasX = width/4;
+		canvasY = height/4;
 		canvasWidth = width/2;
 		canvasHeight = height/2;
 
-		cs = new CanvasSupport(this, canvasX, canvasY, canvasWidth, canvasHeight);
-		h = new Handler(cs);
+
+		win = new Window(this, canvasX, canvasY, canvasWidth, canvasHeight);
+		h = new Handler(win);
 	}
 
 /**
@@ -86,6 +87,7 @@ float canvasX, canvasY, canvasWidth, canvasHeight;
 	public void draw(){
 		background(64);
 		//ellipse(mouseX, mouseY, 20, 20);
+		win.display();
 		gui.display();
 	}
 
@@ -97,5 +99,19 @@ float canvasX, canvasY, canvasWidth, canvasHeight;
 	public void controlEvent(ControlEvent theEvent) {
     h.handle(theEvent);
 	}
+
+
+
+
+	public void mouseDragged() {
+			win.canvasPan((this.mouseX - this.pmouseX), (this.mouseY - this.pmouseY));
+	}
+
+
+
+
+
+
+
 
 }
