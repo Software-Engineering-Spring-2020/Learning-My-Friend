@@ -1,5 +1,5 @@
 package backend.Shapes;
-import backend_beta.ColorfulObject;
+import backend.ColorfulObject;
 import processing.core.PApplet;
 
 class Ellipse extends ColorfulObject {
@@ -8,16 +8,13 @@ class Ellipse extends ColorfulObject {
     super(sketch, x, y, fillColor, boarderColor);
     this.pixelWidth = w;
     this.pixelHeight = h;
+    shape = sketch.createShape(RECT, this.xpos, this.ypos, this.pixelWidth, this.pixelHeight);
+    setColor();
   }
   Ellipse(PApplet sketch, float x, float y, float d, int[] fillColor, int[] boarderColor){
     this(sketch, x, y, d, d, fillColor, boarderColor);
   }
   Ellipse(PApplet sketch, float x, float y, int[] fillColor, int[] boarderColor){
     this(sketch, x, y, 50, 25, fillColor, boarderColor);
-  }
-
-  protected void display(){
-    super.display();
-    sketch.ellipse(xpos, ypos, pixelWidth, pixelHeight);
   }
 }

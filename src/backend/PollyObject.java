@@ -1,6 +1,7 @@
 package backend;
 
 import processing.core.PApplet;
+import processing.core.PConstants;
 import processing.core.PShape;
 
 public abstract class PollyObject extends PShape {
@@ -14,6 +15,7 @@ public abstract class PollyObject extends PShape {
         this.sketch = sketch;
         xpos = x;
         ypos = y;
+        shape = sketch.createShape(PConstants.POINT, xpos, ypos);
     }
 
     protected void setPosition(float x, float y) {
@@ -35,7 +37,8 @@ public abstract class PollyObject extends PShape {
     }
 
     protected void display() {
-        sketch.rotate(sketch.radians(rot));
+        //sketch.rotate(sketch.radians(rot));
+        sketch.shape(shape);
     }
 
     protected void pan(float xo, float yo){

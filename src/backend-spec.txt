@@ -1,0 +1,17 @@
+Features:
+	Tested: 
+		Canvas Pan
+		Zoom
+		Create Shapes (Circle, Rectangle)
+		Set Boarder/Fill Color
+	Untested:
+		Delete
+		UndoShapeDelete
+		RestoreShapeDelete
+		ReCenter
+
+
+Bugs:
+	
+
+
