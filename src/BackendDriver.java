@@ -47,7 +47,7 @@ public class BackendDriver extends PApplet {
     }
 
     public static void main(String[] passedArgs) {
-        String[] appletArgs = { "backTest" };
+        String[] appletArgs = { "BackendDriver" };
         if (passedArgs != null) {
             PApplet.main(concat(appletArgs, passedArgs));
         } else {
