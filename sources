@@ -82,3 +82,16 @@ src\frontend\controlP5\Textlabel.java
 src\frontend\controlP5\TickMark.java
 src\frontend\controlP5\Toggle.java
 src\frontend\controlP5\Tooltip.java
+
+
+
+
+
+src\backend\CanvasSupport.java
+src\backend\ColorfulObject.java
+src\backend\DrawSpace.java
+src\backend\Group.java
+src\backend\PollyObject.java
+src\backend\Shapes\ShapeFactory.java
+src\backend\Shapes\Rectangle.java
+src\backend\Shapes\Ellipse.java
