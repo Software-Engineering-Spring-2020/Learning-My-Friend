@@ -12,6 +12,8 @@ package frontend;
  */
 import processing.core.PApplet;
 import frontend.controlP5.*;
+import frontend.ui.*;
+import javax.management.*;
 
 public class GUI{
   int guiHeight;
@@ -53,6 +55,21 @@ public class GUI{
     guiWidth = sketch.width;
     //testing cp5 right now, not final
 
+  }
+
+
+
+
+
+  public Toolbar toolbarFactory(String type){
+    if(type.equals("ObjSet"))
+      return new ObjSetToolbar(cp5);
+    if(type.equals("ObjCreate"))
+      return new ObjCreateToolbar(cp5);
+    if(type.equals("Workspace"))
+      return new WorkspaceToolbar(cp5);
+    //throw BadStringOperationException
+    return null;
   }
 
 }
