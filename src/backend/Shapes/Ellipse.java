@@ -1,4 +1,4 @@
-package backend.Shapes;
+package backend.shapes;
 import backend.ColorfulObject;
 import processing.core.PApplet;
 

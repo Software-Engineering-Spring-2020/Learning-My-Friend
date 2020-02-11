@@ -1,6 +1,6 @@
 package backend;
 
-import backend.Shapes.ShapeFactory;
+import backend.shapes.ShapeFactory;
 import processing.core.PApplet;
 
 import java.util.ArrayList;
@@ -16,6 +16,7 @@ public class Window {
     private ShapeFactory sf;
     private float zoom = 1;
     private int[] fillColor, boarderColor;
+    private float XINIT, YINIT;
 
     public Window(PApplet sketch, float x, float y, float w, float h) {
         this.sketch = sketch;
@@ -23,6 +24,8 @@ public class Window {
         sf = new ShapeFactory(sketch);
         fillColor = new int[]{0, 0, 0};
         boarderColor = new int[]{0, 0, 0};
+        XINIT = x;
+        YINIT = y;
     }
 
     /*********************************************************
@@ -41,7 +44,14 @@ public class Window {
     }
 
     public void display() {
+        sketch.push();
         this.ds.display(zoom);
+        sketch.pop();
+    }
+
+    public boolean withinCanvas(float x, float y){
+        float[] coord = ds.translateCoordinates(x, y, zoom);
+        return ds.withinScope(coord[0], coord[1]);
     }
 
     public void canvasPan(float xo, float yo) { //(this.mouseX - this.pmouseX), (this.mouseY - this.pmouseY)
@@ -50,17 +60,33 @@ public class Window {
 
     public void reCenter() {
         zoom = 1;
+        this.ds.setPosition(XINIT, YINIT);
         this.ds.display(zoom);
     }
+
+      /*********************************************************
+     *
+     *
+     *          TOOLBAR RELATED FUNCTIONALITY
+     *
+     *
+     *********************************************************/
 
     public boolean createShape(float x, float y, char shape) {
         float[] coord = ds.translateCoordinates(x, y, zoom);
         if (ds.withinScope(coord[0], coord[1])) {
             trash.clear();
-            selected.add((sf.createShape(coord[0], coord[1], shape, fillColor, boarderColor)));
-            return ds.addShape(sf.createShape(coord[0], coord[1], shape, fillColor, boarderColor));
+            PollyObject obj = sf.createShape(coord[0], coord[1], shape, fillColor, boarderColor);
+            if(obj != null){
+                selected.add(obj);
+                return ds.addShape(obj);
+            }
         }
         return false;
+    }
+
+    public void panSelected(float xo, float yo){
+
     }
 
     public void setFillColor(int r, int g, int b) {
@@ -75,13 +101,7 @@ public class Window {
         boarderColor[2] = b;
     }
 
-    /*********************************************************
-     *
-     *
-     *          TOOLBAR RELATED FUNCTIONALITY
-     *
-     *
-     *********************************************************/
+  
     public void rotate(float ao) {
         for (PollyObject shape : selected) {
             shape.setRelativeRotate(ao);
@@ -97,32 +117,34 @@ public class Window {
         selected.add(ds.getObjectAt(x, y, zoom));
     }
 
-    public boolean deleteSelected() { //not removing when pass in shape object
-        boolean successful = false;
+    public boolean deleteSelected() { 
+        boolean successful = true;
         for (PollyObject shape : selected) {
             trash.add(shape);
-            successful = successful || true;
-            //sketch.println(ds.indexOf(shape));
+            if(!ds.removeShape(shape)) successful = false;
         }
         return successful;
     }
 
     public boolean deleteLast() {
         if(ds.getNumObjects() <= 0) return false;
-        //return trash.push(ds.removeShape(ds.getNumObjects()-1));
         return trash.add(ds.removeShape(ds.getNumObjects()-1));
     }
 
     public boolean restoreLast() {
+        sketch.println(trash.size());
         if (trash.isEmpty()) return false;
-        //return ds.addShape(trash.pop());
         return ds.addShape(trash.remove(trash.size()-1));
     }
 
     public void clear(){
-        for(int i = 0; i<ds.getNumObjects(); i++){
-            trash.add(ds.removeShape(ds.getNumObjects()-1));
+        for(PollyObject shape : ds.getAllObjects()){
+            sketch.println(ds.getNumObjects()+" : "+trash.size());
+            trash.add(shape);
         }
+        ds.clear();
+
+        sketch.println(ds.getNumObjects()+" : "+trash.size());
     }
 
     public boolean copy(){

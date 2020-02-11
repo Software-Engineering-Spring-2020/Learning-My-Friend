@@ -17,6 +17,7 @@ METHODS:
 		boolean deleteSelected()
 		boolean deleteLast()
 		boolean restoreLast()
+		void clear()
 
 	Untested:
 		void reCenter()
@@ -25,11 +26,10 @@ METHODS:
 		void multiSelect(float x, float y)
 		boolean copy()
 		void paste()
-		void clear()
 
 
 Bugs:
-	Delete would work, however the remove function on the ArrayList isn't returning anything
+	RestoreLast isn't triggering with my button press? Might just be my keyboard (was testing with just print statements)
 
 
 TODO:

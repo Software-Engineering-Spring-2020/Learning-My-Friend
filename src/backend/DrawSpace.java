@@ -39,6 +39,13 @@ class DrawSpace extends ColorfulObject{
         return coord;
     }
 
+    protected float[] translateDistance(float x, float y, float zoom){
+        float[] coord = new float[]{x, y}; //translates from coordinates to relational fraction
+        coord[0] = (pixelWidth/2) * (coord[0] / ((pixelWidth/2)*zoom));
+        coord[1] = (pixelHeight/2) * (coord[1] / ((pixelHeight/2)*zoom));
+        return coord;
+    }
+
     protected void pan(float x, float y){
         super.pan(x, y);
         xcenter = xpos+pixelWidth/2;
@@ -65,10 +72,16 @@ class DrawSpace extends ColorfulObject{
         return objects.remove(shape);
     } protected PollyObject removeShape(int i){
         return objects.remove(i);
+    } protected void clear(){
+        objects.clear();
     }
 
     protected int indexOf(PollyObject shape){
         return objects.indexOf(shape);
+    }
+
+    protected PollyObject getShape(int i){
+        return objects.get(i);
     }
 
     protected float[] getDimensions(){
