@@ -31,8 +31,14 @@ public abstract class Toolbar{
 
 
   public void update(){
-  //  for(ControllerInterface c : controllers)
-
+    for(ScalableObj c : controllers)
+      c.update();
   }
 
+
+
+    /*public ScalableObj ScalableObjFactory(){
+
+
+    }*/
 }

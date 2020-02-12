@@ -91,7 +91,7 @@ float canvasX, canvasY, canvasWidth, canvasHeight;
  */
 	public void draw(){
 		background(64);
-		win.display();
+		//win.display();
 		gui.display();
 	}
 
