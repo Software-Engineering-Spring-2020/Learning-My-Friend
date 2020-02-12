@@ -1,26 +1,25 @@
 package backend;
+import backend.PollyObject;
 import processing.core.PApplet;
-
+import processing.core.PShape;
 import java.util.ArrayList;
 
-class Group extends PollyObject{
-  ArrayList<Object> members = new ArrayList<Object>();
-  
-  Group(PApplet sketch, float x, float y){
+class Group extends PollyObject {
+  ArrayList<PollyObject> members;
+  Group(PApplet sketch, float x, float y, ArrayList<PollyObject> members){
     super(sketch, x, y);
+    this.members = members;
   }
+  
+  protected void display(){  }
 
-  protected void addMembers(ArrayList<Object> prospectives){
-    for(Object prop : prospectives){
-      members.add(prop);
+  protected void pan(float xo, float yo){
+    for(PollyObject obj : members){
+    	obj.pan(xo, yo);
     }
   }
-  
-  ArrayList<Object> getMembers(){
-    return members;
+  protected void resize(float xfactor, float yfactor){
+    //img.resize(xfactor, yfactor);
   }
 
-  protected void setPosition(float x, float y){
-    //TODO HERE OR MAYBE ELSEWHERE?
-  }
 }

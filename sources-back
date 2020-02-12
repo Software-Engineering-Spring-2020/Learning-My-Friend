@@ -1,6 +1,8 @@
 src\backend\PollyObject.java
 src\backend\ColorfulObject.java
 src\backend\Shape.java
+src\backend\Group.java
+
 
 src\backend\objects\Image.java
 src\backend\objects\Rectangle.java
@@ -11,5 +13,4 @@ src\backend\objects\Comment.java
 src\backend\objects\ObjectFactory.java
 src\backend\DrawSpace.java
 src\backend\Window.java
-src\backend\Group.java
 src\BackendDriver.java

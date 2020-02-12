@@ -17,7 +17,7 @@ class Image extends PollyObject {
   }
 
   protected void resize(float factor){
-    //img.resize(factor, 0);
+    img.resize((int)factor*img.width, 0);
   }
   protected void resize(float xfactor, float yfactor){
     //img.resize(xfactor, yfactor);

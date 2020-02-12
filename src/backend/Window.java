@@ -15,7 +15,7 @@ public class Window {
     private ObjectFactory of;
     private float zoom = 1;
     private int[] fillColor, boarderColor;
-    private float XINIT, YINIT, gridSpacing = 30;
+    private float XINIT, YINIT, WIDTH, HEIGHT, gridSpacing = 30;
     private boolean showGrid = false;
 
     public Window(PApplet sketch, float x, float y, float w, float h) {
@@ -26,6 +26,12 @@ public class Window {
         boarderColor = new int[]{0, 0, 0};
         XINIT = x;
         YINIT = y;
+        WIDTH = w;
+        HEIGHT = h;
+    }
+
+    private float[] translate(float x, float y){
+        return new float[]{(WIDTH/2) * (x / ((WIDTH/2)*zoom)), (HEIGHT/2) * (y / ((HEIGHT/2)*zoom))};
     }
 
     /*********************************************************
@@ -51,6 +57,7 @@ public class Window {
 
     public boolean withinCanvas(float x, float y){
         float[] coord = ds.translateCoordinates(x, y, zoom);
+        //float[] coord = translateCoordinates(x, y);
         return ds.withinScope(coord[0], coord[1]);
     }
 
@@ -91,24 +98,28 @@ public class Window {
 
     public boolean createShape(float x, float y, char shape) {
         float[] coord = ds.translateCoordinates(x, y, zoom);
+        //float[] coord = translateCoordinates(x, y);
         PollyObject obj = of.createShape(coord[0], coord[1], shape, fillColor, boarderColor);
         return createAt(coord[0], coord[1], obj);
     }
 
     public boolean createTextBox(float x, float y, String str, String font, float textSize){
         float[] coord = ds.translateCoordinates(x, y, zoom);
+        //float[] coord = translateCoordinates(x, y);
         PollyObject obj = of.createTextBox(coord[0], coord[1], fillColor, boarderColor, str, font, textSize);
         return createAt(coord[0], coord[1], obj);
     }
 
     public boolean createComment(float x, float y, String str, String font, float textSize){
         float[] coord = ds.translateCoordinates(x, y, zoom);
+        //float[] coord = translateCoordinates(x, y);
         PollyObject obj = of.createComment(coord[0], coord[1], fillColor, boarderColor, str, font, textSize);
         return createAt(coord[0], coord[1], obj);
     }
 
     public boolean importImage(float x, float y, String filename, String extension){
         float[] coord = ds.translateCoordinates(x, y, zoom);
+        //float[] coord = translateCoordinates(x, y);
         PollyObject obj = of.importImage(coord[0], coord[1], filename, extension);
         return createAt(coord[0], coord[1], obj);
     }
@@ -129,10 +140,12 @@ public class Window {
      *********************************************************/
 
     public void selectedPan(float xo, float yo){
-        for(PollyObject shape : selected){
+        for(PollyObject obj : selected){
             //float[] coord = ds.relativePan(xo, yo, zoom);
             //shape.pan(coord[0], coord[1]);
-            shape.pan(xo, yo);
+
+            float[] coord = translate(xo, yo);
+            obj.pan(coord[0], coord[1]);
         }
     }
 
