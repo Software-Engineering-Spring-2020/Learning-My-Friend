@@ -8,7 +8,7 @@ class Ellipse extends ColorfulObject {
     super(sketch, x, y, fillColor, boarderColor);
     this.pixelWidth = w;
     this.pixelHeight = h;
-    shape = sketch.createShape(RECT, this.xpos, this.ypos, this.pixelWidth, this.pixelHeight);
+    shape = sketch.createShape(ELLIPSE, this.xpos, this.ypos, this.pixelWidth, this.pixelHeight);
     setColor();
   }
   Ellipse(PApplet sketch, float x, float y, float d, int[] fillColor, int[] boarderColor){

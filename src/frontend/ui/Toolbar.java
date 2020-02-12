@@ -39,18 +39,44 @@ public abstract class Toolbar{
 
     public ScalableObj ScalableObjFactory(char c, String name, float posX, float posY, float sizeX, float sizeY){
       ScalableObj so;
+      //add group
       if(c == 'g'){
-        //ControlGroup g = cp5.addGroup(name).hideBar().setBackgroundColor(100);
-        so = new ScalableObj(sketch, cp5.addGroup(name).hideBar().setBackgroundColor(100));
+        ControlGroup g = cp5.addGroup(name)
+        .hideBar()
+        .setBackgroundColor(100);
+        so = new ScalableObj(sketch, g);
         so.setPos(posX, posY);
         so.setSize(sizeX, sizeY);
-      //  so.setBackgroundHeight()
+      }
+      //add buttonbar
+      else if(c == 'b'){
+        Controller g = cp5.addButton(name);
+        so = new ScalableObj(sketch, g);
+        so.setPos(posX, posY);
+        so.setSize(sizeX, sizeY);
       }
       else {
         so = new ScalableObj(sketch, cp5.addGroup(name).hideBar().setBackgroundColor(100));
         so.setPos(posX, posY);
         so.setSize(sizeX, posY);
       }
+      controllers.add(so);
+      return so;
+    }
+
+
+
+
+
+
+    public ScalableObj ButtonBarFactory(String name, String[] option, float posX, float posY, float sizeX, float sizeY){
+      ScalableObj so;
+      ButtonBar g = cp5.addButtonBar(name);
+      g.addItems(option);
+      so = new ScalableObj(sketch, g);
+      so.setPos(posX, posY);
+      so.setSize(sizeX, sizeY);
+      controllers.add(so);
       return so;
     }
 }

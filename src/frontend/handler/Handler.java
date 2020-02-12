@@ -42,11 +42,12 @@ public class Handler{
    */
   public void handleEvent(ControlEvent event){
     if(event.isController()){
-
-
+      if (event.getController().getName().equals("Rect"))
+        tool='r';
+      if (event.getController().getName().equals("Ecl"))
+        tool='e';
     }
   }
-
 
   public void clickedCanvas(){
       win.createShape(sketch.mouseX, sketch.mouseY, tool);
