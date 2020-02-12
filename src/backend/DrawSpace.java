@@ -58,11 +58,12 @@ class DrawSpace extends ColorfulObject{
         ycenter = ypos+pixelHeight/2;
     }
 
-    protected void display(float zoom){
+    protected void display(float zoom, boolean showGrid, float gridSpacing){
         super.display();
         sketch.translate(xcenter, ycenter);
         sketch.scale(zoom);
         sketch.rect(0, 0, pixelWidth, pixelHeight);
+        if(showGrid) displayGrid(gridSpacing);
         for(PollyObject obj : objects){
             sketch.push();
             obj.display();
@@ -92,5 +93,10 @@ class DrawSpace extends ColorfulObject{
 
     protected float[] getDimensions(){
         return new float[]{pixelWidth, pixelHeight};
+    }
+
+    protected void displayGrid(float spacing){
+        for(float x = -pixelWidth/2; x<pixelWidth/2; x+=spacing) sketch.line(x, -pixelHeight/2, x, pixelHeight/2);
+        for(float y = -pixelHeight/2; y<pixelHeight/2; y+=spacing) sketch.line(-pixelWidth/2, y, pixelWidth/2, y);
     }
 }
