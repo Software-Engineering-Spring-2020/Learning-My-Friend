@@ -6,7 +6,7 @@ src\frontend\ui\Toolbar.java
 src\frontend\ui\ObjSetToolbar.java
 src\frontend\ui\WorkspaceToolbar.java
 src\frontend\ui\ObjCreateToolbar.java
-
+src\frontend\ui\ScalableObj.java
 
 
 
@@ -88,7 +88,6 @@ src\frontend\controlP5\Textlabel.java
 src\frontend\controlP5\TickMark.java
 src\frontend\controlP5\Toggle.java
 src\frontend\controlP5\Tooltip.java
-
 
 
 

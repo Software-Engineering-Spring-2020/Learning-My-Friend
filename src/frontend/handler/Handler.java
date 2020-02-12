@@ -35,6 +35,11 @@ public class Handler{
     this.sketch = sketch;
   }
 
+
+  /**
+   * [handleEvent handles all events generated from ControlP5]
+   * @param event [the passed event]
+   */
   public void handleEvent(ControlEvent event){
     if(event.isController()){
 
@@ -44,7 +49,6 @@ public class Handler{
 
 
   public void clickedCanvas(){
-    if(tool != null)
       win.createShape(sketch.mouseX, sketch.mouseY, tool);
   }
 

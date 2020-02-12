@@ -35,20 +35,23 @@ public class GUI{
     this.sketch = sketch;
     cp5 = new ControlP5(sketch);
     this.h = h;
+    tbList = new ArrayList<Toolbar>();
   }
 
   /**
    * [setup is called by setup on the sketch. It is responsable for defining the init GUI]
    */
   public void setup(){
-
+    tbList.add(toolbarFactory("ObjCreate"));
   }
 
   /**
    * [update is called during during display when the window changes size. It is responsable for communicating scaling.]
    */
   public void update(){
-
+    for(Toolbar t : tbList){
+      t.update();
+    }
   }
 
   /**
@@ -69,11 +72,11 @@ public class GUI{
 
   public Toolbar toolbarFactory(String type){
     if(type.equals("ObjSet"))
-      return new ObjSetToolbar(cp5, h);
+      return new ObjSetToolbar(cp5, h, sketch);
     if(type.equals("ObjCreate"))
-      return new ObjCreateToolbar(cp5, h);
+      return new ObjCreateToolbar(cp5, h, sketch);
     if(type.equals("Workspace"))
-      return new WorkspaceToolbar(cp5, h);
+      return new WorkspaceToolbar(cp5, h, sketch);
     //throw BadStringOperationException
     return null;
   }

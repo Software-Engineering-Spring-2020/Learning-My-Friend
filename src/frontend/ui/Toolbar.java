@@ -1,6 +1,9 @@
 package frontend.ui;
 import frontend.controlP5.*;
 import frontend.handler.Handler;
+import processing.core.*;
+import java.util.ArrayList;
+
 /**
   * <h1>Toolbar/h1>
   *
@@ -16,10 +19,20 @@ public abstract class Toolbar{
   ControlP5 cp5;
   //Handler is present so the Toolbar can register it's controllers
   Handler h;
+  PApplet sketch;
+  ArrayList<ScalableObj> controllers;
 
-  public Toolbar(ControlP5 cp5, Handler h){
+  public Toolbar(ControlP5 cp5, Handler h, PApplet sketch){
     this.cp5 = cp5;
     this.h = h;
+    this.sketch = sketch;
+    controllers = new ArrayList<ScalableObj>();
+  }
+
+
+  public void update(){
+  //  for(ControllerInterface c : controllers)
+
   }
 
 }

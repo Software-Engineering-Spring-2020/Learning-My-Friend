@@ -62,6 +62,8 @@ float canvasX, canvasY, canvasWidth, canvasHeight;
  */
 	public void settings() {
 		size(1000, 500);
+		// The size here is good for hidpi monitors
+		//size(1500, 1500/2);
 		smooth();
 	}
 
@@ -89,7 +91,6 @@ float canvasX, canvasY, canvasWidth, canvasHeight;
  */
 	public void draw(){
 		background(64);
-		//ellipse(mouseX, mouseY, 20, 20);
 		win.display();
 		gui.display();
 	}
