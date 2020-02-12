@@ -1,14 +1,20 @@
-package backend.shapes;
+package backend.objects;
 import backend.Shape;
 import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PConstants;
 
-public class ShapeFactory {
+public class ObjectFactory {
     protected  PApplet sketch;
-    public ShapeFactory(PApplet sketch){
+    public ObjectFactory(PApplet sketch){
         this.sketch = sketch;
     }
+
+    public Image importImage(float x, float y, String filename, String extension){
+        return new Image(sketch, x, y, filename, extension);
+    }
+
+    
 
     public Shape createShape(float x, float y, char shape, int[] fillColor, int[] boarderColor){
         if(shape == 'e') return createCircle(x, y, fillColor, boarderColor);

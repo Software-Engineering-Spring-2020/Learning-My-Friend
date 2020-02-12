@@ -31,16 +31,19 @@ METHODS:
 		void setThickness(int size)
 		void setGridSpacing(float spacing)
 
+	Untested Classes:
+		Image
+		TexBox
+
 
 Bugs:
 	RestoreLast isn't triggering with my button press? Might just be my keyboard (was testing with just print statements)
 
 
 TODO:
-	Import
+	
 	GROUPING
 	New way to Export
-	Textboxes
 	Comments
 	Snapping
 	Curves

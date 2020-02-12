@@ -1,4 +1,4 @@
-package backend.shapes;
+package backend.objects;
 import backend.PollyObject;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -15,4 +15,12 @@ class Image extends PollyObject {
   protected void display(){
   	if(img.width != 0) sketch.image(img, xpos, ypos);
   }
+
+  protected void resize(float factor){
+    //img.resize(factor, 0);
+  }
+  protected void resize(float xfactor, float yfactor){
+    //img.resize(xfactor, yfactor);
+  }
+
 }

@@ -96,12 +96,12 @@ src\backend\PollyObject.java
 src\backend\ColorfulObject.java
 src\backend\Shape.java
 
-src\backend\Shapes\Image.java
-src\backend\Shapes\Rectangle.java
-src\backend\Shapes\Ellipse.java
+src\backend\objects\Image.java
+src\backend\objects\Rectangle.java
+src\backend\objects\Ellipse.java
 
 
-src\backend\Shapes\ShapeFactory.java
+src\backend\objects\ObjectFactory.java
 src\backend\DrawSpace.java
 src\backend\Window.java
 src\backend\Group.java

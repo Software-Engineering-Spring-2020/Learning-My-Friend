@@ -44,7 +44,7 @@ public abstract class PollyObject {
         ypos = ypos + yo;
     }
 
-    protected void enlarge(float factor) {
+    protected void resize(float factor) {
 
     }
 }

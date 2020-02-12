@@ -1,19 +1,17 @@
 package backend;
 
-import backend.shapes.ShapeFactory;
+import backend.objects.ObjectFactory;
 import processing.core.PApplet;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
 public class Window {
-    //private Stack<PollyObject> trash = new Stack<PollyObject>();
     private ArrayList<PollyObject> trash = new ArrayList<PollyObject>();
     private ArrayList<PollyObject> selected = new ArrayList<PollyObject>();
     private ArrayList<PollyObject> copied = new ArrayList<PollyObject>();
     private PApplet sketch;
     private DrawSpace ds;
-    private ShapeFactory sf;
+    private ObjectFactory of;
     private float zoom = 1;
     private int[] fillColor, boarderColor;
     private float XINIT, YINIT, gridSpacing = 30;
@@ -22,7 +20,7 @@ public class Window {
     public Window(PApplet sketch, float x, float y, float w, float h) {
         this.sketch = sketch;
         ds = new DrawSpace(sketch, x, y, w, h);
-        sf = new ShapeFactory(sketch);
+        of = new ObjectFactory(sketch);
         fillColor = new int[]{0, 0, 0};
         boarderColor = new int[]{0, 0, 0};
         XINIT = x;
@@ -85,7 +83,7 @@ public class Window {
         float[] coord = ds.translateCoordinates(x, y, zoom);
         if (ds.withinScope(coord[0], coord[1])) {
             trash.clear();
-            PollyObject obj = sf.createShape(coord[0], coord[1], shape, fillColor, boarderColor);
+            PollyObject obj = of.createShape(coord[0], coord[1], shape, fillColor, boarderColor);
             if(obj != null){
                 selected.add(obj);
                 return ds.addShape(obj);
@@ -175,7 +173,7 @@ public class Window {
             if(shape instanceof ColorfulObject){
                 int[] fill = ((ColorfulObject) shape).getFillColor();
                 int[] boarder = ((ColorfulObject) shape).getBoarderColor();
-                sf.createShape(pos[0]+2, pos[1]+2, 'r', fill, boarder); //not full copy
+                of.createShape(pos[0]+2, pos[1]+2, 'r', fill, boarder); //not full copy
             } else{
                 //ds.addShape();
             }
