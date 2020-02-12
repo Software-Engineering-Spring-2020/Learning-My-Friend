@@ -16,7 +16,8 @@ public class Window {
     private ShapeFactory sf;
     private float zoom = 1;
     private int[] fillColor, boarderColor;
-    private float XINIT, YINIT;
+    private float XINIT, YINIT, gridSpacing = 30;
+    private boolean showGrid = false;
 
     public Window(PApplet sketch, float x, float y, float w, float h) {
         this.sketch = sketch;
@@ -45,7 +46,7 @@ public class Window {
 
     public void display() {
         sketch.push();
-        this.ds.display(zoom);
+        this.ds.display(zoom, showGrid, gridSpacing);
         sketch.pop();
     }
 
@@ -61,7 +62,15 @@ public class Window {
     public void reCenter() {
         zoom = 1;
         this.ds.setPosition(XINIT, YINIT);
-        this.ds.display(zoom);
+        this.display();
+    }
+
+    public void toggleGrid(){
+        if(showGrid) showGrid = false;
+        else showGrid = true;
+    }
+    public void setGridSpacing(float spacing){
+        gridSpacing = spacing;
     }
 
       /*********************************************************

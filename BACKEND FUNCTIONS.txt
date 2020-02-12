@@ -20,6 +20,7 @@ METHODS:
 		void clear()
 		void selectedPan(float xo, float yo)
 		void reCenter()
+		void toggleGrid()
 
 	Untested:
 		void rotate(float ao)
@@ -28,6 +29,7 @@ METHODS:
 		boolean copy()
 		void paste()
 		void setThickness(int size)
+		void setGridSpacing(float spacing)
 
 
 Bugs:
@@ -36,10 +38,11 @@ Bugs:
 
 TODO:
 	Import
+	GROUPING
 	New way to Export
 	Textboxes
 	Comments
-	Grid (have unupploaded code to show it, not to snap)
+	Snapping
 	Curves
 	Triangles
 	Freehand Drawing

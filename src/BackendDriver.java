@@ -26,7 +26,7 @@ public class BackendDriver extends PApplet {
                 this.window.zoom(-0.03F);
             }
             else if (this.keyCode == 18){
-                this.window.reCenter();
+                this.window.toggleGrid();
             }
         }
     }
