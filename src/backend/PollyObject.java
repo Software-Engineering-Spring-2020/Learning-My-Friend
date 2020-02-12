@@ -85,21 +85,21 @@ public abstract class PollyObject {
         return rotatedBoundingBoxPoints;
     }
 
-    protected PVector rotateAbout(PVector anchor, PVector aboutPoint, float degrees) {
+    protected PVector rotateAbout(PVector rotatePoint, PVector anchor, float degrees) {
         PVector finalPoint = new PVector(0, 0);
         float radians = (float) (Math.PI / 180) * degrees;
 
         // make finalPoint like rotatePoint as if aboutPoint were the origin
-        finalPoint.x = anchor.x - aboutPoint.x;
-        finalPoint.y = anchor.y - aboutPoint.y;
+        finalPoint.x = rotatePoint.x - anchor.x;
+        finalPoint.y = rotatePoint.y - anchor.y;
 
         // rotate finalPoint about the origin
         float tempX = finalPoint.x * (float) Math.cos(radians) -  finalPoint.y * (float) Math.sin(radians);
         float tempY = finalPoint.x * (float) Math.sin(radians) +  finalPoint.y * (float) Math.cos(radians);
 
         // translate finalPoint back to where it should be based on aboutPoint
-        finalPoint.x = tempX + aboutPoint.x;
-        finalPoint.y = tempY + aboutPoint.y;
+        finalPoint.x = tempX + anchor.x;
+        finalPoint.y = tempY + anchor.y;
 
         return finalPoint;
     }
