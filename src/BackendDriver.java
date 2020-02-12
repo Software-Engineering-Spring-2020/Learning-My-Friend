@@ -26,10 +26,7 @@ public class BackendDriver extends PApplet {
                 this.window.zoom(-0.03F);
             }
             else if (this.keyCode == 18){
-                //this.window.setFillColor((count*10)%255, 80, 200);
-                //this.window.deleteLast();
-                //this.window.deleteSelected();
-                this.window.clear();
+                this.window.reCenter();
             }
         }
     }

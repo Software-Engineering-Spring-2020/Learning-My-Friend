@@ -85,8 +85,12 @@ public class Window {
         return false;
     }
 
-    public void panSelected(float xo, float yo){
-
+    public void selectedPan(float xo, float yo){
+        for(PollyObject shape : selected){
+            //float[] coord = ds.relativePan(xo, yo, zoom);
+            //shape.pan(coord[0], coord[1]);
+            shape.pan(xo, yo);
+        }
     }
 
     public void setFillColor(int r, int g, int b) {
@@ -168,6 +172,20 @@ public class Window {
             }
         }
     }
+
+    /*********************************************************
+     *
+     *
+     *          DRAWING RELATED FUNCTIONALITY
+     *
+     *
+     *********************************************************/
+
+    public void setThickness(int size){
+        int weight = sketch.max(size, 1);
+        strokeWeight(weight);
+    }
+
 
     /*********************************************************
      *
