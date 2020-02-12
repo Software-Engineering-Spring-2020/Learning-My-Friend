@@ -11,7 +11,6 @@ METHODS:
 		void canvasPan(float xo, float yo)
 						xo and yo mean (mouseX - pmouseX) and (mouseY - pmouseY) respecitvely
 		void zoom(float factor)
-		boolean createShape(float x, float y, char shape)
 		void setFillColor(int r, int g, int b)
 		void setBoarderColor(int r, int g, int b)
 		boolean deleteSelected()
@@ -30,6 +29,11 @@ METHODS:
 		void paste()
 		void setThickness(int size)
 		void setGridSpacing(float spacing)
+		void exportAs(String saveName, String extension)
+		void importImage(float x, float y, String filename, String extension)
+		void importImage(String filename, String extension)
+		boolean createShape(float x, float y, char shape) - needs retesting since changed
+
 
 	Untested Classes:
 		Image

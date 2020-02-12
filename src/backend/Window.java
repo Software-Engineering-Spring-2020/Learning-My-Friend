@@ -2,6 +2,7 @@ package backend;
 
 import backend.objects.ObjectFactory;
 import processing.core.PApplet;
+import processing.core.PImage;
 
 import java.util.ArrayList;
 
@@ -71,26 +72,61 @@ public class Window {
         gridSpacing = spacing;
     }
 
-      /*********************************************************
+    /*********************************************************
+     *
+     *
+     *          OBJECT CREATION RELATED FUNCTIONALITY
+     *
+     *
+     *********************************************************/
+
+    private boolean createAt(float xpos, float ypos, PollyObject obj){
+        if (ds.withinScope(xpos, ypos) && obj != null) {
+            trash.clear();
+            selected.add(obj);
+            return ds.addShape(obj);
+        }
+        return false;
+    }
+
+    public boolean createShape(float x, float y, char shape) {
+        float[] coord = ds.translateCoordinates(x, y, zoom);
+        PollyObject obj = of.createShape(coord[0], coord[1], shape, fillColor, boarderColor);
+        return createAt(coord[0], coord[1], obj);
+    }
+
+    public boolean createTextBox(float x, float y, String str, String font, float textSize){
+        float[] coord = ds.translateCoordinates(x, y, zoom);
+        PollyObject obj = of.createTextBox(coord[0], coord[1], fillColor, boarderColor, str, font, textSize);
+        return createAt(coord[0], coord[1], obj);
+    }
+
+    public boolean createComment(float x, float y, String str, String font, float textSize){
+        float[] coord = ds.translateCoordinates(x, y, zoom);
+        PollyObject obj = of.createComment(coord[0], coord[1], fillColor, boarderColor, str, font, textSize);
+        return createAt(coord[0], coord[1], obj);
+    }
+
+    public boolean importImage(float x, float y, String filename, String extension){
+        float[] coord = ds.translateCoordinates(x, y, zoom);
+        PollyObject obj = of.importImage(coord[0], coord[1], filename, extension);
+        return createAt(coord[0], coord[1], obj);
+    }
+
+    public boolean importImage(String filename, String extension){
+        PollyObject obj = of.importImage(0, 0, filename, extension);
+        return createAt(0, 0, obj);
+    }
+
+    
+
+    /*********************************************************
      *
      *
      *          TOOLBAR RELATED FUNCTIONALITY
      *
      *
      *********************************************************/
-
-    public boolean createShape(float x, float y, char shape) {
-        float[] coord = ds.translateCoordinates(x, y, zoom);
-        if (ds.withinScope(coord[0], coord[1])) {
-            trash.clear();
-            PollyObject obj = of.createShape(coord[0], coord[1], shape, fillColor, boarderColor);
-            if(obj != null){
-                selected.add(obj);
-                return ds.addShape(obj);
-            }
-        }
-        return false;
-    }
 
     public void selectedPan(float xo, float yo){
         for(PollyObject shape : selected){
@@ -197,9 +233,16 @@ public class Window {
     /*********************************************************
      *
      *
-     *          SAVE/LOAD/IMPORT/EXPORT RELATED FUNCTIONALITY
+     *          SAVE/LOAD/EXPORT RELATED FUNCTIONALITY
      *
      *
      *********************************************************/
+
+    public void exportAs(String saveName, String extension){
+        reCenter();
+        float[] dim = ds.getDimensions();
+        PImage toSave = sketch.get((int)dim[0], (int)dim[1], (int)dim[2]+1, (int)dim[3]+1);
+        toSave.save(saveName+extension);
+    }
 
 }

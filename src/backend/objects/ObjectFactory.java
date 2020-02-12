@@ -14,7 +14,13 @@ public class ObjectFactory {
         return new Image(sketch, x, y, filename, extension);
     }
 
-    
+    public TextBox createTextBox(float x, float y, int[] fillColor, int[] boarderColor, String str, String font, float textSize){
+        return new TextBox(sketch, x, y, fillColor, boarderColor, str, font, textSize);
+    }
+
+    public Comment createComment(float x, float y, int[] fillColor, int[] boarderColor, String str, String font, float textSize){
+        return new Comment(sketch, x, y, fillColor, boarderColor, str, font, textSize);
+    }
 
     public Shape createShape(float x, float y, char shape, int[] fillColor, int[] boarderColor){
         if(shape == 'e') return createCircle(x, y, fillColor, boarderColor);

@@ -17,6 +17,7 @@ class DrawSpace extends ColorfulObject{
         xcenter = xpos+pixelWidth/2;
         ycenter = ypos+pixelHeight/2;
         sketch.rectMode(PConstants.CENTER);
+        sketch.imageMode(PConstants.CENTER);
     }
 
     protected ArrayList<PollyObject> getAllObjects(){
@@ -46,8 +47,8 @@ class DrawSpace extends ColorfulObject{
         return coord;
     }
 
-    protected void pan(float x, float y){
-        super.pan(x, y);
+    protected void pan(float xo, float yo){
+        super.pan(xo, yo);
         xcenter = xpos+pixelWidth/2;
         ycenter = ypos+pixelHeight/2;
     }
@@ -92,7 +93,7 @@ class DrawSpace extends ColorfulObject{
     }
 
     protected float[] getDimensions(){
-        return new float[]{pixelWidth, pixelHeight};
+        return new float[]{xpos, ypos, pixelWidth, pixelHeight};
     }
 
     protected void displayGrid(float spacing){

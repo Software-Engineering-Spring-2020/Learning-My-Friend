@@ -5,7 +5,8 @@ src\backend\Shape.java
 src\backend\objects\Image.java
 src\backend\objects\Rectangle.java
 src\backend\objects\Ellipse.java
-
+src\backend\objects\TextBox.java
+src\backend\objects\Comment.java
 
 src\backend\objects\ObjectFactory.java
 src\backend\DrawSpace.java
