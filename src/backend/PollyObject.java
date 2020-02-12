@@ -33,7 +33,7 @@ public abstract class PollyObject {
         return new float[]{-1, -1};
     }
 
-/* description: checks if the provided x, y are within the pivoted bounding box of this
+    /* description: checks if the provided x, y are within the pivoted bounding box of this
     shape */
     protected boolean withinScope(float x, float y) {
         // approach: rotate the given x, y by the NEGATIVE current rotation
@@ -46,14 +46,17 @@ public abstract class PollyObject {
 
         PVector rotatedPoint = rotateAbout(new PVector(x, y), new PVector(xpos, ypos), -rot);
 
-        if ((rotatedPoint.x >= xpos - width && rotatedPoint.x <= xpos + width) && 
-            (rotatedPoint.y >= ypos - height && rotatedPoint.y <= ypos + height)) {
+        if ((rotatedPoint.x >= xpos - width / 2 && rotatedPoint.x <= xpos + width / 2) && 
+            (rotatedPoint.y >= ypos - height / 2 && rotatedPoint.y <= ypos + height / 2)) {
                 return true;
         }
         return false;
     }
 
-    protected PVector[] getBoundingBoxPoints(float width, float height) {
+    protected PVector[] getBoundingBoxPoints() {
+        float width = boundingBox[0];
+        float height = boundingBox[1];
+
         // this uses the existing bounding box system as much as possible
         // using width and height to generate four points
         // these points are NOT rotated per this PollyObject's rotation
@@ -61,19 +64,20 @@ public abstract class PollyObject {
         // represented with four PVectors: topLeft, topRight, bottomRight, bottomLeft (like NESW)
         PVector[] boundingBoxPoints = new PVector[4];
         // topLeft
-        boundingBoxPoints[0] = new PVector(-width, -height);
+        boundingBoxPoints[0] = new PVector(-width/2 + xpos, -height/2 + ypos);
         // topRight
-        boundingBoxPoints[1] = new PVector(width, -height);
+        boundingBoxPoints[1] = new PVector(width/2 + xpos, -height/2 + ypos);
         // bottomRight
-        boundingBoxPoints[2] = new PVector(width, height);
+        boundingBoxPoints[2] = new PVector(width/2 + xpos, height/2 + ypos);
         // bottomLeft
-        boundingBoxPoints[3] = new PVector(-width, height);
+        boundingBoxPoints[3] = new PVector(-width/2 + xpos, height/2 + ypos);
         return boundingBoxPoints;
     }
 
-    protected PVector[] getRotatedBoundingBoxPoints(float width, float height, float rot) {
+    protected PVector[] getRotatedBoundingBoxPoints() {
+        float rot = this.rot;
         PVector[] rotatedBoundingBoxPoints = new PVector[4];
-        PVector[] boundingBoxPoints = getBoundingBoxPoints(width, height);
+        PVector[] boundingBoxPoints = getBoundingBoxPoints();
         PVector center = new PVector(xpos, ypos);
         for (int i = 0; i < 4; i++) {
             rotatedBoundingBoxPoints[i] = rotateAbout(boundingBoxPoints[i], center, rot);
@@ -83,18 +87,19 @@ public abstract class PollyObject {
 
     protected PVector rotateAbout(PVector rotatePoint, PVector aboutPoint, float degrees) {
         PVector finalPoint = new PVector(0, 0);
+        float radians = (float) (Math.PI / 180) * degrees;
 
         // make finalPoint like rotatePoint as if aboutPoint were the origin
         finalPoint.x = rotatePoint.x - aboutPoint.x;
         finalPoint.y = rotatePoint.y - aboutPoint.y;
 
         // rotate finalPoint about the origin
-        finalPoint.x = finalPoint.x * (float) Math.cos(degrees) -  finalPoint.y * (float) Math.sin(degrees);
-        finalPoint.y = finalPoint.x * (float) Math.sin(degrees) +  finalPoint.y * (float) Math.cos(degrees);
+        float tempX = finalPoint.x * (float) Math.cos(radians) -  finalPoint.y * (float) Math.sin(radians);
+        float tempY = finalPoint.x * (float) Math.sin(radians) +  finalPoint.y * (float) Math.cos(radians);
 
         // translate finalPoint back to where it should be based on aboutPoint
-        finalPoint.x += aboutPoint.x;
-        finalPoint.y += aboutPoint.y;
+        finalPoint.x = tempX + aboutPoint.x;
+        finalPoint.y = tempY + aboutPoint.y;
 
         return finalPoint;
     }
