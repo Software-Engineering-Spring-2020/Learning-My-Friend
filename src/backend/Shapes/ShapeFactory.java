@@ -1,6 +1,8 @@
 package backend.shapes;
-import backend.ColorfulObject;
+import backend.Shape;
 import processing.core.PApplet;
+import processing.core.PShape;
+import processing.core.PConstants;
 
 public class ShapeFactory {
     protected  PApplet sketch;
@@ -8,7 +10,7 @@ public class ShapeFactory {
         this.sketch = sketch;
     }
 
-    public ColorfulObject createShape(float x, float y, char shape, int[] fillColor, int[] boarderColor){
+    public Shape createShape(float x, float y, char shape, int[] fillColor, int[] boarderColor){
         if(shape == 'e') return createCircle(x, y, fillColor, boarderColor);
         else if(shape == 'r') return createRect(x, y, fillColor, boarderColor);
         return null;

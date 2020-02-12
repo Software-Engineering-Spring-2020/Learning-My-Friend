@@ -92,12 +92,17 @@ src\frontend\controlP5\Tooltip.java
 
 
 
-src\backend\Window.java
-src\backend\ColorfulObject.java
-src\backend\DrawSpace.java
-src\backend\Group.java
 src\backend\PollyObject.java
-src\backend\Shapes\ShapeFactory.java
+src\backend\ColorfulObject.java
+src\backend\Shape.java
+
+src\backend\Shapes\Image.java
 src\backend\Shapes\Rectangle.java
 src\backend\Shapes\Ellipse.java
+
+
+src\backend\Shapes\ShapeFactory.java
+src\backend\DrawSpace.java
+src\backend\Window.java
+src\backend\Group.java
 src\BackendDriver.java

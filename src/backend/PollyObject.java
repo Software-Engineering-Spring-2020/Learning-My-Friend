@@ -2,12 +2,10 @@ package backend;
 
 import processing.core.PApplet;
 import processing.core.PConstants;
-import processing.core.PShape;
 
-public abstract class PollyObject extends PShape {
+public abstract class PollyObject {
     protected PApplet sketch;
-    protected PShape shape;
-    protected float xpos, ypos, rot = 0;
+    protected float xpos, ypos, rot = 0, pixelWidth, pixelHeight;
     protected boolean showBoundary;
     protected float[] boundingBox = new float[2]; //represented with centered at 0,0
 
@@ -15,7 +13,6 @@ public abstract class PollyObject extends PShape {
         this.sketch = sketch;
         xpos = x;
         ypos = y;
-        shape = sketch.createShape(PConstants.POINT, xpos, ypos);
     }
 
     protected float[] getPosition() {
@@ -40,15 +37,11 @@ public abstract class PollyObject extends PShape {
         return false;
     }
 
-    protected void display() {
-        //sketch.rotate(sketch.radians(rot));
-        sketch.shape(shape);
-    }
+    protected void display() {    }
 
     protected void pan(float xo, float yo){
         xpos = xpos + xo;
         ypos = ypos + yo;
-        shape.translate(xo, yo);
     }
 
     protected void enlarge(float factor) {
