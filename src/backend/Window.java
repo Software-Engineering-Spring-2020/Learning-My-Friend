@@ -85,8 +85,12 @@ public class Window {
         return false;
     }
 
-    public void panSelected(float xo, float yo){
-
+    public void selectedPan(float xo, float yo){
+        for(PollyObject shape : selected){
+            //float[] coord = ds.relativePan(xo, yo, zoom);
+            //shape.pan(coord[0], coord[1]);
+            shape.pan(xo, yo);
+        }
     }
 
     public void setFillColor(int r, int g, int b) {
@@ -101,7 +105,7 @@ public class Window {
         boarderColor[2] = b;
     }
 
-  
+
     public void rotate(float ao) {
         for (PollyObject shape : selected) {
             shape.setRelativeRotate(ao);
@@ -117,7 +121,7 @@ public class Window {
         selected.add(ds.getObjectAt(x, y, zoom));
     }
 
-    public boolean deleteSelected() { 
+    public boolean deleteSelected() {
         boolean successful = true;
         for (PollyObject shape : selected) {
             trash.add(shape);
@@ -163,11 +167,25 @@ public class Window {
                 int[] fill = ((ColorfulObject) shape).getFillColor();
                 int[] boarder = ((ColorfulObject) shape).getBoarderColor();
                 sf.createShape(pos[0]+2, pos[1]+2, 'r', fill, boarder); //not full copy
-            } else{ 
+            } else{
                 //ds.addShape();
             }
         }
     }
+
+    /*********************************************************
+     *
+     *
+     *          DRAWING RELATED FUNCTIONALITY
+     *
+     *
+     *********************************************************/
+
+    public void setThickness(int size){
+        int weight = sketch.max(size, 1);
+        sketch.strokeWeight(weight);
+    }
+
 
     /*********************************************************
      *

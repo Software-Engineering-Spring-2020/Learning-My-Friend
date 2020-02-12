@@ -48,6 +48,7 @@ public abstract class PollyObject extends PShape {
     protected void pan(float xo, float yo){
         xpos = xpos + xo;
         ypos = ypos + yo;
+        shape.translate(xo, yo);
     }
 
     protected void enlarge(float factor) {

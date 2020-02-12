@@ -9,7 +9,7 @@ METHODS:
 	Tested: 
 		void display()
 		void canvasPan(float xo, float yo)
-			xo and yo mean (mouseX - pmouseX) and (mouseY - pmouseY) respecitvely
+						xo and yo mean (mouseX - pmouseX) and (mouseY - pmouseY) respecitvely
 		void zoom(float factor)
 		boolean createShape(float x, float y, char shape)
 		void setFillColor(int r, int g, int b)
@@ -18,14 +18,16 @@ METHODS:
 		boolean deleteLast()
 		boolean restoreLast()
 		void clear()
+		void selectedPan(float xo, float yo)
+		void reCenter()
 
 	Untested:
-		void reCenter()
 		void rotate(float ao)
 		void singleSelect(float x, float y)
 		void multiSelect(float x, float y)
 		boolean copy()
 		void paste()
+		void setThickness(int size)
 
 
 Bugs:
@@ -35,14 +37,11 @@ Bugs:
 TODO:
 	Import
 	New way to Export
-	Pan / Scale Shapes (basis written, have to translate to diff coord (math))
 	Textboxes
 	Comments
 	Grid (have unupploaded code to show it, not to snap)
-	setStroke
 	Curves
 	Triangles
-	SetStroke
 	Freehand Drawing
 
 

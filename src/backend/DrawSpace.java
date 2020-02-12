@@ -39,8 +39,8 @@ class DrawSpace extends ColorfulObject{
         return coord;
     }
 
-    protected float[] translateDistance(float x, float y, float zoom){
-        float[] coord = new float[]{x, y}; //translates from coordinates to relational fraction
+    protected float[] relativePan(float xo, float yo, float zoom){
+        float[] coord = new float[]{xo, yo}; //translates from coordinates to relational fraction
         coord[0] = (pixelWidth/2) * (coord[0] / ((pixelWidth/2)*zoom));
         coord[1] = (pixelHeight/2) * (coord[1] / ((pixelHeight/2)*zoom));
         return coord;
@@ -48,6 +48,12 @@ class DrawSpace extends ColorfulObject{
 
     protected void pan(float x, float y){
         super.pan(x, y);
+        xcenter = xpos+pixelWidth/2;
+        ycenter = ypos+pixelHeight/2;
+    }
+
+    protected void setPosition(float x, float y){
+        super.setPosition(x, y);
         xcenter = xpos+pixelWidth/2;
         ycenter = ypos+pixelHeight/2;
     }
