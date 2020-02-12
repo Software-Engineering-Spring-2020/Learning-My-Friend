@@ -26,6 +26,7 @@ class ScalableObj{
   public ControllerGroup cg = null;
   //this is added to have the ability to change the group background color
   public ControlGroup cgb = null;
+
   public ScalableObj(PApplet sketch, Controller con){
     this.sketch = sketch;
     this.con = con;
@@ -39,6 +40,18 @@ class ScalableObj{
     this.cgb = cgb;
   }
 
+  public String getName(){
+    if(cg != null){
+      return cg.getName();
+    }
+    if(con!= null){
+      return con.getName();
+    }
+    if(cgb!= null){
+      return cgb.getName();
+    }
+    else return null;
+  }
 
   public void setPos(float x, float y){
     posRX = x;
@@ -67,7 +80,6 @@ class ScalableObj{
       cgb.setPosition((int)Math.round(sketch.width*posRX), (int)Math.round(sketch.height*posRY));
       cgb.setBackgroundHeight((int)Math.round(sketch.height*sizeRY));
     }
-
   }
 
 }

@@ -37,8 +37,20 @@ public abstract class Toolbar{
 
 
 
-    /*public ScalableObj ScalableObjFactory(){
-
-
-    }*/
+    public ScalableObj ScalableObjFactory(char c, String name, float posX, float posY, float sizeX, float sizeY){
+      ScalableObj so;
+      if(c == 'g'){
+        //ControlGroup g = cp5.addGroup(name).hideBar().setBackgroundColor(100);
+        so = new ScalableObj(sketch, cp5.addGroup(name).hideBar().setBackgroundColor(100));
+        so.setPos(posX, posY);
+        so.setSize(sizeX, sizeY);
+      //  so.setBackgroundHeight()
+      }
+      else {
+        so = new ScalableObj(sketch, cp5.addGroup(name).hideBar().setBackgroundColor(100));
+        so.setPos(posX, posY);
+        so.setSize(sizeX, posY);
+      }
+      return so;
+    }
 }
