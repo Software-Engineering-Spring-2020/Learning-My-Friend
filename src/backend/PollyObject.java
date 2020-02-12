@@ -40,8 +40,8 @@ public abstract class PollyObject {
         // this will move it back into the original bounding box (based on width and height)
         // if it is within the shape
 
-        float width = boundingBox[0];
-        float height = boundingBox[1];
+        float width = pixelWidth;
+        float height = pixelHeight;
 
 
         PVector rotatedPoint = rotateAbout(new PVector(x, y), new PVector(xpos, ypos), -rot);
@@ -54,8 +54,8 @@ public abstract class PollyObject {
     }
 
     protected PVector[] getBoundingBoxPoints() {
-        float width = boundingBox[0];
-        float height = boundingBox[1];
+        float width = pixelWidth;
+        float height = pixelHeight;
 
         // this uses the existing bounding box system as much as possible
         // using width and height to generate four points
@@ -85,13 +85,13 @@ public abstract class PollyObject {
         return rotatedBoundingBoxPoints;
     }
 
-    protected PVector rotateAbout(PVector rotatePoint, PVector aboutPoint, float degrees) {
+    protected PVector rotateAbout(PVector anchor, PVector aboutPoint, float degrees) {
         PVector finalPoint = new PVector(0, 0);
         float radians = (float) (Math.PI / 180) * degrees;
 
         // make finalPoint like rotatePoint as if aboutPoint were the origin
-        finalPoint.x = rotatePoint.x - aboutPoint.x;
-        finalPoint.y = rotatePoint.y - aboutPoint.y;
+        finalPoint.x = anchor.x - aboutPoint.x;
+        finalPoint.y = anchor.y - aboutPoint.y;
 
         // rotate finalPoint about the origin
         float tempX = finalPoint.x * (float) Math.cos(radians) -  finalPoint.y * (float) Math.sin(radians);
