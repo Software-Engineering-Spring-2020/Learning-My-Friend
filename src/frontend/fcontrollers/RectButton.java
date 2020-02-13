@@ -13,8 +13,8 @@ import frontend.*;
 import frontend.controlP5.*;
 
 public class RectButton extends FButton{
-  public RectButton(ControlP5 cp5, String name){
-    super(cp5, name);
+  public RectButton(ControlP5 cp5, String name, FToolbar parrent){
+    super(cp5, name, parrent);
 
   }
 

@@ -23,9 +23,13 @@ public abstract class FController{
   //sizePriority is 1 by default. The larger sizePriority is the more space it takes from other FControllers in the group.
   float sizePriority = 1;
 
-  public FController(ControlP5 cp5, String name){
+
+  //Parrent FToolbar
+  FToolbar parrent;
+  public FController(ControlP5 cp5, String name, FToolbar parrent){
     this.cp5 = cp5;
     this.name = name;
+    this.parrent = parrent;
     sizeX = 100;
     sizeY = 100;
     posX = 0;
@@ -117,7 +121,7 @@ public abstract class FController{
    * [getPoxY sets the position of the controller in percentage of group's height]]
    * @return [percentage of group's hieght where the controller's upper left corner is]
    */
-    protected float getPoxY(){
+    protected float getPosY(){
       return posY;
     }
 

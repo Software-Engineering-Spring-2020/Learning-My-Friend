@@ -38,10 +38,10 @@ public class FToolbar{
   float boarderX, boarderY, boarderController;
 
   public FToolbar(PApplet sketch, ControlP5 cp5, String name){
-    sizeX = 100;
-    sizeY = 100;
-    posX = 0;
-    posX = 0;
+    sizeX = (float).05;
+    sizeY = (float).9;
+    posX = (float).0;
+    posY = (float).05;
 
     conList = new LinkedList<FController>();
 
@@ -49,7 +49,9 @@ public class FToolbar{
     boarderY = (float).05;
 
     this.cp5 = cp5;
+    this.sketch = sketch;
     g = groupFactory(name);
+    update();
   }
 
 /**
@@ -240,9 +242,11 @@ public class FToolbar{
  */
   protected void update(){
     //sets toolbar size and position
+    //System.out.println(g.getName() + " Width: " + sizeX + " Height: "  + sizeY +
+    //"\n Sketch Width: " + sketch.width + "Sketch Height: " + sketch.height);
     g.setSize((int)Math.round(sketch.width*sizeX), (int)Math.round(sketch.height*sizeY));
     g.setPosition((int)Math.round(sketch.width*posX), (int)Math.round(sketch.height*posY));
-    g.setBackgroundHeight((int)Math.round(sketch.height*sizeX));
+    g.setBackgroundHeight((int)Math.round(sketch.height*sizeY));
 
     //sets FController size and position
     //curent version does not use priotirtys
@@ -253,8 +257,14 @@ public class FToolbar{
 
     //start of Y boarder
     //start of X boarder
+    //delta of Y boarder aka workable space or space in which we can put Controllers
+    //    int deltaY = (size(sizeY*boarderY))
+    //delta of x boarder aka workable space or space in which we can put Controllers, width of controllers
+    //    int deltaX
+    // find avalable space
     // find the size of each Controller
     // starts resizing each controller
+
     for(int i = 0; i < conList.size(); i++){
 
 

@@ -31,6 +31,8 @@ import processing.core.*;
    //list of toolbars
    LinkedList<FToolbar> tbList;
 
+   //contains the last size for the sketch. If these are diffrent then the curent sketch size the gui will call the toolbars to resize.
+   int lastAppletWidth, lastAppletHeight;
    /**
     * Start of STATE Deleration
     * The state is a structure of varibales that represent the state of the GUI.
@@ -56,13 +58,37 @@ import processing.core.*;
      this.sketch = sketch;
      this.win = win;
      cp5 = new ControlP5(sketch);
+     tbList = new LinkedList<FToolbar>();
+
+     lastAppletWidth = sketch.width;
+     lastAppletHeight = sketch.height;
+
+     tbList.add(new FToolbar(sketch, cp5, "Object Creation"));
    }
 
 
+
+
+   /**
+    * [display checks to see if the applet size has changed. If it has it triggers a resize.]
+    */
    public void display(){
      //TODO
+     if(lastAppletWidth != sketch.width || lastAppletHeight != sketch.height){
+      resizeAll();
+      lastAppletWidth = sketch.width;
+      lastAppletHeight = sketch.height;
+    }
      //Check for window resize and if so update all toolbars
    }
 
+   /**
+    * [resizeAll resizes all the gui elements]
+    */
+   public void resizeAll(){
+     for(FToolbar tb : tbList)
+      tb.update();
+
+   }
 
 }

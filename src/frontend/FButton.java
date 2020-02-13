@@ -15,8 +15,8 @@ import frontend.controlP5.*;
 public abstract class FButton extends FController{
   Button button;
 
-  public FButton(ControlP5 cp5, String name){
-    super(cp5, name);
+  public FButton(ControlP5 cp5, String name, FToolbar parrent){
+    super(cp5, name, parrent);
     button = buttonFactory();
     button.plugTo(this);
   }
@@ -29,6 +29,8 @@ public abstract class FButton extends FController{
    * [update updates the ControlP5 object to the FControlers size]
    */
   protected void update(){
+    button.setSize((int)Math.round(parrent.getSizeX()*getSizeX()), (int)Math.round(parrent.getSizeY()*getSizeY()));
+    button.setPosition((int)Math.round(parrent.getSizeX()*getPosX()), (int)Math.round(parrent.getSizeY()*getPosY()));
 
   }
 
