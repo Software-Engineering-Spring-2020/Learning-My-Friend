@@ -76,8 +76,8 @@ import processing.core.*;
 
    private void setupObjectCreationToolbar(){
      FToolbar ft = toolbarFactory("Obj Create", (float).05, (float).9, (float).0, (float).05);
-     ft.addFController(new RectButton(cp5, "rect", ft, this));
-     ft.addFController(new RectButton(cp5, "E", ft, this));
+     ft.addFController(new RectButton(cp5, ft, this));
+     ft.addFController(new ElipButton(cp5, ft, this));
    }
 
 

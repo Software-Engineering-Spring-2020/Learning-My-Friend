@@ -6,7 +6,7 @@ DECLARATION / INSTANCIATION:
 
 
 METHODS:
-	Tested: 
+	Tested:
 		void display()
 		void canvasPan(float xo, float yo)
 						xo and yo mean (mouseX - pmouseX) and (mouseY - pmouseY) respecitvely
@@ -47,7 +47,7 @@ Bugs:
 
 TODO:
 	Properties of Objects
-	Resizing 
+	Resizing
 	GROUPING
 	New way to Export
 	Snapping
@@ -55,6 +55,3 @@ TODO:
 	Triangles
 	Freehand Drawing
 	Throw Exception for image import
-
-
-
