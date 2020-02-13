@@ -21,6 +21,8 @@ public abstract class Toolbar{
   Handler h;
   PApplet sketch;
   ArrayList<ScalableObj> controllers;
+  Group g = null;
+  ScalableObj parrent = null;
 
   public Toolbar(ControlP5 cp5, Handler h, PApplet sketch){
     this.cp5 = cp5;
@@ -39,19 +41,13 @@ public abstract class Toolbar{
 
     public ScalableObj ScalableObjFactory(char c, String name, float posX, float posY, float sizeX, float sizeY){
       ScalableObj so;
-      //add group
-      if(c == 'g'){
-        ControlGroup g = cp5.addGroup(name)
-        .hideBar()
-        .setBackgroundColor(100);
-        so = new ScalableObj(sketch, g);
-        so.setPos(posX, posY);
-        so.setSize(sizeX, sizeY);
-      }
       //add buttonbar
-      else if(c == 'b'){
-        Controller g = cp5.addButton(name);
-        so = new ScalableObj(sketch, g);
+      if(c == 'b'){
+        Controller co = cp5.addButton(name);
+        co.setGroup(this.g);
+        so = new ScalableObj(sketch, co);
+        so.setParrentGroup(g);
+        so.setParrent(parrent);
         so.setPos(posX, posY);
         so.setSize(sizeX, sizeY);
       }
@@ -69,14 +65,18 @@ public abstract class Toolbar{
 
 
 
-    public ScalableObj ButtonBarFactory(String name, String[] option, float posX, float posY, float sizeX, float sizeY){
+    public ScalableObj ScalableGroupFactory(String name, float posX, float posY, float sizeX, float sizeY){
       ScalableObj so;
-      ButtonBar g = cp5.addButtonBar(name);
-      g.addItems(option);
-      so = new ScalableObj(sketch, g);
+      Group gr = cp5.addGroup(name)
+      .setBackgroundColor(100)
+      //.setMoveable(true)
+      ;
+      so = new ScalableObj(sketch, gr);
       so.setPos(posX, posY);
       so.setSize(sizeX, sizeY);
       controllers.add(so);
       return so;
     }
+
+
 }

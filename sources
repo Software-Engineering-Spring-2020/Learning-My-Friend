@@ -1,12 +1,13 @@
 src/PollyPaint.java
 
-src/frontend/GUI.java
-src\frontend\handler\Handler.java
-src\frontend\ui\Toolbar.java
-src\frontend\ui\ObjSetToolbar.java
-src\frontend\ui\WorkspaceToolbar.java
-src\frontend\ui\ObjCreateToolbar.java
-src\frontend\ui\ScalableObj.java
+src\frontend\GUI.java
+src\frontend\IOHandler.java
+src\frontend\FToolbar.java
+src\frontend\FController.java
+src\frontend\FButton.java
+src\frontend\fcontrollers\RectButton.java
+
+
 
 
 

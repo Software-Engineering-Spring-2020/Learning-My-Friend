@@ -2,8 +2,10 @@ import processing.core.*;
 import processing.event.*;
 import frontend.*;
 import frontend.controlP5.*;
-import frontend.handler.*;
 import backend.*;
+import frontend.fcontrollers.*;
+
+
 /**
  *<h1> PollyPaint </h1>
  * This is our primary class. Our `main` method is stored here. When launching the program this is what launches.
@@ -38,11 +40,9 @@ import backend.*;
 public class PollyPaint extends PApplet {
 GUI gui;
 Window win;
-Handler h;
+IOHandler h;
 
-//mouse sensitivity for zooming
-float mouseSense = 5;
-float canvasX, canvasY, canvasWidth, canvasHeight;
+public float canvasX, canvasY, canvasWidth, canvasHeight;
 
 /**
  * [main is what runs by default. This should not be called by any other class.]
@@ -57,8 +57,10 @@ float canvasX, canvasY, canvasWidth, canvasHeight;
 		}
     }
 
+
+
 /**
- * [settings description]
+ * [settings provides settings to PApplet befor init]
  */
 	public void settings() {
 		size(1000, 500);
@@ -69,21 +71,21 @@ float canvasX, canvasY, canvasWidth, canvasHeight;
 
 
 /**
- * [setup description]
+ * [setup provides instructions to PApplet after init]
  */
 	public void setup(){
 		surface.setResizable(true);
+
 		//Init Canvas Position and Size in center of the screen
-		canvasX = width/4;
-		canvasY = height/4;
+	 	canvasX = width/4;
+		canvasY  = height/4;
 		canvasWidth = width/2;
 		canvasHeight = height/2;
 
 
 		win = new Window(this, canvasX, canvasY, canvasWidth, canvasHeight);
-		h = new Handler(win, this);
-		gui = new GUI(this, h);
-		gui.setup();
+		gui = new GUI(this, win);
+		h = new IOHandler(this, win, gui);
 	}
 
 /**
@@ -96,19 +98,10 @@ float canvasX, canvasY, canvasWidth, canvasHeight;
 	}
 
 
-	/**
-	 * [controlEvent is called whenever a controlP5 controller is used]
-	 * @param theEvent [is passed by ControlP5 and contains the event that was just triggered]
-	 */
-	public void controlEvent(ControlEvent theEvent) {
-    h.handleEvent(theEvent);
-	}
-
-
 
 
 	public void mouseDragged() {
-			win.canvasPan((this.mouseX - this.pmouseX), (this.mouseY - this.pmouseY));
+			h.mouseDragged();
 	}
 
 
@@ -119,7 +112,7 @@ float canvasX, canvasY, canvasWidth, canvasHeight;
 	}
 
 	public void mouseWheel(MouseEvent event) {
-	  win.zoom(event.getCount()/mouseSense);
+	 h.mouseWheel(event);
 	}
 
 
