@@ -173,11 +173,8 @@ public class Window {
     }
 
     public void singleSelect(float x, float y){
-        PollyObject obj = ds.getObjectAt(x, y, zoom);
-        if(obj != null){
-            selected.clear();
-            selected.add(obj);
-        }
+        selected.clear();
+        multiSelect(x, y);
     }
 
     public void multiSelect(float x, float y){

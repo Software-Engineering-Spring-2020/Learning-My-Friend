@@ -21,11 +21,11 @@ METHODS:
 		void reCenter()
 		void toggleGrid()
 		boolean createShape(float x, float y, char shape)
+		void singleSelect(float x, float y)
+		void multiSelect(float x, float y)
 
 	Untested:
 		void rotate(float ao)
-		void singleSelect(float x, float y)
-		void multiSelect(float x, float y)
 		boolean copy()
 		void paste()
 		void setThickness(int size)
