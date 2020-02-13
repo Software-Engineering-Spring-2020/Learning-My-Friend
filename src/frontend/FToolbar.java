@@ -246,10 +246,22 @@ public class FToolbar{
 
     //sets FController size and position
     //curent version does not use priotirtys
-    float sizeOfEach = (float)conList.size();
+
+
+
+    int n = conList.size();
+
+    //start of Y boarder
+    //start of X boarder
+    // find the size of each Controller
+    // starts resizing each controller
     for(int i = 0; i < conList.size(); i++){
 
+
     }
+
+
+
 
 
     /*

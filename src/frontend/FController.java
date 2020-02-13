@@ -32,7 +32,10 @@ public abstract class FController{
     posX = 0;
   }
 
-
+/**
+ * [update updates the ControlP5 object to the FControlers size]
+ */
+  abstract protected void update();
 
   /**
    * [setSizeX sets the width of the controller in percentage of group]
