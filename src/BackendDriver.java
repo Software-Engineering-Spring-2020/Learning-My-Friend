@@ -22,13 +22,74 @@ public class BackendDriver extends PApplet {
                 this.window.restoreLast();
             if (this.keyCode == 38) {
                 this.window.zoom(0.03F);
-            } else if (this.keyCode == 40) {
+            } if (this.keyCode == 40) {
                 this.window.zoom(-0.03F);
             }
             else if (this.keyCode == 18){
                 this.window.toggleGrid();
             }
         }
+		
+			if (this.key == 'a'){ 
+				 this.window.createShape(this.mouseX, this.mouseY, 'r');
+			}
+			if (this.key == 'b'){
+				this.window.reCenter();
+			}
+			if (this.key == 'c'){
+				this.window.setGridSpacing(50);
+			}
+			if (this.key == 'd'){
+				this.window.createShape(this.mouseX, this.mouseY, 'e');
+			}
+			if (this.key == 'e'){
+				this.window.createTextBox(this.mouseX, this.mouseY, "Hello world!", "arial", 12);
+			}
+			if (this.key == 'f'){
+				this.window.createComment(this.mouseX, this.mouseY, "Hello world!", "arial", 12);
+			}
+			if (this.key == 'g'){
+				this.window.importImage(this.mouseX, this.mouseY, "grayscrunchie", ".png");
+			}
+			if (this.key == 'h'){
+				this.window.setFillColor(90, 50, 250);
+			}
+			if (this.key == 'j'){
+				this.window.setBoarderColor(100, 200, 60);
+			}
+			if (this.key == 'l'){
+				this.window.rotate(180);
+			}
+			if (this.key == 'm'){
+				this.window.deleteSelected();
+			}
+			if (this.key == 'n'){
+				this.window.deleteLast();
+			}
+			if (this.key == 'o'){
+				this.window.deleteSelected();
+			}
+			if (this.key == 'p'){
+				this.window.clear();
+			}
+			if (this.key == 'q'){
+				this.window.copy();
+			}
+			if (this.key == 'r'){
+				this.window.paste();
+			}
+			if (this.key == 's'){
+				this.window.setThickness(5);
+			}
+			if (this.key == 't'){
+				this.window.exportAs("testName", ".png");
+			}
+			if (this.key == 'u'){
+				System.out.println(this.window.withinCanvas(this.mouseX, this.mouseY));
+			}
+			if (this.key == 'u'){
+				
+			}
     }
 
     public void mouseDragged() {
@@ -36,7 +97,7 @@ public class BackendDriver extends PApplet {
     }
 
     public void mouseClicked() {
-        this.window.createShape(this.mouseX, this.mouseY, 'r');
+        this.window.multiSelect(this.mouseX, this.mouseY);
         count++;
     }
 

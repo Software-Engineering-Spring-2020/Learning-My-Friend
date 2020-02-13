@@ -1,0 +1,26 @@
+Issues
+Nothing appears onscreen when you create a comment
+When you use multiselect and selectedPan(), rectangles sometimes don't pan along with the rest of the objects (they move around more). Edit: this can be a circle too. It's usually the third or so object added. Other objects that are added after that might pan correctly.
+Nothing happens to selected objects when you rotate
+selectedPan() didn't work after multiple other functions are called (created a bunch of shapes, tested deleteSelected(), restoreLast(), and clear())
+Paste() doesn't paste the object selected
+setThickness creates a border around drawableCanvas (border is black, even if setBorderColor() is set to a different color)
+restoreLast() doesn't restore last object deleted (whether it was deleteSelected() or deleteLast())
+exportAs() doesn't seem to do anything
+importImage doesn't work. I put the image in multiple folders (main PollyPaint folder, src, src->backend) and it still didn't run. I passed the argument "grayscrunchie", ".png" and got the error message "Could not find a method to load grayscrunchie"
+
+NOTE: Could not find a way to test createAt(). You have to pass in a PollyObject to test this, and I don't know how to pass in a separate PollyObject. (createShape() runs createAt(), so I can't use it for testing). I'll keep thinking on how to possibly do this.
+
+Successful tests run
+Re-center works if you zoom in and if you zoom out
+Grid spacing works for positive ints of different sizes
+Canvaspan pans canvas correctly
+You can create a circle, shape, and textbox
+setFillColor() and setBorderColor() work when creating new shapes
+Selectedpan() pans shapes selected properly
+Singleselect() allows you to select one shape
+deleteSelected() works for singleSelect() and multiSelect()
+p clears all objects onscreen (not just ones selected)
+deleteLast() works to delete objects in the order they were created
+setThickness() works
+withinBounds() accurately determines if mouse position is in bounds, even if the canvas is zoomed or paned
