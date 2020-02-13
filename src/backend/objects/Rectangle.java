@@ -8,7 +8,7 @@ class Rectangle extends Shape {
         super(sketch, x, y, strokeWeight, fillColor, boarderColor);
         this.pixelWidth = w;
         this.pixelHeight = h;
-        shape = sketch.createShape(PConstants.RECT, this.xpos, this.ypos, this.pixelWidth, this.pixelHeight);
+        shape = sketch.createShape(PConstants.RECT, 0, 0, this.pixelWidth, this.pixelHeight);
         setSettings();
     }
     Rectangle(PApplet sketch, float x, float y, float d, float strokeWeight,  int[] fillColor, int[] boarderColor){
