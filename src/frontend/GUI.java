@@ -63,9 +63,35 @@ import processing.core.*;
      lastAppletWidth = sketch.width;
      lastAppletHeight = sketch.height;
 
-     tbList.add(new FToolbar(sketch, cp5, "Object Creation"));
+     setup();
    }
 
+
+
+   private void setup(){
+     setupObjectCreationToolbar();
+     setupObjectSettingsToolbar();
+     resizeAll();
+   }
+
+   private void setupObjectCreationToolbar(){
+     toolbarFactory("Obj Create", (float).05, (float).9, (float).0, (float).05);
+   }
+
+
+   private void setupObjectSettingsToolbar(){
+    toolbarFactory("Obj Set", (float).05, (float).9, (float).95, (float).05);
+   }
+
+
+
+  private FToolbar toolbarFactory(String name, float sizeX, float sizeY, float posX, float posY){
+    FToolbar ret = new FToolbar(sketch, cp5, name);
+    tbList.add(ret);
+    ret.setSize(sizeX, sizeY);
+    ret.setPos(posX, posY);
+    return ret;
+  }
 
 
 

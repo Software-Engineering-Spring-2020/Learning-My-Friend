@@ -40,8 +40,8 @@ public class FToolbar{
   public FToolbar(PApplet sketch, ControlP5 cp5, String name){
     sizeX = (float).05;
     sizeY = (float).9;
-    posX = (float).0;
-    posY = (float).05;
+    posX = (float).5;
+    posY = (float).0;
 
     conList = new LinkedList<FController>();
 
