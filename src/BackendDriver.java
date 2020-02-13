@@ -58,7 +58,7 @@ public class BackendDriver extends PApplet {
 				this.window.setBoarderColor(100, 200, 60);
 			}
 			if (this.key == 'l'){
-				this.window.rotate(180);
+				this.window.rotate(90);
 			}
 			if (this.key == 'm'){
 				this.window.deleteSelected();
@@ -93,7 +93,7 @@ public class BackendDriver extends PApplet {
     }
 
     public void mouseDragged() {
-        this.window.canvasPan((this.mouseX - this.pmouseX), (this.mouseY - this.pmouseY));
+        this.window.selectedPan((this.mouseX - this.pmouseX), (this.mouseY - this.pmouseY));
     }
 
     public void mouseClicked() {
