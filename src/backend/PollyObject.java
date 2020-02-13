@@ -8,7 +8,6 @@ public abstract class PollyObject {
     protected PApplet sketch;
     protected float xpos, ypos, rot = 0, pixelWidth, pixelHeight;
     protected boolean showBoundary;
-    protected float[] boundingBox = new float[2]; //represented with centered at 0,0
 
     public PollyObject(PApplet sketch, float x, float y) {
         this.sketch = sketch;
@@ -48,8 +47,11 @@ public abstract class PollyObject {
 
         if ((rotatedPoint.x >= xpos - width / 2 && rotatedPoint.x <= xpos + width / 2) && 
             (rotatedPoint.y >= ypos - height / 2 && rotatedPoint.y <= ypos + height / 2)) {
+                sketch.println("Within Bounds!");
                 return true;
         }
+
+        sketch.println("NOT NOT NOT Within Bounds!");
         return false;
     }
 
@@ -74,7 +76,7 @@ public abstract class PollyObject {
         return boundingBoxPoints;
     }
 
-    protected PVector[] getRotatedBoundingBoxPoints() {
+    protected PVector[] getRotatedBoundingBoxPoints() { //Can Display
         float rot = this.rot;
         PVector[] rotatedBoundingBoxPoints = new PVector[4];
         PVector[] boundingBoxPoints = getBoundingBoxPoints();

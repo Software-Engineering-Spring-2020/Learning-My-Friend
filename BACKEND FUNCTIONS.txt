@@ -20,6 +20,7 @@ METHODS:
 		void selectedPan(float xo, float yo)
 		void reCenter()
 		void toggleGrid()
+		boolean createShape(float x, float y, char shape)
 
 	Untested:
 		void rotate(float ao)
@@ -32,12 +33,12 @@ METHODS:
 		void exportAs(String saveName, String extension)
 		void importImage(float x, float y, String filename, String extension)
 		void importImage(String filename, String extension)
-		boolean createShape(float x, float y, char shape) - needs retesting since changed
 
 
 	Untested Classes:
 		Image
 		TexBox
+		Comments
 
 
 Bugs:
@@ -45,14 +46,15 @@ Bugs:
 
 
 TODO:
-	
+	Properties of Objects
+	Resizing 
 	GROUPING
 	New way to Export
-	Comments
 	Snapping
 	Curves
 	Triangles
 	Freehand Drawing
+	Throw Exception for image import
 
 
 

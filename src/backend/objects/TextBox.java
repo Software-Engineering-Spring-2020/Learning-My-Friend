@@ -17,6 +17,7 @@ class TextBox extends ColorfulObject{
     sketch.textSize(textSize);
     pixelWidth = sketch.textWidth(str);
     //pixelHeight = sketch.textHeight();
+    pixelHeight = 100;
     sketch.textAlign(PConstants.CENTER);
   }
 

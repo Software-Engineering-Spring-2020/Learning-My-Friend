@@ -16,7 +16,7 @@ public class Window {
     private float zoom = 1;
     private int[] fillColor, boarderColor;
     private float XINIT, YINIT, WIDTH, HEIGHT, gridSpacing = 30;
-    private boolean showGrid = false;
+    private boolean showGrid = false, showComments = false;
 
     public Window(PApplet sketch, float x, float y, float w, float h) {
         this.sketch = sketch;
@@ -51,7 +51,7 @@ public class Window {
 
     public void display() {
         sketch.push();
-        this.ds.display(zoom, showGrid, gridSpacing);
+        this.ds.display(zoom, showComments, showGrid, gridSpacing);
         sketch.pop();
     }
 
@@ -79,6 +79,11 @@ public class Window {
         gridSpacing = spacing;
     }
 
+    public void toggleComments(){
+        if(showComments) showComments = false;
+        else showComments = true;
+    }
+
     /*********************************************************
      *
      *
@@ -90,7 +95,6 @@ public class Window {
     private boolean createAt(float xpos, float ypos, PollyObject obj){
         if (ds.withinScope(xpos, ypos) && obj != null) {
             trash.clear();
-            selected.add(obj);
             return ds.addShape(obj);
         }
         return false;
@@ -114,7 +118,7 @@ public class Window {
         float[] coord = ds.translateCoordinates(x, y, zoom);
         //float[] coord = translateCoordinates(x, y);
         PollyObject obj = of.createComment(coord[0], coord[1], fillColor, boarderColor, str, font, textSize);
-        return createAt(coord[0], coord[1], obj);
+        return ds.addComment(obj);
     }
 
     public boolean importImage(float x, float y, String filename, String extension){
@@ -169,12 +173,18 @@ public class Window {
     }
 
     public void singleSelect(float x, float y){
-        selected.clear();
-        selected.add(ds.getObjectAt(x, y, zoom));
+        PollyObject obj = ds.getObjectAt(x, y, zoom);
+        if(obj != null){
+            selected.clear();
+            selected.add(obj);
+        }
     }
 
     public void multiSelect(float x, float y){
-        selected.add(ds.getObjectAt(x, y, zoom));
+        PollyObject obj = ds.getObjectAt(x, y, zoom);
+        if(obj != null){
+            selected.add(obj);
+        }
     }
 
     public boolean deleteSelected() {

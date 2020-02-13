@@ -6,14 +6,13 @@ import processing.core.PConstants;
 class DrawSpace extends ColorfulObject{
     private float pixelWidth, pixelHeight, xcenter, ycenter;
     private ArrayList<PollyObject> objects = new ArrayList<PollyObject>();
+    private ArrayList<PollyObject> comments = new ArrayList<PollyObject>();
     int[] white = {255,255,255};
 
     DrawSpace(PApplet sketch, float x, float y, float w, float h){
         super(sketch, x, y, new int[] {255, 255, 255}, new int[] {255, 255, 255});
         pixelWidth = w;
         pixelHeight = h;
-        boundingBox[0] = pixelWidth/2;
-        boundingBox[1] = pixelHeight/2;
         xcenter = xpos+pixelWidth/2;
         ycenter = ypos+pixelHeight/2;
         sketch.rectMode(PConstants.CENTER);
@@ -26,7 +25,16 @@ class DrawSpace extends ColorfulObject{
 
     protected PollyObject getObjectAt(float x, float y, float zoom){
         float[] pos = translateCoordinates(x, y, zoom);
+        for(int i = objects.size()-1; i>=0; i--){
+            PollyObject obj = objects.get(i);
+            if(obj.withinScope(pos[0], pos[1])) return obj;
+        }
         return null;
+    }
+
+    protected boolean withinScope(float x, float y){
+        if (x < pixelWidth/2 && x > -pixelWidth/2 && y < pixelHeight/2 && y > -pixelHeight/2) return true;
+        return false;
     }
 
     protected int getNumObjects(){
@@ -59,7 +67,7 @@ class DrawSpace extends ColorfulObject{
         ycenter = ypos+pixelHeight/2;
     }
 
-    protected void display(float zoom, boolean showGrid, float gridSpacing){
+    protected void display(float zoom, boolean showComments, boolean showGrid, float gridSpacing){
         super.display();
         sketch.translate(xcenter, ycenter);
         sketch.scale(zoom);
@@ -70,6 +78,7 @@ class DrawSpace extends ColorfulObject{
             obj.display();
             sketch.pop();
         }
+        if(showComments);
     }
 
     protected boolean addShape(PollyObject shape){
@@ -91,6 +100,23 @@ class DrawSpace extends ColorfulObject{
     protected PollyObject getShape(int i){
         return objects.get(i);
     }
+
+    protected boolean addComment(PollyObject shape){
+        return comments.add(shape);
+    }
+
+    protected boolean removeComment(PollyObject shape){
+        return comments.remove(shape);
+    } protected PollyObject removeComment(int i){
+        return comments.remove(i);
+    } protected void clearComments(){
+        comments.clear();
+    }
+
+    protected PollyObject getCommente(int i){
+        return comments.get(i);
+    }
+
 
     protected float[] getDimensions(){
         return new float[]{xpos, ypos, pixelWidth, pixelHeight};

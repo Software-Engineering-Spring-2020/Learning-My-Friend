@@ -10,6 +10,8 @@ class Image extends PollyObject {
     super(sketch, x, y);
     file = new String[]{filename, extension};
     img = sketch.requestImage(filename, extension);
+    pixelWidth = img.width;
+    pixelHeight = img.height;
   }
   
   protected void display(){
