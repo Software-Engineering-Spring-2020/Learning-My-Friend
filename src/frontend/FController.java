@@ -26,7 +26,11 @@ public abstract class FController{
 
   //Parrent FToolbar
   FToolbar parrent;
-  public FController(ControlP5 cp5, String name, FToolbar parrent){
+
+  //buttons need to edit gui state
+  GUI gui;
+  public FController(ControlP5 cp5, String name, FToolbar parrent, GUI gui){
+    this.gui = gui;
     this.cp5 = cp5;
     this.name = name;
     this.parrent = parrent;
@@ -157,11 +161,16 @@ public abstract class FController{
       return sizePriority;
     }
 
+
+    protected GUI getGUI(){
+      return gui;
+    }
+
     //TODO
     //Comment on this better
     /**
      * [trigger preforms the action the button is for]
      */
-    abstract public void trigger(int val);
+  //  abstract public void trigger(int val);
 
 }

@@ -58,8 +58,9 @@ public class IOHandler{
 
 
 
-  public void clickedCanvas(){
-
+  public void mouseClicked(){
+    if(offGUI())
+      win.createShape(sketch.mouseX, sketch.mouseY, gui.tool);
   }
 
   public void mouseDragged() {

@@ -13,13 +13,16 @@ import frontend.*;
 import frontend.controlP5.*;
 
 public class RectButton extends FButton{
-  public RectButton(ControlP5 cp5, String name, FToolbar parrent){
-    super(cp5, name, parrent);
-
+  public RectButton(ControlP5 cp5, String name, FToolbar parrent, GUI gui){
+    super(cp5, name, parrent, gui);
+    super.button.plugTo(this);
   }
 
-  public void trigger(int val){
+
+  public void rect(int val){
     System.out.println(val);
+    getGUI().tool = 'r';
+
   }
 
 }

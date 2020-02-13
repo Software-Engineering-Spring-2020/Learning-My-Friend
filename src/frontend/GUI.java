@@ -39,9 +39,9 @@ import processing.core.*;
     * For example the selected tool and color are stored in the state.
     */
    //selected tool
-   char tool;
-   int fillColor[] = {0, 0, 0};
-   int boarderColor[] = {0, 0, 0};
+   public char tool;
+   public int fillColor[] = {0, 0, 0};
+   public int boarderColor[] = {0, 0, 0};
 
   /**
    * End of STATE Deleration
@@ -75,7 +75,9 @@ import processing.core.*;
    }
 
    private void setupObjectCreationToolbar(){
-     toolbarFactory("Obj Create", (float).05, (float).9, (float).0, (float).05);
+     FToolbar ft = toolbarFactory("Obj Create", (float).05, (float).9, (float).0, (float).05);
+     ft.addFController(new RectButton(cp5, "rect", ft, this));
+     ft.addFController(new RectButton(cp5, "E", ft, this));
    }
 
 
