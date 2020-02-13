@@ -25,5 +25,12 @@ public abstract class FButton extends FController{
     return cp5.addButton(this.name);
   }
 
+  /**
+   * [update updates the ControlP5 object to the FControlers size]
+   */
+  protected void update(){
+
+  }
+
 
 }
