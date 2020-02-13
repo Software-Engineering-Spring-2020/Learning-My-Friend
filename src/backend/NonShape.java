@@ -3,13 +3,13 @@ import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PConstants;
 
-public abstract class Shape extends ColorfulObject{
+public abstract class NonShape extends ColorfulObject{
     protected PShape shape;
     protected float strokeWeight;
 
-  public Shape(PApplet sketch, float x, float y, float strokeWeight, int[] fillColor, int[] boarderColor){
+  public NonShape(PApplet sketch, float x, float y, float strokeWeight, int[] fillColor, int[] boarderColor){
     super(sketch, x, y, fillColor, boarderColor);
-    shape = sketch.createShape(PConstants.POINT, 0, 0);
+    shape = sketch.createShape(PConstants.POINT, xpos, ypos);
     this.strokeWeight = strokeWeight;
   }
 
@@ -44,17 +44,19 @@ public abstract class Shape extends ColorfulObject{
 
   protected void display(){
         super.display();
-        sketch.translate(xpos, ypos);
         sketch.shape(shape);
   }
 
-  /*protected void pan(float xo, float yo){
+  protected void pan(float xo, float yo){
     super.pan(xo, yo);
     shape.translate(xo, yo);
   }
-*/
+
   protected void setRelativeRotate(float ro) {
     super.setRelativeRotate(ro);
+    sketch.push();
+    sketch.translate(xpos, ypos);
     shape.rotate(sketch.radians(ro));
+    sketch.pop();
   }
 }

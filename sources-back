@@ -1,6 +1,7 @@
 src\backend\PollyObject.java
 src\backend\ColorfulObject.java
 src\backend\Shape.java
+src\backend\NonShape.java
 src\backend\Group.java
 
 

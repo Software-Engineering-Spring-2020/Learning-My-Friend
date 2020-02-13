@@ -18,7 +18,9 @@ class DrawSpace extends ColorfulObject{
         sketch.rectMode(PConstants.CENTER);
         sketch.ellipseMode(PConstants.CENTER);
         sketch.imageMode(PConstants.CENTER);
-        sketch.textMode(PConstants.CENTER);
+        sketch.textMode(PConstants.MODEL);
+        sketch.textAlign(PConstants.CENTER, PConstants.CENTER);
+        sketch.shapeMode(PConstants.CENTER);
     }
 
     protected ArrayList<PollyObject> getAllObjects(){
