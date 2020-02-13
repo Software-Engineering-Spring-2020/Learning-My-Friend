@@ -13,7 +13,7 @@ public class Window {
     private PApplet sketch;
     private DrawSpace ds;
     private ObjectFactory of;
-    private float zoom = 1;
+    private float zoom = 1, strokeWeight = 1;
     private int[] fillColor, boarderColor;
     private float XINIT, YINIT, WIDTH, HEIGHT, gridSpacing = 30;
     private boolean showGrid = false, showComments = false;
@@ -76,7 +76,7 @@ public class Window {
         else showGrid = true;
     }
     public void setGridSpacing(float spacing){
-        gridSpacing = spacing;
+        gridSpacing = sketch.max(spacing, 2);
     }
 
     public void toggleComments(){
@@ -103,7 +103,7 @@ public class Window {
     public boolean createShape(float x, float y, char shape) {
         float[] coord = ds.translateCoordinates(x, y, zoom);
         //float[] coord = translateCoordinates(x, y);
-        PollyObject obj = of.createShape(coord[0], coord[1], shape, fillColor, boarderColor);
+        PollyObject obj = of.createShape(coord[0], coord[1], shape, strokeWeight, fillColor, boarderColor);
         return createAt(coord[0], coord[1], obj);
     }
 
@@ -229,7 +229,7 @@ public class Window {
             if(shape instanceof ColorfulObject){
                 int[] fill = ((ColorfulObject) shape).getFillColor();
                 int[] boarder = ((ColorfulObject) shape).getBoarderColor();
-                of.createShape(pos[0]+2, pos[1]+2, 'r', fill, boarder); //not full copy
+                of.createShape(pos[0]+2, pos[1]+2, 'r', strokeWeight, fill, boarder); //not full copy
             } else{
                 //ds.addShape();
             }
@@ -244,9 +244,8 @@ public class Window {
      *
      *********************************************************/
 
-    public void setThickness(int size){
-        int weight = sketch.max(size, 1);
-        sketch.strokeWeight(weight);
+    public void setThickness(float size){
+        strokeWeight = sketch.max(size, 1);
     }
 
 
