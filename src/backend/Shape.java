@@ -54,6 +54,6 @@ public abstract class Shape extends ColorfulObject{
 
   protected void setRelativeRotate(float ro) {
     super.setRelativeRotate(ro);
-    shape.rotate(ro);
+    shape.rotate(sketch.radians(ro));
   }
 }

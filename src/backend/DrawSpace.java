@@ -16,7 +16,9 @@ class DrawSpace extends ColorfulObject{
         xcenter = xpos+pixelWidth/2;
         ycenter = ypos+pixelHeight/2;
         sketch.rectMode(PConstants.CENTER);
+        sketch.ellipseMode(PConstants.CENTER);
         sketch.imageMode(PConstants.CENTER);
+        sketch.textMode(PConstants.CENTER);
     }
 
     protected ArrayList<PollyObject> getAllObjects(){
