@@ -119,7 +119,7 @@ public class Window {
     }
     public boolean createEllipse(float x, float y, float d){
         return createEllipse(x, y, d, d);
-    } 
+    }
     public boolean createEllipse(float x, float y){
         return createEllipse(x, y, 100, 50);
     }
@@ -134,7 +134,7 @@ public class Window {
     }
     public boolean createRect(float x, float y, float d){
         return createRect(x, y, d, d);
-    } 
+    }
     public boolean createRect(float x, float y){
         return createRect(x, y, 100, 50);
     }
@@ -169,7 +169,7 @@ public class Window {
         return false;
     }
 
-    
+
 
     /*********************************************************
      *
@@ -181,6 +181,12 @@ public class Window {
 
     public void group(){
         ds.addObject(new Group(sketch, 0, 0, selected));
+    }
+
+    public void unGroup(){
+        for(PollyObject obj : selected){
+          if(obj instanceof Group) ds.removeObject(obj);
+        }
     }
 
     public void selectedPan(float xo, float yo){

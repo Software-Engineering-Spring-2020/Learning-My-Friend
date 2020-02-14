@@ -15,6 +15,12 @@ class Group extends PollyObject implements Serializable {
     this.members = members;
   }
 
+  protected boolean withinScope(float x, float y){
+    for(PollyObject obj : members){
+      return obj.withinScope(x, y);
+    } return false;
+  }
+
   protected void pan(float xo, float yo){
     for(PollyObject obj : members){
     	obj.pan(xo, yo);
