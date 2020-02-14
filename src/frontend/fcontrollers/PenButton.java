@@ -25,7 +25,7 @@ public class PenButton extends FButton{
  */
   public void pen(int val){
     //System.out.println(val);
-    getGUI().tool = 'p';
+    getGUI().setTool('p');
 
   }
 
