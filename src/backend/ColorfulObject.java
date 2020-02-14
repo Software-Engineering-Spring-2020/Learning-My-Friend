@@ -1,9 +1,12 @@
 package backend;
+import java.io.Serializable;
+
 import processing.core.PApplet;
 
-public abstract class ColorfulObject extends PollyObject{
-  protected int[] boarderColor = new int[3];
-  protected int[] fillColor = new int[3];
+public abstract class ColorfulObject extends PollyObject implements Serializable {
+  private static final long serialVersionUID = 9L;
+  protected int[] boarderColor = new int[3]; //save me
+  protected int[] fillColor = new int[3]; //save me
 
   public ColorfulObject(PApplet sketch, float x, float y, int[] fillColor, int[] boarderColor){
     super(sketch, x, y);

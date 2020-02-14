@@ -1,11 +1,14 @@
 package backend;
+import java.io.Serializable;
+
 import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PConstants;
 
-public abstract class Shape extends ColorfulObject{
+public abstract class Shape extends ColorfulObject implements Serializable {
+    private static final long serialVersionUID = 11L;
     protected PShape shape;
-    protected float strokeWeight;
+    protected float strokeWeight; //save me
 
   public Shape(PApplet sketch, float x, float y, float strokeWeight, int[] fillColor, int[] boarderColor){
     super(sketch, x, y, fillColor, boarderColor);
