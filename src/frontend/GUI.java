@@ -40,7 +40,7 @@ import processing.core.*;
     */
    //selected tool
    public char tool;
-   public int fillColor[] = {0, 0, 0};
+   public int fillColor[] = {0, 0, 0, 0};
    public int boarderColor[] = {0, 0, 0};
 
   /**
@@ -86,7 +86,25 @@ import processing.core.*;
       fillColor[1] = i;
     if(c == 'b')
       fillColor[2] = i;
-    win.setFillColor(fillColor[0], fillColor[1], fillColor[2]);
+    if(c == 'a')
+      fillColor[3] = i;
+    win.setFillColor(fillColor[0], fillColor[1], fillColor[2], fillColor[3]);
+   }
+
+
+   /**
+    * [setFill sets the boarder color]
+    * @param i [color from 1 to 255]
+    * @param c [color r, b, g]
+    */
+   public void setBoarder(int i, char c){
+    if(c == 'r')
+      boarderColor[0] = i;
+    if(c == 'g')
+      boarderColor[1] = i;
+    if(c == 'b')
+      boarderColor[2] = i;
+    win.setBoarderColor(boarderColor[0], boarderColor[1], boarderColor[2]);
    }
 
    public void toggleGrid(){

@@ -20,9 +20,7 @@ public class SaveButton extends FButton{
 
 
   public void save(int val){
-    //System.out.println("Elip " + val);
     getGUI().save();
-
   }
 
 }
