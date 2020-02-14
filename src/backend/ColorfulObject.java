@@ -5,8 +5,8 @@ import processing.core.PApplet;
 
 public abstract class ColorfulObject extends PollyObject implements Serializable {
   private static final long serialVersionUID = 9L;
-  protected int[] boarderColor = new int[3]; 
-  protected int[] fillColor = new int[4]; 
+  protected int[] boarderColor = new int[3];
+  protected int[] fillColor = new int[4];
 
   public ColorfulObject(PApplet sketch, float x, float y, int[] fillColor, int[] boarderColor){
     super(sketch, x, y);

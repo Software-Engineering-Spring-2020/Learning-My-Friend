@@ -6,8 +6,7 @@ import processing.core.PConstants;
 class DrawSpace extends ColorfulObject{
     private float xcenter, ycenter;
     private ArrayList<PollyObject> objects = new ArrayList<PollyObject>();
-    private ArrayList<PollyObject> comments = new ArrayList<PollyObject>(); 
-    int[] white = {255,255,255};
+    private ArrayList<PollyObject> comments = new ArrayList<PollyObject>();
 
     DrawSpace(PApplet sketch, float x, float y, float w, float h){
         super(sketch, x, y, new int[] {255, 255, 255, 255}, new int[] {255, 255, 255});
@@ -21,6 +20,16 @@ class DrawSpace extends ColorfulObject{
         sketch.textMode(PConstants.MODEL);
         sketch.textAlign(PConstants.CENTER, PConstants.CENTER);
         sketch.shapeMode(PConstants.CENTER);
+    }
+
+    protected void init(PApplet sketch){
+      super.init(sketch);
+      for(PollyObject obj : objects){
+        obj.init(sketch);
+      }
+      for(PollyObject obj : comments){
+        obj.init(sketch);
+      }
     }
 
     protected ArrayList<PollyObject> getAllObjects(){

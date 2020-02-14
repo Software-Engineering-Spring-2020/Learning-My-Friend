@@ -14,10 +14,17 @@ class Rectangle extends Shape implements Serializable {
         shape = sketch.createShape(PConstants.RECT, 0, 0, this.pixelWidth, this.pixelHeight);
         setSettings();
     }
+
     Rectangle(PApplet sketch, float x, float y, float d, float strokeWeight,  int[] fillColor, int[] boarderColor){
         this(sketch, x, y, d, d, strokeWeight, fillColor, boarderColor);
     }
     Rectangle(PApplet sketch, float x, float y, float strokeWeight,  int[] fillColor, int[] boarderColor){
         this(sketch, x, y, 50, 25, strokeWeight, fillColor, boarderColor);
+    }
+
+    protected void init(PApplet sketch){
+      super.init(sketch);
+      shape = sketch.createShape(PConstants.RECT, 0, 0, this.pixelWidth, this.pixelHeight);
+      setSettings();
     }
 }

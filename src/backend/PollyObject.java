@@ -18,6 +18,10 @@ public abstract class PollyObject implements Serializable {
         ypos = y;
     }
 
+    protected void init(PApplet sketch){
+      this.sketch = sketch;
+    }
+
     protected float[] getPosition() {
         return new float[]{xpos, ypos};
     }

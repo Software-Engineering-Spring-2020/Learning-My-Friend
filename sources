@@ -113,6 +113,8 @@ src\backend\objects\Comment.java
 src\backend\objects\PollyGon.java
 src\backend\objects\FreeForm.java
 
+
+src\backend\FileManager.java
 src\backend\objects\ObjectFactory.java
 src\backend\DrawSpace.java
 src\backend\Window.java

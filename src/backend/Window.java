@@ -3,15 +3,14 @@ package backend;
 import backend.objects.ObjectFactory;
 import processing.core.PApplet;
 import processing.core.PImage;
-import processing.core.PVector;
 import java.util.ArrayList;
 
 public class Window {
     private ArrayList<PollyObject> trash = new ArrayList<PollyObject>();
     private ArrayList<PollyObject> selected = new ArrayList<PollyObject>();
     private ArrayList<PollyObject> copied = new ArrayList<PollyObject>();
-    private ArrayList<PVector> freePoints = new ArrayList<PVector>();
-    private ArrayList<PVector> pollyPoints = new ArrayList<PVector>();
+    private ArrayList<float[]> freePoints = new ArrayList<float[]>();
+    private ArrayList<float[]> pollyPoints = new ArrayList<float[]>();
     private PApplet sketch;
     private DrawSpace ds;
     private ObjectFactory of;
@@ -37,17 +36,17 @@ public class Window {
         sketch.push();
         this.ds.display(zoom, showComments, showGrid, gridSpacing);
         for(int i = 0; i<freePoints.size()-1; i++){
-            if(freePoints.size()>1) sketch.line(freePoints.get(i).x, freePoints.get(i).y, freePoints.get(i+1).x, freePoints.get(i+1).y);
+            if(freePoints.size()>1) sketch.line(freePoints.get(i)[0], freePoints.get(i)[1], freePoints.get(i+1)[0], freePoints.get(i+1)[1]);
         }
         sketch.push();
         sketch.strokeWeight(strokeWeight);
         //sketch.stroke(boarderColor);
-        for(PVector v : pollyPoints){
-            sketch.point(v.x, v.y);
+        for(float[] v : pollyPoints){
+            sketch.point(v[0], v[1]);
         }
         sketch.pop();
         if(pollyPoints.size()>=numberVertex && numberVertex>0){
-            ds.addObject(of.createPollyGon(pollyPoints.get(0).x, pollyPoints.get(0).x, pollyPoints, strokeWeight, fillColor, boarderColor));
+            ds.addObject(of.createPollyGon(pollyPoints.get(0)[0], pollyPoints.get(0)[1], pollyPoints, strokeWeight, fillColor, boarderColor));
             pollyPoints.clear();
             numberVertex = 0;
         }
@@ -317,26 +316,26 @@ public class Window {
 
     public void freeDraw(float pmousex, float pmousey){ //must call createFreeForm() on mouseRelease()
         float[] coord = ds.translateCoordinates(pmousex, pmousey, zoom);
-        PVector v = new PVector(coord[0], coord[1]);
+        float[] v = new float[]{coord[0], coord[1]};
         freePoints.add(v);
     }
 
     public void createPollyGon(float pmousex, float pmousey, int numberVertex){
         this.numberVertex = numberVertex;
         float[] coord = ds.translateCoordinates(pmousex, pmousey, zoom);
-        PVector v = new PVector(coord[0], coord[1]);
+        float[] v = new float[]{coord[0], coord[1]};
         pollyPoints.add(v);
     }
 
     public void createLine(float pmousex, float pmousey){ //make exta thick???
         this.numberVertex = 2;
         float[] coord = ds.translateCoordinates(pmousex, pmousey, zoom);
-        PVector v = new PVector(coord[0], coord[1]);
+        float[] v = new float[]{coord[0], coord[1]};
         pollyPoints.add(v);
     }
 
     public void createFreeForm(){ //must be called on the mouseReleased()
-        ds.addObject(of.createFreeForm(freePoints.get(0).x, freePoints.get(0).y, freePoints, strokeWeight, fillColor, boarderColor));
+        ds.addObject(of.createFreeForm(freePoints.get(0)[0], freePoints.get(0)[1], freePoints, strokeWeight, fillColor, boarderColor));
         freePoints.clear();
     }
 
@@ -354,5 +353,13 @@ public class Window {
         PImage toSave = sketch.get((int)dim[0], (int)dim[1], (int)dim[2]+1, (int)dim[3]+1);
         toSave.save(saveName+extension);
     }
+
+    /*public void save(String filename){
+      FileManager.saveDrawSpace(ds, filename);
+    }
+
+    public void open(String filename){
+      ds = FileManager.openDrawSpace(sketch, filename);
+    }*/
 
 }
