@@ -26,8 +26,8 @@ public class Window {
         this.sketch = sketch;
         ds = new DrawSpace(sketch, x, y, w, h);
         of = new ObjectFactory(sketch);
-        fillColor = new int[]{0, 0, 0, 0};
-        boarderColor = new int[]{0, 0, 0};
+        fillColor = new int[] { 0, 0, 0, 0 };
+        boarderColor = new int[] { 0, 0, 0 };
         XINIT = x;
         YINIT = y;
         WIDTH = w;
@@ -37,32 +37,35 @@ public class Window {
     public void display() {
         sketch.push();
         this.ds.display(zoom, showComments, showGrid, gridSpacing);
-        for(int i = 0; i<freePoints.size()-1; i++){
-            if(freePoints.size()>1) sketch.line(freePoints.get(i)[0], freePoints.get(i)[1], freePoints.get(i+1)[0], freePoints.get(i+1)[1]);
+        for (int i = 0; i < freePoints.size() - 1; i++) {
+            if (freePoints.size() > 1)
+                sketch.line(freePoints.get(i)[0], freePoints.get(i)[1], freePoints.get(i + 1)[0],
+                        freePoints.get(i + 1)[1]);
         }
         sketch.push();
         sketch.strokeWeight(strokeWeight);
-        //sketch.stroke(boarderColor);
-        for(float[] v : pollyPoints){
+        // sketch.stroke(boarderColor);
+        for (float[] v : pollyPoints) {
             sketch.point(v[0], v[1]);
         }
         sketch.pop();
-        if(pollyPoints.size()>=numberVertex && numberVertex>0){
-            ds.addObject(of.createPollyGon(pollyPoints.get(0)[0], pollyPoints.get(0)[1], pollyPoints, strokeWeight, fillColor, boarderColor));
+        if (pollyPoints.size() >= numberVertex && numberVertex > 0) {
+            ds.addObject(of.createPollyGon(pollyPoints.get(0)[0], pollyPoints.get(0)[1], pollyPoints, strokeWeight,
+                    fillColor, boarderColor));
             pollyPoints.clear();
             numberVertex = 0;
         }
         sketch.pop();
     }
 
-    private float[] translate(float x, float y){
-        return new float[]{(WIDTH/2) * (x / ((WIDTH/2)*zoom)), (HEIGHT/2) * (y / ((HEIGHT/2)*zoom))};
+    private float[] translate(float x, float y) {
+        return new float[] { (WIDTH / 2) * (x / ((WIDTH / 2) * zoom)), (HEIGHT / 2) * (y / ((HEIGHT / 2) * zoom)) };
     }
 
     /*********************************************************
      *
      *
-     *          DRAWSPACE RELATED FUNCTIONALITY
+     * DRAWSPACE RELATED FUNCTIONALITY
      *
      *
      *********************************************************/
@@ -70,17 +73,17 @@ public class Window {
         this.ds = new DrawSpace(sketch, x, y, w, h);
     }
 
-    public void zoom(float factor) { //draw offcenter once zoom
+    public void zoom(float factor) { // draw offcenter once zoom
         zoom = sketch.max((float) .01, zoom + factor);
     }
 
-    public boolean withinCanvas(float x, float y){
+    public boolean withinCanvas(float x, float y) {
         float[] coord = ds.translateCoordinates(x, y, zoom);
-        //float[] coord = translateCoordinates(x, y);
+        // float[] coord = translateCoordinates(x, y);
         return ds.withinScope(coord[0], coord[1]);
     }
 
-    public void canvasPan(float xo, float yo) { //(this.mouseX - this.pmouseX), (this.mouseY - this.pmouseY)
+    public void canvasPan(float xo, float yo) { // (this.mouseX - this.pmouseX), (this.mouseY - this.pmouseY)
         this.ds.pan(xo, yo);
     }
 
@@ -90,110 +93,128 @@ public class Window {
         this.display();
     }
 
-    public void toggleGrid(){
-        if(showGrid) showGrid = false;
-        else showGrid = true;
+    public void toggleGrid() {
+        if (showGrid)
+            showGrid = false;
+        else
+            showGrid = true;
     }
-    public void setGridSpacing(float spacing){
+
+    public void setGridSpacing(float spacing) {
         gridSpacing = sketch.max(spacing, 2);
     }
 
-    public void toggleComments(){
-        if(showComments) showComments = false;
-        else showComments = true;
+    public void toggleComments() {
+        if (showComments)
+            showComments = false;
+        else
+            showComments = true;
     }
 
     /*********************************************************
      *
      *
-     *          OBJECT CREATION RELATED FUNCTIONALITY
+     * OBJECT CREATION RELATED FUNCTIONALITY
      *
      *
      *********************************************************/
 
-    public boolean createEllipse(float x, float y, float w, float h){
+    public boolean createEllipse(float x, float y, float w, float h) {
         PollyObject obj = null;
         float[] coord = ds.translateCoordinates(x, y, zoom);
-        if(ds.withinScope(coord[0], coord[1])) obj = of.createEllipse(coord[0], coord[1], w, h, strokeWeight, fillColor, boarderColor);
-        if(obj != null) return ds.addObject(obj);
+        if (ds.withinScope(coord[0], coord[1]))
+            obj = of.createEllipse(coord[0], coord[1], w, h, strokeWeight, fillColor, boarderColor);
+        if (obj != null)
+            return ds.addObject(obj);
         return false;
     }
-    public boolean createEllipse(float x, float y, float d){
+
+    public boolean createEllipse(float x, float y, float d) {
         return createEllipse(x, y, d, d);
     }
-    public boolean createEllipse(float x, float y){
+
+    public boolean createEllipse(float x, float y) {
         return createEllipse(x, y, 100, 50);
     }
 
-
-    public boolean createRect(float x, float y, float w, float h){
+    public boolean createRect(float x, float y, float w, float h) {
         PollyObject obj = null;
         float[] coord = ds.translateCoordinates(x, y, zoom);
-        if(ds.withinScope(coord[0], coord[1])) obj = of.createRect(coord[0], coord[1], w, h, strokeWeight, fillColor, boarderColor);
-        if(obj != null) return ds.addObject(obj);
+        if (ds.withinScope(coord[0], coord[1]))
+            obj = of.createRect(coord[0], coord[1], w, h, strokeWeight, fillColor, boarderColor);
+        if (obj != null)
+            return ds.addObject(obj);
         return false;
     }
-    public boolean createRect(float x, float y, float d){
+
+    public boolean createRect(float x, float y, float d) {
         return createRect(x, y, d, d);
     }
-    public boolean createRect(float x, float y){
+
+    public boolean createRect(float x, float y) {
         return createRect(x, y, 100, 50);
     }
 
-    public boolean createTextBox(float x, float y, String str, String font, float textSize){
+    public boolean createTextBox(float x, float y, String str, String font, float textSize) {
         PollyObject obj = null;
         float[] coord = ds.translateCoordinates(x, y, zoom);
-        if(ds.withinScope(coord[0], coord[1])) obj = of.createTextBox(coord[0], coord[1], fillColor, boarderColor, str, font, textSize);
-        if(obj != null) return ds.addObject(obj);
+        if (ds.withinScope(coord[0], coord[1]))
+            obj = of.createTextBox(coord[0], coord[1], fillColor, boarderColor, str, font, textSize);
+        if (obj != null)
+            return ds.addObject(obj);
         return false;
     }
 
-    public boolean createComment(float x, float y, String str, String font, float textSize){
+    public boolean createComment(float x, float y, String str, String font, float textSize) {
         PollyObject obj = null;
         float[] coord = ds.translateCoordinates(x, y, zoom);
-        if(ds.withinScope(coord[0], coord[1])) obj = of.createComment(coord[0], coord[1], fillColor, boarderColor, str, font, textSize);
-        if(obj != null) return ds.addObject(obj);
+        if (ds.withinScope(coord[0], coord[1]))
+            obj = of.createComment(coord[0], coord[1], fillColor, boarderColor, str, font, textSize);
+        if (obj != null)
+            return ds.addObject(obj);
         return false;
     }
 
-    public boolean importImage(float x, float y, String filename, String extension){
+    public boolean importImage(float x, float y, String filename, String extension) {
         PollyObject obj = null;
         float[] coord = ds.translateCoordinates(x, y, zoom);
-        if(ds.withinScope(coord[0], coord[1])) obj = of.importImage(coord[0], coord[1], filename, extension);
-        if(obj != null) return ds.addObject(obj);
+        if (ds.withinScope(coord[0], coord[1]))
+            obj = of.importImage(coord[0], coord[1], filename, extension);
+        if (obj != null)
+            return ds.addObject(obj);
         return false;
     }
 
-    public boolean importImage(String filename, String extension){
+    public boolean importImage(String filename, String extension) {
         PollyObject obj = of.importImage(0, 0, filename, extension);
-        if(obj != null) return ds.addObject(obj);
+        if (obj != null)
+            return ds.addObject(obj);
         return false;
     }
-
-
 
     /*********************************************************
      *
      *
-     *          TOOLBAR RELATED FUNCTIONALITY
+     * TOOLBAR RELATED FUNCTIONALITY
      *
      *
      *********************************************************/
 
-    public void group(){
+    public void group() {
         ds.addObject(new Group(sketch, 0, 0, selected));
     }
 
-    public void unGroup(){
-        for(PollyObject obj : selected){
-          if(obj instanceof Group) ds.removeObject(obj);
+    public void unGroup() {
+        for (PollyObject obj : selected) {
+            if (obj instanceof Group)
+                ds.removeObject(obj);
         }
     }
 
-    public void selectedPan(float xo, float yo){
-        for(PollyObject obj : selected){
-            //float[] coord = ds.relativePan(xo, yo, zoom);
-            //shape.pan(coord[0], coord[1]);
+    public void selectedPan(float xo, float yo) {
+        for (PollyObject obj : selected) {
+            // float[] coord = ds.relativePan(xo, yo, zoom);
+            // shape.pan(coord[0], coord[1]);
             float[] coord = translate(xo, yo);
             obj.pan(coord[0], coord[1]);
         }
@@ -212,30 +233,34 @@ public class Window {
         boarderColor[2] = b;
     }
 
-    public void setSelectedFillColor(int r, int g, int b, int a){
-        for(PollyObject shape : selected){
-            if(shape instanceof ColorfulObject) ((ColorfulObject)shape).setFillColor(r, g, b, a);
+    public void setSelectedFillColor(int r, int g, int b, int a) {
+        for (PollyObject shape : selected) {
+            if (shape instanceof ColorfulObject)
+                ((ColorfulObject) shape).setFillColor(r, g, b, a);
         }
     }
 
-    public void setSelectedBoarderColor(int r, int g, int b){
-        for(PollyObject shape : selected){
-            if(shape instanceof ColorfulObject) ((ColorfulObject)shape).setBoarderColor(r, g, b);
+    public void setSelectedBoarderColor(int r, int g, int b) {
+        for (PollyObject shape : selected) {
+            if (shape instanceof ColorfulObject)
+                ((ColorfulObject) shape).setBoarderColor(r, g, b);
         }
     }
 
-    public ArrayList<int[]> getSelectedFillColors(){
+    public ArrayList<int[]> getSelectedFillColors() {
         ArrayList<int[]> colors = new ArrayList<int[]>();
-        for(PollyObject shape : selected){
-            if(shape instanceof ColorfulObject) colors.add(((ColorfulObject)shape).getFillColor());
+        for (PollyObject shape : selected) {
+            if (shape instanceof ColorfulObject)
+                colors.add(((ColorfulObject) shape).getFillColor());
         }
         return colors;
     }
 
-    public ArrayList<int[]> getSelectedBoarderColors(){
+    public ArrayList<int[]> getSelectedBoarderColors() {
         ArrayList<int[]> colors = new ArrayList<int[]>();
-        for(PollyObject shape : selected){
-            if(shape instanceof ColorfulObject) colors.add(((ColorfulObject)shape).getBoarderColor());
+        for (PollyObject shape : selected) {
+            if (shape instanceof ColorfulObject)
+                colors.add(((ColorfulObject) shape).getBoarderColor());
         }
         return colors;
     }
@@ -246,14 +271,14 @@ public class Window {
         }
     }
 
-    public void singleSelect(float x, float y){
+    public void singleSelect(float x, float y) {
         selected.clear();
         multiSelect(x, y);
     }
 
-    public void multiSelect(float x, float y){
+    public void multiSelect(float x, float y) {
         PollyObject obj = ds.getObjectAt(x, y, zoom);
-        if(obj != null){
+        if (obj != null) {
             selected.add(obj);
         }
     }
@@ -262,9 +287,21 @@ public class Window {
         boolean successful = true;
         for (PollyObject shape : selected) {
             trash.add(shape);
-            if(!ds.removeObject(shape)) successful = false;
+            if (!ds.removeObject(shape))
+                successful = false;
         }
         return successful;
+    }
+
+    public void duplicateSelected() {
+        for (PollyObject shape : selected) {
+            try {
+                ds.addObject(SerialManager.deepClonePollyObject(sketch, shape));
+			} catch (ClassNotFoundException | IOException e) {
+				System.out.println(e);
+				e.printStackTrace();
+			}
+        }
     }
 
     public boolean deleteLast() {
@@ -357,11 +394,11 @@ public class Window {
     }
 
     public void save(String filename) throws IOException {
-      FileManager.saveDrawSpace(ds, filename);
+      SerialManager.saveDrawSpace(ds, filename);
     }
 
     public void open(String filename) throws IOException, ClassNotFoundException {
-      ds = FileManager.openDrawSpace(sketch, filename);
+      ds = SerialManager.openDrawSpace(sketch, filename);
     }
 
 }

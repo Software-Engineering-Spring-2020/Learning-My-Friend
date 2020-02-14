@@ -95,6 +95,9 @@ public class BackendDriver extends PApplet {
 			/*if (this.key == 'w') {
 				this.window.freeDraw();
 			}*/
+
+			// saving and opening. Currently using absolute paths to demonstrate how this could
+			// work with a choose file/choose folder system
 			if (this.key == 'x'){
 				try {
 					this.window.save("C:/Users/isaac/Documents/Git/notebook/school/spring-2020/software-engineering/drawing.polly");
@@ -110,6 +113,9 @@ public class BackendDriver extends PApplet {
 					System.out.println(e);
 					e.printStackTrace();
 				}
+			}
+			if (this.key == 'z') {
+				this.window.duplicateSelected();
 			}
     }
 
