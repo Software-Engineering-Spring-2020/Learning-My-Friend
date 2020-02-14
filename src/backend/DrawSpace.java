@@ -4,9 +4,9 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 
 class DrawSpace extends ColorfulObject{
-    private float pixelWidth, pixelHeight, xcenter, ycenter;
+    private float xcenter, ycenter;
     private ArrayList<PollyObject> objects = new ArrayList<PollyObject>();
-    private ArrayList<PollyObject> comments = new ArrayList<PollyObject>();
+    private ArrayList<PollyObject> comments = new ArrayList<PollyObject>(); 
     int[] white = {255,255,255};
 
     DrawSpace(PApplet sketch, float x, float y, float w, float h){
@@ -85,13 +85,13 @@ class DrawSpace extends ColorfulObject{
         if(showComments);
     }
 
-    protected boolean addShape(PollyObject shape){
+    protected boolean addObject(PollyObject shape){
         return objects.add(shape);
     }
 
-    protected boolean removeShape(PollyObject shape){
+    protected boolean removeObject(PollyObject shape){
         return objects.remove(shape);
-    } protected PollyObject removeShape(int i){
+    } protected PollyObject removeObject(int i){
         return objects.remove(i);
     } protected void clear(){
         objects.clear();
@@ -117,7 +117,7 @@ class DrawSpace extends ColorfulObject{
         comments.clear();
     }
 
-    protected PollyObject getCommente(int i){
+    protected PollyObject getComment(int i){
         return comments.get(i);
     }
 

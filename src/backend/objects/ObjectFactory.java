@@ -3,6 +3,8 @@ import backend.Shape;
 import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PConstants;
+import processing.core.PVector;
+import java.util.ArrayList;
 
 public class ObjectFactory {
     protected  PApplet sketch;
@@ -49,5 +51,16 @@ public class ObjectFactory {
         return new Rectangle(sketch, x, y, strokeWeight, fillColor, boarderColor);
     }
 
+    public FreeForm createFreeForm(float x, float y, ArrayList<PVector> points, float strokeWeight,  int[] fillColor, int[] boarderColor){
+        return new FreeForm(sketch, x, y, points, strokeWeight, fillColor, boarderColor);
+    }
+
+    public FreeForm createLine(float x, float y, ArrayList<PVector> points, float strokeWeight,  int[] fillColor, int[] boarderColor){
+        return new FreeForm(sketch, x, y, points, strokeWeight, fillColor, boarderColor);
+    }
+
+    public PollyGon createPollyGon(float x, float y, ArrayList<PVector> points, float strokeWeight,  int[] fillColor, int[] boarderColor){
+        return new PollyGon(sketch, x, y, points, strokeWeight, fillColor, boarderColor);
+    }
 
 }

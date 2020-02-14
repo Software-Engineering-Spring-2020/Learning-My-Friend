@@ -36,14 +36,6 @@ METHODS:
 
 
 	Untested Classes:
-		Image
-		TexBox
-		Comments
-
-
-Bugs:
-	RestoreLast isn't triggering with my button press? Might just be my keyboard (was testing with just print statements)
-
 
 TODO:
 	Properties of Objects

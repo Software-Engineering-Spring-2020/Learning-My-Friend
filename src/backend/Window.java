@@ -3,13 +3,15 @@ package backend;
 import backend.objects.ObjectFactory;
 import processing.core.PApplet;
 import processing.core.PImage;
-
+import processing.core.PVector;
 import java.util.ArrayList;
 
 public class Window {
     private ArrayList<PollyObject> trash = new ArrayList<PollyObject>();
     private ArrayList<PollyObject> selected = new ArrayList<PollyObject>();
     private ArrayList<PollyObject> copied = new ArrayList<PollyObject>();
+    private ArrayList<PVector> freePoints = new ArrayList<PVector>();
+    private ArrayList<PVector> pollyPoints = new ArrayList<PVector>();
     private PApplet sketch;
     private DrawSpace ds;
     private ObjectFactory of;
@@ -17,6 +19,7 @@ public class Window {
     private int[] fillColor, boarderColor;
     private float XINIT, YINIT, WIDTH, HEIGHT, gridSpacing = 30;
     private boolean showGrid = false, showComments = false;
+    private int numberVertex = 0;
 
     public Window(PApplet sketch, float x, float y, float w, float h) {
         this.sketch = sketch;
@@ -28,6 +31,27 @@ public class Window {
         YINIT = y;
         WIDTH = w;
         HEIGHT = h;
+    }
+
+    public void display() {
+        sketch.push();
+        this.ds.display(zoom, showComments, showGrid, gridSpacing);
+        for(int i = 0; i<freePoints.size()-1; i++){
+            if(freePoints.size()>1) sketch.line(freePoints.get(i).x, freePoints.get(i).y, freePoints.get(i+1).x, freePoints.get(i+1).y);
+        }
+        sketch.push();
+        sketch.strokeWeight(strokeWeight);
+        //sketch.stroke(boarderColor);
+        for(PVector v : pollyPoints){
+            sketch.point(v.x, v.y);
+        }
+        sketch.pop();
+        if(pollyPoints.size()>=numberVertex && numberVertex>0){
+            ds.addObject(of.createPollyGon(pollyPoints.get(0).x, pollyPoints.get(0).x, pollyPoints, strokeWeight, fillColor, boarderColor));
+            pollyPoints.clear();
+            numberVertex = 0;
+        }
+        sketch.pop();
     }
 
     private float[] translate(float x, float y){
@@ -47,12 +71,6 @@ public class Window {
 
     public void zoom(float factor) { //draw offcenter once zoom
         zoom = sketch.max((float) .01, zoom + factor);
-    }
-
-    public void display() {
-        sketch.push();
-        this.ds.display(zoom, showComments, showGrid, gridSpacing);
-        sketch.pop();
     }
 
     public boolean withinCanvas(float x, float y){
@@ -95,7 +113,7 @@ public class Window {
     private boolean createAt(float xpos, float ypos, PollyObject obj){
         if (ds.withinScope(xpos, ypos) && obj != null) {
             trash.clear();
-            return ds.addShape(obj);
+            return ds.addObject(obj);
         }
         return false;
     }
@@ -147,7 +165,6 @@ public class Window {
         for(PollyObject obj : selected){
             //float[] coord = ds.relativePan(xo, yo, zoom);
             //shape.pan(coord[0], coord[1]);
-
             float[] coord = translate(xo, yo);
             obj.pan(coord[0], coord[1]);
         }
@@ -215,20 +232,20 @@ public class Window {
         boolean successful = true;
         for (PollyObject shape : selected) {
             trash.add(shape);
-            if(!ds.removeShape(shape)) successful = false;
+            if(!ds.removeObject(shape)) successful = false;
         }
         return successful;
     }
 
     public boolean deleteLast() {
         if(ds.getNumObjects() <= 0) return false;
-        return trash.add(ds.removeShape(ds.getNumObjects()-1));
+        return trash.add(ds.removeObject(ds.getNumObjects()-1));
     }
 
     public boolean restoreLast() {
         sketch.println(trash.size());
         if (trash.isEmpty()) return false;
-        return ds.addShape(trash.remove(trash.size()-1));
+        return ds.addObject(trash.remove(trash.size()-1));
     }
 
     public void clear(){
@@ -258,7 +275,7 @@ public class Window {
                 int[] boarder = ((ColorfulObject) shape).getBoarderColor();
                 of.createShape(pos[0]+2, pos[1]+2, 'r', strokeWeight, fill, boarder); //not full copy
             } else{
-                //ds.addShape();
+                //ds.addObject();
             }
         }
     }
@@ -275,6 +292,23 @@ public class Window {
         strokeWeight = sketch.max(size, 1);
     }
 
+    public void freeDraw(float pmousex, float pmousey){
+        float[] coord = ds.translateCoordinates(pmousex, pmousey, zoom);
+        PVector v = new PVector(coord[0], coord[1]);
+        freePoints.add(v);
+    }
+
+    public void createPollyGon(float pmousex, float pmousey, int numberVertex){
+        this.numberVertex = numberVertex;
+        float[] coord = ds.translateCoordinates(pmousex, pmousey, zoom);
+        PVector v = new PVector(coord[0], coord[1]);
+        pollyPoints.add(v);
+    }
+
+    public void createFreeForm(){ //must be called on the mouseReleased()
+        ds.addObject(of.createFreeForm(freePoints.get(0).x, freePoints.get(0).y, freePoints, strokeWeight, fillColor, boarderColor));
+        freePoints.clear();
+    }
 
     /*********************************************************
      *
