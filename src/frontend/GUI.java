@@ -67,6 +67,33 @@ import processing.core.*;
    }
 
 
+
+
+   public char getTool(){
+     return tool;
+   }
+
+   public void setTool(char tool){
+     this.tool = tool;
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    /**
     * [save opens file exploreor and passes save func]
     */
@@ -128,6 +155,7 @@ import processing.core.*;
 
    private void setupObjectSettingsToolbar(){
     FToolbar ft = toolbarFactory("Obj Set", (float).2, (float).9, (float).8, (float).05);
+    ft.addFController(new RFillSlider(cp5, ft, this));
     ft.addFController(new FColorPicker(cp5, ft, this));
     ft.addFController(new GridButton(cp5, ft, this));
     ft.addFController(new SaveButton(cp5, ft, this));

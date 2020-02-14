@@ -115,6 +115,10 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
 	 h.mouseWheel(event);
 	}
 
+	public void mouseReleased(){
+		h.mouseReleased();
+	}
+
 
 
 	void folderSelected(File selection) {

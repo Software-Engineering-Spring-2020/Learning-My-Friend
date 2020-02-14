@@ -51,20 +51,33 @@ public class IOHandler{
  * [offGUI returns a boolean representing if the mouse is on the GUI or not]
  * @return [returns true of the mouse is not on GUI elements]
  */
-  public boolean offGUI(){
-    //TODO
-    return true;
+  public boolean onCanvas(){
+    return win.withinCanvas(sketch.mouseX, sketch.mouseY);
   }
 
 
 
   public void mouseClicked(){
-    if(offGUI())
-      win.createShape(sketch.mouseX, sketch.mouseY, gui.tool);
+    //Needs to parse the gui tool selected
+    if(onCanvas()){
+      if(gui.getTool() == 'r')
+        win.createRect(sketch.mouseX, sketch.mouseY);
+      if(gui.getTool() == 'e')
+        win.createEllipse(sketch.mouseX, sketch.mouseY);
+    }
+
+  }
+
+  public void mouseReleased(){
+    if(gui.getTool() == 'p')
+      win.createFreeForm();
   }
 
   public void mouseDragged() {
-    if(offGUI())
+    //if pan tool is selected
+    if(gui.getTool() == 'p')
+      win.freeDraw(sketch.mouseX, sketch.mouseY);
+    else if(onCanvas())
       win.canvasPan((sketch.mouseX - sketch.pmouseX), (sketch.mouseY - sketch.pmouseY));
   }
 

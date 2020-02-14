@@ -13,6 +13,10 @@ src\frontend\fcontrollers\FColorWheel.java
 src\frontend\fcontrollers\PenButton.java
 src\frontend\fcontrollers\GridButton.java
 src\frontend\fcontrollers\SaveButton.java
+src\frontend\fcontrollers\RFillSlider.java
+
+
+
 
 src\frontend\controlP5\Accordion.java
 src\frontend\controlP5\Background.java
@@ -98,7 +102,6 @@ src\frontend\controlP5\Tooltip.java
 src\backend\PollyObject.java
 src\backend\ColorfulObject.java
 src\backend\Shape.java
-src\backend\NonShape.java
 src\backend\Group.java
 
 
