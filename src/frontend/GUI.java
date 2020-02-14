@@ -54,7 +54,7 @@ public class GUI {
 
   /**
    * [GUI constructor]
-   * 
+   *
    * @param sketch [PApplet sketch]
    * @param win    [Windows from selected backend]
    */
@@ -72,7 +72,7 @@ public class GUI {
 
   /**
    * [getTool gets the selected tool]
-   * 
+   *
    * @return [the selected tool]
    */
   public char getTool() {
@@ -81,7 +81,7 @@ public class GUI {
 
   /**
    * [setTool sets the selected tool]
-   * 
+   *
    * @param tool [the selected tool]
    */
   public void setTool(char tool) {
@@ -93,6 +93,15 @@ public class GUI {
    */
   public void save() {
     File f = new File("drawing.polly");
+    sketch.selectOutput("Select a file to save to:", "saveFileSelected", f, this);
+  }
+
+
+  /**
+   * [export opens file exploreor and passes export func]
+   */
+  public void export() {
+    File f = new File("drawing.png");
     sketch.selectOutput("Select a file to save to:", "saveFileSelected", f, this);
   }
 
@@ -194,6 +203,8 @@ public class GUI {
    private void setUpWorkspaceToolbar(){
     FToolbar ft = toolbarFactory("Workspace", (float).8, (float).05, (float).1, (float).0);
     ft.addFController(new SaveButton(cp5, ft, this));
+    ft.addFController(new ExportButton(cp5, ft, this));
+
     ft.addFController(new GridButton(cp5, ft, this));
 
    }
