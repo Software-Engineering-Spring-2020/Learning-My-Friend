@@ -50,9 +50,9 @@ import processing.core.*;
 
 
 /**
- * [GUI description]
- * @param sketch [description]
- * @param win    [description]
+ * [GUI constructor]
+ * @param sketch [PApplet sketch]
+ * @param win    [Windows from selected backend]
  */
    public GUI(PApplet sketch, Window win){
      this.sketch = sketch;
@@ -68,11 +68,19 @@ import processing.core.*;
 
 
 
-
+   /**
+    * [getTool gets the selected tool]
+    * @return [the selected tool]
+    */
    public char getTool(){
      return tool;
    }
 
+
+ /**
+  * [setTool sets the selected tool]
+  * @param tool [the selected tool]
+  */
    public void setTool(char tool){
      this.tool = tool;
    }
@@ -138,6 +146,7 @@ import processing.core.*;
 
    public void toggleGrid(){
     win.toggleGrid();
+    System.out.println("Grid Toggled");
    }
 
 
@@ -160,12 +169,13 @@ import processing.core.*;
     FToolbar ft = toolbarFactory("Obj Set", (float).2, (float).8, (float).8, (float).1);
     ft.addFController(new RFillSlider(cp5, ft, this));
     ft.addFController(new FColorPicker(cp5, ft, this));
-    ft.addFController(new GridButton(cp5, ft, this));
    }
 
    private void setUpWorkspaceToolbar(){
     FToolbar ft = toolbarFactory("Workspace", (float).8, (float).05, (float).1, (float).0);
     ft.addFController(new SaveButton(cp5, ft, this));
+    ft.addFController(new GridButton(cp5, ft, this));
+
    }
 
 
