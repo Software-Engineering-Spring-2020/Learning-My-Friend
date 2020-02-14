@@ -1,4 +1,5 @@
 package frontend;
+
 /**
   * <h1>GUI/h1>
   *
@@ -20,93 +21,110 @@ package frontend;
 import backend.Window;
 import frontend.controlP5.*;
 import frontend.fcontrollers.*;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 import processing.core.*;
 
- public class GUI{
-   PApplet sketch;
-   Window win;
-   //ControlP5 is a GUI lib
-   ControlP5 cp5;
-   //list of toolbars
-   LinkedList<FToolbar> tbList;
+public class GUI {
+  PApplet sketch;
+  Window win;
+  // ControlP5 is a GUI lib
+  ControlP5 cp5;
+  // list of toolbars
+  LinkedList<FToolbar> tbList;
 
-   //contains the last size for the sketch. If these are diffrent then the curent sketch size the gui will call the toolbars to resize.
-   int lastAppletWidth, lastAppletHeight;
-   /**
-    * Start of STATE Deleration
-    * The state is a structure of varibales that represent the state of the GUI.
-    * For example the selected tool and color are stored in the state.
-    */
-   //selected tool
-   public char tool;
-   public int fillColor[] = {0, 0, 0, 0};
-   public int boarderColor[] = {0, 0, 0};
+  // contains the last size for the sketch. If these are diffrent then the curent
+  // sketch size the gui will call the toolbars to resize.
+  int lastAppletWidth, lastAppletHeight;
+  /**
+   * Start of STATE Deleration The state is a structure of varibales that
+   * represent the state of the GUI. For example the selected tool and color are
+   * stored in the state.
+   */
+  // selected tool
+  public char tool;
+  public int fillColor[] = { 0, 0, 0, 0 };
+  public int boarderColor[] = { 0, 0, 0 };
 
   /**
    * End of STATE Deleration
    */
 
+  /**
+   * [GUI constructor]
+   * 
+   * @param sketch [PApplet sketch]
+   * @param win    [Windows from selected backend]
+   */
+  public GUI(PApplet sketch, Window win) {
+    this.sketch = sketch;
+    this.win = win;
+    cp5 = new ControlP5(sketch);
+    tbList = new LinkedList<FToolbar>();
 
+    lastAppletWidth = sketch.width;
+    lastAppletHeight = sketch.height;
 
-/**
- * [GUI constructor]
- * @param sketch [PApplet sketch]
- * @param win    [Windows from selected backend]
- */
-   public GUI(PApplet sketch, Window win){
-     this.sketch = sketch;
-     this.win = win;
-     cp5 = new ControlP5(sketch);
-     tbList = new LinkedList<FToolbar>();
+    setup();
+  }
 
-     lastAppletWidth = sketch.width;
-     lastAppletHeight = sketch.height;
+  /**
+   * [getTool gets the selected tool]
+   * 
+   * @return [the selected tool]
+   */
+  public char getTool() {
+    return tool;
+  }
 
-     setup();
+  /**
+   * [setTool sets the selected tool]
+   * 
+   * @param tool [the selected tool]
+   */
+  public void setTool(char tool) {
+    this.tool = tool;
+  }
+
+  /**
+   * [save opens file exploreor and passes save func]
+   */
+  public void save() {
+    File f = new File("drawing.polly");
+    sketch.selectOutput("Select a file to save to:", "saveFileSelected", f, this);
+  }
+
+  public void saveFileSelected(File selection) {
+    try {
+      win.save(selection.getAbsolutePath());
+    } catch (IOException e) {
+      System.out.println(e);
+      e.printStackTrace();
+    }
    }
 
+   public void open() {
+     File f = new File("drawing.polly");
+    sketch.selectInput("Select a file to open:", "openFileSelected", f, this);
+  }
 
+  public void openFileSelected(File selection) {
+    try {
+      win.open(selection.getAbsolutePath());
+    } catch (IOException | ClassNotFoundException e) {
+      System.out.println(e);
+      e.printStackTrace();
+    }
+  }
 
-   /**
-    * [getTool gets the selected tool]
-    * @return [the selected tool]
-    */
-   public char getTool(){
-     return tool;
+   public void exportImage() {
+
    }
 
+   public void importImage() {
 
- /**
-  * [setTool sets the selected tool]
-  * @param tool [the selected tool]
-  */
-   public void setTool(char tool){
-     this.tool = tool;
-   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   /**
-    * [save opens file exploreor and passes save func]
-    */
-   public void save(){
-     sketch.selectFolder("Select a folder to save in:", "folderSelected");
    }
 
    /**
