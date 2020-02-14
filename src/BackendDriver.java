@@ -37,7 +37,7 @@ public class BackendDriver extends PApplet {
 				this.window.reCenter();
 			}
 			if (this.key == 'c'){
-				this.window.setGridSpacing(50);
+				this.window.setGridSpacing(-10);
 			}
 			if (this.key == 'd'){
 				this.window.createShape(this.mouseX, this.mouseY, 'e');
@@ -52,13 +52,13 @@ public class BackendDriver extends PApplet {
 				this.window.importImage(this.mouseX, this.mouseY, "grayscrunchie", ".png");
 			}
 			if (this.key == 'h'){
-				this.window.setFillColor(90, 50, 250);
+				this.window.setFillColor(300, 500, 0);
 			}
 			if (this.key == 'j'){
-				this.window.setBoarderColor(100, 200, 60);
+				this.window.setBoarderColor(-450, 300, 60);
 			}
 			if (this.key == 'l'){
-				this.window.rotate(90);
+				this.window.rotate(123);
 			}
 			if (this.key == 'm'){
 				this.window.deleteSelected();
@@ -67,7 +67,7 @@ public class BackendDriver extends PApplet {
 				this.window.deleteLast();
 			}
 			if (this.key == 'o'){
-				this.window.deleteSelected();
+				this.window.restoreLast();
 			}
 			if (this.key == 'p'){
 				this.window.clear();
@@ -79,7 +79,7 @@ public class BackendDriver extends PApplet {
 				this.window.paste();
 			}
 			if (this.key == 's'){
-				this.window.setThickness(5);
+				this.window.setThickness(25);
 			}
 			if (this.key == 't'){
 				this.window.exportAs("testName", ".png");
@@ -87,8 +87,8 @@ public class BackendDriver extends PApplet {
 			if (this.key == 'u'){
 				System.out.println(this.window.withinCanvas(this.mouseX, this.mouseY));
 			}
-			if (this.key == 'u'){
-				
+			if (this.key == 'v'){
+				this.window.toggleComments();
 			}
     }
 
