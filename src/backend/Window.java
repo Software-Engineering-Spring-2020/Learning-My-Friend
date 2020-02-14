@@ -165,6 +165,33 @@ public class Window {
         boarderColor[2] = b;
     }
 
+    public void setSelectedFillColor(int r, int g, int b){
+        for(PollyObject shape : selected){
+            if(shape instanceof ColorfulObject) ((ColorfulObject)shape).setFillColor(r, g, b);
+        }
+    }
+
+    public void setSelectedBoarderColor(int r, int g, int b){
+        for(PollyObject shape : selected){
+            if(shape instanceof ColorfulObject) ((ColorfulObject)shape).setBoarderColor(r, g, b);
+        }
+    }
+
+    public ArrayList<int[]> getSelectedFillColors(){
+        ArrayList<int[]> colors = new ArrayList<int[]>();
+        for(PollyObject shape : selected){
+            if(shape instanceof ColorfulObject) colors.add(((ColorfulObject)shape).getFillColor());
+        }
+        return colors;
+    }
+
+    public ArrayList<int[]> getSelectedBoarderColors(){
+        ArrayList<int[]> colors = new ArrayList<int[]>();
+        for(PollyObject shape : selected){
+            if(shape instanceof ColorfulObject) colors.add(((ColorfulObject)shape).getBoarderColor());
+        }
+        return colors;
+    }
 
     public void rotate(float ao) {
         for (PollyObject shape : selected) {
@@ -218,7 +245,7 @@ public class Window {
         boolean sucess = true;
         copied.clear();
         for(PollyObject shape : selected){
-            sucess = sucess && copied.add(shape);
+            if(!copied.add(shape)) sucess = false;
         }
         return sucess;
     }

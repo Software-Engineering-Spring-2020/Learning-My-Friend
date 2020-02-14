@@ -9,7 +9,8 @@ public abstract class Shape extends ColorfulObject{
 
   public Shape(PApplet sketch, float x, float y, float strokeWeight, int[] fillColor, int[] boarderColor){
     super(sketch, x, y, fillColor, boarderColor);
-    shape = sketch.createShape(PConstants.POINT, 0, 0);
+    //shape = sketch.createShape(PConstants.POINT, 0, 0);
+    shape = sketch.createShape();
     this.strokeWeight = strokeWeight;
   }
 
