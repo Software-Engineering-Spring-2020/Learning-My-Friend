@@ -1,13 +1,13 @@
 Issues
-Nothing appears onscreen when you create a comment
-When you use multiselect and selectedPan(), rectangles sometimes don't pan along with the rest of the objects (they move around more). Edit: this can be a circle too. It's usually the third or so object added. Other objects that are added after that might pan correctly.
-Nothing happens to selected objects when you rotate
-selectedPan() didn't work after multiple other functions are called (created a bunch of shapes, tested deleteSelected(), restoreLast(), and clear())
-Paste() doesn't paste the object selected
-setThickness creates a border around drawableCanvas (border is black, even if setBorderColor() is set to a different color)
-restoreLast() doesn't restore last object deleted (whether it was deleteSelected() or deleteLast())
-exportAs() doesn't seem to do anything
-importImage doesn't work. I put the image in multiple folders (main PollyPaint folder, src, src->backend) and it still didn't run. I passed the argument "grayscrunchie", ".png" and got the error message "Could not find a method to load grayscrunchie"
+Nothing appears onscreen when you create a comment. Edit 2/13: I re-tested this after toggling comments. I tried creating comments before/after togging, and they still don't show up.
+When you use multiselect and selectedPan(), rectangles sometimes don't pan along with the rest of the objects (they move around more). Edit: this can be a circle too. It's usually the third or so object added. Other objects that are added after that might pan correctly. Edit 2/13: One time it was the first object I created that was panning weirdly. This seems rather random.
+setThickness still creates a border around drawableCanvas (border is black, even if setBorderColor() is set to a different color)
+importImage doesn't work. I put the image in multiple folders (all folders except ones marked frontend or docs) and it doesn't run. I passed the argument "grayscrunchie", ".png" and got the error message "Could not find a method to load grayscrunchie" Edit 2/13: I tried putting it in the bin folder (since there's where it saved,) but it still didn't import. Not sure if it's not working because the function isn't working, or because of where the image is saved.
+When two objects are multiselected and rotated, they rotate different amounts (the amount I tested was 85, 4000, 123). However, they rotated the same amount for 90. While all the shapes rotate different amounts, these stay consistent, even when I move them around the screen (so, one rectangle always rotates more).
+When I had a rectangle, circle, and other rectangle multiselected (they all panned correctly), the last rectangle didn't rotate. I added a circle and it did rotate, but the last rectangle still didn't. Later on, after I added more shapes and panned, it rotated.
+Not really a specific issue, but sometimes it takes a while for the program to load/create rectangles/allow you to select. I noticed this especially with rotate.
+Text doesn't rotate.
+One time, when I selected text, then a circle, then a rectangle, nothing rotated. This may have been due to the program lagging but I still wanted to note it.
 
 NOTE: Could not find a way to test createAt(). You have to pass in a PollyObject to test this, and I don't know how to pass in a separate PollyObject. (createShape() runs createAt(), so I can't use it for testing). I'll keep thinking on how to possibly do this.
 
@@ -24,3 +24,11 @@ p clears all objects onscreen (not just ones selected)
 deleteLast() works to delete objects in the order they were created
 setThickness() works
 withinBounds() accurately determines if mouse position is in bounds, even if the canvas is zoomed or paned
+Objects seem to be rotating correctly. Multiple objects that are selected can be rotated. Rotation works on different areas of the screen.
+restoreLast() restores objects in the order they were deleted (even if you use deleteSelected() or clear())
+exportAs() saves image in the bin folder
+toggleGrid() works with negative numbers. The code seems to just ignore the negative.
+setFillColor() works with negative numbers and numbers over 255. The code seems to just ignore the negative numbers passed and keep the color as black.
+setBorderColor() works with negative numbers and numbers over 255.
+setThickness() works with negative numbers.
+rotate() works with negative numbers and numbers over 360.
