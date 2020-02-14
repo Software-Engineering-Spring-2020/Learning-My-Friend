@@ -98,6 +98,7 @@ src\frontend\controlP5\Tooltip.java
 src\backend\PollyObject.java
 src\backend\ColorfulObject.java
 src\backend\Shape.java
+src\backend\NonShape.java
 src\backend\Group.java
 
 
@@ -106,6 +107,8 @@ src\backend\objects\Rectangle.java
 src\backend\objects\Ellipse.java
 src\backend\objects\TextBox.java
 src\backend\objects\Comment.java
+src\backend\objects\PollyGon.java
+src\backend\objects\FreeForm.java
 
 src\backend\objects\ObjectFactory.java
 src\backend\DrawSpace.java
