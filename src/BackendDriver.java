@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import backend.*;
 import processing.core.PApplet;
 
@@ -89,6 +91,25 @@ public class BackendDriver extends PApplet {
 			}
 			if (this.key == 'v'){
 				this.window.toggleComments();
+			}
+			/*if (this.key == 'w') {
+				this.window.freeDraw();
+			}*/
+			if (this.key == 'x'){
+				try {
+					this.window.save("C:/Users/isaac/Documents/Git/notebook/school/spring-2020/software-engineering/drawing.polly");
+				} catch (IOException e) {
+					System.out.println(e);
+					e.printStackTrace();
+				}
+			}
+			if (this.key == 'y'){
+				try {
+					this.window.open("C:/Users/isaac/Documents/Git/notebook/school/spring-2020/software-engineering/drawing.polly");
+				} catch (ClassNotFoundException | IOException e) {
+					System.out.println(e);
+					e.printStackTrace();
+				}
 			}
     }
 

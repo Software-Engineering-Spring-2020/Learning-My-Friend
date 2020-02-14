@@ -3,6 +3,8 @@ package backend;
 import backend.objects.ObjectFactory;
 import processing.core.PApplet;
 import processing.core.PImage;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Window {
@@ -354,12 +356,12 @@ public class Window {
         toSave.save(saveName+extension);
     }
 
-    /*public void save(String filename){
+    public void save(String filename) throws IOException {
       FileManager.saveDrawSpace(ds, filename);
     }
 
-    public void open(String filename){
+    public void open(String filename) throws IOException, ClassNotFoundException {
       ds = FileManager.openDrawSpace(sketch, filename);
-    }*/
+    }
 
 }
