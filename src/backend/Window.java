@@ -139,19 +139,6 @@ public class Window {
         return createRect(x, y, 100, 50);
     }
 
-/*
-    public FreeForm createFreeForm(float x, float y){
-        return new FreeForm(sketch, x, y, points, strokeWeight, fillColor, boarderColor);
-    }
-
-    public FreeForm createLine(float x, float y){
-        return new FreeForm(sketch, x, y, points, strokeWeight, fillColor, boarderColor);
-    }
-
-    public PollyGon createPollyGon(float x, float y){
-        return new PollyGon(sketch, x, y, points, strokeWeight, fillColor, boarderColor);
-    }*/
-
     public boolean createTextBox(float x, float y, String str, String font, float textSize){
         PollyObject obj = null;
         float[] coord = ds.translateCoordinates(x, y, zoom);
@@ -191,6 +178,10 @@ public class Window {
      *
      *
      *********************************************************/
+
+    public void group(){
+        ds.addObject(new Group(sketch, 0, 0, selected));
+    }
 
     public void selectedPan(float xo, float yo){
         for(PollyObject obj : selected){

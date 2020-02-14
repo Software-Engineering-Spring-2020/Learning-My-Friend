@@ -7,38 +7,72 @@ DECLARATION / INSTANCIATION:
 
 METHODS:
 	Tested:
-		void display()
-		void canvasPan(float xo, float yo)
-						xo and yo mean (mouseX - pmouseX) and (mouseY - pmouseY) respecitvely
-		void zoom(float factor)
-		void setFillColor(int r, int g, int b)
-		void setBoarderColor(int r, int g, int b)
-		boolean deleteSelected()
-		boolean deleteLast()
-		boolean restoreLast()
-		void clear()
-		void selectedPan(float xo, float yo)
-		void reCenter()
-		void toggleGrid()
-		boolean createShape(float x, float y, char shape)
-		void singleSelect(float x, float y)
-		void multiSelect(float x, float y)
+		public void zoom(float factor)
+    	public boolean withinCanvas(float x, float y)
+	    public void canvasPan(float xo, float yo)
+	    public void reCenter()
+	    public void toggleGrid()
+	    public void setGridSpacing(float spacing)
+	    public void toggleComments()
+
+	    public boolean createEllipse(float x, float y, float w, float h)
+	    public boolean createEllipse(float x, float y, float d)
+	    public boolean createEllipse(float x, float y)
+	    public boolean createRect(float x, float y, float w, float h)
+	    public boolean createRect(float x, float y, float d)
+	    public boolean createRect(float x, float y)
+	    public boolean createTextBox(float x, float y, String str, String font, float textSize)
+	    public boolean createComment(float x, float y, String str, String font, float textSize)
+	    public boolean importImage(float x, float y, String filename, String extension)
+	    public boolean importImage(String filename, String extension)
+
+	    public void group()
+	    public void selectedPan(float xo, float yo)
+	    public void setFillColor(int r, int g, int b, int a)
+	    public void setBoarderColor(int r, int g, int b)
+	    public void setSelectedFillColor(int r, int g, int b, int a)
+	    public void setSelectedBoarderColor(int r, int g, int b)
+	    public ArrayList<int[]> getSelectedFillColors()
+	    public ArrayList<int[]> getSelectedBoarderColors()
+	    public void rotate(float ao)
+	    public void singleSelect(float x, float y)
+	    public void multiSelect(float x, float y)
+	    public boolean deleteSelected()
+	    public boolean deleteLast()
+	    public boolean restoreLast()
+	    public void clear()
+	    public boolean copy()
+	    public void paste()
+
+	    public void setThickness(float size)
+	    public void freeDraw(float pmousex, float pmousey)
+	    			//must call createFreeForm() on mouseRelease()
+	    public void createPollyGon(float pmousex, float pmousey, int numberVertex)
+	    public void createLine(float pmousex, float pmousey)
+	    public void createFreeForm()
+	    			//must be called on the mouseReleased()
+
+	    public void exportAs(String saveName, String extension)
+
+
 
 	Untested:
-		void rotate(float ao)
-		boolean copy()
-		void paste()
-		void setThickness(int size)
-		void setGridSpacing(float spacing)
-		void exportAs(String saveName, String extension)
-		void importImage(float x, float y, String filename, String extension)
-		void importImage(String filename, String extension)
 
 
 	Untested Classes:
+		FreeForm
+		PollyGon
+		Group
+
+BUGS:
+	image import not working
+	pan at different rate????? --can you record example or show me?
+	Text not rotote
+
+
 
 TODO:
-	Properties of Objects
+	Paste is Empty
 	Resizing
 	GROUPING
 	New way to Export
