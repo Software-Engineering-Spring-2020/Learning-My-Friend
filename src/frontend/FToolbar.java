@@ -72,7 +72,7 @@ public class FToolbar{
    * [getGroup retruns the controlP5 group related to this toolbar]
    * @return [the controlP5 group related to this toolbar]
    */
-  protected Group getGroup(){
+  public Group getGroup(){
     return g;
   }
 
@@ -130,7 +130,7 @@ public class FToolbar{
  * [setPoxY sets the position of the toolbar in percentage of screen's height]
  * @param y [percentage of screen's height where the toolbar's upper left corner is]
  */
-  protected void setPoxY(float y){
+  protected void setPosY(float y){
     this.posY = y;
   }
 
@@ -156,7 +156,7 @@ public class FToolbar{
  * [getPoxY sets the position of the toolbar in percentage of screen's height]]
  * @return [percentage of screen's hieght where the toolbar's upper left corner is]
  */
-  protected float getPoxY(){
+  protected float getPosY(){
     return posY;
   }
 
@@ -173,7 +173,7 @@ public class FToolbar{
    * [setRealSizeRX sets the width of the toolbar in piRXel]
    * @param RX [percentage of the width of the screen the toolbar takes up]
    */
-    protected void setRealSizeRX(int RX){
+    public void setRealSizeRX(int RX){
       this.sizeRX = RX;
     }
 
@@ -181,7 +181,7 @@ public class FToolbar{
    * [setRealSizeRY sets the height of the toolbar in percentage of screen]
    * @param RY [percentage of the height of the screen the toolbar takes up]
    */
-    protected void setRealSizeRY(int RY){
+    public void setRealSizeRY(int RY){
       this.sizeRY = RY;
     }
 
@@ -190,7 +190,7 @@ public class FToolbar{
    * @param RX [percentage of the width of the screen the toolbar takes up]
    * @param RY [percentage of the height of the screen the toolbar takes up]
    */
-    protected void setRealSize(int RX, int RY){
+    public void setRealSize(int RX, int RY){
       this.sizeRX = RX;
       this.sizeRY = RY;
     }
@@ -199,7 +199,7 @@ public class FToolbar{
    * [getRealSizeRX gets the width of the toolbar in percentage of screen]
    * @return [percentage of the width of the screen the toolbar takes up]
    */
-    protected int getRealSizeRX(){
+    public int getRealSizeRX(){
       return sizeRX;
     }
 
@@ -207,7 +207,7 @@ public class FToolbar{
    * [getRealSizeRY getRealSizeRX gets the height of the toolbar in percentage of screen]
    * @return [percentage of the height of the screen the toolbar takes up]
    */
-    protected int getRealSizeRY(){
+    public int getRealSizeRY(){
       return sizeRY;
     }
 
@@ -215,7 +215,7 @@ public class FToolbar{
    * [setRealPosRX sets the position of the toolbar in percentage of screen' width]
    * @param RX [percentage of screen's width where the toolbar's upper left corner is]
    */
-    protected void setRealPosRX(int RX){
+    public void setRealPosRX(int RX){
       this.posRX = RX;
     }
 
@@ -223,7 +223,7 @@ public class FToolbar{
    * [setPoRXRY sets the position of the toolbar in percentage of screen's height]
    * @param RY [percentage of screen's height where the toolbar's upper left corner is]
    */
-    protected void setRealPosRY(int RY){
+    public void setRealPosRY(int RY){
       this.posRY = RY;
     }
 
@@ -232,7 +232,7 @@ public class FToolbar{
    * @param RX [percentage of screen's width where the toolbar's upper left corner is]
    * @param RY [percentage of screen's height where the toolbar's upper left corner is]
    */
-    protected void setRealPos(int RX, int RY){
+    public void setRealPos(int RX, int RY){
       this.posRX = RX;
       this.posRY = RY;
     }
@@ -241,7 +241,7 @@ public class FToolbar{
    * [getRealPosRX gets the position of the toolbar in percentage of screen's width]
    * @return [percentage of screen's width where the toolbar's upper left corner is]
    */
-    protected int getRealPosRX(){
+    public int getRealPosRX(){
       return posRX;
     }
 
@@ -249,7 +249,7 @@ public class FToolbar{
    * [getPoRXRY sets the position of the toolbar in percentage of screen's height]]
    * @return [percentage of screen's hieght where the toolbar's upper left corner is]
    */
-    protected int getRealPosRY(){
+    public int getRealPosRY(){
       return posRY;
     }
 
@@ -367,14 +367,15 @@ public class FToolbar{
  */
   protected void update(){
     //sets toolbar size and position
-    //System.out.println(g.getName() + " Width: " + sizeX + " Height: "  + sizeY +
-    //"\n Sketch Width: " + sketch.width + "Sketch Height: " + sketch.height);
+
     setRealSize((int)Math.round(sketch.width*sizeX), (int)Math.round(sketch.height*sizeY));
     setRealPos((int)Math.round(sketch.width*posX), (int)Math.round(sketch.height*posY));
     g.setSize(getRealSizeRX(), getRealSizeRY());
     g.setPosition(getRealPosRX(), getRealPosRY());
     g.setBackgroundHeight(getRealSizeRY());
-
+  //  System.out.println(g.getName() + " Width%: " + sizeX + " Height%: "  + sizeY +
+    //"\n Sketch Width: " + sketch.width + "Sketch Height: " + sketch.height +
+    //"\n Width pix: " + getRealPosRX());
     //sets FController size and position
     //curent version does not use priotirtys
 

@@ -67,6 +67,32 @@ import processing.core.*;
    }
 
 
+   /**
+    * [save opens file exploreor and passes save func]
+    */
+   public void save(){
+     sketch.selectFolder("Select a folder to save in:", "folderSelected");
+   }
+
+   /**
+    * [setFill sets the fill color]
+    * @param i [color from 1 to 255]
+    * @param c [color r, b, g]
+    */
+   public void setFill(int i, char c){
+    if(c == 'r')
+      fillColor[0] = i;
+    if(c == 'g')
+      fillColor[1] = i;
+    if(c == 'b')
+      fillColor[2] = i;
+    win.setFillColor(fillColor[0], fillColor[1], fillColor[2]);
+   }
+
+   public void toggleGrid(){
+    win.toggleGrid();
+   }
+
 
    private void setup(){
      setupObjectCreationToolbar();
@@ -78,11 +104,15 @@ import processing.core.*;
      FToolbar ft = toolbarFactory("Obj Create", (float).05, (float).9, (float).0, (float).05);
      ft.addFController(new RectButton(cp5, ft, this));
      ft.addFController(new ElipButton(cp5, ft, this));
+     ft.addFController(new PenButton(cp5, ft, this));
    }
 
 
    private void setupObjectSettingsToolbar(){
-    toolbarFactory("Obj Set", (float).05, (float).9, (float).95, (float).05);
+    FToolbar ft = toolbarFactory("Obj Set", (float).2, (float).9, (float).8, (float).05);
+    ft.addFController(new FColorPicker(cp5, ft, this));
+    ft.addFController(new GridButton(cp5, ft, this));
+    ft.addFController(new SaveButton(cp5, ft, this));
    }
 
 

@@ -28,7 +28,6 @@ public abstract class FButton extends FController{
    * [update updates the ControlP5 object to the FControlers size]
    */
   protected void update(){
-
     button.setSize((int)Math.round(parrent.getRealSizeRX()*getSizeX()), (int)Math.round(parrent.getRealSizeRY()*getSizeY()));
     button.setPosition((int)Math.round(parrent.getRealSizeRX()*getPosX()), (int)Math.round(parrent.getRealSizeRY()*getPosY()));
 

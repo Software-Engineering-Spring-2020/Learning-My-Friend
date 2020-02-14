@@ -5,12 +5,14 @@ src\frontend\IOHandler.java
 src\frontend\FToolbar.java
 src\frontend\FController.java
 src\frontend\FButton.java
+src\frontend\FSlider.java
 src\frontend\fcontrollers\RectButton.java
 src\frontend\fcontrollers\ElipButton.java
-
-
-
-
+src\frontend\fcontrollers\FColorPicker.java
+src\frontend\fcontrollers\FColorWheel.java
+src\frontend\fcontrollers\PenButton.java
+src\frontend\fcontrollers\GridButton.java
+src\frontend\fcontrollers\SaveButton.java
 
 src\frontend\controlP5\Accordion.java
 src\frontend\controlP5\Background.java

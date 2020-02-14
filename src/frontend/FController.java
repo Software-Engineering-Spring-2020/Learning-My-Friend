@@ -12,20 +12,20 @@ package frontend;
  import frontend.fcontrollers.*;
 
 public abstract class FController{
-  ControlP5 cp5;
+  protected ControlP5 cp5;
 
   // the size and position of the group and toolbar
-  float sizeX, sizeY, posX, posY;
+  protected float sizeX, sizeY, posX, posY;
 
   //name of the controller
-  String name;
+  protected String name;
 
   //sizePriority is 1 by default. The larger sizePriority is the more space it takes from other FControllers in the group.
-  float sizePriority = 1;
+  protected float sizePriority = 1;
 
 
   //Parrent FToolbar
-  FToolbar parrent;
+  protected FToolbar parrent;
 
   //buttons need to edit gui state
   GUI gui;
