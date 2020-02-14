@@ -113,6 +113,7 @@ import processing.core.*;
     * [setFill sets the fill color]
     * @param i [color from 1 to 255]
     * @param c [color r, b, g]
+    * also changes boarder as client did not ask for this feture and it takes up space in the gui
     */
    public void setFill(int i, char c){
     if(c == 'r')
@@ -133,6 +134,7 @@ import processing.core.*;
     * [setFill sets the boarder color]
     * @param i [color from 1 to 255]
     * @param c [color r, b, g]
+    * currently unused as client did not ask for boarder settings and it takes up space in the gui, is controlled by setFill
     */
    public void setBoarder(int i, char c){
     if(c == 'r')
