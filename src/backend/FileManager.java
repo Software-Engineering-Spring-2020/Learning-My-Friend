@@ -24,9 +24,9 @@ public class FileManager {
         saveFile.close();
     }
 
-    protected static DrawSpace loadDrawSpace(PApplet sketch, String filename) throws IOException, ClassNotFoundException {
-        FileInputStream loadFile = new FileInputStream(filename);
-        ObjectInputStream fileInput = new ObjectInputStream(loadFile);
+    protected static DrawSpace openDrawSpace(PApplet sketch, String filename) throws IOException, ClassNotFoundException {
+        FileInputStream openFile = new FileInputStream(filename);
+        ObjectInputStream fileInput = new ObjectInputStream(openFile);
         ArrayList<PollyObject> objects = new ArrayList<PollyObject>();
         boolean savedDrawSpace = false;
         DrawSpace ds = new DrawSpace(sketch, 0, 0, 0, 0);
@@ -41,7 +41,7 @@ public class FileManager {
             System.out.println(e);
         }
         fileInput.close();
-        loadFile.close();
+        openFile.close();
         if (savedDrawSpace) {
             ds.init(sketch);
             return ds;
