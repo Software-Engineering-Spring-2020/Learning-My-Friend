@@ -108,7 +108,10 @@ public abstract class PollyObject implements Serializable {
         return finalPoint;
     }
 
-    protected void display() {    }
+    protected void display() {  
+        //sketch.translate(xpos, ypos);
+        //sketch.rotate(rot);
+     }
 
     protected void pan(float xo, float yo){
         xpos = xpos + xo;
@@ -116,6 +119,7 @@ public abstract class PollyObject implements Serializable {
     }
 
     protected void resize(float factor) {
-
+        pixelHeight *= factor;
+        pixelWidth *= factor;
     }
 }

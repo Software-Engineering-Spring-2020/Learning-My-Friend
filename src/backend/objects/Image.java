@@ -14,6 +14,7 @@ class Image extends PollyObject implements Serializable {
     img = sketch.requestImage(filename, extension);
     pixelWidth = img.width;
     pixelHeight = img.height;
+    sketch.println("Picture:\t"+pixelWidth);
   }
   
   protected void display(){

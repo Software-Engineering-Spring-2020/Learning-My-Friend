@@ -10,7 +10,7 @@ class DrawSpace extends ColorfulObject{
     int[] white = {255,255,255};
 
     DrawSpace(PApplet sketch, float x, float y, float w, float h){
-        super(sketch, x, y, new int[] {255, 255, 255}, new int[] {255, 255, 255});
+        super(sketch, x, y, new int[] {255, 255, 255, 255}, new int[] {255, 255, 255});
         pixelWidth = w;
         pixelHeight = h;
         xcenter = xpos+pixelWidth/2;
@@ -29,6 +29,11 @@ class DrawSpace extends ColorfulObject{
 
     protected PollyObject getObjectAt(float x, float y, float zoom){
         float[] pos = translateCoordinates(x, y, zoom);
+        for(int i = comments.size()-1; i>=0; i--){
+            PollyObject obj = comments.get(i);
+            if(obj.withinScope(pos[0], pos[1])) return obj;
+        }
+
         for(int i = objects.size()-1; i>=0; i--){
             PollyObject obj = objects.get(i);
             if(obj.withinScope(pos[0], pos[1])) return obj;
@@ -82,7 +87,13 @@ class DrawSpace extends ColorfulObject{
             obj.display();
             sketch.pop();
         }
-        if(showComments);
+        if(showComments){
+            for(PollyObject obj : comments){
+                sketch.push();
+                obj.display();
+                sketch.pop();
+            }
+        }
     }
 
     protected boolean addObject(PollyObject shape){

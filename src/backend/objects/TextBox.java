@@ -21,12 +21,12 @@ class TextBox extends ColorfulObject implements Serializable {
     pixelWidth = sketch.textWidth(str);
     //pixelHeight = sketch.textHeight();
     pixelHeight = 100;
+    fillColor[3] = 255;
   }
 
   protected void display(){
         super.display();
-    	sketch.textFont(font, textSize);
-        sketch.fill(sketch.color(fillColor[0], fillColor[1], fillColor[2]));
+    	  sketch.textFont(font, textSize);
         sketch.text(str, xpos, ypos);
   }
 }

@@ -25,7 +25,7 @@ public class Window {
         this.sketch = sketch;
         ds = new DrawSpace(sketch, x, y, w, h);
         of = new ObjectFactory(sketch);
-        fillColor = new int[]{0, 0, 0};
+        fillColor = new int[]{0, 0, 0, 0};
         boarderColor = new int[]{0, 0, 0};
         XINIT = x;
         YINIT = y;
@@ -110,45 +110,76 @@ public class Window {
      *
      *********************************************************/
 
-    private boolean createAt(float xpos, float ypos, PollyObject obj){
-        if (ds.withinScope(xpos, ypos) && obj != null) {
-            trash.clear();
-            return ds.addObject(obj);
-        }
+    public boolean createEllipse(float x, float y, float w, float h){
+        PollyObject obj = null;
+        float[] coord = ds.translateCoordinates(x, y, zoom);
+        if(ds.withinScope(coord[0], coord[1])) obj = of.createEllipse(coord[0], coord[1], w, h, strokeWeight, fillColor, boarderColor);
+        if(obj != null) return ds.addObject(obj);
+        return false;
+    }
+    public boolean createEllipse(float x, float y, float d){
+        return createEllipse(x, y, d, d);
+    } 
+    public boolean createEllipse(float x, float y){
+        return createEllipse(x, y, 100, 50);
+    }
+
+
+    public boolean createRect(float x, float y, float w, float h){
+        PollyObject obj = null;
+        float[] coord = ds.translateCoordinates(x, y, zoom);
+        if(ds.withinScope(coord[0], coord[1])) obj = of.createRect(coord[0], coord[1], w, h, strokeWeight, fillColor, boarderColor);
+        if(obj != null) return ds.addObject(obj);
+        return false;
+    }
+    public boolean createRect(float x, float y, float d){
+        return createRect(x, y, d, d);
+    } 
+    public boolean createRect(float x, float y){
+        return createRect(x, y, 100, 50);
+    }
+
+/*
+    public FreeForm createFreeForm(float x, float y){
+        return new FreeForm(sketch, x, y, points, strokeWeight, fillColor, boarderColor);
+    }
+
+    public FreeForm createLine(float x, float y){
+        return new FreeForm(sketch, x, y, points, strokeWeight, fillColor, boarderColor);
+    }
+
+    public PollyGon createPollyGon(float x, float y){
+        return new PollyGon(sketch, x, y, points, strokeWeight, fillColor, boarderColor);
+    }*/
+
+    public boolean createTextBox(float x, float y, String str, String font, float textSize){
+        PollyObject obj = null;
+        float[] coord = ds.translateCoordinates(x, y, zoom);
+        if(ds.withinScope(coord[0], coord[1])) obj = of.createTextBox(coord[0], coord[1], fillColor, boarderColor, str, font, textSize);
+        if(obj != null) return ds.addObject(obj);
         return false;
     }
 
-    public boolean createShape(float x, float y, char shape) {
-        float[] coord = ds.translateCoordinates(x, y, zoom);
-        //float[] coord = translateCoordinates(x, y);
-        PollyObject obj = of.createShape(coord[0], coord[1], shape, strokeWeight, fillColor, boarderColor);
-        return createAt(coord[0], coord[1], obj);
-    }
-
-    public boolean createTextBox(float x, float y, String str, String font, float textSize){
-        float[] coord = ds.translateCoordinates(x, y, zoom);
-        //float[] coord = translateCoordinates(x, y);
-        PollyObject obj = of.createTextBox(coord[0], coord[1], fillColor, boarderColor, str, font, textSize);
-        return createAt(coord[0], coord[1], obj);
-    }
-
     public boolean createComment(float x, float y, String str, String font, float textSize){
+        PollyObject obj = null;
         float[] coord = ds.translateCoordinates(x, y, zoom);
-        //float[] coord = translateCoordinates(x, y);
-        PollyObject obj = of.createComment(coord[0], coord[1], fillColor, boarderColor, str, font, textSize);
-        return ds.addComment(obj);
+        if(ds.withinScope(coord[0], coord[1])) obj = of.createComment(coord[0], coord[1], fillColor, boarderColor, str, font, textSize);
+        if(obj != null) return ds.addObject(obj);
+        return false;
     }
 
     public boolean importImage(float x, float y, String filename, String extension){
+        PollyObject obj = null;
         float[] coord = ds.translateCoordinates(x, y, zoom);
-        //float[] coord = translateCoordinates(x, y);
-        PollyObject obj = of.importImage(coord[0], coord[1], filename, extension);
-        return createAt(coord[0], coord[1], obj);
+        if(ds.withinScope(coord[0], coord[1])) obj = of.importImage(coord[0], coord[1], filename, extension);
+        if(obj != null) return ds.addObject(obj);
+        return false;
     }
 
     public boolean importImage(String filename, String extension){
         PollyObject obj = of.importImage(0, 0, filename, extension);
-        return createAt(0, 0, obj);
+        if(obj != null) return ds.addObject(obj);
+        return false;
     }
 
     
@@ -170,10 +201,11 @@ public class Window {
         }
     }
 
-    public void setFillColor(int r, int g, int b) {
+    public void setFillColor(int r, int g, int b, int a) {
         fillColor[0] = r;
         fillColor[1] = g;
         fillColor[2] = b;
+        fillColor[3] = a;
     }
 
     public void setBoarderColor(int r, int g, int b) {
@@ -182,9 +214,9 @@ public class Window {
         boarderColor[2] = b;
     }
 
-    public void setSelectedFillColor(int r, int g, int b){
+    public void setSelectedFillColor(int r, int g, int b, int a){
         for(PollyObject shape : selected){
-            if(shape instanceof ColorfulObject) ((ColorfulObject)shape).setFillColor(r, g, b);
+            if(shape instanceof ColorfulObject) ((ColorfulObject)shape).setFillColor(r, g, b, a);
         }
     }
 
@@ -267,16 +299,10 @@ public class Window {
         return sucess;
     }
 
-    public void paste(){
+    public void paste(){    //not working yet
         for(PollyObject shape : copied){
             float[] pos = shape.getPosition();
-            if(shape instanceof ColorfulObject){
-                int[] fill = ((ColorfulObject) shape).getFillColor();
-                int[] boarder = ((ColorfulObject) shape).getBoarderColor();
-                of.createShape(pos[0]+2, pos[1]+2, 'r', strokeWeight, fill, boarder); //not full copy
-            } else{
-                //ds.addObject();
-            }
+            //FINISH THIS
         }
     }
 
@@ -292,7 +318,7 @@ public class Window {
         strokeWeight = sketch.max(size, 1);
     }
 
-    public void freeDraw(float pmousex, float pmousey){
+    public void freeDraw(float pmousex, float pmousey){ //must call createFreeForm() on mouseRelease()
         float[] coord = ds.translateCoordinates(pmousex, pmousey, zoom);
         PVector v = new PVector(coord[0], coord[1]);
         freePoints.add(v);
@@ -300,6 +326,13 @@ public class Window {
 
     public void createPollyGon(float pmousex, float pmousey, int numberVertex){
         this.numberVertex = numberVertex;
+        float[] coord = ds.translateCoordinates(pmousex, pmousey, zoom);
+        PVector v = new PVector(coord[0], coord[1]);
+        pollyPoints.add(v);
+    }
+
+    public void createLine(float pmousex, float pmousey){ //make exta thick???
+        this.numberVertex = 2;
         float[] coord = ds.translateCoordinates(pmousex, pmousey, zoom);
         PVector v = new PVector(coord[0], coord[1]);
         pollyPoints.add(v);

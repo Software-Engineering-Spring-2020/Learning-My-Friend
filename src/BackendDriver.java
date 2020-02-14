@@ -31,7 +31,7 @@ public class BackendDriver extends PApplet {
         }
 		
 			if (this.key == 'a'){ 
-				 this.window.createShape(this.mouseX, this.mouseY, 'r');
+				 this.window.createRect(this.mouseX, this.mouseY);
 			}
 			if (this.key == 'b'){
 				this.window.reCenter();
@@ -40,7 +40,7 @@ public class BackendDriver extends PApplet {
 				this.window.setGridSpacing(-10);
 			}
 			if (this.key == 'd'){
-				this.window.createShape(this.mouseX, this.mouseY, 'e');
+				this.window.createEllipse(this.mouseX, this.mouseY);
 			}
 			if (this.key == 'e'){
 				this.window.createTextBox(this.mouseX, this.mouseY, "Hello world!", "arial", 12);
@@ -52,7 +52,7 @@ public class BackendDriver extends PApplet {
 				this.window.importImage(this.mouseX, this.mouseY, "grayscrunchie", ".png");
 			}
 			if (this.key == 'h'){
-				this.window.setFillColor(300, 500, 0);
+				this.window.setFillColor(300, 500, 0, 255);
 			}
 			if (this.key == 'j'){
 				this.window.setBoarderColor(-450, 300, 60);

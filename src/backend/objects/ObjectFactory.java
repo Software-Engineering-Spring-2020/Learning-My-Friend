@@ -23,20 +23,20 @@ public class ObjectFactory {
     public Comment createComment(float x, float y, int[] fillColor, int[] boarderColor, String str, String font, float textSize){
         return new Comment(sketch, x, y, fillColor, boarderColor, str, font, textSize);
     }
-
+/*
     public Shape createShape(float x, float y, char shape, float strokeWeight, int[] fillColor, int[] boarderColor){
         if(shape == 'e') return createCircle(x, y, strokeWeight, fillColor, boarderColor);
         else if(shape == 'r') return createRect(x, y, 100, 50, strokeWeight, fillColor, boarderColor);
         return null;
     }
-
+*/
     public Ellipse createEllipse(float x, float y, float w, float h, float strokeWeight, int[] fillColor, int[] boarderColor){
         return new Ellipse(sketch, x, y, w, h, strokeWeight, fillColor, boarderColor);
     }
 
-    public Ellipse createCircle(float x, float y, float d,  float strokeWeight, int[] fillColor, int[] boarderColor){
+    public Ellipse createEllipse(float x, float y, float d,  float strokeWeight, int[] fillColor, int[] boarderColor){
         return new Ellipse(sketch, x, y, d, strokeWeight, fillColor, boarderColor);
-    } public Ellipse createCircle(float x, float y,  float strokeWeight, int[] fillColor, int[] boarderColor){
+    } public Ellipse createEllipse(float x, float y,  float strokeWeight, int[] fillColor, int[] boarderColor){
         return new Ellipse(sketch, x, y, strokeWeight, fillColor, boarderColor);
     }
 
@@ -45,7 +45,7 @@ public class ObjectFactory {
         return new Rectangle(sketch, x, y, w, h, strokeWeight, fillColor, boarderColor);
     }
 
-    public Rectangle createSquare(float x, float y, float d, float strokeWeight,  int[] fillColor, int[] boarderColor){
+    public Rectangle createRect(float x, float y, float d, float strokeWeight,  int[] fillColor, int[] boarderColor){
         return new Rectangle(sketch, x, y, d, strokeWeight, fillColor, boarderColor);
     } public Rectangle createRect(float x, float y, float strokeWeight, int[] fillColor, int[] boarderColor){
         return new Rectangle(sketch, x, y, strokeWeight, fillColor, boarderColor);
