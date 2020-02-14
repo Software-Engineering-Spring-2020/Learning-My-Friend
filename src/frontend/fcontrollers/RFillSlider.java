@@ -17,6 +17,7 @@ public class RFillSlider extends FSlider{
     super(cp5, "Rfill", parrent, gui);
     super.slider.plugTo(this);
     super.slider.setMax(255);
+    //super.slider.setColor(new CColor(0, 0,))
   }
 
 

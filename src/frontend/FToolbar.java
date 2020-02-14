@@ -396,16 +396,31 @@ public class FToolbar{
     // starts resizing each controller
 
     //for(FController fc : conList)
+
+
+    //if its longger then it is wide
     if(conList.size()>0){
       FController fc;
       int p = 0;
-      for(float i = boarderY; i < deltaY; i+= (deltaY/conList.size())){
-        //System.out.println("Delta Y: " + deltaY + " i: " + (1/conList.size()));
-        fc = conList.get(p);
-        fc.setPos((float)boarderX, (float)i);
-        fc.setSize((float)deltaX, (float)deltaY/conList.size());
-        fc.update();
-        p++;
+      if(getSizeX() < getSizeY()){
+        for(float i = boarderY; i < deltaY; i+= (deltaY/conList.size())){
+          //System.out.println("Delta Y: " + deltaY + " i: " + (1/conList.size()));
+          fc = conList.get(p);
+          fc.setPos((float)boarderX, (float)i);
+          fc.setSize((float)deltaX, (float)deltaY/conList.size());
+          fc.update();
+          p++;
+        }
+      }
+      else{
+        for(float i = boarderX; i < deltaX; i+= (deltaX/conList.size())){
+          //System.out.println("Delta Y: " + deltaY + " i: " + (1/conList.size()));
+          fc = conList.get(p);
+          fc.setPos((float)i, (float)boarderY);
+          fc.setSize((float)deltaX/conList.size(), (float)deltaY);
+          fc.update();
+          p++;
+        }
       }
     }
 

@@ -17,6 +17,7 @@ public class RectButton extends FButton{
 
     super(cp5, "rect", parrent, gui);
     super.button.plugTo(this);
+    //super.button.setImages(loadImage("times-square.png"), loadImage("times-square.png"), loadImage("times-square.png"));
   }
 
 /**

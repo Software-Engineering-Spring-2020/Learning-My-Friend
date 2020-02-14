@@ -115,7 +115,9 @@ import processing.core.*;
       fillColor[2] = i;
     if(c == 'a')
       fillColor[3] = i;
-    win.setFillColor(fillColor[0], fillColor[1], fillColor[2], fillColor[3]);
+    //win.setFillColor(fillColor[0], fillColor[1], fillColor[2], fillColor[3]);
+    win.setFillColor(fillColor[0], fillColor[1], fillColor[2], 255);
+
    }
 
 
@@ -142,11 +144,12 @@ import processing.core.*;
    private void setup(){
      setupObjectCreationToolbar();
      setupObjectSettingsToolbar();
+     setUpWorkspaceToolbar();
      resizeAll();
    }
 
    private void setupObjectCreationToolbar(){
-     FToolbar ft = toolbarFactory("Obj Create", (float).05, (float).9, (float).0, (float).05);
+     FToolbar ft = toolbarFactory("Obj Create", (float).05, (float).8, (float).0, (float).1);
      ft.addFController(new RectButton(cp5, ft, this));
      ft.addFController(new ElipButton(cp5, ft, this));
      ft.addFController(new PenButton(cp5, ft, this));
@@ -154,13 +157,16 @@ import processing.core.*;
 
 
    private void setupObjectSettingsToolbar(){
-    FToolbar ft = toolbarFactory("Obj Set", (float).2, (float).9, (float).8, (float).05);
+    FToolbar ft = toolbarFactory("Obj Set", (float).2, (float).8, (float).8, (float).1);
     ft.addFController(new RFillSlider(cp5, ft, this));
     ft.addFController(new FColorPicker(cp5, ft, this));
     ft.addFController(new GridButton(cp5, ft, this));
-    ft.addFController(new SaveButton(cp5, ft, this));
    }
 
+   private void setUpWorkspaceToolbar(){
+    FToolbar ft = toolbarFactory("Workspace", (float).8, (float).05, (float).1, (float).0);
+    ft.addFController(new SaveButton(cp5, ft, this));
+   }
 
 
   private FToolbar toolbarFactory(String name, float sizeX, float sizeY, float posX, float posY){
