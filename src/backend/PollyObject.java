@@ -10,6 +10,7 @@ public abstract class PollyObject implements Serializable {
     transient protected PApplet sketch;
     protected float xpos, ypos, rot = 0, pixelWidth, pixelHeight;
     transient protected boolean showBoundary;
+    transient float zoom = 1;
 
     public PollyObject(PApplet sketch, float x, float y) {
         this.sketch = sketch;
@@ -47,7 +48,7 @@ public abstract class PollyObject implements Serializable {
 
         PVector rotatedPoint = rotateAbout(new PVector(x, y), new PVector(xpos, ypos), -rot);
 
-        if ((rotatedPoint.x >= xpos - width / 2 && rotatedPoint.x <= xpos + width / 2) && 
+        if ((rotatedPoint.x >= xpos - width / 2 && rotatedPoint.x <= xpos + width / 2) &&
             (rotatedPoint.y >= ypos - height / 2 && rotatedPoint.y <= ypos + height / 2)) {
                 sketch.println("Within Bounds!");
                 return true;
@@ -108,7 +109,7 @@ public abstract class PollyObject implements Serializable {
         return finalPoint;
     }
 
-    protected void display() {  
+    protected void display() {
         //sketch.translate(xpos, ypos);
         //sketch.rotate(rot);
      }
@@ -121,5 +122,6 @@ public abstract class PollyObject implements Serializable {
     protected void resize(float factor) {
         pixelHeight *= factor;
         pixelWidth *= factor;
+        zoom += factor;
     }
 }
