@@ -5,7 +5,7 @@ import processing.core.PConstants;
 
 public abstract class Shape extends ColorfulObject{
     protected PShape shape;
-    protected float strokeWeight;
+    protected float strokeWeight; //save me
 
   public Shape(PApplet sketch, float x, float y, float strokeWeight, int[] fillColor, int[] boarderColor){
     super(sketch, x, y, fillColor, boarderColor);

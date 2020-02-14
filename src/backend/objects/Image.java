@@ -2,10 +2,11 @@ package backend.objects;
 import backend.PollyObject;
 import processing.core.PApplet;
 import processing.core.PImage;
+import java.io.Serializable;
 
-class Image extends PollyObject {
+class Image extends PollyObject{
   String[] file;
-  PImage img;
+  transient PImage img;
   Image(PApplet sketch, float x, float y, String filename, String extension){
     super(sketch, x, y);
     file = new String[]{filename, extension};

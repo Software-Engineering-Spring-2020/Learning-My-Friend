@@ -5,9 +5,9 @@ import processing.core.PFont;
 import processing.core.PConstants;
 
 class TextBox extends ColorfulObject{
-    private String str;
-    private float textSize;
-    private PFont font;
+    private String str; //save me
+    private float textSize; //save me
+    private PFont font; //save me
 
   public TextBox(PApplet sketch, float x, float y, int[] fillColor, int[] boarderColor, String str, String font, float textSize){
     super(sketch, x, y, fillColor, boarderColor);
