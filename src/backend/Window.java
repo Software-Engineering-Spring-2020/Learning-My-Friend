@@ -335,7 +335,7 @@ public class Window {
     }
 
     public void createFreeForm(){ //must be called on the mouseReleased()
-        ds.addObject(of.createFreeForm(freePoints.get(0)[0], freePoints.get(0)[1], freePoints, strokeWeight, fillColor, boarderColor));
+        if(!freePoints.isEmpty() ds.addObject(of.createFreeForm(freePoints.get(0)[0], freePoints.get(0)[1], freePoints, strokeWeight, fillColor, boarderColor));
         freePoints.clear();
     }
 
