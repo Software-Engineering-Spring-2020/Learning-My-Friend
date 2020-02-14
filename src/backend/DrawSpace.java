@@ -19,7 +19,7 @@ class DrawSpace extends ColorfulObject{
         sketch.imageMode(PConstants.CENTER);
         sketch.textMode(PConstants.MODEL);
         sketch.textAlign(PConstants.CENTER, PConstants.CENTER);
-        sketch.shapeMode(PConstants.CENTER);
+        //sketch.shapeMode(PConstants.CENTER);
     }
 
     protected void init(PApplet sketch){
