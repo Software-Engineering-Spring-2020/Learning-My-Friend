@@ -19,6 +19,7 @@ public abstract class Shape extends ColorfulObject implements Serializable {
   protected void init(PApplet sketch){
     super.init(sketch);
     shape = sketch.createShape();
+    setSettings();
   }
 
   protected void setSettings(){
