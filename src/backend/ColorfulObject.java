@@ -1,7 +1,10 @@
 package backend;
+import java.io.Serializable;
+
 import processing.core.PApplet;
 
-public abstract class ColorfulObject extends PollyObject{
+public abstract class ColorfulObject extends PollyObject implements Serializable {
+  private static final long serialVersionUID = 9L;
   protected int[] boarderColor = new int[3]; //save me
   protected int[] fillColor = new int[3]; //save me
 

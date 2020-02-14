@@ -1,10 +1,13 @@
 package backend.objects;
+import java.io.Serializable;
+
 import backend.ColorfulObject;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PConstants;
 
-class TextBox extends ColorfulObject{
+class TextBox extends ColorfulObject implements Serializable {
+    private static final long serialVersionUID = 8L;
     private String str; //save me
     private float textSize; //save me
     private PFont font; //save me

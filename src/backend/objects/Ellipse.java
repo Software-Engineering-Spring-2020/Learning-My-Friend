@@ -1,9 +1,12 @@
 package backend.objects;
+import java.io.Serializable;
+
 import backend.Shape;
 import processing.core.PApplet;
 import processing.core.PConstants;
 
-class Ellipse extends Shape {
+class Ellipse extends Shape implements Serializable {
+  private static final long serialVersionUID = 3L;
   Ellipse(PApplet sketch, float x, float y, float w, float h, float strokeWeight, int[] fillColor, int[] boarderColor){
     super(sketch, x, y, strokeWeight, fillColor, boarderColor);
     this.pixelWidth = w;

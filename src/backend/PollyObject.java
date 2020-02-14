@@ -5,7 +5,8 @@ import processing.core.PConstants;
 import processing.core.PVector;
 import java.io.Serializable;
 
-public abstract class PollyObject  implements Serializable {
+public abstract class PollyObject implements Serializable {
+    private static final long serialVersionUID = 10L;
     transient protected PApplet sketch;
     protected float xpos, ypos, rot = 0, pixelWidth, pixelHeight;
     transient protected boolean showBoundary;

@@ -4,7 +4,8 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import java.io.Serializable;
 
-class Image extends PollyObject{
+class Image extends PollyObject implements Serializable {
+  private static final long serialVersionUID = 6L;
   String[] file;
   transient PImage img;
   Image(PApplet sketch, float x, float y, String filename, String extension){
