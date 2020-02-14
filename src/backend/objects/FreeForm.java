@@ -2,24 +2,32 @@ package backend.objects;
 import backend.Shape;
 import processing.core.PApplet;
 import processing.core.PConstants;
-import processing.core.PVector;
 import java.util.ArrayList;
 
 class FreeForm extends Shape {
-  FreeForm(PApplet sketch, float x, float y, ArrayList<PVector> points, float strokeWeight, int[] fillColor, int[] boarderColor){
+  private ArrayList<float[]> points = new ArrayList<float[]>();
+
+  FreeForm(PApplet sketch, float x, float y, ArrayList<float[]> points, float strokeWeight, int[] fillColor, int[] boarderColor){
     super(sketch, x, y, strokeWeight, fillColor, boarderColor);
+    this.points = points;
     createShape(points);
     setSettings();
     this.pixelWidth = shape.width;
     this.pixelHeight = shape.height;
   }
 
-  protected void createShape(ArrayList<PVector> points){
+  protected void init(PApplet sketch){
+    super.init(sketch);
+    createShape(points);
+    setSettings();
+  }
+
+  protected void createShape(ArrayList<float[]> points){
   	//shape = createShape();
     sketch.noFill();
     shape.beginShape();
     for(int i = 0; i<points.size(); i++){
-      shape.vertex(points.get(i).x, points.get(i).y);
+      shape.vertex(points.get(i)[0], points.get(i)[1]);
     }
     shape.endShape();
   }

@@ -16,7 +16,12 @@ class Image extends PollyObject implements Serializable {
     pixelHeight = img.height;
     sketch.println("Picture:\t"+pixelWidth);
   }
-  
+
+  protected void init(PApplet sketch){
+    super.init(sketch);
+    img = sketch.requestImage(file[0], file[1]);
+  }
+
   protected void display(){
   	if(img.width != 0) sketch.image(img, xpos, ypos);
   }
