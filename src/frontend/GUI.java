@@ -197,7 +197,10 @@ public class GUI {
    private void setupObjectSettingsToolbar(){
     FToolbar ft = toolbarFactory("Obj Set", (float).2, (float).8, (float).8, (float).1);
     ft.addFController(new RFillSlider(cp5, ft, this));
-    ft.addFController(new FColorPicker(cp5, ft, this));
+    ft.addFController(new GFillSlider(cp5, ft, this));
+    ft.addFController(new BFillSlider(cp5, ft, this));
+
+    //ft.addFController(new FColorPicker(cp5, ft, this));
    }
 
    private void setUpWorkspaceToolbar(){
