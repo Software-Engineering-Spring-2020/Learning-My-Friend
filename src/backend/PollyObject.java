@@ -111,8 +111,8 @@ public abstract class PollyObject implements Serializable {
     }
 
     protected void display() {
-        //sketch.translate(xpos, ypos);
-        //sketch.rotate(rot);
+        sketch.translate(xpos, ypos);
+        sketch.rotate(rot);
      }
 
     protected void pan(float xo, float yo){

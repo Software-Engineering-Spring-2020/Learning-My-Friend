@@ -52,7 +52,6 @@ public abstract class Shape extends ColorfulObject implements Serializable {
   }
 
   protected void display(){
-    super.display();
     sketch.translate(xpos, ypos);
     sketch.shape(shape);
   }

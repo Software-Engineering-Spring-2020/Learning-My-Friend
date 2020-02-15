@@ -33,6 +33,7 @@ class TextBox extends ColorfulObject implements Serializable {
   protected void display(){
         super.display();
     	  sketch.textFont(pFont, textSize);
-        sketch.text(str, xpos, ypos);
+        //sketch.text(str, xpos, ypos);
+        sketch.text(str, 0, 0);
   }
 }

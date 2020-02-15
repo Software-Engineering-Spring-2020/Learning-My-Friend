@@ -86,9 +86,10 @@ class DrawSpace extends ColorfulObject{
     }
 
     protected void display(float zoom, boolean showComments, boolean showGrid, float gridSpacing){
-        super.display();
+        //super.display();
         sketch.translate(xcenter, ycenter);
         sketch.scale(zoom);
+        sketch.fill(sketch.color(fillColor[0], fillColor[1], fillColor[2]), fillColor[3]);
         sketch.rect(0, 0, pixelWidth, pixelHeight);
         if(showGrid) displayGrid(gridSpacing);
         for(PollyObject obj : objects){
