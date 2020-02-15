@@ -227,6 +227,16 @@ public class Window {
         }
     }
 
+    public void selectedPan(float mouseX, float mouseY, float pmouseX, float pmouseY) {
+        for (PollyObject obj : selected) {
+          float[] coord = ds.translateCoordinates(mouseX, mouseY, zoom);
+          if(obj.withinScope(coord[0], coord[1])){
+            coord = translate(mouseX-pmouseX, mouseY-pmouseY);
+            selectedPan(coord[0], coord[1]);
+          }
+        }
+    }
+
     public void setFillColor(int r, int g, int b, int a) {
         fillColor[0] = r;
         fillColor[1] = g;

@@ -121,6 +121,7 @@ src\backend\objects\Ellipse.java
 src\backend\objects\TextBox.java
 src\backend\objects\Comment.java
 src\backend\objects\PollyGon.java
+src\backend\objects\Curve.java
 src\backend\objects\FreeForm.java
 
 

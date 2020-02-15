@@ -124,8 +124,8 @@ public class BackendDriver extends PApplet {
     }
 
     public void mouseDragged() {
-        //this.window.selectedPan((this.mouseX - this.pmouseX), (this.mouseY - this.pmouseY));
-        this.window.freeDraw(this.mouseX, this.mouseY);
+        this.window.selectedPan(this.mouseX, this.mouseY, this.pmouseX, this.pmouseY);
+        //this.window.freeDraw(this.mouseX, this.mouseY);
     }
 
     public void mouseClicked() {

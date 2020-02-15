@@ -29,7 +29,8 @@ METHODS:
 	    public void group()
 			public void ungroup()
 			public void resizeSelected(float factor)
-	    public void selectedPan(float xo, float yo)
+	    public void selectedPan(float xo, float yo) --- DEPRECATED ----
+			public void selectedPan(float mouseX, float mouseY, float pmouseX, float pmouseY)
 	    public void setFillColor(int r, int g, int b, int a)
 	    public void setBoarderColor(int r, int g, int b)
 	    public void setSelectedFillColor(int r, int g, int b, int a)
