@@ -1,15 +1,22 @@
 Issues
-Nothing appears onscreen when you create a comment. Edit 2/13: I re-tested this after toggling comments. I tried creating comments before/after togging, and they still don't show up.
-When you use multiselect and selectedPan(), rectangles sometimes don't pan along with the rest of the objects (they move around more). Edit: this can be a circle too. It's usually the third or so object added. Other objects that are added after that might pan correctly. Edit 2/13: One time it was the first object I created that was panning weirdly. This seems rather random.
-setThickness still creates a border around drawableCanvas (border is black, even if setBorderColor() is set to a different color)
-importImage doesn't work. I put the image in multiple folders (all folders except ones marked frontend or docs) and it doesn't run. I passed the argument "grayscrunchie", ".png" and got the error message "Could not find a method to load grayscrunchie" Edit 2/13: I tried putting it in the bin folder (since there's where it saved,) but it still didn't import. Not sure if it's not working because the function isn't working, or because of where the image is saved.
-When two objects are multiselected and rotated, they rotate different amounts (the amount I tested was 85, 4000, 123). However, they rotated the same amount for 90. While all the shapes rotate different amounts, these stay consistent, even when I move them around the screen (so, one rectangle always rotates more).
-When I had a rectangle, circle, and other rectangle multiselected (they all panned correctly), the last rectangle didn't rotate. I added a circle and it did rotate, but the last rectangle still didn't. Later on, after I added more shapes and panned, it rotated.
-Not really a specific issue, but sometimes it takes a while for the program to load/create rectangles/allow you to select. I noticed this especially with rotate.
-Text doesn't rotate.
-One time, when I selected text, then a circle, then a rectangle, nothing rotated. This may have been due to the program lagging but I still wanted to note it.
+Bounding boxes don't line up fully with freeDrawn shapes. Though, it seems like if you click on the dot, you can select the freeDrawn shapes. If we can't get the bounding boxes to line up fully, we can  make a note in the ReadMe to click the dot.
+Clear doesn't clear comments (though, maybe this is supposed to happen?). Clear  cleared the text of a text box selected, and content of shapes, but not the bounding box.
+Group and ungroup put small dots on the screen. The dots remain static on the screen even as the group is panned/moved. Dots don't disappear when you ungroup. More dots are added if you hit group again.
+Edit 2/15: not re-tested. importImage doesn't work. I put the image in multiple folders (all folders except ones marked frontend or docs) and it doesn't run. I passed the argument "grayscrunchie", ".png" and got the error message "Could not find a method to load grayscrunchie" Edit 2/13: I tried putting it in the bin folder (since there's where it saved,) but it still didn't import. Not sure if it's not working because the function isn't working, or because of where the image is saved.
 
-NOTE: Could not find a way to test createAt(). You have to pass in a PollyObject to test this, and I don't know how to pass in a separate PollyObject. (createShape() runs createAt(), so I can't use it for testing). I'll keep thinking on how to possibly do this.
+Minor (may or may not be worth fixing. Also some notes on design choices)
+Bounding boxes are inside a shape if the thickness is set very high (the thick border overlaps the bounding box)
+Not sure if this is a bug, but setSelectedFillColor colors freeDrawn shapes that are open
+createPollyGon shows tiny dots when you click--it may be worth making them larger
+With freeDraw(), if you draw a shape and have a color for setFillColor(), the program doesn't automatically color the shape. It does color the shape if you select it and hit setSelectedFillColor().
+
+Misc notes (weird edge cases probably due to to program lagging):
+One time, when I selected text, then a circle, then a rectangle, nothing rotated. This may have been due to the program lagging but I still wanted to note it.
+Not really a specific issue, but sometimes it takes a while for the program to load/create rectangles/allow you to select. I noticed this especially with rotate.
+
+Testing limitation / to-do notes: 
+Could not find a way to test createAt(). You have to pass in a PollyObject to test this, and I don't know how to pass in a separate PollyObject. (createShape() runs createAt(), so I can't use it for testing). I'll keep thinking on how to possibly do this.
+getSelectedFillColor() and getSelectedBorderColor() is returning references (like I@616f32d1). I'll probably test how these functions work in the holistic systems test.
 
 Successful tests run
 Re-center works if you zoom in and if you zoom out
@@ -32,3 +39,14 @@ setFillColor() works with negative numbers and numbers over 255. The code seems 
 setBorderColor() works with negative numbers and numbers over 255.
 setThickness() works with negative numbers.
 rotate() works with negative numbers and numbers over 360.
+Comments are created when correctly toggled.
+Text rotates
+Multiselect and panning seems to work without any shapes panning differently
+Multiselect with rotating seems to work (objects rotate the same amount, based on the number input, without one shape rotating more or less)
+setSelectedFillColor() and setSelectedBoarderColor() worked for multiselected shapes
+getSelectedFillColor() and setSelectedBoarderColor() seem to work for multiselected shapes (I printed to the console, but it gave me reference points instead of numbers, so I can't veryify 100%). See issues for getSelectedFillColor(). 
+freeDraw() accurately follows the mouse of the user. The dot is shown when you lift the mouse, so freeDraw() shapes are created correctly.
+toggleComments() works
+createPollyGon() connects dots in the order you clicked them
+freeDraw() works with setThickness() and setBoarderColor(). 
+I passed in five values for setSelectedFillColor() and two for setSelectedBoarderColor(). The console showed errors, but the program didn't crash, and set a color for the fill/border.

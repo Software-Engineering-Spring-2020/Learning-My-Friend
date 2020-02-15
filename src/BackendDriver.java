@@ -41,7 +41,7 @@ public class BackendDriver extends PApplet {
 				this.window.reCenter();
 			}
 			if (this.key == 'c'){
-				this.window.setGridSpacing(-10);
+				this.window.setGridSpacing(10);
 			}
 			if (this.key == 'd'){
 				this.window.createEllipse(this.mouseX, this.mouseY);
@@ -53,17 +53,16 @@ public class BackendDriver extends PApplet {
 				this.window.createComment(this.mouseX, this.mouseY, "This is Comment!", "arial", 12);
 			}
 			if (this.key == 'g'){
-				//this.window.importImage(this.mouseX, this.mouseY, "grayscrunchie", ".png");
-        this.window.group();
+				this.window.group();
 			}
 			if (this.key == 'h'){
-				this.window.setFillColor(300, 500, 0, 255);
+				this.window.setFillColor(255, 50, 100, 10);
 			}
 			if (this.key == 'j'){
-				this.window.setBoarderColor(-450, 300, 60);
+				this.window.setBoarderColor(200, 50, 200);
 			}
 			if (this.key == 'l'){
-				this.window.rotate(123);
+				this.window.rotate(85);
 			}
 			if (this.key == 'm'){
 				this.window.deleteSelected();
@@ -96,8 +95,8 @@ public class BackendDriver extends PApplet {
 				this.window.toggleComments();
 			}
 			if (this.key == 'w') {
-				//this.window.freeDraw();
-        this.window.unGroup();
+				this.window.freeDraw(this.mouseX, this.mouseY);
+				//this.window.unGroup();
 			}
 
 			// saving and opening. Currently using absolute paths to demonstrate how this could
@@ -121,14 +120,29 @@ public class BackendDriver extends PApplet {
 			if (this.key == 'z') {
 				this.window.duplicateSelected();
 			}
+			if (this.key == '['){ // Note: we can use punctuation marks to test more functions. Pressing shift for keys doesn't work (so we can't use A or >, for example). Numbers also didn't work for me.
+				this.window.setSelectedFillColor(10, 50, 50, 100, 100);
+			}
+			if (this.key == ']'){
+				this.window.setSelectedBoarderColor(10, 200);
+			}
+			if (this.key == ';'){
+				System.out.println(this.window.getSelectedFillColors());
+			}
+			if (this.key == '\''){ // this is the apostrophe punctuation mark
+				System.out.println(this.window.getSelectedBoarderColors());
+			}
     }
 
     public void mouseDragged() {
-        this.window.selectedPan(this.mouseX, this.mouseY, this.pmouseX, this.pmouseY);
-        //this.window.freeDraw(this.mouseX, this.mouseY);
+		
+		if (count < 300){ this.window.freeDraw(this.mouseX, this.mouseY);}
+		//if (count > 300){ this.window.selectedPan(this.mouseX, this.mouseY, this.pmouseX, this.pmouseY);}
+		//this.window.selectedPan(this.mouseX, this.mouseY, this.pmouseX, this.pmouseY);
+        count++;
     }
 
-    public void mouseClicked() {
+   public void mouseClicked() {
         //if(count%3 == 0) this.window.singleSelect(this.mouseX, this.mouseY);
         //else this.window.multiSelect(this.mouseX, this.mouseY);
         //count++;
@@ -141,7 +155,6 @@ public class BackendDriver extends PApplet {
     }
 
     public void settings() {
-        //size(400, 400, "processing.opengl.PGraphics2D");
         size(400, 400);
     }
 
