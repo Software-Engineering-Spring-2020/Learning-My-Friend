@@ -18,6 +18,7 @@ public class BackendDriver extends PApplet {
     }
 
     public void keyReleased() {
+      System.out.println(this.keyCode);
         if (this.key == Character.MAX_VALUE) {
             if (this.keyCode == 17)
                 //this.save = true;
@@ -144,10 +145,10 @@ public class BackendDriver extends PApplet {
     }
 
    public void mouseClicked() {
-        //if(count%3 == 0) this.window.singleSelect(this.mouseX, this.mouseY);
-        //else this.window.multiSelect(this.mouseX, this.mouseY);
-        //count++;
-        this.window.createCurve(this.mouseX, this.mouseY);
+        if(count%3 == 0) this.window.singleSelect(this.mouseX, this.mouseY);
+        else this.window.multiSelect(this.mouseX, this.mouseY);
+        count++;
+        //this.window.createCurve(this.mouseX, this.mouseY);
         //this.window.createPollyGon(this.mouseX, this.mouseY, 3);
     }
 
