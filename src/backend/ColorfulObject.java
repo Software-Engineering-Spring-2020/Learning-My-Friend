@@ -7,9 +7,11 @@ public abstract class ColorfulObject extends PollyObject implements Serializable
   private static final long serialVersionUID = 9L;
   protected int[] boarderColor = new int[3];
   protected int[] fillColor = new int[4];
+  protected float strokeWeight = 1;
 
-  public ColorfulObject(PApplet sketch, float x, float y, int[] fillColor, int[] boarderColor){
+  public ColorfulObject(PApplet sketch, float x, float y, float strokeWeight, int[] fillColor, int[] boarderColor){
     super(sketch, x, y);
+    this.strokeWeight = strokeWeight;
     this.boarderColor[0] = boarderColor[0];
     this.boarderColor[1] = boarderColor[1];
     this.boarderColor[2] = boarderColor[2];
@@ -44,6 +46,7 @@ public abstract class ColorfulObject extends PollyObject implements Serializable
   protected void display(){
     super.display();
     sketch.fill(sketch.color(fillColor[0], fillColor[1], fillColor[2]), fillColor[3]);
-    sketch.stroke(sketch.color(fillColor[0], fillColor[1], fillColor[2]));
+    sketch.stroke(sketch.color(boarderColor[0], boarderColor[1], boarderColor[2]));
+    sketch.strokeWeight(strokeWeight);
   }
 }

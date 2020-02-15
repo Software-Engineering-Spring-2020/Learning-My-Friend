@@ -8,11 +8,10 @@ import processing.core.PConstants;
 public abstract class Shape extends ColorfulObject implements Serializable {
     private static final long serialVersionUID = 11L;
     transient protected PShape shape;
-    protected float strokeWeight; //save me
 
   public Shape(PApplet sketch, float x, float y, float strokeWeight, int[] fillColor, int[] boarderColor){
-    super(sketch, x, y, fillColor, boarderColor);
-    this.strokeWeight = strokeWeight;
+    super(sketch, x, y, strokeWeight, fillColor, boarderColor);
+    //this.strokeWeight = strokeWeight;
     shape = sketch.createShape();
   }
 
@@ -62,8 +61,4 @@ public abstract class Shape extends ColorfulObject implements Serializable {
     super.setRelativeRotate(ro);
     shape.rotate(sketch.radians(ro));
   }
-
-  /*protected void resize(float factor) {
-
-  }*/
 }

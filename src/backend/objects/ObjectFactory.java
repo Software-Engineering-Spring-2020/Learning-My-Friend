@@ -16,12 +16,12 @@ public class ObjectFactory {
         return new Image(sketch, x, y, filename, extension);
     }
 
-    public TextBox createTextBox(float x, float y, int[] fillColor, int[] boarderColor, String str, String font, float textSize){
-        return new TextBox(sketch, x, y, fillColor, boarderColor, str, font, textSize);
+    public TextBox createTextBox(float x, float y, float strokeWeight, int[] fillColor, int[] boarderColor, String str, String font, float textSize){
+        return new TextBox(sketch, x, y, strokeWeight, fillColor, boarderColor, str, font, textSize);
     }
 
-    public Comment createComment(float x, float y, int[] fillColor, int[] boarderColor, String str, String font, float textSize){
-        return new Comment(sketch, x, y, fillColor, boarderColor, str, font, textSize);
+    public Comment createComment(float x, float y, float strokeWeight, int[] fillColor, int[] boarderColor, String str, String font, float textSize){
+        return new Comment(sketch, x, y, strokeWeight, fillColor, boarderColor, str, font, textSize);
     }
 
 
