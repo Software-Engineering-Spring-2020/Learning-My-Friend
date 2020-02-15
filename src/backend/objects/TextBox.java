@@ -12,8 +12,8 @@ class TextBox extends ColorfulObject implements Serializable {
     private float textSize;
     transient private PFont pFont;
 
-  public TextBox(PApplet sketch, float x, float y, int[] fillColor, int[] boarderColor, String str, String font, float textSize){
-    super(sketch, x, y, fillColor, boarderColor);
+  public TextBox(PApplet sketch, float x, float y, float strokeWeight, int[] fillColor, int[] boarderColor, String str, String font, float textSize){
+    super(sketch, x, y, strokeWeight, fillColor, boarderColor);
     this.str = str;
     this.font = font;
     this.pFont = sketch.createFont(font, 1);

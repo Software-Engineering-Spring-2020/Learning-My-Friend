@@ -10,7 +10,7 @@ class DrawSpace extends ColorfulObject{
     transient boolean showComments;
 
     DrawSpace(PApplet sketch, float x, float y, float w, float h){
-        super(sketch, x, y, new int[] {255, 255, 255, 255}, new int[] {255, 255, 255});
+        super(sketch, x, y, 0, new int[] {255, 255, 255, 255}, new int[] {255, 255, 255});
         pixelWidth = w;
         pixelHeight = h;
         xcenter = xpos+pixelWidth/2;

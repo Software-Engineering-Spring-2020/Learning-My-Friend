@@ -12,6 +12,7 @@ public class Window {
     private ArrayList<PollyObject> copied = new ArrayList<PollyObject>();
     private ArrayList<float[]> freePoints = new ArrayList<float[]>();
     private ArrayList<float[]> pollyPoints = new ArrayList<float[]>();
+    private ArrayList<float[]> curvePoints = new ArrayList<float[]>();
     private PApplet sketch;
     private DrawSpace ds;
     private ObjectFactory of;
@@ -49,10 +50,15 @@ public class Window {
         }
         sketch.pop();
 
-        if (pollyPoints.size() >= numberVertex && numberVertex > 0) {
+        if (pollyPoints.size() >= numberVertex && numberVertex > 1) {
             ds.addObject(of.createPollyGon(pollyPoints, strokeWeight, fillColor, boarderColor));
             pollyPoints.clear();
             numberVertex = 0;
+        }
+
+        if (curvePoints.size() >= 4) {
+            ds.addObject(of.createCurve(curvePoints, strokeWeight, fillColor, boarderColor));
+            curvePoints.clear();
         }
 
         for(PollyObject obj : selected){
@@ -162,7 +168,7 @@ public class Window {
         PollyObject obj = null;
         float[] coord = ds.translateCoordinates(x, y, zoom);
         if (ds.withinScope(coord[0], coord[1]))
-            obj = of.createTextBox(coord[0], coord[1], fillColor, boarderColor, str, font, textSize);
+            obj = of.createTextBox(coord[0], coord[1], strokeWeight, fillColor, boarderColor, str, font, textSize);
         if (obj != null)
             return ds.addObject(obj);
         return false;
@@ -172,7 +178,7 @@ public class Window {
         PollyObject obj = null;
         float[] coord = ds.translateCoordinates(x, y, zoom);
         if (ds.withinScope(coord[0], coord[1]))
-            obj = of.createComment(coord[0], coord[1], fillColor, boarderColor, str, font, textSize);
+            obj = of.createComment(coord[0], coord[1], strokeWeight, fillColor, boarderColor, str, font, textSize);
         if (obj != null)
             return ds.addComment(obj);
         return false;
@@ -384,6 +390,12 @@ public class Window {
         float[] coord = ds.translateCoordinates(pmousex, pmousey, zoom);
         float[] v = new float[]{coord[0], coord[1]};
         pollyPoints.add(v);
+    }
+
+    public void createCurve(float pmousex, float pmousey){
+        float[] coord = ds.translateCoordinates(pmousex, pmousey, zoom);
+        float[] v = new float[]{coord[0], coord[1]};
+        curvePoints.add(v);
     }
 
     public void createLine(float pmousex, float pmousey){ //make exta thick???

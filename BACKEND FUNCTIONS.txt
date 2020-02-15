@@ -52,9 +52,11 @@ METHODS:
 	    public void freeDraw(float pmousex, float pmousey)
 	    			//must call createFreeForm() on mouseRelease()
 	    public void createPollyGon(float pmousex, float pmousey, int numberVertex)
+			public void createCurve(float pmousex, float pmousey)
 	    public void createLine(float pmousex, float pmousey)
 	    public void createFreeForm()
 	    			//must be called on the mouseReleased()
+
 
 	    public void exportAs(String saveName, String extension)
 			public void save(String filename)
@@ -64,29 +66,17 @@ METHODS:
 
 	Untested:
 
-
-	Untested Classes:
-		FreeForm
-		PollyGon
-		Group
-
 BUGS:
 	Scaling doesn't translate distances (eventually overlap)
-	First Freedraw has weird fill
+	Bounding Box off for freedraw, pollygon, curve
 
 
 
 TODO:
 	Snapping
-	Curves
 	Throw Exception for image import
-	New way to Export
 
 
 	SPEC TODO:
-	Change Color of Pixel (1)
-	Draw Straight Lines (2)
-	Specify Coord of Poly and Reg Shapes (3)
-	Curves (8)
 	SpellCheck (8)
 	Print (5)

@@ -129,10 +129,11 @@ public class BackendDriver extends PApplet {
     }
 
     public void mouseClicked() {
-        if(count%3 == 0) this.window.singleSelect(this.mouseX, this.mouseY);
-        else this.window.multiSelect(this.mouseX, this.mouseY);
-        count++;
-        //this.window.createPollyGon(this.mouseX, this.mouseY, 4);
+        //if(count%3 == 0) this.window.singleSelect(this.mouseX, this.mouseY);
+        //else this.window.multiSelect(this.mouseX, this.mouseY);
+        //count++;
+        this.window.createCurve(this.mouseX, this.mouseY);
+        //this.window.createPollyGon(this.mouseX, this.mouseY, 3);
     }
 
     public void mouseReleased(){
@@ -140,6 +141,7 @@ public class BackendDriver extends PApplet {
     }
 
     public void settings() {
+        //size(400, 400, "processing.opengl.PGraphics2D");
         size(400, 400);
     }
 
