@@ -17,7 +17,7 @@ public class BackendDriver extends PApplet {
         this.window.display();
     }
 
-    public void keyReleased() {     
+    public void keyReleased() {
         if (this.key == Character.MAX_VALUE) {
             if (this.keyCode == 17)
                 //this.save = true;
@@ -31,8 +31,8 @@ public class BackendDriver extends PApplet {
                 this.window.toggleGrid();
             }
         }
-		
-			if (this.key == 'a'){ 
+
+			if (this.key == 'a'){
 				 this.window.createRect(this.mouseX, this.mouseY);
 			}
 			if (this.key == 'b'){
@@ -45,10 +45,10 @@ public class BackendDriver extends PApplet {
 				this.window.createEllipse(this.mouseX, this.mouseY);
 			}
 			if (this.key == 'e'){
-				this.window.createTextBox(this.mouseX, this.mouseY, "Hello world!", "arial", 12);
+				this.window.createTextBox(this.mouseX, this.mouseY, "This is Text!", "arial", 12);
 			}
 			if (this.key == 'f'){
-				this.window.createComment(this.mouseX, this.mouseY, "Hello world!", "arial", 12);
+				this.window.createComment(this.mouseX, this.mouseY, "This is Comment!", "arial", 12);
 			}
 			if (this.key == 'g'){
 				this.window.importImage(this.mouseX, this.mouseY, "grayscrunchie", ".png");

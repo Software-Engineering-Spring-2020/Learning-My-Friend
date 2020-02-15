@@ -27,6 +27,7 @@ METHODS:
 	    public boolean importImage(String filename, String extension)
 
 	    public void group()
+			public void ungroup()
 	    public void selectedPan(float xo, float yo)
 	    public void setFillColor(int r, int g, int b, int a)
 	    public void setBoarderColor(int r, int g, int b)
@@ -53,6 +54,8 @@ METHODS:
 	    			//must be called on the mouseReleased()
 
 	    public void exportAs(String saveName, String extension)
+			public void save(String filename)
+			public void open(String filename)
 
 
 

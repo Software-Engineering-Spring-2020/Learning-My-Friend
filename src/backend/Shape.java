@@ -23,7 +23,7 @@ public abstract class Shape extends ColorfulObject implements Serializable {
   }
 
   protected void setSettings(){
-    shape.setFill(sketch.color(fillColor[0], fillColor[1], fillColor[2]), fillColor[3]);
+    shape.setFill(sketch.color(sketch.color(fillColor[0], fillColor[1], fillColor[2]), fillColor[3]));
     shape.setStroke(sketch.color(boarderColor[0], boarderColor[1], boarderColor[2]));
     setStrokeWeight(strokeWeight);
   }
@@ -48,7 +48,7 @@ public abstract class Shape extends ColorfulObject implements Serializable {
 
   protected void setFillColor(int r, int g, int b, int a){
     super.setFillColor(r, g, b, a);
-    shape.setFill(sketch.color(fillColor[0], fillColor[1], fillColor[2]), fillColor[3]);
+    shape.setFill(sketch.color(sketch.color(fillColor[0], fillColor[1], fillColor[2]), fillColor[3]));
   }
 
   protected void display(){

@@ -3,7 +3,7 @@ package backend;
 import backend.objects.ObjectFactory;
 import processing.core.PApplet;
 import processing.core.PImage;
-
+import processing.core.PVector;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -55,6 +55,16 @@ public class Window {
             pollyPoints.clear();
             numberVertex = 0;
         }
+        sketch.push();
+        sketch.noFill();
+        sketch.stroke(215,165,0);
+        sketch.strokeWeight(2);
+        for(PollyObject obj : selected){
+          int offset = 3;
+          PVector[] vert = obj.getRotatedBoundingBoxPoints();
+          sketch.quad(vert[0].x-offset, vert[0].y-offset, vert[1].x+offset, vert[1].y-offset, vert[2].x+offset, vert[2].y+offset, vert[3].x-offset, vert[3].y+offset);
+        }
+        sketch.pop();
         sketch.pop();
     }
 
@@ -171,7 +181,7 @@ public class Window {
         if (ds.withinScope(coord[0], coord[1]))
             obj = of.createComment(coord[0], coord[1], fillColor, boarderColor, str, font, textSize);
         if (obj != null)
-            return ds.addObject(obj);
+            return ds.addComment(obj);
         return false;
     }
 
@@ -278,7 +288,7 @@ public class Window {
 
     public void multiSelect(float x, float y) {
         PollyObject obj = ds.getObjectAt(x, y, zoom);
-        if (obj != null) {
+        if (obj != null && !selected.contains(obj)) {
             selected.add(obj);
         }
     }
