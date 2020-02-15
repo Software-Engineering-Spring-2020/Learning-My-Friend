@@ -61,6 +61,7 @@ public abstract class PollyObject implements Serializable {
     protected PVector[] getBoundingBoxPoints() {
         float width = pixelWidth;
         float height = pixelHeight;
+        float offset = 3;
 
         // this uses the existing bounding box system as much as possible
         // using width and height to generate four points
@@ -69,13 +70,13 @@ public abstract class PollyObject implements Serializable {
         // represented with four PVectors: topLeft, topRight, bottomRight, bottomLeft (like NESW)
         PVector[] boundingBoxPoints = new PVector[4];
         // topLeft
-        boundingBoxPoints[0] = new PVector(-width/2 + xpos, -height/2 + ypos);
+        boundingBoxPoints[0] = new PVector(-width/2 + xpos - offset, -height/2 + ypos - offset);
         // topRight
-        boundingBoxPoints[1] = new PVector(width/2 + xpos, -height/2 + ypos);
+        boundingBoxPoints[1] = new PVector(width/2 + xpos + offset, -height/2 + ypos - offset);
         // bottomRight
-        boundingBoxPoints[2] = new PVector(width/2 + xpos, height/2 + ypos);
+        boundingBoxPoints[2] = new PVector(width/2 + xpos + offset, height/2 + ypos + offset);
         // bottomLeft
-        boundingBoxPoints[3] = new PVector(-width/2 + xpos, height/2 + ypos);
+        boundingBoxPoints[3] = new PVector(-width/2 + xpos - offset, height/2 + ypos + offset);
         return boundingBoxPoints;
     }
 

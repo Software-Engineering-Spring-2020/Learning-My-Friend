@@ -60,9 +60,8 @@ public class Window {
         sketch.stroke(215,165,0);
         sketch.strokeWeight(2);
         for(PollyObject obj : selected){
-          int offset = 3;
           PVector[] vert = obj.getRotatedBoundingBoxPoints();
-          sketch.quad(vert[0].x-offset, vert[0].y-offset, vert[1].x+offset, vert[1].y-offset, vert[2].x+offset, vert[2].y+offset, vert[3].x-offset, vert[3].y+offset);
+          sketch.quad(vert[0].x, vert[0].y, vert[1].x, vert[1].y, vert[2].x, vert[2].y, vert[3].x, vert[3].y);
         }
         sketch.pop();
         sketch.pop();
