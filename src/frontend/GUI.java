@@ -48,6 +48,9 @@ public class GUI {
   public int fillColor[] = { 0, 0, 0, 0 };
   public int boarderColor[] = { 0, 0, 0 };
 
+
+  FSlider rSlider, gSlider, bSlider;
+
   /**
    * End of STATE Deleration
    */
@@ -194,20 +197,24 @@ public class GUI {
 
    private void setupObjectCreationToolbar(){
      FToolbar ft = toolbarFactory("Obj Create", (float).05, (float).8, (float).0, (float).1);
+     ft.addFController(new SelecButton(cp5, ft, this));
      ft.addFController(new RectButton(cp5, ft, this));
      ft.addFController(new ElipButton(cp5, ft, this));
      ft.addFController(new PenButton(cp5, ft, this));
-     ft.addFController(new SelecButton(cp5, ft, this));
-     ft.addFController(new TrashButton(cp5, ft, this));
-
    }
 
 
    private void setupObjectSettingsToolbar(){
     FToolbar ft = toolbarFactory("Obj Set", (float).2, (float).8, (float).8, (float).1);
-    ft.addFController(new RFillSlider(cp5, ft, this));
-    ft.addFController(new GFillSlider(cp5, ft, this));
-    ft.addFController(new BFillSlider(cp5, ft, this));
+    rSlider = new RFillSlider(cp5, ft, this);
+    bSlider = new GFillSlider(cp5, ft, this);
+    gSlider = new BFillSlider(cp5, ft, this);
+    ft.addFController(rSlider);
+    ft.addFController(bSlider);
+    ft.addFController(gSlider);
+
+
+    ft.addFController(new TrashButton(cp5, ft, this));
 
     //ft.addFController(new FColorPicker(cp5, ft, this));
    }
@@ -230,6 +237,14 @@ public class GUI {
     return ret;
   }
 
+
+
+  public void updateRGB(int r, int g, int b){
+    rSlider.updateState(r);
+    gSlider.updateState(g);
+    bSlider.updateState(b);
+
+  }
 
 
    /**
