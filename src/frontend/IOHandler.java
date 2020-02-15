@@ -64,6 +64,9 @@ public class IOHandler{
         win.createRect(sketch.mouseX, sketch.mouseY);
       if(gui.getTool() == 'e')
         win.createEllipse(sketch.mouseX, sketch.mouseY);
+      if(gui.getTool() == 's')
+        win.singleSelect(sketch.mouseX, sketch.mouseY);
+
     }
 
   }

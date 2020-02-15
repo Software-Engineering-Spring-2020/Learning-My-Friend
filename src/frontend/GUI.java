@@ -88,6 +88,12 @@ public class GUI {
     this.tool = tool;
   }
 
+
+  public void trash(){
+    win.deleteSelected();
+  }
+
+
   /**
    * [save opens file exploreor and passes save func]
    */
@@ -191,6 +197,9 @@ public class GUI {
      ft.addFController(new RectButton(cp5, ft, this));
      ft.addFController(new ElipButton(cp5, ft, this));
      ft.addFController(new PenButton(cp5, ft, this));
+     ft.addFController(new SelecButton(cp5, ft, this));
+     ft.addFController(new TrashButton(cp5, ft, this));
+
    }
 
 
