@@ -53,7 +53,8 @@ public class BackendDriver extends PApplet {
 				this.window.createComment(this.mouseX, this.mouseY, "This is Comment!", "arial", 12);
 			}
 			if (this.key == 'g'){
-				this.window.importImage(this.mouseX, this.mouseY, "grayscrunchie", ".png");
+				//this.window.importImage(this.mouseX, this.mouseY, "grayscrunchie", ".png");
+        this.window.group();
 			}
 			if (this.key == 'h'){
 				this.window.setFillColor(300, 500, 0, 255);
@@ -94,9 +95,10 @@ public class BackendDriver extends PApplet {
 			if (this.key == 'v'){
 				this.window.toggleComments();
 			}
-			/*if (this.key == 'w') {
-				this.window.freeDraw();
-			}*/
+			if (this.key == 'w') {
+				//this.window.freeDraw();
+        this.window.unGroup();
+			}
 
 			// saving and opening. Currently using absolute paths to demonstrate how this could
 			// work with a choose file/choose folder system
@@ -126,7 +128,8 @@ public class BackendDriver extends PApplet {
     }
 
     public void mouseClicked() {
-        this.window.multiSelect(this.mouseX, this.mouseY);
+        if(count%3 == 0) this.window.singleSelect(this.mouseX, this.mouseY);
+        else this.window.multiSelect(this.mouseX, this.mouseY);
         count++;
     }
 

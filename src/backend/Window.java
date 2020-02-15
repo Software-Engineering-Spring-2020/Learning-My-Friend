@@ -3,7 +3,6 @@ package backend;
 import backend.objects.ObjectFactory;
 import processing.core.PApplet;
 import processing.core.PImage;
-import processing.core.PVector;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -57,15 +56,9 @@ public class Window {
             numberVertex = 0;
         }
 
-        sketch.push();
-        sketch.noFill();
-        sketch.stroke(215,165,0);
-        sketch.strokeWeight(2);
         for(PollyObject obj : selected){
-          PVector[] vert = obj.getRotatedBoundingBoxPoints();
-          sketch.quad(vert[0].x, vert[0].y, vert[1].x, vert[1].y, vert[2].x, vert[2].y, vert[3].x, vert[3].y);
+          obj.showBoundingBox();
         }
-        sketch.pop();
         sketch.pop();
     }
 
@@ -218,7 +211,9 @@ public class Window {
      }
 
     public void group() {
+      System.out.println(ds.getNumObjects());
         ds.addObject(new Group(sketch, 0, 0, selected));
+          System.out.println(ds.getNumObjects());
     }
 
     public void unGroup() {
@@ -294,8 +289,12 @@ public class Window {
     public void multiSelect(float x, float y) {
         PollyObject obj = ds.getObjectAt(x, y, zoom);
         if (obj != null && !selected.contains(obj)) {
+            /*if(obj instanceof Group){
+              for(PollyObject member : ((Group)obj).getMembers()) selected.add(member);
+            }
+            else selected.add(obj);*/
             selected.add(obj);
-        }
+        } System.out.println("Selected Size "+selected.size());
     }
 
     public boolean deleteSelected() {

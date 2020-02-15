@@ -7,6 +7,7 @@ class DrawSpace extends ColorfulObject{
     private float xcenter, ycenter;
     private ArrayList<PollyObject> objects = new ArrayList<PollyObject>();
     private ArrayList<PollyObject> comments = new ArrayList<PollyObject>();
+    transient boolean showComments;
 
     DrawSpace(PApplet sketch, float x, float y, float w, float h){
         super(sketch, x, y, new int[] {255, 255, 255, 255}, new int[] {255, 255, 255});
@@ -38,9 +39,11 @@ class DrawSpace extends ColorfulObject{
 
     protected PollyObject getObjectAt(float x, float y, float zoom){
         float[] pos = translateCoordinates(x, y, zoom);
-        for(int i = comments.size()-1; i>=0; i--){
-            PollyObject obj = comments.get(i);
-            if(obj.withinScope(pos[0], pos[1])) return obj;
+        if(showComments){
+          for(int i = comments.size()-1; i>=0; i--){
+              PollyObject obj = comments.get(i);
+              if(obj.withinScope(pos[0], pos[1])) return obj;
+          }
         }
 
         for(int i = objects.size()-1; i>=0; i--){
@@ -86,7 +89,7 @@ class DrawSpace extends ColorfulObject{
     }
 
     protected void display(float zoom, boolean showComments, boolean showGrid, float gridSpacing){
-        //super.display();
+        this.showComments = showComments;
         sketch.translate(xcenter, ycenter);
         sketch.scale(zoom);
         sketch.fill(sketch.color(fillColor[0], fillColor[1], fillColor[2]), fillColor[3]);

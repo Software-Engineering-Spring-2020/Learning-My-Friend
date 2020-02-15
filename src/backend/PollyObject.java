@@ -59,6 +59,16 @@ public abstract class PollyObject implements Serializable {
         return false;
     }
 
+    protected void showBoundingBox(){
+      sketch.push();
+      sketch.noFill();
+      sketch.stroke(215,165,0);
+      sketch.strokeWeight(2);
+      PVector[] vert = getRotatedBoundingBoxPoints();
+      sketch.quad(vert[0].x, vert[0].y, vert[1].x, vert[1].y, vert[2].x, vert[2].y, vert[3].x, vert[3].y);
+      sketch.pop();
+    }
+
     protected PVector[] getBoundingBoxPoints() {
         float width = pixelWidth;
         float height = pixelHeight;
@@ -125,6 +135,6 @@ public abstract class PollyObject implements Serializable {
     protected void resize(float factor) {
         pixelHeight *= (1+factor);
         pixelWidth *= (1+factor);
-        zoom += (1+factor);
+        zoom += factor;
     }
 }
