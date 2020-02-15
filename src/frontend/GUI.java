@@ -104,6 +104,14 @@ public class GUI {
     sketch.selectOutput("Select a file to save to save as:", "saveFileSelected", f, this);
   }
 
+  public void folderSelected(File selection) {
+    if (selection == null) {
+      System.out.println("Window was closed or the user hit cancel.");
+    } else {
+      win.exportAs(selection.getAbsolutePath(), "png");
+      System.out.println("User selected " + selection.getAbsolutePath());
+    }
+  }
 
   /**
    * [export opens file exploreor and passes export func]
@@ -114,12 +122,8 @@ public class GUI {
   }
 
   public void saveFileSelected(File selection) {
-    try {
-      win.save(selection.getAbsolutePath());
-    } catch (IOException e) {
-      System.out.println(e);
-      e.printStackTrace();
-    }
+
+      win.exportAs(selection.getAbsolutePath(), ".png");    
    }
 
    public void open() {
@@ -135,6 +139,7 @@ public class GUI {
       e.printStackTrace();
     }
   }
+
 
 
    /**
