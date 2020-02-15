@@ -21,6 +21,7 @@ import processing.core.*;
 import processing.event.*;
 import backend.Window;
 import processing.core.*;
+import java.awt.event.KeyEvent;
 
 
 
@@ -64,12 +65,13 @@ public class IOHandler{
         win.createRect(sketch.mouseX, sketch.mouseY);
       if(gui.getTool() == 'e')
         win.createEllipse(sketch.mouseX, sketch.mouseY);
+      if(gui.getTool() == 's' && sketch.keyCode == 17)
+        win.multiSelect(sketch.mouseX, sketch.mouseY);
       if(gui.getTool() == 's'){
         win.singleSelect(sketch.mouseX, sketch.mouseY);
         //upadte sliderRBG here
         //gui.updateRGB(win.getRGB)
       }
-
     }
 
   }
