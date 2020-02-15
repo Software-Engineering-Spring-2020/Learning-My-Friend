@@ -19,6 +19,7 @@ public abstract class Shape extends ColorfulObject implements Serializable {
     super.init(sketch);
     shape = sketch.createShape();
     setSettings();
+    setRelativeRotate(rot);
   }
 
   protected void setSettings(){
