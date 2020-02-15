@@ -22,6 +22,13 @@ class FreeForm extends Shape {
     setSettings();
   }
 
+  protected void display(){
+    //super.display();
+    //sketch.translate(xpos, ypos);
+    //sketch.scale(zoom);
+    sketch.shape(shape);
+  }
+
   protected void createShape(ArrayList<float[]> points){
   	//shape = createShape();
     sketch.noFill();

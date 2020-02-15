@@ -211,9 +211,7 @@ public class Window {
      }
 
     public void group() {
-      System.out.println(ds.getNumObjects());
         ds.addObject(new Group(sketch, 0, 0, selected));
-          System.out.println(ds.getNumObjects());
     }
 
     public void unGroup() {
@@ -288,13 +286,8 @@ public class Window {
 
     public void multiSelect(float x, float y) {
         PollyObject obj = ds.getObjectAt(x, y, zoom);
-        if (obj != null && !selected.contains(obj)) {
-            /*if(obj instanceof Group){
-              for(PollyObject member : ((Group)obj).getMembers()) selected.add(member);
-            }
-            else selected.add(obj);*/
+        if (obj != null && !selected.contains(obj))
             selected.add(obj);
-        } System.out.println("Selected Size "+selected.size());
     }
 
     public boolean deleteSelected() {
@@ -417,6 +410,11 @@ public class Window {
 
     public void open(String filename) throws IOException, ClassNotFoundException {
       ds = SerialManager.openDrawSpace(sketch, filename);
+    }
+
+
+    public void test(){
+      PImage img = sketch.requestImage("grayscrunchie.png");
     }
 
 }

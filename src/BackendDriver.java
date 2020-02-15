@@ -90,7 +90,7 @@ public class BackendDriver extends PApplet {
 				this.window.exportAs("testName", ".png");
 			}
 			if (this.key == 'u'){
-				System.out.println(this.window.withinCanvas(this.mouseX, this.mouseY));
+				this.window.importImage("grayscrunchie",".png");
 			}
 			if (this.key == 'v'){
 				this.window.toggleComments();
@@ -124,13 +124,19 @@ public class BackendDriver extends PApplet {
     }
 
     public void mouseDragged() {
-        this.window.selectedPan((this.mouseX - this.pmouseX), (this.mouseY - this.pmouseY));
+        //this.window.selectedPan((this.mouseX - this.pmouseX), (this.mouseY - this.pmouseY));
+        this.window.freeDraw(this.mouseX, this.mouseY);
     }
 
     public void mouseClicked() {
         if(count%3 == 0) this.window.singleSelect(this.mouseX, this.mouseY);
         else this.window.multiSelect(this.mouseX, this.mouseY);
         count++;
+        //this.window.createPollyGon(this.mouseX, this.mouseY, 4);
+    }
+
+    public void mouseReleased(){
+      this.window.createFreeForm();
     }
 
     public void settings() {

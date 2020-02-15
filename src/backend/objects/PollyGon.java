@@ -24,6 +24,11 @@ class PollyGon extends Shape {
     setSettings();
   }
 
+  protected void display(){
+    //sketch.translate(xpos, ypos);
+    sketch.shape(shape);
+  }
+
   protected void createShape(ArrayList<float[]> points){
   	//shape = createShape();
     sketch.noFill();

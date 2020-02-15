@@ -70,8 +70,8 @@ METHODS:
 		Group
 
 BUGS:
-	image import not working
 	Scaling doesn't translate distances (eventually overlap)
+	First Freedraw has weird fill
 
 
 
@@ -87,6 +87,5 @@ TODO:
 	Draw Straight Lines (2)
 	Specify Coord of Poly and Reg Shapes (3)
 	Curves (8)
-	Import png, jpg, svg, pdf - move and rescale - (13)
 	SpellCheck (8)
 	Print (5)

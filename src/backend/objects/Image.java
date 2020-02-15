@@ -11,23 +11,27 @@ class Image extends PollyObject implements Serializable {
   Image(PApplet sketch, float x, float y, String filename, String extension){
     super(sketch, x, y);
     file = new String[]{filename, extension};
-    img = sketch.requestImage(filename, extension);
-    pixelWidth = img.width;
-    pixelHeight = img.height;
-    sketch.println("Picture:\t"+pixelWidth);
+    //img = sketch.requestImage(filename+extension);
+    img = sketch.loadImage(filename+extension);
+    if(img != null){
+      pixelWidth = img.width;
+      pixelHeight = img.height;
+    }
   }
 
   protected void init(PApplet sketch){
     super.init(sketch);
-    img = sketch.requestImage(file[0], file[1]);
+    img = sketch.requestImage(file[0]+file[1]);
   }
 
   protected void display(){
-  	if(img.width != 0) sketch.image(img, xpos, ypos);
+    if(img != null) sketch.image(img, xpos, ypos);
+  	//if(img.width != 0) sketch.image(img, xpos, ypos);
   }
 
   protected void resize(float factor){
-    img.resize((int)factor*img.width, 0);
+    super.resize(factor);
+    img.resize((int)((1+factor)*pixelWidth), 0);
   }
   protected void resize(float xfactor, float yfactor){
     //img.resize(xfactor, yfactor);
