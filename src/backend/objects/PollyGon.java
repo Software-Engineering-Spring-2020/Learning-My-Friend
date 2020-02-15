@@ -1,12 +1,16 @@
 package backend.objects;
+
 import backend.Shape;
-import processing.core.PApplet;;
+import processing.core.PApplet;
 import processing.core.PVector;
 import processing.core.PConstants;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-class PollyGon extends Shape {
+class PollyGon extends Shape implements Serializable {
+  private static final long serialVersionUID = 13L;
   private ArrayList<float[]> points = new ArrayList<float[]>();
 
   PollyGon(PApplet sketch, float x, float y, ArrayList<float[]> points, float strokeWeight, int[] fillColor, int[] boarderColor){

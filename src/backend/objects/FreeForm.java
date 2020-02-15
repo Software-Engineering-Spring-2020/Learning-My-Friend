@@ -3,9 +3,12 @@ import backend.Shape;
 import processing.core.PApplet;
 import processing.core.PVector;
 import processing.core.PConstants;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-class FreeForm extends Shape {
+class FreeForm extends Shape implements Serializable {
+  private static final long serialVersionUID = 14L;
   private ArrayList<float[]> points = new ArrayList<float[]>();
   private float xcenter, ycenter;
 

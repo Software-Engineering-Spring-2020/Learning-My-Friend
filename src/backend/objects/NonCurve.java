@@ -1,6 +1,6 @@
 package backend.objects;
 import backend.Shape;
-import processing.core.PApplet;;
+import processing.core.PApplet;
 import processing.core.PVector;
 import processing.core.PConstants;
 import java.util.ArrayList;

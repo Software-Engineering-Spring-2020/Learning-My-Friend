@@ -1,13 +1,16 @@
 package backend.objects;
 
 import backend.ColorfulObject;
-import processing.core.PApplet;;
+import processing.core.PApplet;
 import processing.core.PVector;
 import processing.core.PConstants;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-class Curve extends ColorfulObject {
+class Curve extends ColorfulObject implements Serializable{
+  private static final long serialVersionUID = 12L;
   private ArrayList<float[]> points = new ArrayList<float[]>();
   private float xcenter, ycenter;
 
