@@ -38,7 +38,8 @@ public class BackendDriver extends PApplet {
 				 this.window.createRect(this.mouseX, this.mouseY);
 			}
 			if (this.key == 'b'){
-				this.window.reCenter();
+				//this.window.reCenter();
+        this.window.createCurve();
 			}
 			if (this.key == 'c'){
 				this.window.setGridSpacing(10);
@@ -135,7 +136,7 @@ public class BackendDriver extends PApplet {
     }
 
     public void mouseDragged() {
-		
+
 		if (count < 300){ this.window.freeDraw(this.mouseX, this.mouseY);}
 		//if (count > 300){ this.window.selectedPan(this.mouseX, this.mouseY, this.pmouseX, this.pmouseY);}
 		//this.window.selectedPan(this.mouseX, this.mouseY, this.pmouseX, this.pmouseY);

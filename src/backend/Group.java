@@ -66,7 +66,7 @@ class Group extends PollyObject implements Serializable {
       obj.setRelativeRotate(ro);
   }
 
-  protected void display(){
+  /*protected void display(){
     super.display();
       sketch.push();
       sketch.strokeWeight(5);
@@ -74,5 +74,5 @@ class Group extends PollyObject implements Serializable {
 
       sketch.point(xmin+(xmax-xmin)/2,ymin+(ymax-ymin)/2);
       sketch.pop();
-  }
+  }*/
 }

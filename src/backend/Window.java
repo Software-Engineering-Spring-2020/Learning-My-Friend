@@ -44,7 +44,7 @@ public class Window {
         }
 
         sketch.push();
-        sketch.strokeWeight(strokeWeight);
+        sketch.strokeWeight(3);
         for (float[] v : pollyPoints) {
             sketch.point(v[0], v[1]);
         }
@@ -55,6 +55,13 @@ public class Window {
             pollyPoints.clear();
             numberVertex = 0;
         }
+
+        sketch.push();
+        sketch.strokeWeight(3);
+        for (float[] v : curvePoints) {
+            sketch.point(v[0], v[1]);
+        }
+        sketch.pop();
 
         if (curvePoints.size() >= 4) {
             ds.addObject(of.createCurve(curvePoints, strokeWeight, fillColor, boarderColor));

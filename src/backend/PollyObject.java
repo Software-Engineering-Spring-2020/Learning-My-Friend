@@ -9,7 +9,7 @@ public abstract class PollyObject implements Serializable {
     private static final long serialVersionUID = 10L;
     transient protected PApplet sketch;
     protected float xpos, ypos, rot = 0, pixelWidth, pixelHeight;
-    transient float zoom = 1;
+    transient float zoom = 1, offset = 3F;
 
     public PollyObject(PApplet sketch, float x, float y) {
         this.sketch = sketch;
@@ -72,8 +72,7 @@ public abstract class PollyObject implements Serializable {
     protected PVector[] getBoundingBoxPoints() {
         float width = pixelWidth;
         float height = pixelHeight;
-        float offset = 3F/zoom;
-
+        offset /= zoom;
         // this uses the existing bounding box system as much as possible
         // using width and height to generate four points
         // these points are NOT rotated per this PollyObject's rotation
