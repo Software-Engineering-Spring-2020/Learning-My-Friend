@@ -50,8 +50,7 @@ public class Window {
         sketch.pop();
 
         if (pollyPoints.size() >= numberVertex && numberVertex > 0) {
-            ds.addObject(of.createPollyGon(pollyPoints.get(0)[0], pollyPoints.get(0)[1], pollyPoints, strokeWeight,
-                    fillColor, boarderColor));
+            ds.addObject(of.createPollyGon(pollyPoints, strokeWeight, fillColor, boarderColor));
             pollyPoints.clear();
             numberVertex = 0;
         }
@@ -385,7 +384,7 @@ public class Window {
     }
 
     public void createFreeForm(){ //must be called on the mouseReleased()
-        if(!freePoints.isEmpty()) ds.addObject(of.createFreeForm(freePoints.get(0)[0], freePoints.get(0)[1], freePoints, strokeWeight, fillColor, boarderColor));
+        if(!freePoints.isEmpty()) ds.addObject(of.createFreeForm(freePoints, strokeWeight, fillColor, boarderColor));
         freePoints.clear();
     }
 

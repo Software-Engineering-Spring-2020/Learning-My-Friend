@@ -11,7 +11,9 @@ class PollyGon extends Shape {
 
   PollyGon(PApplet sketch, float x, float y, ArrayList<float[]> points, float strokeWeight, int[] fillColor, int[] boarderColor){
     super(sketch, x, y, strokeWeight, fillColor, boarderColor);
-    this.points = points;
+    for(float[] point : points){
+      this.points.add(point);
+    }
     createShape(points);
     setSettings();
     this.pixelWidth = shape.width;
@@ -24,17 +26,16 @@ class PollyGon extends Shape {
     setSettings();
   }
 
-  protected void display(){
-    //sketch.translate(xpos, ypos);
-    sketch.shape(shape);
+  protected void setSettings(){
+    setFillColor(255,255,255,0);
+    shape.setStroke(sketch.color(boarderColor[0], boarderColor[1], boarderColor[2]));
+    setStrokeWeight(strokeWeight);
   }
 
   protected void createShape(ArrayList<float[]> points){
-  	//shape = createShape();
-    sketch.noFill();
     shape.beginShape();
     for(int i = 0; i<points.size(); i++){
-      shape.vertex(points.get(i)[0], points.get(i)[1]);
+      shape.vertex(points.get(i)[0]-xpos, points.get(i)[1]-ypos);
     }
     //if(points.size()>2) shape.endShape(PConstants.CLOSE);
     //else shape.endShape();
