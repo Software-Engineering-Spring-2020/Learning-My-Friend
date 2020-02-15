@@ -39,7 +39,7 @@ public class BackendDriver extends PApplet {
 			}
 			if (this.key == 'b'){
 				//this.window.reCenter();
-        this.window.createCurve();
+        this.window.createCurve(this.mouseX, this.mouseY);
 			}
 			if (this.key == 'c'){
 				this.window.setGridSpacing(10);
@@ -122,10 +122,10 @@ public class BackendDriver extends PApplet {
 				this.window.duplicateSelected();
 			}
 			if (this.key == '['){ // Note: we can use punctuation marks to test more functions. Pressing shift for keys doesn't work (so we can't use A or >, for example). Numbers also didn't work for me.
-				this.window.setSelectedFillColor(10, 50, 50, 100, 100);
+				this.window.setSelectedFillColor(10, 50, 50, 100);
 			}
 			if (this.key == ']'){
-				this.window.setSelectedBoarderColor(10, 200);
+				this.window.setSelectedBoarderColor(10, 200, 100);
 			}
 			if (this.key == ';'){
 				System.out.println(this.window.getSelectedFillColors());
