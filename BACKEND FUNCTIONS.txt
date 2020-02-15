@@ -75,6 +75,8 @@ BUGS:
 TODO:
 	Snapping
 	Throw Exception for image import
+	double click unselect
+	click canvas unselect
 
 
 	SPEC TODO:

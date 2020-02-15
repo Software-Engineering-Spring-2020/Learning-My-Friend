@@ -65,10 +65,10 @@ public class IOHandler{
         win.createRect(sketch.mouseX, sketch.mouseY);
       if(gui.getTool() == 'e')
         win.createEllipse(sketch.mouseX, sketch.mouseY);
-      if(gui.getTool() == 's' && sketch.keyCode == 17)
-        win.multiSelect(sketch.mouseX, sketch.mouseY);
+      //if((gui.getTool() == 's') && (sketch.keyCode.getKeyCode() == KeyCode.CONTROL))
+      //  win.multiSelect(sketch.mouseX, sketch.mouseY);
       if(gui.getTool() == 's'){
-        win.singleSelect(sketch.mouseX, sketch.mouseY);
+        win.multiSelect(sketch.mouseX, sketch.mouseY);
         //upadte sliderRBG here
         //gui.updateRGB(win.getRGB)
       }
