@@ -83,7 +83,7 @@ public class IOHandler{
     //if pan tool is selected
     if(gui.getTool() == 'p')
       win.freeDraw(sketch.mouseX, sketch.mouseY);
-    if(gui.getTool() == 's')
+    if((onCanvas()) && gui.getTool() == 's')
       win.selectedPan((sketch.mouseX - sketch.pmouseX), (sketch.mouseY - sketch.pmouseY));
     else if(onCanvas())
       win.canvasPan((sketch.mouseX - sketch.pmouseX), (sketch.mouseY - sketch.pmouseY));

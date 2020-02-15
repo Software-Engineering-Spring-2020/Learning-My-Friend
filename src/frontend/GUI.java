@@ -96,13 +96,12 @@ public class GUI {
     win.deleteSelected();
   }
 
-
   /**
    * [save opens file exploreor and passes save func]
    */
   public void save() {
     File f = new File("drawing.polly");
-    sketch.selectOutput("Select a file to save to:", "saveFileSelected", f, this);
+    sketch.selectOutput("Select a file to save to save as:", "saveFileSelected", f, this);
   }
 
 
@@ -111,7 +110,7 @@ public class GUI {
    */
   public void export() {
     File f = new File("drawing.png");
-    sketch.selectOutput("Select a file to save to:", "saveFileSelected", f, this);
+    sketch.selectOutput("Select a file to save to export to", "saveFileSelected", f, this);
   }
 
   public void saveFileSelected(File selection) {
@@ -137,13 +136,6 @@ public class GUI {
     }
   }
 
-   public void exportImage() {
-
-   }
-
-   public void importImage() {
-
-   }
 
    /**
     * [setFill sets the fill color]
@@ -222,6 +214,7 @@ public class GUI {
    private void setUpWorkspaceToolbar(){
     FToolbar ft = toolbarFactory("Workspace", (float).8, (float).05, (float).1, (float).0);
     ft.addFController(new SaveButton(cp5, ft, this));
+    ft.addFController(new OpenButton(cp5, ft, this));
     ft.addFController(new ExportButton(cp5, ft, this));
 
     ft.addFController(new GridButton(cp5, ft, this));

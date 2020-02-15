@@ -14,6 +14,7 @@ src\frontend\fcontrollers\PenButton.java
 src\frontend\fcontrollers\GridButton.java
 src\frontend\fcontrollers\SaveButton.java
 src\frontend\fcontrollers\ExportButton.java
+src\frontend\fcontrollers\OpenButton.java
 
 
 src\frontend\fcontrollers\RFillSlider.java
