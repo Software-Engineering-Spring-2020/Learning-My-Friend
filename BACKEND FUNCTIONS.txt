@@ -71,15 +71,22 @@ METHODS:
 
 BUGS:
 	image import not working
-	pan at different rate????? --can you record example or show me?
-	Text not rotote
+	Scaling doesn't translate distances (eventually overlap)
 
 
 
 TODO:
-	Resizing
-	New way to Export
 	Snapping
 	Curves
-	Triangles
 	Throw Exception for image import
+	New way to Export
+
+
+	SPEC TODO:
+	Change Color of Pixel (1)
+	Draw Straight Lines (2)
+	Specify Coord of Poly and Reg Shapes (3)
+	Curves (8)
+	Import png, jpg, svg, pdf - move and rescale - (13)
+	SpellCheck (8)
+	Print (5)
