@@ -255,12 +255,14 @@ public class Window {
         fillColor[1] = g;
         fillColor[2] = b;
         fillColor[3] = a;
+        setSelectedFillColor(r, g, b, a);
     }
 
     public void setBoarderColor(int r, int g, int b) {
         boarderColor[0] = r;
         boarderColor[1] = g;
         boarderColor[2] = b;
+        setSelectedBoarderColor(r, g, b);
     }
 
     public void setSelectedFillColor(int r, int g, int b, int a) {
