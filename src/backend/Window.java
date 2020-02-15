@@ -42,19 +42,21 @@ public class Window {
                 sketch.line(freePoints.get(i)[0], freePoints.get(i)[1], freePoints.get(i + 1)[0],
                         freePoints.get(i + 1)[1]);
         }
+
         sketch.push();
         sketch.strokeWeight(strokeWeight);
-        // sketch.stroke(boarderColor);
         for (float[] v : pollyPoints) {
             sketch.point(v[0], v[1]);
         }
         sketch.pop();
+
         if (pollyPoints.size() >= numberVertex && numberVertex > 0) {
             ds.addObject(of.createPollyGon(pollyPoints.get(0)[0], pollyPoints.get(0)[1], pollyPoints, strokeWeight,
                     fillColor, boarderColor));
             pollyPoints.clear();
             numberVertex = 0;
         }
+
         sketch.push();
         sketch.noFill();
         sketch.stroke(215,165,0);
@@ -209,6 +211,12 @@ public class Window {
      *
      *********************************************************/
 
+     public void resizeSelected(float factor){
+       for(PollyObject obj : selected){
+         obj.resize(factor);
+       }
+     }
+
     public void group() {
         ds.addObject(new Group(sketch, 0, 0, selected));
     }
@@ -222,8 +230,6 @@ public class Window {
 
     public void selectedPan(float xo, float yo) {
         for (PollyObject obj : selected) {
-            // float[] coord = ds.relativePan(xo, yo, zoom);
-            // shape.pan(coord[0], coord[1]);
             float[] coord = translate(xo, yo);
             obj.pan(coord[0], coord[1]);
         }
@@ -344,10 +350,14 @@ public class Window {
     }
 
     public void paste(){    //not working yet
-        for(PollyObject shape : copied){
-            float[] pos = shape.getPosition();
-            //FINISH THIS
-        }
+      for (PollyObject shape : copied) {
+          try {
+              ds.addObject(SerialManager.deepClonePollyObject(sketch, shape));
+    } catch (ClassNotFoundException | IOException e) {
+      System.out.println(e);
+      e.printStackTrace();
+    }
+      }
     }
 
     /*********************************************************

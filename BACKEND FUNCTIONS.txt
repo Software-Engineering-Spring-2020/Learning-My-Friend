@@ -28,6 +28,7 @@ METHODS:
 
 	    public void group()
 			public void ungroup()
+			public void resizeSelected(float factor)
 	    public void selectedPan(float xo, float yo)
 	    public void setFillColor(int r, int g, int b, int a)
 	    public void setBoarderColor(int r, int g, int b)
@@ -42,6 +43,7 @@ METHODS:
 	    public boolean deleteLast()
 	    public boolean restoreLast()
 	    public void clear()
+			public void duplicateSelected()
 	    public boolean copy()
 	    public void paste()
 
@@ -75,12 +77,9 @@ BUGS:
 
 
 TODO:
-	Paste is Empty
 	Resizing
-	GROUPING
 	New way to Export
 	Snapping
 	Curves
 	Triangles
-	Freehand Drawing
 	Throw Exception for image import

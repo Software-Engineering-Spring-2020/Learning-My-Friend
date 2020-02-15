@@ -32,6 +32,7 @@ public abstract class PollyObject implements Serializable {
 
     protected void setRelativeRotate(float ro) {
         rot += ro;
+        rot = rot%360;
     }
 
     protected float[] getDimensions() {
@@ -61,7 +62,7 @@ public abstract class PollyObject implements Serializable {
     protected PVector[] getBoundingBoxPoints() {
         float width = pixelWidth;
         float height = pixelHeight;
-        float offset = 3;
+        float offset = 3F/zoom;
 
         // this uses the existing bounding box system as much as possible
         // using width and height to generate four points
@@ -113,6 +114,7 @@ public abstract class PollyObject implements Serializable {
     protected void display() {
         sketch.translate(xpos, ypos);
         sketch.rotate(rot);
+        sketch.scale(zoom);
      }
 
     protected void pan(float xo, float yo){
@@ -121,8 +123,8 @@ public abstract class PollyObject implements Serializable {
     }
 
     protected void resize(float factor) {
-        pixelHeight *= factor;
-        pixelWidth *= factor;
-        zoom += factor;
+        pixelHeight *= (1+factor);
+        pixelWidth *= (1+factor);
+        zoom += (1+factor);
     }
 }

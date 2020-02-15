@@ -52,7 +52,9 @@ public abstract class Shape extends ColorfulObject implements Serializable {
   }
 
   protected void display(){
+    //super.display();
     sketch.translate(xpos, ypos);
+    sketch.scale(zoom);
     sketch.shape(shape);
   }
 
@@ -60,4 +62,8 @@ public abstract class Shape extends ColorfulObject implements Serializable {
     super.setRelativeRotate(ro);
     shape.rotate(sketch.radians(ro));
   }
+
+  /*protected void resize(float factor) {
+
+  }*/
 }
