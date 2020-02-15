@@ -21,6 +21,13 @@ src\frontend\fcontrollers\GFillSlider.java
 src\frontend\fcontrollers\BFillSlider.java
 
 
+src\frontend\fcontrollers\SelecButton.java
+src\frontend\fcontrollers\TrashButton.java
+
+
+
+
+
 src\frontend\controlP5\Accordion.java
 src\frontend\controlP5\Background.java
 src\frontend\controlP5\Bang.java

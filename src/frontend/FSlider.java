@@ -24,6 +24,10 @@ public abstract class FSlider extends FController{
     return cp5.addSlider(this.name).setGroup(parrent.getGroup());
   }
 
+  public void updateState(int i){
+    slider.setValue(i);
+  }
+
   /**
    * [update updates the ControlP5 object to the FControlers size]
    */

@@ -64,6 +64,12 @@ public class IOHandler{
         win.createRect(sketch.mouseX, sketch.mouseY);
       if(gui.getTool() == 'e')
         win.createEllipse(sketch.mouseX, sketch.mouseY);
+      if(gui.getTool() == 's'){
+        win.singleSelect(sketch.mouseX, sketch.mouseY);
+        //upadte sliderRBG here
+        //gui.updateRGB(win.getRGB)
+      }
+
     }
 
   }
@@ -77,6 +83,8 @@ public class IOHandler{
     //if pan tool is selected
     if(gui.getTool() == 'p')
       win.freeDraw(sketch.mouseX, sketch.mouseY);
+    if(gui.getTool() == 's')
+      win.selectedPan((sketch.mouseX - sketch.pmouseX), (sketch.mouseY - sketch.pmouseY));
     else if(onCanvas())
       win.canvasPan((sketch.mouseX - sketch.pmouseX), (sketch.mouseY - sketch.pmouseY));
   }
