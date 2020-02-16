@@ -1,26 +1,34 @@
-Testing (2/16, 2:30PM)
+Testing (2/16, 2:30PM-3:40PM)
 
 Notes
-- Save, export, import, and open buttons don't work 
+- Save, export, import, and open buttons don't work (neither does paste)
 - PollyGon feature hasn't been added yet
 
 Issues
-- When you select and move an object, the bounding boxes stay in the same area. (I don't think this bug was with the backend)
-- Got a nullPointerException when I tried to add a comment and toggle comments. This was before I knew you had to hit enter after inputting text. I'm still noting it here though. (1)
-- At one point, when I was clicking around/trying to do stuff, the screen froze and none of the buttons clicked. The toolbar disappeared. (2)
-- Selecting and dragging a text box caused it to duplicate. The text in the bounding box remained frozen on the screen. You could drag the duplicated text along the screen. (3)
--I created multiple rectangles on top of each other. One of the rectangles remained frozen with a bounding box around it, while the other rectangles panned. (5)
+- Got a nullPointerException when I tried to add a comment and toggle comments. This was before I knew you had to hit enter after inputting text. I'm still noting it here though. (1) 
 - Resize/rotate buttons seem to work so that if click anywhere left, it makes it smaller or rotates left, and if you click anywhere right, it makes it bigger or rotates right. Apart from that, where you click on the bar doesn't seem to matter that much. It also isn't super intuitive (so, clicking all the way right or left doesn't rotate the shape very much. To me, the bar would imply that clicking right or left brings it to an extreme). See design choices notes for thoughts on usability.
-- If you drag all the way to 1 or -1 for rotate, the shape rotate consistently. When you drag the mouse bag and lift it, the shape stays frozen at that rotation.
+- If you drag all the way to 1 or -1 for rotate or resize, the shape rotates or resizes consistently. When you drag the mouse bag and lift it, the shape stays frozen at that rotation.
+- Bounding boxes don't line up with freeDraw objects. There's also a random dot that pans along with it. But the dot moves different amounts when it pans. (6, look in the upper right corner for dot)
+- Once, when I had text boxes and a rectangle multiselected, the rectangle didn't rotate with the text boxes. I also was not able to re-select the text boxes once they were rotated. This may have been a fluke.
+- When text boxes and rectangles do both rotate, the text boxes rotate more than the rectangles.
+- Error message while trying to paste (7)
+- Ungroup seems to work (see successful tests run), but I had to click it a couple times.
+- I was able to creat comments previously, but one time, I wasn't. I tried turning the toggle on/off. I hit enter before clicking on the screen, etc. I think it may be because it's hard to tell when buttons are selected or toggled on/off. I restarted the program and messed around with the buttons, and was able to get it to work. Also, when I hit enter on the text box, it re-centered the canvas. I think the process for comments is: comments must be toggled on. You enter text and hit enter. You then select comment and click on the screen for the comment to appear. This isn't super usable (see design choices notes for text box)
 
 Design choices / missing functionality
+- There isn't a changeBorderColor button. This means Lines/curves don't change color when selected. This also means you can't change the color of one pixel on the screen (which you could do by selecting pen, changing the border color, and clicking on the screen)
 - There isn't a clear all button
-- There isn't a way to distinguish multiSelect from singleSelect (though from a usability standpoint, I don't think we really need it).
-- It may be nice to make the color of the grid gray so it doesn't overaly the shapes as much
+- It may be nice to make the color of the grid gray so it doesn't overaly the shapes as much. There also isn't a way to change the grid size (but I don't think this is super important / might clutter up UI).
 - Text works if you input the text, hit enter, then press the text box, then click the screen. It took me a while to figure out how to do it, so if there's a way to make it more user-friendly, that would be great.
 - Usability wise, it may be better to make resize() an "increase size" and "decrease size" button, since that seems to be how it's functioning anyway (increasing if you click right, decreasing left).
 - Ditto for the rotate button: we could have a rotateLeft() and rotateRight()
+- It may be good to highlight buttons when they're clicked/active. It can be hard to see if you have select clicked, for example.
+- Might be too late / not worth this, but I'm not sure grouping offers much more functionalty than multiselect. I think it makes it a bit more confusing for the user.
+- We don't have gradients or spellcheck (but have decided not to implement this)
+- Comments can't be dragged/created far off the drawSpace: they're like other objects in this regard.
 
+Changes from testing document
+- You can't input problematic numerical elements (like for coordinates or RGB values) based on the GUI
 
 Successful Tests
 - Rectangles can be created
@@ -29,3 +37,13 @@ Successful Tests
 - Grid toggles on and off
 - Comments can be toggled on and off
 - Sliders work well and very intuitively to change the fill color of shapes!
+- Curve works
+- Rectangles, ellipses, freeDrawn objects, text, and comments change fill color when selected
+- Mei's new select works (you click to select a single or multiple objects, click on canvas to pan canvas)
+- Groups work: you can group objects, then click away, then click one of the grouped objects, and all grouped objects are selected.
+- Ungroup works: when you make a group, hit ungroup, and click away, then select one object of the former group, it doesn't select all objects of the former group.
+- resize and rotate work for multiselected objects
+- freeDrawn shapes that aren't closed can still be filled 
+- Nothing happens if you try to create objects off the drawSpace. Objects don't get created, and program doesn't crash. If you create an object near the edge of the drawspace, it might overlap on the gray edges. Once objects are created, you can drag them off the drawSpac (but not very far off the drawSpace).
+- There are, indeed, only buttons and no drop-down menus
+- Program works fine if there are objects layered or filling the screen. If objects fill the screen, they don't go over the toolbar.
