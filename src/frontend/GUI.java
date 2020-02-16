@@ -213,14 +213,14 @@ public class GUI {
       String fname = selection.getAbsolutePath();
       // trim the file extension first.
       if (fname.contains(".")) {
-        fname.substring(0, fname.lastIndexOf('.'));
+        fname = fname.substring(0, fname.lastIndexOf('.'));
       }
       win.exportAs(fname, ".png");
     }
  }
 
    public void fileImport() {
-    File f = new File("drawing.polly");
+    File f = new File("drawing.png");
     sketch.selectInput("Select a file to open:", "importFileSelected", f, this);
 
   }
@@ -232,7 +232,7 @@ public class GUI {
       String fname = selection.getAbsolutePath();
       // trim the file extension first.
       if (fname.contains(".")) {
-        fname.substring(0, fname.lastIndexOf('.'));
+        fname = fname.substring(0, fname.lastIndexOf('.'));
       }
       win.importImage(fname, ".png");
     }
