@@ -52,7 +52,7 @@ public abstract class PollyObject implements Serializable {
         rot = rot%360;
       }
     }
-    
+
     protected float[] getDimensions() {
         return new float[]{-1, -1};
     }
@@ -154,6 +154,6 @@ public abstract class PollyObject implements Serializable {
     protected void resize(float factor) {
         pixelHeight *= (1+factor);
         pixelWidth *= (1+factor);
-        zoom = sketch.max(.001F, zoom + factor);
+        zoom = sketch.max(.1F, 1 + factor);
     }
 }
