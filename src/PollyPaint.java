@@ -5,6 +5,7 @@ import frontend.controlP5.*;
 import backend.*;
 import frontend.fcontrollers.*;
 import java.io.File;
+import java.io.IOException;
 
 /**
  *<h1> PollyPaint </h1>
