@@ -15,6 +15,7 @@ import frontend.controlP5.*;
 public class Textbox extends FTextfield{
   public Textbox(ControlP5 cp5, FToolbar parrent, GUI gui){
     super(cp5, "Textbox", parrent, gui);
+    textfield.setText("input text here");
   }
 
 }
