@@ -22,7 +22,7 @@ public class SizeSlider extends FSlider{
   }
 
 
-  public void size(int val){
+  public void size(float val){
     //System.out.println(val);
     getGUI().setSize(val);
   }
