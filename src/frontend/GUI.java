@@ -75,6 +75,10 @@ public class GUI {
     setup();
   }
 
+  public void setRotate(float i){
+    win.rotate(i);
+  }
+
   public void setSize(float i){
     win.resizeSelected(i);
   }
@@ -247,12 +251,27 @@ public class GUI {
     rSlider = new RFillSlider(cp5, ft, this);
     bSlider = new GFillSlider(cp5, ft, this);
     gSlider = new BFillSlider(cp5, ft, this);
+
+    rSlider.slider.setColorBackground(sketch.color(100,0,0));
+    rSlider.slider.setColorActive(sketch.color(255,0,0));
+    rSlider.slider.setColorForeground(sketch.color(255,0,0));
+
+    gSlider.slider.setColorBackground(sketch.color(0,100,0));
+    gSlider.slider.setColorActive(sketch.color(0,255,0));
+    gSlider.slider.setColorForeground(sketch.color(0,255,0));
+
+    bSlider.slider.setColorBackground(sketch.color(0,0,100));
+    bSlider.slider.setColorActive(sketch.color(0,0,255));
+    bSlider.slider.setColorForeground(sketch.color(0,0,255));
+
+
     ft.addFController(rSlider);
-    ft.addFController(bSlider);
     ft.addFController(gSlider);
+    ft.addFController(bSlider);
 
     ft.addFController(new Textbox(cp5, ft, this));
     ft.addFController(new SizeSlider(cp5, ft, this));
+    ft.addFController(new RotateSlider(cp5, ft, this));
 
     ft.addFController(new TrashButton(cp5, ft, this));
 

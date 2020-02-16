@@ -21,6 +21,7 @@ src\frontend\fcontrollers\CommentButton.java
 src\frontend\fcontrollers\TogComButton.java
 
 src\frontend\fcontrollers\SizeSlider.java
+src\frontend\fcontrollers\RotateSlider.java
 
 src\frontend\fcontrollers\RFillSlider.java
 src\frontend\fcontrollers\GFillSlider.java

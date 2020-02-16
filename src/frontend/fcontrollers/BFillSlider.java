@@ -17,6 +17,7 @@ public class BFillSlider extends FSlider{
     super(cp5, "Bfill", parrent, gui);
     super.slider.plugTo(this);
     super.slider.setMax(255);
+    //super.slider.setColor(PApplet.color(100, 0, 0));
     //super.slider.setColor(new CColor(0, 0,))
   }
 
