@@ -26,6 +26,7 @@ Design choices / missing functionality
 - Might be too late / not worth this, but I'm not sure grouping offers much more functionalty than multiselect. I think it makes it a bit more confusing for the user.
 - We don't have gradients or spellcheck (but have decided not to implement this)
 - Comments can't be dragged/created far off the drawSpace: they're like other objects in this regard.
+- There isn't a way to zoom the canvas.
 
 Changes from testing document
 - You can't input problematic numerical elements (like for coordinates or RGB values) based on the GUI
