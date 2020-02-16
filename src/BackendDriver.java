@@ -24,8 +24,8 @@ public class BackendDriver extends PApplet {
                 //this.save = true;
                 this.window.restoreLast();
             if (this.keyCode == 38) {
-                //this.window.zoom(0.03F);
-                this.window.resizeSelected(0.03F);
+                this.window.zoom(0.03F);
+                //this.window.resizeSelected(0.03F);
             } if (this.keyCode == 40) {
                 this.window.zoom(-0.03F);
                 //this.window.resizeSelected(-0.03F);
@@ -39,8 +39,8 @@ public class BackendDriver extends PApplet {
 				 this.window.createRect(this.mouseX, this.mouseY);
 			}
 			if (this.key == 'b'){
-				//this.window.reCenter();
-        this.window.createCurve(this.mouseX, this.mouseY);
+				this.window.reCenter();
+				//this.window.createCurve(this.mouseX, this.mouseY);
 			}
 			if (this.key == 'c'){
 				this.window.setGridSpacing(10);
@@ -97,8 +97,8 @@ public class BackendDriver extends PApplet {
 				this.window.toggleComments();
 			}
 			if (this.key == 'w') {
-				this.window.freeDraw(this.mouseX, this.mouseY);
-				//this.window.unGroup();
+				//this.window.freeDraw(this.mouseX, this.mouseY);
+				this.window.unGroup();
 			}
 
 			// saving and opening. Currently using absolute paths to demonstrate how this could
@@ -134,13 +134,24 @@ public class BackendDriver extends PApplet {
 			if (this.key == '\''){ // this is the apostrophe punctuation mark
 				System.out.println(this.window.getSelectedBoarderColors());
 			}
+			if (this.key == '.'){
+				this.window.resizeSelected(0.1F);
+			}
+			if (this.key == '/'){
+				this.window.resizeSelected(-0.1F);
+			}
+			if (this.key == '`'){
+				this.window.createCurve(this.mouseX, this.mouseY);
+			}
     }
 
     public void mouseDragged() {
 
-		if (count < 300){ this.window.freeDraw(this.mouseX, this.mouseY);}
+		//if (count < 300){ this.window.freeDraw(this.mouseX, this.mouseY);}
 		//if (count > 300){ this.window.selectedPan(this.mouseX, this.mouseY, this.pmouseX, this.pmouseY);}
-		//this.window.selectedPan(this.mouseX, this.mouseY, this.pmouseX, this.pmouseY);
+		this.window.selectedPan(this.mouseX, this.mouseY, this.pmouseX, this.pmouseY);
+		//this.window.canvasPan((this.mouseX - this.pmouseX), (this.mouseY - this.pmouseY));
+		//this.window.freeDraw(this.mouseX, this.mouseY);
         count++;
     }
 

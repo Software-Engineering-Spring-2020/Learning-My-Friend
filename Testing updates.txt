@@ -1,14 +1,14 @@
 Issues
+Pasting (even after copying) doesn't seem to work
+duplicateSelected() doesn't seem to work 
 Bounding boxes don't line up fully with freeDrawn shapes. Though, it seems like if you click on the dot, you can select the freeDrawn shapes. If we can't get the bounding boxes to line up fully, we can  make a note in the ReadMe to click the dot.
-Clear doesn't clear comments (though, maybe this is supposed to happen?). Clear  cleared the text of a text box selected, and content of shapes, but not the bounding box.
-Group and ungroup put small dots on the screen. The dots remain static on the screen even as the group is panned/moved. Dots don't disappear when you ungroup. More dots are added if you hit group again.
-Edit 2/15: not re-tested. importImage doesn't work. I put the image in multiple folders (all folders except ones marked frontend or docs) and it doesn't run. I passed the argument "grayscrunchie", ".png" and got the error message "Could not find a method to load grayscrunchie" Edit 2/13: I tried putting it in the bin folder (since there's where it saved,) but it still didn't import. Not sure if it's not working because the function isn't working, or because of where the image is saved.
 
-Minor (may or may not be worth fixing. Also some notes on design choices)
-Bounding boxes are inside a shape if the thickness is set very high (the thick border overlaps the bounding box)
-Not sure if this is a bug, but setSelectedFillColor colors freeDrawn shapes that are open
-createPollyGon shows tiny dots when you click--it may be worth making them larger
-With freeDraw(), if you draw a shape and have a color for setFillColor(), the program doesn't automatically color the shape. It does color the shape if you select it and hit setSelectedFillColor().
+More minor issues
+Bounding boxes don't maintain perfect relative size to an object if you scale it. If the shapes gets very big, the bounding box is significantly larger. Sometimes when an object changes size, though rarely, the bounding box can be smaller than the object.
+If you make resize an object to make it smaller, if you make it so small that it disappears, resizing it to make it smaller ends up resizing it to make it larger. (However, you can resize an object to take up the entire screen, and it doesn't get any smaller)
+
+Notes/design choices
+You can't create a comment until toggleComments is turned on (even after you turn on comments, if you created a comment before they were toggled on, it won't show)
 
 Misc notes (weird edge cases probably due to to program lagging):
 One time, when I selected text, then a circle, then a rectangle, nothing rotated. This may have been due to the program lagging but I still wanted to note it.
@@ -50,3 +50,10 @@ toggleComments() works
 createPollyGon() connects dots in the order you clicked them
 freeDraw() works with setThickness() and setBoarderColor(). 
 I passed in five values for setSelectedFillColor() and two for setSelectedBoarderColor(). The console showed errors, but the program didn't crash, and set a color for the fill/border.
+Bounding boxes work with shapes that have a large thicknesses 
+Bounding boxes remain after you clear, but come back when you click somewhere else on the canvas
+resizeSelected() makes objects bigger if you pass in a positive float, and it makes them smaller if you pass in a negative float
+createCurve() works and creates smooth curves
+Grouping works: even if you click away, clicking one object selects another object in the group.
+Ungrouping works: when you click away, clicking on one object formerly in the group doesn't affect the other object formerly in the group
+You can scale an object to be large enough to fill the entire screen
