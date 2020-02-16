@@ -1,0 +1,31 @@
+Testing (2/16, 2:30PM)
+
+Notes
+- Save, export, import, and open buttons don't work 
+- PollyGon feature hasn't been added yet
+
+Issues
+- When you select and move an object, the bounding boxes stay in the same area. (I don't think this bug was with the backend)
+- Got a nullPointerException when I tried to add a comment and toggle comments. This was before I knew you had to hit enter after inputting text. I'm still noting it here though. (1)
+- At one point, when I was clicking around/trying to do stuff, the screen froze and none of the buttons clicked. The toolbar disappeared. (2)
+- Selecting and dragging a text box caused it to duplicate. The text in the bounding box remained frozen on the screen. You could drag the duplicated text along the screen. (3)
+-I created multiple rectangles on top of each other. One of the rectangles remained frozen with a bounding box around it, while the other rectangles panned. (5)
+- Resize/rotate buttons seem to work so that if click anywhere left, it makes it smaller or rotates left, and if you click anywhere right, it makes it bigger or rotates right. Apart from that, where you click on the bar doesn't seem to matter that much. It also isn't super intuitive (so, clicking all the way right or left doesn't rotate the shape very much. To me, the bar would imply that clicking right or left brings it to an extreme). See design choices notes for thoughts on usability.
+- If you drag all the way to 1 or -1 for rotate, the shape rotate consistently. When you drag the mouse bag and lift it, the shape stays frozen at that rotation.
+
+Design choices / missing functionality
+- There isn't a clear all button
+- There isn't a way to distinguish multiSelect from singleSelect (though from a usability standpoint, I don't think we really need it).
+- It may be nice to make the color of the grid gray so it doesn't overaly the shapes as much
+- Text works if you input the text, hit enter, then press the text box, then click the screen. It took me a while to figure out how to do it, so if there's a way to make it more user-friendly, that would be great.
+- Usability wise, it may be better to make resize() an "increase size" and "decrease size" button, since that seems to be how it's functioning anyway (increasing if you click right, decreasing left).
+- Ditto for the rotate button: we could have a rotateLeft() and rotateRight()
+
+
+Successful Tests
+- Rectangles can be created
+- Ellipses can be created
+- FreeDraw objects can be created
+- Grid toggles on and off
+- Comments can be toggled on and off
+- Sliders work well and very intuitively to change the fill color of shapes!
