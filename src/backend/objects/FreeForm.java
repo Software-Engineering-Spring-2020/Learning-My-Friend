@@ -10,7 +10,6 @@ import java.util.ArrayList;
 class FreeForm extends Shape implements Serializable {
   private static final long serialVersionUID = 14L;
   private ArrayList<float[]> points = new ArrayList<float[]>();
-  private float xcenter, ycenter;
 
   FreeForm(PApplet sketch, float x, float y, ArrayList<float[]> points, float strokeWeight, int[] fillColor, int[] boarderColor){
     super(sketch, x, y, strokeWeight, fillColor, boarderColor);

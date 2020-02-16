@@ -105,7 +105,7 @@ public class BackendDriver extends PApplet {
 			// work with a choose file/choose folder system
 			if (this.key == 'x'){
 				try {
-					this.window.save("C:/Users/isaac/Documents/Git/notebook/school/spring-2020/software-engineering/drawing.polly");
+					this.window.save("C:/Users/isaac/Desktop/drawing.polly");
 				} catch (IOException e) {
 					System.out.println(e);
 					e.printStackTrace();
@@ -113,7 +113,7 @@ public class BackendDriver extends PApplet {
 			}
 			if (this.key == 'y'){
 				try {
-					this.window.open("C:/Users/isaac/Documents/Git/notebook/school/spring-2020/software-engineering/drawing.polly");
+					this.window.open("C:/Users/isaac/Desktop/drawing.polly");
 				} catch (ClassNotFoundException | IOException e) {
 					System.out.println(e);
 					e.printStackTrace();

@@ -9,12 +9,15 @@ public abstract class PollyObject implements Serializable {
     private static final long serialVersionUID = 10L;
     transient protected PApplet sketch;
     protected float xpos, ypos, rot = 0, pixelWidth, pixelHeight;
-    transient float zoom = 1, offset = 3F;
+    transient protected float xcenter = xpos, ycenter = ypos;
+    float zoom = 1, offset = 3F;
 
     public PollyObject(PApplet sketch, float x, float y) {
         this.sketch = sketch;
         xpos = x;
         ypos = y;
+        xcenter = xpos;
+        ycenter = ypos;
     }
 
     protected void init(PApplet sketch){
@@ -64,12 +67,12 @@ public abstract class PollyObject implements Serializable {
       sketch.noFill();
       sketch.stroke(215,165,0);
       sketch.strokeWeight(2);
-      PVector[] vert = getRotatedBoundingBoxPoints();
+      PVector[] vert = getRotatedBoundingBoxPoints(xcenter, ycenter);
       sketch.quad(vert[0].x, vert[0].y, vert[1].x, vert[1].y, vert[2].x, vert[2].y, vert[3].x, vert[3].y);
       sketch.pop();
     }
 
-    protected PVector[] getBoundingBoxPoints() {
+    protected PVector[] getBoundingBoxPoints(float xcenter, float ycenter) {
         float width = pixelWidth;
         float height = pixelHeight;
         offset /= zoom;
@@ -80,21 +83,21 @@ public abstract class PollyObject implements Serializable {
         // represented with four PVectors: topLeft, topRight, bottomRight, bottomLeft (like NESW)
         PVector[] boundingBoxPoints = new PVector[4];
         // topLeft
-        boundingBoxPoints[0] = new PVector(-width/2 + xpos - offset, -height/2 + ypos - offset);
+        boundingBoxPoints[0] = new PVector(-width/2 + xcenter - offset, -height/2 + ycenter - offset);
         // topRight
-        boundingBoxPoints[1] = new PVector(width/2 + xpos + offset, -height/2 + ypos - offset);
+        boundingBoxPoints[1] = new PVector(width/2 + xcenter + offset, -height/2 + ycenter - offset);
         // bottomRight
-        boundingBoxPoints[2] = new PVector(width/2 + xpos + offset, height/2 + ypos + offset);
+        boundingBoxPoints[2] = new PVector(width/2 + xcenter + offset, height/2 + ycenter + offset);
         // bottomLeft
-        boundingBoxPoints[3] = new PVector(-width/2 + xpos - offset, height/2 + ypos + offset);
+        boundingBoxPoints[3] = new PVector(-width/2 + xcenter - offset, height/2 + ycenter + offset);
         return boundingBoxPoints;
     }
 
-    protected PVector[] getRotatedBoundingBoxPoints() { //Can Display
+    protected PVector[] getRotatedBoundingBoxPoints(float xcenter, float ycenter) { //Can Display
         float rot = this.rot;
         PVector[] rotatedBoundingBoxPoints = new PVector[4];
-        PVector[] boundingBoxPoints = getBoundingBoxPoints();
-        PVector center = new PVector(xpos, ypos);
+        PVector[] boundingBoxPoints = getBoundingBoxPoints(xcenter, ycenter);
+        PVector center = new PVector(xcenter, ycenter);
         for (int i = 0; i < 4; i++) {
             rotatedBoundingBoxPoints[i] = rotateAbout(boundingBoxPoints[i], center, rot);
         }

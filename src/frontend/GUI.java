@@ -104,14 +104,17 @@ public class GUI {
     sketch.selectOutput("Select a file to save to save as:", "saveFileSelected", f, this);
   }
 
-  public void folderSelected(File selection) {
+  public void saveFileSelected(File selection) {
     if (selection == null) {
       System.out.println("Window was closed or the user hit cancel.");
     } else {
-      win.exportAs(selection.getAbsolutePath(), "png");
-      System.out.println("User selected " + selection.getAbsolutePath());
-    }
-  }
+      try {
+        win.save(selection.getAbsolutePath());
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    } 
+ }
 
   /**
    * [export opens file exploreor and passes export func]
@@ -121,23 +124,30 @@ public class GUI {
     sketch.selectOutput("Select a file to save to export to", "saveFileSelected", f, this);
   }
 
-  public void saveFileSelected(File selection) {
-
-      win.exportAs(selection.getAbsolutePath(), ".png");    
-   }
+  public void exportFileSelected(File selection) {
+    if (selection == null) {
+      System.out.println("Window was closed or the user hit cancel.");
+    } else {
+      win.exportAs(selection.getAbsolutePath(), ".png");   
+    } 
+ }
 
    public void open() {
-     File f = new File("drawing.polly");
+    File f = new File("drawing.polly");
     sketch.selectInput("Select a file to open:", "openFileSelected", f, this);
   }
 
   public void openFileSelected(File selection) {
-    try {
-      win.open(selection.getAbsolutePath());
-    } catch (IOException | ClassNotFoundException e) {
-      System.out.println(e);
-      e.printStackTrace();
-    }
+    if (selection == null) {
+      System.out.println("Window was closed or the user hit cancel.");
+    } else {
+      try {
+        win.open(selection.getAbsolutePath());
+      } catch (IOException | ClassNotFoundException e) {
+        System.out.println(e);
+        e.printStackTrace();
+      }
+    } 
   }
 
 
