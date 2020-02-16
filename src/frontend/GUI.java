@@ -82,10 +82,17 @@ public class GUI {
   }
 
 
+
+  /**
+   * [copy copys the selected object]
+   */
   public void copy(){
     win.copy();
   }
 
+/**
+ * [paste pastes the selected object]
+ */
   public void paste(){
     win.paste();
   }
@@ -309,6 +316,7 @@ public class GUI {
      ft.addFController(new PenButton(cp5, ft, this));
      ft.addFController(new LineButton(cp5, ft, this));
      ft.addFController(new CurveButton(cp5, ft, this));
+     ft.addFController(new PolyButton(cp5, ft, this));
      ft.addFController(new TextButton(cp5, ft, this));
      ft.addFController(new CommentButton(cp5, ft, this));
 
