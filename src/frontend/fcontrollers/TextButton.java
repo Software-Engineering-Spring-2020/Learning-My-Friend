@@ -19,7 +19,7 @@ public class TextButton extends FButton{
   }
 
 
-  public void text(int val){
+  public void Text(int val){
     getGUI().setTool('t');
   }
 

@@ -102,6 +102,7 @@ public class GUI {
    * @param tool [the selected tool]
    */
   public void setTool(char tool) {
+    //System.out.println(tool);
     this.tool = tool;
   }
 
