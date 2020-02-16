@@ -97,7 +97,70 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
 		gui.display();
 	}
 
+	boolean ctrl = false, shift = false;
 
+	public void keyReleased(){
+		if(this.keyCode == 17) ctrl = false;
+		if(this.keyCode == 16) shift = false;
+	}
+
+	public void keyPressed(){
+		//System.out.println(this.key+ ", "+this.keyCode + " : "+ctrl);
+		if(this.keyCode == 17)  ctrl = true;
+		if(this.keyCode == 16) shift = true;
+
+		if(this.key == 'z' && ctrl) this.window.deleteLast();
+		else if(this.key == 'y' && ctrl) this.window.restoreLast();
+		else if(this.key == 'c' && ctrl) this.window.copy();
+		else if(this.key == 'x' && ctrl) this.window.cut();
+		else if(this.key == 'v' && ctrl) this.window.paste();
+
+		else if(this.key == 'n' && ctrl) this.window.clear();
+		else if(this.key == 'o' && ctrl){
+			try {
+				this.window.open("C:/Users/Mei ^.^/Desktop/drawing.polly");
+			} catch (ClassNotFoundException | IOException e) {
+				System.out.println(e);
+				e.printStackTrace();
+			}
+		}
+		else if(this.key == 's' && ctrl){
+			try {
+				this.window.save("C:/Users/Mei ^.^/Desktop/drawing.polly");
+			} catch (IOException e) {
+				System.out.println(e);
+				e.printStackTrace();
+			}
+		}
+
+		else if(this.key == 'e' && ctrl) this.window.exportAs("test", ".png");
+		else if(this.key == 'g' && ctrl) this.window.toggleGroup();
+		else if(this.key == 'a' && ctrl) this.window.toggleComments(); //Toggles Annotations
+		else if(this.key == 'b' && ctrl) this.window.toggleGrid();  //Toggles boxes on screen (grid)
+
+		else if(this.key == '<') this.window.changeThickness(-0.1F);
+		else if(this.key == '>') this.window.changeThickness(0.1F);
+		else if(this.key == '{') this.window.changeGridSpacing(-5);
+		else if(this.key == '}') this.window.changeGridSpacing(5);
+		else if(this.key == '|') this.window.createLine(this.mouseX, this.mouseY);
+		else if(this.key == 'P') this.window.createPollyGon(this.mouseX, this.mouseY, 3);
+
+
+		else if(this.key == 'R') this.window.createRect(this.mouseX, this.mouseY);
+		else if(this.key == 'T') this.window.createTextBox(this.mouseX, this.mouseY, "This is Text!", "arial", 12);
+		else if(this.key == 'A') this.window.createComment(this.mouseX, this.mouseY, "This is Comment!", "arial", 12);
+		else if(this.key == 'C') this.window.createEllipse(this.mouseX, this.mouseY);
+
+		else if(this.keyCode == 127) this.window.deleteSelected();  //delete
+		else if(this.keyCode == 37) this.window.rotate(-1); //left
+		else if(this.keyCode == 39) this.window.rotate(1);  //right
+		else if(this.keyCode == 38) this.window.resize(0.01F);  //up
+		else if(this.keyCode == 40) this.window.resize(-0.01F); //down
+		else if(this.keyCode == 155) this.window.importImage("grayscrunchie",".png");
+
+		else if(this.keyCode == 10) this.window.reCenter();   //enter
+		else if(this.keyCode == 192) this.window.createCurve(this.mouseX, this.mouseY); //tilde
+	}
 
 
 	public void mouseDragged() {
