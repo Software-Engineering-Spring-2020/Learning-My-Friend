@@ -82,6 +82,15 @@ public class GUI {
   }
 
 
+  public void copy(){
+    win.copy();
+  }
+
+  public void paste(){
+    win.paste();
+  }
+
+
 /**
  * [group groups objects]
  */
@@ -198,7 +207,7 @@ public class GUI {
       // trim the file extension first.
       if (fname.contains(".")) {
         fname.substring(0, fname.lastIndexOf('.'));
-      } 
+      }
       win.exportAs(fname, ".png");
     }
  }
@@ -217,7 +226,7 @@ public class GUI {
       // trim the file extension first.
       if (fname.contains(".")) {
         fname.substring(0, fname.lastIndexOf('.'));
-      } 
+      }
       win.importImage(fname, ".png");
     }
  }
@@ -344,6 +353,9 @@ public class GUI {
 
    private void setUpWorkspaceToolbar(){
     FToolbar ft = toolbarFactory("Workspace", (float).8, (float).05, (float).1, (float).0);
+    ft.addFController(new CopyButton(cp5, ft, this));
+    ft.addFController(new PasteButton(cp5, ft, this));
+
     ft.addFController(new SaveButton(cp5, ft, this));
     ft.addFController(new OpenButton(cp5, ft, this));
     ft.addFController(new ExportButton(cp5, ft, this));
