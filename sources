@@ -20,6 +20,8 @@ src\frontend\fcontrollers\TextButton.java
 src\frontend\fcontrollers\CommentButton.java
 src\frontend\fcontrollers\TogComButton.java
 
+src\frontend\fcontrollers\SizeSlider.java
+
 src\frontend\fcontrollers\RFillSlider.java
 src\frontend\fcontrollers\GFillSlider.java
 src\frontend\fcontrollers\BFillSlider.java

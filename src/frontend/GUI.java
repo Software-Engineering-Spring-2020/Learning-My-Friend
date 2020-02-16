@@ -75,6 +75,10 @@ public class GUI {
     setup();
   }
 
+  public void setSize(float i){
+    win.resizeSelected(i);
+  }
+
 
   public void toggleComments(){
     win.toggleComments();
@@ -248,6 +252,7 @@ public class GUI {
     ft.addFController(gSlider);
 
     ft.addFController(new Textbox(cp5, ft, this));
+    ft.addFController(new SizeSlider(cp5, ft, this));
 
     ft.addFController(new TrashButton(cp5, ft, this));
 
