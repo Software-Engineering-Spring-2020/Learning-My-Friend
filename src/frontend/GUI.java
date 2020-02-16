@@ -48,9 +48,15 @@ public class GUI {
   public int fillColor[] = { 0, 0, 0, 0 };
   public int boarderColor[] = { 0, 0, 0 };
 
-
+  /**
+   * slider objects for rgb control
+   */
   FSlider rSlider, gSlider, bSlider;
 
+
+/**
+ * current string entered
+ */
   String currentString;
 
   /**
@@ -76,33 +82,57 @@ public class GUI {
   }
 
 
+/**
+ * [group groups objects]
+ */
   public void group(){
     win.group();
   }
 
 
+/**
+ * [ungroup ungroups objects]
+ */
   public void ungroup(){
     win.unGroup();
   }
 
-
+/**
+ * [setRotate rotates selected object]
+ * @param i [degreses]
+ */
   public void setRotate(float i){
     win.rotate(i);
   }
 
+/**
+ * [setSize sets the size of an object]
+ * @param i [size multiplyer]
+ */
   public void setSize(float i){
     win.resizeSelected(i);
   }
 
-
+/**
+ * [toggleComments toggles comments on or off]
+ */
   public void toggleComments(){
     win.toggleComments();
   }
 
+
+/**
+ * [getCurrentString retreves the current string for the TextBox]
+ * @return [the current string in the text box]
+ */
   public String getCurrentString(){
     return currentString;
   }
 
+/**
+ * [setCurrentString sets the string in the textbox]
+ * @param currentString [the string in the textbox]
+ */
   public void setCurrentString(String currentString){
     this.currentString = currentString;
   }
