@@ -17,8 +17,75 @@ public class BackendDriver extends PApplet {
         this.window.display();
     }
 
-    public void keyReleased() {
-      System.out.println(this.keyCode);
+    boolean ctrl = false, shift = false;
+
+    public void keyReleased(){
+      if(this.keyCode == 17) ctrl = false;
+      if(this.keyCode == 16) shift = false;
+    }
+
+    public void keyPressed(){
+      //System.out.println(this.key+ ", "+this.keyCode + " : "+ctrl);
+      if(this.keyCode == 17)  ctrl = true;
+      if(this.keyCode == 16) shift = true;
+
+      if(this.key == 'z' && ctrl) this.window.deleteLast();
+      else if(this.key == 'y' && ctrl) this.window.restoreLast();
+      else if(this.key == 'c' && ctrl) this.window.copy();
+      else if(this.key == 'x' && ctrl) this.window.cut();
+      else if(this.key == 'v' && ctrl) this.window.paste();
+
+      else if(this.key == 'n' && ctrl) this.window.clear();
+      else if(this.key == 'o' && ctrl){
+        try {
+					this.window.open("C:/Users/Mei ^.^/Desktop/drawing.polly");
+				} catch (ClassNotFoundException | IOException e) {
+					System.out.println(e);
+					e.printStackTrace();
+				}
+      }
+      else if(this.key == 's' && ctrl){
+        try {
+					this.window.save("C:/Users/Mei ^.^/Desktop/drawing.polly");
+				} catch (IOException e) {
+					System.out.println(e);
+					e.printStackTrace();
+				}
+      }
+
+      else if(this.key == 'e' && ctrl) this.window.exportAs("test", ".png");
+      else if(this.key == 'g' && ctrl) this.window.toggleGroup();
+      else if(this.key == 'a' && ctrl) this.window.toggleComments(); //Toggles Annotations
+      else if(this.key == 'b' && ctrl) this.window.toggleGrid();  //Toggles boxes on screen (grid)
+
+      else if(this.key == '<') this.window.changeThickness(-0.1F);
+      else if(this.key == '>') this.window.changeThickness(0.1F);
+      else if(this.key == '{') this.window.changeGridSpacing(-5);
+      else if(this.key == '}') this.window.changeGridSpacing(5);
+      else if(this.key == '|') this.window.createLine(this.mouseX, this.mouseY);
+      else if(this.key == 'P') this.window.createPollyGon(this.mouseX, this.mouseY, 3);
+
+
+      else if(this.key == 'R') this.window.createRect(this.mouseX, this.mouseY);
+      else if(this.key == 'T') this.window.createTextBox(this.mouseX, this.mouseY, "This is Text!", "arial", 12);
+      else if(this.key == 'A') this.window.createComment(this.mouseX, this.mouseY, "This is Comment!", "arial", 12);
+      else if(this.key == 'C') this.window.createEllipse(this.mouseX, this.mouseY);
+
+      else if(this.keyCode == 127) this.window.deleteSelected();  //delete
+      else if(this.keyCode == 37) this.window.rotate(-1); //left
+      else if(this.keyCode == 39) this.window.rotate(1);  //right
+      else if(this.keyCode == 38) this.window.resize(0.01F);  //up
+      else if(this.keyCode == 40) this.window.resize(-0.01F); //down
+      else if(this.keyCode == 155) this.window.importImage("grayscrunchie",".png");
+
+      else if(this.keyCode == 10) this.window.reCenter();   //enter
+      else if(this.keyCode == 192) this.window.createCurve(this.mouseX, this.mouseY); //tilde
+
+
+    }
+
+  /*  public void keyReleased() {
+
         if (this.key == Character.MAX_VALUE) {
             if (this.keyCode == 17)
                 //this.save = true;
@@ -35,72 +102,15 @@ public class BackendDriver extends PApplet {
             }
         }
 
-			if (this.key == 'a'){
-				 this.window.createRect(this.mouseX, this.mouseY);
-			}
-			if (this.key == 'b'){
-				this.window.reCenter();
-				//this.window.createCurve(this.mouseX, this.mouseY);
-			}
-			if (this.key == 'c'){
-				this.window.setGridSpacing(10);
-			}
-			if (this.key == 'd'){
-				this.window.createEllipse(this.mouseX, this.mouseY);
-			}
-			if (this.key == 'e'){
-				this.window.createTextBox(this.mouseX, this.mouseY, "This is Text!", "arial", 12);
-			}
-			if (this.key == 'f'){
-				this.window.createComment(this.mouseX, this.mouseY, "This is Comment!", "arial", 12);
-			}
-			if (this.key == 'g'){
-				this.window.group();
-			}
 			if (this.key == 'h'){
 				this.window.setFillColor(255, 50, 100, 10);
 			}
 			if (this.key == 'j'){
 				this.window.setBoarderColor(200, 50, 200);
 			}
-			if (this.key == 'l'){
-				this.window.rotate(85);
-			}
-			if (this.key == 'm'){
-				this.window.deleteSelected();
-			}
-			if (this.key == 'n'){
-				this.window.deleteLast();
-			}
-			if (this.key == 'o'){
-				this.window.restoreLast();
-			}
-			if (this.key == 'p'){
-				this.window.clear();
-			}
-			if (this.key == 'q'){
-				this.window.copy();
-			}
-			if (this.key == 'r'){
-				this.window.paste();
-			}
 			if (this.key == 's'){
 				this.window.setThickness(25);
 			}
-			if (this.key == 't'){
-				this.window.exportAs("testName", ".png");
-			}
-			if (this.key == 'u'){
-				this.window.importImage("grayscrunchie",".png");
-			}
-			if (this.key == 'v'){
-				this.window.toggleComments();
-			}
-			if (this.key == 'w') {
-				//this.window.freeDraw(this.mouseX, this.mouseY);
-				this.window.unGroup();
-			}
-
 			// saving and opening. Currently using absolute paths to demonstrate how this could
 			// work with a choose file/choose folder system
 			if (this.key == 'x'){
@@ -144,23 +154,14 @@ public class BackendDriver extends PApplet {
 				this.window.createCurve(this.mouseX, this.mouseY);
 			}
     }
-
+*/
     public void mouseDragged() {
-
-		//if (count < 300){ this.window.freeDraw(this.mouseX, this.mouseY);}
-		//if (count > 300){ this.window.selectedPan(this.mouseX, this.mouseY, this.pmouseX, this.pmouseY);}
-		this.window.selectedPan(this.mouseX, this.mouseY, this.pmouseX, this.pmouseY);
-		//this.window.canvasPan((this.mouseX - this.pmouseX), (this.mouseY - this.pmouseY));
-		//this.window.freeDraw(this.mouseX, this.mouseY);
-        count++;
+      if(shift) this.window.pan(this.mouseX, this.mouseY, this.pmouseX, this.pmouseY);
+      else this.window.freeDraw(this.mouseX, this.mouseY);
     }
 
    public void mouseClicked() {
-        if(count%3 == 0) this.window.singleSelect(this.mouseX, this.mouseY);
-        else this.window.multiSelect(this.mouseX, this.mouseY);
-        count++;
-        //this.window.createCurve(this.mouseX, this.mouseY);
-        //this.window.createPollyGon(this.mouseX, this.mouseY, 3);
+        this.window.select(this.mouseX, this.mouseY);
     }
 
     public void mouseReleased(){
