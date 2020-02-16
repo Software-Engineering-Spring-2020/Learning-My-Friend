@@ -55,10 +55,10 @@ public abstract class PollyObject implements Serializable {
         float height = pixelHeight;
 
 
-        PVector rotatedPoint = rotateAbout(new PVector(x, y), new PVector(xpos, ypos), -rot);
+        PVector rotatedPoint = rotateAbout(new PVector(x, y), new PVector(xcenter, ycenter), -rot);
 
-        if ((rotatedPoint.x >= xpos - width / 2 && rotatedPoint.x <= xpos + width / 2) &&
-            (rotatedPoint.y >= ypos - height / 2 && rotatedPoint.y <= ypos + height / 2)) {
+        if ((rotatedPoint.x >= xcenter - width / 2 && rotatedPoint.x <= xcenter + width / 2) &&
+            (rotatedPoint.y >= ycenter - height / 2 && rotatedPoint.y <= ycenter + height / 2)) {
                 return true;
         }
         return false;
