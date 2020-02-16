@@ -275,7 +275,7 @@ public class GUI {
       fillColor[3] = i;
     //win.setFillColor(fillColor[0], fillColor[1], fillColor[2], fillColor[3]);
     win.setFillColor(fillColor[0], fillColor[1], fillColor[2], 255);
-
+    setBoarder(i, c);
    }
 
 
