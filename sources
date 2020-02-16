@@ -22,6 +22,9 @@ src\frontend\fcontrollers\TogComButton.java
 src\frontend\fcontrollers\LineButton.java
 src\frontend\fcontrollers\CurveButton.java
 
+src\frontend\fcontrollers\CopyButton.java
+src\frontend\fcontrollers\PasteButton.java
+
 
 src\frontend\fcontrollers\UngroupButton.java
 src\frontend\fcontrollers\GroupButton.java
