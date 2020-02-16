@@ -9,7 +9,7 @@ public abstract class PollyObject implements Serializable {
     private static final long serialVersionUID = 10L;
     transient protected PApplet sketch;
     protected float xpos, ypos, rot = 0, pixelWidth, pixelHeight;
-    transient protected float xcenter = xpos, ycenter = ypos;
+    transient protected float xcenter = xpos, ycenter = ypos, prevRot = 0, ro = 0;
     float zoom = 1, offset = 3F;
 
     public PollyObject(PApplet sketch, float x, float y) {
@@ -35,11 +35,24 @@ public abstract class PollyObject implements Serializable {
         ypos = y;
     }
 
-    protected void setRelativeRotate(float ro) {
+    /*protected void setRelativeRotate(float ro) {
         rot += ro;
         rot = rot%360;
+    }*/
+
+    protected void setRotate(float r) {
+        rot = r % 360;
     }
 
+    protected void setRelativeRotate(float r) {
+      prevRot = rot;
+      ro = r - prevRot;
+      if(sketch.abs(ro) >= 1){
+        rot += ro;
+        rot = rot%360;
+      }
+    }
+    
     protected float[] getDimensions() {
         return new float[]{-1, -1};
     }

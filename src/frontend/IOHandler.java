@@ -73,11 +73,11 @@ public class IOHandler{
       }
       if(gui.getTool() == 't'){
         //System.out.println("this is running");
-        win.createTextBox(sketch.mouseX, sketch.mouseY, gui.getCurrentString(), "Arial", 20);
+        win.createTextBox(sketch.mouseX, sketch.mouseY, gui.getCurrentString(), "arial", 20);
       }
       if(gui.getTool() == 'c'){
         //System.out.println("this is running");
-        win.createComment(sketch.mouseX, sketch.mouseY, gui.getCurrentString(), "Arial", 20);
+        win.createComment(sketch.mouseX, sketch.mouseY, gui.getCurrentString(), "arial", 20);
       }
       if(gui.getTool() == 'l')
         win.createLine(sketch.mouseX, sketch.mouseY);

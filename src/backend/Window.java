@@ -334,7 +334,7 @@ public class Window {
 
     public void rotate(float ao) {
         for (PollyObject shape : selected) {
-            shape.setRelativeRotate(ao);
+            shape.setRotate(ao);
         }
     }
 
