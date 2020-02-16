@@ -72,8 +72,12 @@ public class IOHandler{
         //gui.updateRGB(win.getRGB)
       }
       if(gui.getTool() == 't'){
-        //System.out.println("this is running");    
+        //System.out.println("this is running");
         win.createTextBox(sketch.mouseX, sketch.mouseY, gui.getCurrentString(), "Arial", 20);
+      }
+      if(gui.getTool() == 'c'){
+        //System.out.println("this is running");
+        win.createComment(sketch.mouseX, sketch.mouseY, gui.getCurrentString(), "Arial", 20);
       }
     }
 

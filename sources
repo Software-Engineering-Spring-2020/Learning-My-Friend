@@ -18,6 +18,7 @@ src\frontend\fcontrollers\OpenButton.java
 src\frontend\fcontrollers\ImportButton.java
 src\frontend\fcontrollers\TextButton.java
 src\frontend\fcontrollers\CommentButton.java
+src\frontend\fcontrollers\TogComButton.java
 
 src\frontend\fcontrollers\RFillSlider.java
 src\frontend\fcontrollers\GFillSlider.java

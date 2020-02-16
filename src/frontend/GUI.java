@@ -76,7 +76,9 @@ public class GUI {
   }
 
 
-
+  public void toggleComments(){
+    win.toggleComments();
+  }
 
   public String getCurrentString(){
     return currentString;
@@ -258,6 +260,8 @@ public class GUI {
     ft.addFController(new OpenButton(cp5, ft, this));
     ft.addFController(new ExportButton(cp5, ft, this));
     ft.addFController(new ImportButton(cp5, ft, this));
+    ft.addFController(new TogComButton(cp5, ft, this));
+
     ft.addFController(new GridButton(cp5, ft, this));
 
    }
