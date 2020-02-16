@@ -31,6 +31,8 @@ public abstract class PollyObject implements Serializable {
     protected void setPosition(float x, float y) {
         xpos = x;
         ypos = y;
+        xcenter = xpos;
+        ycenter = ypos;
     }
 
     protected void setRelativeRotate(float ro) {
