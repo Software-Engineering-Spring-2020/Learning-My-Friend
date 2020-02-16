@@ -29,10 +29,10 @@ public abstract class PollyObject implements Serializable {
     }
 
     protected void setPosition(float x, float y) {
+        xcenter += (xpos - x);
+        ycenter += (ypos - y);
         xpos = x;
         ypos = y;
-        xcenter = xpos;
-        ycenter = ypos;
     }
 
     protected void setRelativeRotate(float ro) {
@@ -134,8 +134,8 @@ public abstract class PollyObject implements Serializable {
     protected void pan(float xo, float yo){
         xpos = xpos + xo;
         ypos = ypos + yo;
-        xcenter = xpos;
-        ycenter = ypos;
+        xcenter += xo;
+        ycenter += yo;
     }
 
     protected void resize(float factor) {

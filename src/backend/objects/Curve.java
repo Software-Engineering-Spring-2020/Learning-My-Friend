@@ -12,7 +12,6 @@ import java.util.ArrayList;
 class Curve extends ColorfulObject implements Serializable{
   private static final long serialVersionUID = 12L;
   private ArrayList<float[]> points = new ArrayList<float[]>();
-  private float xcenter, ycenter;
 
   Curve(PApplet sketch, float x, float y, ArrayList<float[]> points, float strokeWeight, int[] fillColor, int[] boarderColor){
     super(sketch, x, y, strokeWeight, fillColor, boarderColor);
@@ -27,17 +26,17 @@ class Curve extends ColorfulObject implements Serializable{
   protected void setSettings(ArrayList<float[]> points){
     float xmin = Float.MAX_VALUE, ymin = Float.MAX_VALUE, xmax = Float.MIN_VALUE, ymax = Float.MIN_VALUE;
     for(float[] point : points){
+      xmin = Math.min(point[0], xmin);
+      ymin = Math.min(point[1], ymin);
+      xmax = Math.max(point[0], xmax);
+      ymax = Math.max(point[1], ymax);
+      pixelWidth = Math.abs(xmax - xmin);
+      pixelHeight = Math.abs(ymax - ymin);
+      xcenter = (xmin + xmax)/2;
+      ycenter = (ymin + ymax)/2;
       point[0] -= xpos;
       point[1] -= ypos;
       this.points.add(point);
-      xmin = sketch.min(point[0], xmin);
-      ymin = sketch.min(point[1], ymin);
-      xmax = sketch.max(point[0], xmax);
-      ymax = sketch.max(point[1], ymax);
-      pixelWidth = xmax - xmin;
-      pixelHeight = ymax - ymin;
-      xcenter = xmin + pixelWidth/2;
-      ycenter = ymin + pixelHeight/2;
     }
     setFillColor(255,255,255,0);
   }

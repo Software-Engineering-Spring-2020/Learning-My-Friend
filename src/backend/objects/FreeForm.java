@@ -36,25 +36,25 @@ class FreeForm extends Shape implements Serializable {
     float xmin = Float.MAX_VALUE, ymin = Float.MAX_VALUE, xmax = Float.MIN_VALUE, ymax = Float.MIN_VALUE;
     shape.beginShape();
     for(int i = 0; i<points.size(); i++){
-      float[] pos = new float[]{points.get(i)[0]-xpos, points.get(i)[1]-ypos};
-      shape.vertex(pos[0], pos[1]);
-      xmin = sketch.min(pos[0], xmin);
-      ymin = sketch.min(pos[1], ymin);
-      xmax = sketch.max(pos[0], xmax);
-      ymax = sketch.max(pos[1], ymax);
+      float[] pos = new float[]{points.get(i)[0], points.get(i)[1]};
+      shape.vertex(pos[0]-xpos, pos[1]-ypos);
+      xmin = Math.min(pos[0], xmin);
+      ymin = Math.min(pos[1], ymin);
+      xmax = Math.max(pos[0], xmax);
+      ymax = Math.max(pos[1], ymax);
     }
     shape.endShape();
-    pixelWidth = xmax - xmin;
-    pixelHeight = ymax - ymin;
-    xcenter = xmin + pixelWidth/2;
-    ycenter = ymin + pixelHeight/2;
+    pixelWidth = Math.abs(xmax - xmin);
+    pixelHeight = Math.abs(ymax - ymin);
+    xcenter = (xmin + xmax)/2;
+    ycenter = (ymin + ymax)/2;
   }
 
   protected void display(){
     super.display();
     sketch.push();
     sketch.strokeWeight(3);
-    sketch.point(xcenter, ycenter);
+    //sketch.point(xcenter, ycenter);
     sketch.pop();
   }
 

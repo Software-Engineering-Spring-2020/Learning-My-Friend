@@ -37,10 +37,19 @@ class PollyGon extends Shape implements Serializable {
   }
 
   protected void createShape(ArrayList<float[]> points){
+    float xmin = Float.MAX_VALUE, ymin = Float.MAX_VALUE, xmax = Float.MIN_VALUE, ymax = Float.MIN_VALUE;
     shape.beginShape();
     for(int i = 0; i<points.size(); i++){
       shape.vertex(points.get(i)[0]-xpos, points.get(i)[1]-ypos);
+      xmin = Math.min(points.get(i)[0], xmin);
+      ymin = Math.min(points.get(i)[1], ymin);
+      xmax = Math.max(points.get(i)[0], xmax);
+      ymax = Math.max(points.get(i)[1], ymax);
     }
+    pixelWidth = Math.abs(xmax - xmin);
+    pixelHeight = Math.abs(ymax - ymin);
+    xcenter = (xmin + xmax)/2;
+    ycenter = (ymin + ymax)/2;
     //if(points.size()>2) shape.endShape(PConstants.CLOSE);
     //else shape.endShape();
     shape.endShape(PConstants.CLOSE);
