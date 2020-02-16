@@ -85,17 +85,16 @@ public class Window {
      *
      *
      *********************************************************/
-    public void createDrawSpace(PApplet sketch, float x, float y, float w, float h) {
+    private void createDrawSpace(PApplet sketch, float x, float y, float w, float h) {
         this.ds = new DrawSpace(sketch, x, y, w, h);
     }
 
     public void zoom(float factor) { // draw offcenter once zoom
-        zoom = sketch.max((float) .01, zoom + factor);
+        zoom = sketch.max(.001F, zoom + factor);
     }
 
     public boolean withinCanvas(float x, float y) {
         float[] coord = ds.translateCoordinates(x, y, zoom);
-        // float[] coord = translateCoordinates(x, y);
         return ds.withinScope(coord[0], coord[1]);
     }
 
@@ -117,7 +116,9 @@ public class Window {
     }
 
     public void setGridSpacing(float spacing) {
-        gridSpacing = sketch.max(spacing, 2);
+        gridSpacing = sketch.max(spacing, 2F);
+    } public void changeGridSpacing(float so) {
+        gridSpacing = sketch.max(gridSpacing+so, 2F);
     }
 
     public void toggleComments() {
@@ -222,6 +223,22 @@ public class Window {
        }
      }
 
+     public void resize(float factor){
+       if(selected.size() == 0) zoom(factor);
+       else{
+         for(PollyObject obj : selected){
+           obj.resize(factor);
+         }
+       }
+     }
+
+     public void toggleGroup(){
+       for(PollyObject obj : selected){
+         if(obj instanceof Group) ds.removeObject(obj);
+         else ds.addObject(new Group(sketch, 0, 0, selected));
+       }
+     }
+
     public void group() {
         ds.addObject(new Group(sketch, 0, 0, selected));
     }
@@ -249,6 +266,24 @@ public class Window {
           }
         }
     }
+
+    public void pan(float mouseX, float mouseY, float pmouseX, float pmouseY) {
+      boolean pan = false;
+      float[] coord = ds.translateCoordinates(mouseX, mouseY, zoom);
+      float[] translation = translate(mouseX-pmouseX, mouseY-pmouseY);
+
+      if(selected.size() == 0 && withinCanvas(mouseX, mouseY)) this.ds.pan(translation[0], translation[1]);
+      else{
+        for (PollyObject obj : selected) {
+          if(obj.withinScope(coord[0], coord[1])) pan = true;
+        }
+        if(pan){
+          for(PollyObject obj : selected) obj.pan(translation[0], translation[1]);
+        }
+      }
+    }
+
+
 
     public void setFillColor(int r, int g, int b, int a) {
         fillColor[0] = r;
@@ -310,8 +345,32 @@ public class Window {
 
     public void multiSelect(float x, float y) {
         PollyObject obj = ds.getObjectAt(x, y, zoom);
-        if (obj != null && !selected.contains(obj))
-            selected.add(obj);
+        if (obj != null){
+          if(selected.contains(obj)) selected.remove(obj);
+          else selected.add(obj);
+        }
+    }
+
+    public void select(float x, float y) {
+      PollyObject obj = ds.getObjectAt(x, y, zoom);
+      if (obj != null){
+        if(selected.contains(obj))
+          selected.remove(obj);
+        else
+          selected.add(obj);
+      }
+      else if(withinCanvas(x, y))
+          selected.clear();
+    }
+
+    public boolean delete() {
+        boolean successful = true;
+        for (PollyObject shape : selected) {
+            trash.add(shape);
+            if (!ds.removeObject(shape))
+                successful = false;
+        }
+        return successful;
     }
 
     public boolean deleteSelected() {
@@ -325,6 +384,17 @@ public class Window {
     }
 
     public void duplicateSelected() {
+        for (PollyObject shape : selected) {
+            try {
+                ds.addObject(SerialManager.deepClonePollyObject(sketch, shape));
+			} catch (ClassNotFoundException | IOException e) {
+				System.out.println(e);
+				e.printStackTrace();
+			}
+        }
+    }
+
+    public void duplicate() {
         for (PollyObject shape : selected) {
             try {
                 ds.addObject(SerialManager.deepClonePollyObject(sketch, shape));
@@ -352,7 +422,6 @@ public class Window {
             trash.add(shape);
         }
         ds.clear();
-
         sketch.println(ds.getNumObjects()+" : "+trash.size());
     }
 
@@ -365,7 +434,14 @@ public class Window {
         return sucess;
     }
 
-    public void paste(){    //not working yet
+    public boolean cut(){
+        boolean sucess = true;
+        if(!copy()) sucess = false;
+        clear();
+        return sucess;
+    }
+
+    public void paste(){
       for (PollyObject shape : copied) {
           try {
               ds.addObject(SerialManager.deepClonePollyObject(sketch, shape));
@@ -386,6 +462,9 @@ public class Window {
 
     public void setThickness(float size){
         strokeWeight = sketch.max(size, 1);
+    }
+    public void changeThickness(float so){
+        strokeWeight = sketch.max(strokeWeight+so, 1);
     }
 
     public void freeDraw(float pmousex, float pmousey){ //must call createFreeForm() on mouseRelease()
@@ -440,11 +519,6 @@ public class Window {
 
     public void open(String filename) throws IOException, ClassNotFoundException {
       ds = SerialManager.openDrawSpace(sketch, filename);
-    }
-
-
-    public void test(){
-      PImage img = sketch.requestImage("grayscrunchie.png");
     }
 
 }

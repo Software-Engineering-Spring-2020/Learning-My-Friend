@@ -132,11 +132,13 @@ public abstract class PollyObject implements Serializable {
     protected void pan(float xo, float yo){
         xpos = xpos + xo;
         ypos = ypos + yo;
+        xcenter = xpos;
+        ycenter = ypos;
     }
 
     protected void resize(float factor) {
         pixelHeight *= (1+factor);
         pixelWidth *= (1+factor);
-        zoom += factor;
+        zoom = sketch.max(.001F, zoom + factor);
     }
 }
