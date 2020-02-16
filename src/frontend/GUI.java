@@ -51,6 +51,8 @@ public class GUI {
 
   FSlider rSlider, gSlider, bSlider;
 
+  String currentString;
+
   /**
    * End of STATE Deleration
    */
@@ -72,6 +74,18 @@ public class GUI {
 
     setup();
   }
+
+
+
+
+  public String getCurrentString(){
+    return currentString;
+  }
+
+  public void setCurrentString(String currentString){
+    this.currentString = currentString;
+  }
+
 
   /**
    * [getTool gets the selected tool]
@@ -113,7 +127,7 @@ public class GUI {
       } catch (IOException e) {
         e.printStackTrace();
       }
-    } 
+    }
  }
 
   /**
@@ -128,13 +142,20 @@ public class GUI {
     if (selection == null) {
       System.out.println("Window was closed or the user hit cancel.");
     } else {
-      win.exportAs(selection.getAbsolutePath(), ".png");   
-    } 
+      win.exportAs(selection.getAbsolutePath(), ".png");
+    }
  }
 
    public void open() {
     File f = new File("drawing.polly");
     sketch.selectInput("Select a file to open:", "openFileSelected", f, this);
+  }
+
+
+  public void fileImport() {
+    File f = new File("drawing.polly");
+    sketch.selectInput("Select a file to open:", "openFileSelected", f, this);
+
   }
 
   public void openFileSelected(File selection) {
@@ -147,7 +168,7 @@ public class GUI {
         System.out.println(e);
         e.printStackTrace();
       }
-    } 
+    }
   }
 
 
@@ -208,6 +229,9 @@ public class GUI {
      ft.addFController(new RectButton(cp5, ft, this));
      ft.addFController(new ElipButton(cp5, ft, this));
      ft.addFController(new PenButton(cp5, ft, this));
+     ft.addFController(new TextButton(cp5, ft, this));
+     ft.addFController(new CommentButton(cp5, ft, this));
+
    }
 
 
@@ -220,6 +244,7 @@ public class GUI {
     ft.addFController(bSlider);
     ft.addFController(gSlider);
 
+    ft.addFController(new Textbox(cp5, ft, this));
 
     ft.addFController(new TrashButton(cp5, ft, this));
 
@@ -231,7 +256,7 @@ public class GUI {
     ft.addFController(new SaveButton(cp5, ft, this));
     ft.addFController(new OpenButton(cp5, ft, this));
     ft.addFController(new ExportButton(cp5, ft, this));
-
+    ft.addFController(new ImportButton(cp5, ft, this));
     ft.addFController(new GridButton(cp5, ft, this));
 
    }

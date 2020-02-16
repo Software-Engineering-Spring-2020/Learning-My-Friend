@@ -35,7 +35,6 @@ public class IOHandler{
 
 
 
-
   //zoom sensitivity
   float mouseSense = 5;
   /**
@@ -71,6 +70,10 @@ public class IOHandler{
         win.multiSelect(sketch.mouseX, sketch.mouseY);
         //upadte sliderRBG here
         //gui.updateRGB(win.getRGB)
+      }
+      if(gui.getTool() == 't'){
+        win.createTextBox(sketch.mouseX, sketch.mouseY, gui.getCurrentString(), "Arial", 20);
+        System.out.println("this is running");    
       }
     }
 

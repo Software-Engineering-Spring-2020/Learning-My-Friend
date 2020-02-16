@@ -120,7 +120,11 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
 	}
 
 
-
+	public void controlEvent(ControlEvent theEvent) {
+	  if(theEvent.isAssignableFrom(Textfield.class)) {
+	    gui.setCurrentString(theEvent.getStringValue());
+	  }
+	}
 
 
 }

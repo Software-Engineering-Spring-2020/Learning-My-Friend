@@ -15,7 +15,9 @@ src\frontend\fcontrollers\GridButton.java
 src\frontend\fcontrollers\SaveButton.java
 src\frontend\fcontrollers\ExportButton.java
 src\frontend\fcontrollers\OpenButton.java
-
+src\frontend\fcontrollers\ImportButton.java
+src\frontend\fcontrollers\TextButton.java
+src\frontend\fcontrollers\CommentButton.java
 
 src\frontend\fcontrollers\RFillSlider.java
 src\frontend\fcontrollers\GFillSlider.java
@@ -25,8 +27,8 @@ src\frontend\fcontrollers\BFillSlider.java
 src\frontend\fcontrollers\SelecButton.java
 src\frontend\fcontrollers\TrashButton.java
 
-
-
+src\frontend\FTextfield.java
+src\frontend\fcontrollers\Textbox.java
 
 
 src\frontend\controlP5\Accordion.java
