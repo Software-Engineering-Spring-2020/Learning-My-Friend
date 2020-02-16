@@ -79,6 +79,10 @@ public class IOHandler{
         //System.out.println("this is running");
         win.createComment(sketch.mouseX, sketch.mouseY, gui.getCurrentString(), "Arial", 20);
       }
+      if(gui.getTool() == 'l')
+        win.createLine(sketch.mouseX, sketch.mouseY);
+      if(gui.getTool() == 'u')
+        win.createCurve(sketch.mouseX, sketch.mouseY);
     }
 
   }

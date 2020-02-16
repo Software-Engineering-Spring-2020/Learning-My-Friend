@@ -19,6 +19,9 @@ src\frontend\fcontrollers\ImportButton.java
 src\frontend\fcontrollers\TextButton.java
 src\frontend\fcontrollers\CommentButton.java
 src\frontend\fcontrollers\TogComButton.java
+src\frontend\fcontrollers\LineButton.java
+src\frontend\fcontrollers\CurveButton.java
+
 
 src\frontend\fcontrollers\UngroupButton.java
 src\frontend\fcontrollers\GroupButton.java

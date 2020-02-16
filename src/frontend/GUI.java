@@ -48,9 +48,15 @@ public class GUI {
   public int fillColor[] = { 0, 0, 0, 0 };
   public int boarderColor[] = { 0, 0, 0 };
 
-
+  /**
+   * slider objects for rgb control
+   */
   FSlider rSlider, gSlider, bSlider;
 
+
+/**
+ * current string entered
+ */
   String currentString;
 
   /**
@@ -76,34 +82,57 @@ public class GUI {
   }
 
 
-
+/**
+ * [group groups objects]
+ */
   public void group(){
     win.group();
   }
 
 
+/**
+ * [ungroup ungroups objects]
+ */
   public void ungroup(){
     win.unGroup();
   }
 
-
+/**
+ * [setRotate rotates selected object]
+ * @param i [degreses]
+ */
   public void setRotate(float i){
     win.rotate(i);
   }
 
+/**
+ * [setSize sets the size of an object]
+ * @param i [size multiplyer]
+ */
   public void setSize(float i){
     win.resizeSelected(i);
   }
 
-
+/**
+ * [toggleComments toggles comments on or off]
+ */
   public void toggleComments(){
     win.toggleComments();
   }
 
+
+/**
+ * [getCurrentString retreves the current string for the TextBox]
+ * @return [the current string in the text box]
+ */
   public String getCurrentString(){
     return currentString;
   }
 
+/**
+ * [setCurrentString sets the string in the textbox]
+ * @param currentString [the string in the textbox]
+ */
   public void setCurrentString(String currentString){
     this.currentString = currentString;
   }
@@ -158,27 +187,44 @@ public class GUI {
    */
   public void export() {
     File f = new File("drawing.png");
-    sketch.selectOutput("Select a file to save to export to", "saveFileSelected", f, this);
+    sketch.selectOutput("Select a file to save to export to", "exportFileSelected", f, this);
   }
 
   public void exportFileSelected(File selection) {
     if (selection == null) {
       System.out.println("Window was closed or the user hit cancel.");
     } else {
-      win.exportAs(selection.getAbsolutePath(), ".png");
+      String fname = selection.getAbsolutePath();
+      // trim the file extension first.
+      if (fname.contains(".")) {
+        fname.substring(0, fname.lastIndexOf('.'));
+      } 
+      win.exportAs(fname, ".png");
+    }
+ }
+
+   public void fileImport() {
+    File f = new File("drawing.polly");
+    sketch.selectInput("Select a file to open:", "importFileSelected", f, this);
+
+  }
+
+  public void importFileSelected(File selection) {
+    if (selection == null) {
+      System.out.println("Window was closed or the user hit cancel.");
+    } else {
+      String fname = selection.getAbsolutePath();
+      // trim the file extension first.
+      if (fname.contains(".")) {
+        fname.substring(0, fname.lastIndexOf('.'));
+      } 
+      win.importImage(fname, ".png");
     }
  }
 
    public void open() {
     File f = new File("drawing.polly");
     sketch.selectInput("Select a file to open:", "openFileSelected", f, this);
-  }
-
-
-  public void fileImport() {
-    File f = new File("drawing.polly");
-    sketch.selectInput("Select a file to open:", "openFileSelected", f, this);
-
   }
 
   public void openFileSelected(File selection) {
@@ -252,6 +298,8 @@ public class GUI {
      ft.addFController(new RectButton(cp5, ft, this));
      ft.addFController(new ElipButton(cp5, ft, this));
      ft.addFController(new PenButton(cp5, ft, this));
+     ft.addFController(new LineButton(cp5, ft, this));
+     ft.addFController(new CurveButton(cp5, ft, this));
      ft.addFController(new TextButton(cp5, ft, this));
      ft.addFController(new CommentButton(cp5, ft, this));
 
@@ -285,7 +333,7 @@ public class GUI {
 
     ft.addFController(new GroupButton(cp5, ft, this));
     ft.addFController(new UngroupButton(cp5, ft, this));
-    
+
     ft.addFController(new SizeSlider(cp5, ft, this));
     ft.addFController(new RotateSlider(cp5, ft, this));
 
