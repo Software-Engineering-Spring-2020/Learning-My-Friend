@@ -75,6 +75,18 @@ public class GUI {
     setup();
   }
 
+
+
+  public void group(){
+    win.group();
+  }
+
+
+  public void ungroup(){
+    win.unGroup();
+  }
+
+
   public void setRotate(float i){
     win.rotate(i);
   }
@@ -270,6 +282,10 @@ public class GUI {
     ft.addFController(bSlider);
 
     ft.addFController(new Textbox(cp5, ft, this));
+
+    ft.addFController(new GroupButton(cp5, ft, this));
+    ft.addFController(new UngroupButton(cp5, ft, this));
+    
     ft.addFController(new SizeSlider(cp5, ft, this));
     ft.addFController(new RotateSlider(cp5, ft, this));
 
@@ -285,7 +301,6 @@ public class GUI {
     ft.addFController(new ExportButton(cp5, ft, this));
     ft.addFController(new ImportButton(cp5, ft, this));
     ft.addFController(new TogComButton(cp5, ft, this));
-
     ft.addFController(new GridButton(cp5, ft, this));
 
    }

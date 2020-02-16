@@ -20,6 +20,9 @@ src\frontend\fcontrollers\TextButton.java
 src\frontend\fcontrollers\CommentButton.java
 src\frontend\fcontrollers\TogComButton.java
 
+src\frontend\fcontrollers\UngroupButton.java
+src\frontend\fcontrollers\GroupButton.java
+
 src\frontend\fcontrollers\SizeSlider.java
 src\frontend\fcontrollers\RotateSlider.java
 
