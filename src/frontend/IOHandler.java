@@ -67,7 +67,7 @@ public class IOHandler{
       //if((gui.getTool() == 's') && (sketch.keyCode.getKeyCode() == KeyCode.CONTROL))
       //  win.multiSelect(sketch.mouseX, sketch.mouseY);
       if(gui.getTool() == 's'){
-        win.multiSelect(sketch.mouseX, sketch.mouseY);
+        win.select(sketch.mouseX, sketch.mouseY);
         //upadte sliderRBG here
         //gui.updateRGB(win.getRGB)
       }
@@ -96,11 +96,13 @@ public class IOHandler{
     //if pan tool is selected
     if(gui.getTool() == 'p')
       win.freeDraw(sketch.mouseX, sketch.mouseY);
-    //else win.pan(sketch.mouseX, sketch.mouseY, sketch.pmouseX, sketch.pmouseY);
-    else if((onCanvas()) && gui.getTool() == 's')
+    else
+      win.pan(sketch.mouseX, sketch.mouseY, sketch.pmouseX, sketch.pmouseY);
+    /*else if((onCanvas()) && gui.getTool() == 's')
       win.selectedPan((sketch.mouseX - sketch.pmouseX), (sketch.mouseY - sketch.pmouseY));
     else if(onCanvas())
       win.canvasPan((sketch.mouseX - sketch.pmouseX), (sketch.mouseY - sketch.pmouseY));
+*/
   }
 
 
