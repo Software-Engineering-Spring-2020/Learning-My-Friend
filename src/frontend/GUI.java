@@ -157,27 +157,44 @@ public class GUI {
    */
   public void export() {
     File f = new File("drawing.png");
-    sketch.selectOutput("Select a file to save to export to", "saveFileSelected", f, this);
+    sketch.selectOutput("Select a file to save to export to", "exportFileSelected", f, this);
   }
 
   public void exportFileSelected(File selection) {
     if (selection == null) {
       System.out.println("Window was closed or the user hit cancel.");
     } else {
-      win.exportAs(selection.getAbsolutePath(), ".png");
+      String fname = selection.getAbsolutePath();
+      // trim the file extension first.
+      if (fname.contains(".")) {
+        fname.substring(0, fname.lastIndexOf('.'));
+      } 
+      win.exportAs(fname, ".png");
+    }
+ }
+
+   public void fileImport() {
+    File f = new File("drawing.polly");
+    sketch.selectInput("Select a file to open:", "importFileSelected", f, this);
+
+  }
+
+  public void importFileSelected(File selection) {
+    if (selection == null) {
+      System.out.println("Window was closed or the user hit cancel.");
+    } else {
+      String fname = selection.getAbsolutePath();
+      // trim the file extension first.
+      if (fname.contains(".")) {
+        fname.substring(0, fname.lastIndexOf('.'));
+      } 
+      win.importImage(fname, ".png");
     }
  }
 
    public void open() {
     File f = new File("drawing.polly");
     sketch.selectInput("Select a file to open:", "openFileSelected", f, this);
-  }
-
-
-  public void fileImport() {
-    File f = new File("drawing.polly");
-    sketch.selectInput("Select a file to open:", "openFileSelected", f, this);
-
   }
 
   public void openFileSelected(File selection) {
