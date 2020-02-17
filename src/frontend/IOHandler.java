@@ -84,7 +84,7 @@ public class IOHandler{
       if(gui.getTool() == 'u')
         win.createCurve(sketch.mouseX, sketch.mouseY);
       if(gui.getTool() == 'x')
-        win.createPollyGon(sketch.mouseX, sketch.mouseY, 4);
+        win.createPollyGon(sketch.mouseX, sketch.mouseY, gui.getPolyCount());
     }
 
   }
