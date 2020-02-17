@@ -22,6 +22,7 @@ src\frontend\fcontrollers\TogComButton.java
 src\frontend\fcontrollers\LineButton.java
 src\frontend\fcontrollers\CurveButton.java
 src\frontend\fcontrollers\PolyButton.java
+src\frontend\fcontrollers\PolyCountSlider.java
 
 src\frontend\fcontrollers\CopyButton.java
 src\frontend\fcontrollers\PasteButton.java

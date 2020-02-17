@@ -57,8 +57,10 @@ public class GUI {
 /**
  * current string entered
  */
-  String currentString;
+  String currentString = "";
 
+
+  int polyCount = 3;
   /**
    * End of STATE Deleration
    */
@@ -81,6 +83,16 @@ public class GUI {
     setup();
   }
 
+
+
+
+  public void setPolyCount(int i){
+    polyCount = i;
+  }
+
+  public int getPolyCount(){
+    return polyCount;
+  }
 
 
   /**
@@ -355,7 +367,7 @@ public class GUI {
 
     ft.addFController(new SizeSlider(cp5, ft, this));
     ft.addFController(new RotateSlider(cp5, ft, this));
-
+    ft.addFController(new PolyCountSlider(cp5, ft, this));
     ft.addFController(new TrashButton(cp5, ft, this));
 
     //ft.addFController(new FColorPicker(cp5, ft, this));
