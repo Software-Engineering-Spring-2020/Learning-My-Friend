@@ -369,11 +369,11 @@ public class GUI {
     ft.addFController(new RotateSlider(cp5, ft, this));
     ft.addFController(new PolyCountSlider(cp5, ft, this));
     ft.addFController(new TrashButton(cp5, ft, this));
-
+  }
     //ft.addFController(new FColorPicker(cp5, ft, this));
-   }
 
-   private void setUpWorkspaceToolbar(){
+
+  private void setUpWorkspaceToolbar(){
     FToolbar ft = toolbarFactory("Workspace", (float).8, (float).05, (float).1, (float).0);
     ft.addFController(new CopyButton(cp5, ft, this));
     ft.addFController(new PasteButton(cp5, ft, this));
@@ -382,9 +382,9 @@ public class GUI {
     ft.addFController(new OpenButton(cp5, ft, this));
     ft.addFController(new ExportButton(cp5, ft, this));
     ft.addFController(new ImportButton(cp5, ft, this));
-    ft.addFController(new TogComButton(cp5, ft, this));
     ft.addFController(new GridButton(cp5, ft, this));
-
+    ft.addFController(new TogComButton(cp5, ft, this));
+    //System.out.println(ft.conList);
    }
 
 

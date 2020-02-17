@@ -35,7 +35,7 @@ public class FToolbar{
   String name;
 
   //List of fcontrollers
-  LinkedList<FController> conList;
+  public LinkedList<FController> conList;
 
   //the groups boarders/margins
   float boarderX, boarderY, boarderController;
@@ -255,25 +255,6 @@ public class FToolbar{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  * [setBoarderX sets the toolbar's horizontal boarder/margin in percetage of toolbar's space]
  * @param x [percetabe of toolbar's horizontal boarder]
@@ -413,13 +394,16 @@ public class FToolbar{
         }
       }
       else{
-        for(float i = boarderX; i < deltaX; i+= (deltaX/conList.size())){
-          //System.out.println("Delta Y: " + deltaY + " i: " + (1/conList.size()));
+        for(float i = boarderX; i < (deltaX+.000005); i+= (deltaX/conList.size())){
+          //System.out.println("Forloop started");
           fc = conList.get(p);
           fc.setPos((float)i, (float)boarderY);
           fc.setSize((float)deltaX/conList.size(), (float)deltaY);
           fc.update();
+          //System.out.println(fc.getName());
+          //System.out.println("p: " + p + " deltaX = " + deltaX + " delta/size = " + (deltaX/conList.size()) + " Current i: " + i);
           p++;
+          //System.out.println("forloop should continue to run if " + i + " < " + deltaX + " " + (i < deltaX));
         }
       }
     }

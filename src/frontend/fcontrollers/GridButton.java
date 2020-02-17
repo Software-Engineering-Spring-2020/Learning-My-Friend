@@ -20,7 +20,6 @@ public class GridButton extends FButton{
 
 
   public void grid(int val){
-    //System.out.println("Elip " + val);
     getGUI().toggleGrid();
 
   }
