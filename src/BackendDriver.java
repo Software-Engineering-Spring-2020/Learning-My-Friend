@@ -63,12 +63,12 @@ public class BackendDriver extends PApplet {
       else if(this.key == '{') this.window.changeGridSpacing(-5);
       else if(this.key == '}') this.window.changeGridSpacing(5);
       else if(this.key == '|') this.window.createLine(this.mouseX, this.mouseY);
-      else if(this.key == 'P') this.window.createPollyGon(this.mouseX, this.mouseY, 3);
+      //else if(this.key == 'P') this.window.createPollyGon(this.mouseX, this.mouseY, 3);
 
 
       else if(this.key == 'R') this.window.createRect(this.mouseX, this.mouseY);
-      else if(this.key == 'T') this.window.createTextBox(this.mouseX, this.mouseY, "This is Text!", "arial", 12);
-      else if(this.key == 'A') this.window.createComment(this.mouseX, this.mouseY, "This is Comment!", "arial", 12);
+      //else if(this.key == 'T') this.window.createTextBox(this.mouseX, this.mouseY, "This is Text!", "arial", 12);
+      //else if(this.key == 'A') this.window.createComment(this.mouseX, this.mouseY, "This is Comment!", "arial", 12);
       else if(this.key == 'C') this.window.createEllipse(this.mouseX, this.mouseY);
 
       else if(this.keyCode == 127) this.window.deleteSelected();  //delete
