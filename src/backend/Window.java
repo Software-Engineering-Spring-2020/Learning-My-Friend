@@ -444,7 +444,10 @@ public class Window {
     public void paste(){
       for (PollyObject shape : copied) {
           try {
+              //shape.pan(10, 10);
               ds.addObject(SerialManager.deepClonePollyObject(sketch, shape));
+              //shape.pan(-10, -10);
+              ds.getShape(ds.getNumObjects()-1).pan(10, 10);
     } catch (ClassNotFoundException | IOException e) {
       System.out.println(e);
       e.printStackTrace();

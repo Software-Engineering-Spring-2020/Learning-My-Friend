@@ -106,18 +106,21 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
 	}
 
 	public void keyPressed(){
-		//System.out.println(this.key+ ", "+this.keyCode + " : "+ctrl);
+		
 		if(this.keyCode == 17)  ctrl = true;
 		if(this.keyCode == 16) shift = true;
 
-		if(this.key == 'z' && ctrl) this.win.deleteLast();
-		else if(this.key == 'y' && ctrl) this.win.restoreLast();
-		else if(this.key == 'c' && ctrl) this.win.copy();
-		else if(this.key == 'x' && ctrl) this.win.cut();
-		else if(this.key == 'v' && ctrl) this.win.paste();
+		System.out.println(this.key+ ", "+this.keyCode + " : "+ctrl);
+		System.out.println(this.key=='c'&&ctrl);
 
-		else if(this.key == 'n' && ctrl) this.win.clear();
-		else if(this.key == 'o' && ctrl){
+		if(this.keyCode == 90 && ctrl) this.win.deleteLast();
+		else if(this.keyCode == 89 && ctrl) this.win.restoreLast();
+		else if(this.keyCode == 67 && ctrl) this.win.copy();
+		else if(this.keyCode == 88 && ctrl) this.win.cut();
+		else if(this.keyCode == 86 && ctrl) this.win.paste();
+
+		else if(this.keyCode == 78 && ctrl) this.win.clear();
+		else if(this.keyCode == 79 && ctrl){
 			try {
 				this.win.open("C:/Users/Mei ^.^/Desktop/drawing.polly");
 			} catch (ClassNotFoundException | IOException e) {
@@ -125,7 +128,7 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
 				e.printStackTrace();
 			}
 		}
-		else if(this.key == 's' && ctrl){
+		else if(this.keyCode == 83 && ctrl){
 			try {
 				this.win.save("C:/Users/Mei ^.^/Desktop/drawing.polly");
 			} catch (IOException e) {
@@ -134,10 +137,10 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
 			}
 		}
 
-		else if(this.key == 'e' && ctrl) this.win.exportAs("test", ".png");
-		else if(this.key == 'g' && ctrl) this.win.toggleGroup();
-		else if(this.key == 'a' && ctrl) this.win.toggleComments(); //Toggles Annotations
-		else if(this.key == 'b' && ctrl) this.win.toggleGrid();  //Toggles boxes on screen (grid)
+		else if(this.keyCode == 69 && ctrl) this.win.exportAs("test", ".png");
+		else if(this.keyCode == 71 && ctrl) this.win.toggleGroup();
+		else if(this.keyCode == 65 && ctrl) this.win.toggleComments(); //Toggles Annotations
+		else if(this.keyCode == 66 && ctrl) this.win.toggleGrid();  //Toggles boxes on screen (grid)
 
 		else if(this.key == '<') this.win.changeThickness(-0.1F);
 		else if(this.key == '>') this.win.changeThickness(0.1F);
