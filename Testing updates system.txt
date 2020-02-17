@@ -1,9 +1,21 @@
+Testing (2/17, started at 2PM, will return to this)
+
+Issues
+- Trash doens't work for comments
+- Saving cut off a section of the border (15)
+- Toggle Grid button still missing
+
+Design choices notes
+
+Successful tests run
+- Trash works for text
+
 Testing (2/16, 8:40PM-10PM) Pulled once at 8:40PM
 New notes/issues are noted here-some stuff from earlier tests today might still be relevant.
 
 Issues
 - There's no toggleGrid() button anymore?
-- Trash doesn't work for comments or text
+- Trash doesn't work for comments or text [RESOLVED for text, NOT RESOLVED for comments]
 - Using the up/down arrows when an object is selected will rescale the object, not the canvas.
 - Copy/pasting a freeDrawn object that is filled doesn't reflect the freeDrawn object's fill color or rotation (does reflect border color and size changes)
 - Copy/paste error when I tried to paste a filled curve. 

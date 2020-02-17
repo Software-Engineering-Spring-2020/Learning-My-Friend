@@ -1,0 +1,24 @@
+To zoom in and out of the canvas:
+- Make sure that no objects are selected. If no objects are selected, the canvas will default to being selected.
+- Tap the up arrow button to zoom in, and the down arrow button to zoom out. You can also scroll your mouse up to zoom in, and scroll your mouse down to zoom out.
+
+To write text:
+- Type text into the text box
+- Hit enter
+- Click the "TEXT" button
+- Click on the screen where you want your text to appear
+
+To write comments: 
+- Type text into the text box
+- Hit enter
+- Click the "COMMENT" button
+- Click on the screen where you want your text to appear
+- Click the "TOGGLE COMMENTS" button to make your comments appear or disappear.
+
+To print your drawing:
+Only the DrawSpace (the white section of the screen that you draw on) will be saved.
+- Click "export"
+- Choose a name for your file and location to save your file
+- Exit PollyPaint and go to the file you just saved. 
+- Click on the file to open it; your file will open as a PNG with whatever program your computer uses to open PNGS, such as Photos
+- Use the program your computer uses to open PNGS to print your image
