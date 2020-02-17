@@ -59,32 +59,37 @@ public class GUI {
  */
   String currentString = "";
 
-
+  // count to pass to IOhandler
   int polyCount = 3;
-  /**
-   * End of STATE Deleration
-   */
+
+  boolean toggleFill = true;
 
   /**
-   * [GUI constructor]
-   *
-   * @param sketch [PApplet sketch]
-   * @param win    [Windows from selected backend]
-   */
+  * End of STATE Deleration
+  */
+
+  /**
+  * [GUI constructor]
+  *
+  * @param sketch [PApplet sketch]
+  * @param win    [Windows from selected backend]
+  */
   public GUI(PApplet sketch, Window win) {
-    this.sketch = sketch;
-    this.win = win;
-    cp5 = new ControlP5(sketch);
-    tbList = new LinkedList<FToolbar>();
+  this.sketch = sketch;
+  this.win = win;
+  cp5 = new ControlP5(sketch);
+  tbList = new LinkedList<FToolbar>();
 
-    lastAppletWidth = sketch.width;
-    lastAppletHeight = sketch.height;
+  lastAppletWidth = sketch.width;
+  lastAppletHeight = sketch.height;
 
-    setup();
+  setup();
+}
+
+
+  public void toggleFill(){
+    toggleFill = !toggleFill;
   }
-
-
-
 
   public void setPolyCount(int i){
     polyCount = i;
@@ -288,8 +293,10 @@ public class GUI {
     if(c == 'a')
       fillColor[3] = i;
     //win.setFillColor(fillColor[0], fillColor[1], fillColor[2], fillColor[3]);
-    win.setFillColor(fillColor[0], fillColor[1], fillColor[2], 255);
-    setBoarder(i, c);
+    if(toggleFill)
+      win.setFillColor(fillColor[0], fillColor[1], fillColor[2], 255);
+    else
+      setBoarder(i, c);
    }
 
 
@@ -359,7 +366,7 @@ public class GUI {
     ft.addFController(rSlider);
     ft.addFController(gSlider);
     ft.addFController(bSlider);
-
+    ft.addFController(new TogFillButton(cp5, ft, this));
     ft.addFController(new Textbox(cp5, ft, this));
 
     ft.addFController(new GroupButton(cp5, ft, this));
