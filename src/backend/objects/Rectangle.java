@@ -12,6 +12,7 @@ class Rectangle extends Shape implements Serializable {
         this.pixelWidth = w;
         this.pixelHeight = h;
         shape = sketch.createShape(PConstants.RECT, 0, 0, this.pixelWidth, this.pixelHeight);
+        setFillColor(255,255,255,0);
         setSettings();
     }
 

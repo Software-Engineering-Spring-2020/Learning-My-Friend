@@ -3,6 +3,7 @@ import backend.Shape;
 import processing.core.PApplet;
 import processing.core.PVector;
 import processing.core.PConstants;
+import processing.core.PShape;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ class FreeForm extends Shape implements Serializable {
       this.points.add(point);
     }
     createShape(points);
+    setFillColor(255,255,255,0);
     setSettings();
   }
 
@@ -26,15 +28,10 @@ class FreeForm extends Shape implements Serializable {
     setSettings();
   }
 
-  protected void setSettings(){
-    setFillColor(255,255,255,0);
-    shape.setStroke(sketch.color(boarderColor[0], boarderColor[1], boarderColor[2]));
-    setStrokeWeight(strokeWeight);
-  }
-
   protected void createShape(ArrayList<float[]> points){
     float xmin = Float.MAX_VALUE, ymin = Float.MAX_VALUE, xmax = Float.MIN_VALUE, ymax = Float.MIN_VALUE;
 
+    shape = sketch.createShape(PShape.PATH);
     shape.beginShape();
     for(int i = 0; i<points.size(); i++){
       float[] pos = new float[]{points.get(i)[0], points.get(i)[1]};
@@ -54,7 +51,7 @@ class FreeForm extends Shape implements Serializable {
 
   protected boolean withinScope(float x, float y) {
     boolean yes = super.withinScope(x, y);
-    System.out.println(shape.contains(x-xcenter+xpos, y-ycenter+ypos));
+    System.out.println(shape.contains(-xcenter+xpos, -ycenter+ypos));
     return yes;
   }
 

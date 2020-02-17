@@ -12,7 +12,7 @@ public abstract class Shape extends ColorfulObject implements Serializable {
   public Shape(PApplet sketch, float x, float y, float strokeWeight, int[] fillColor, int[] boarderColor){
     super(sketch, x, y, strokeWeight, fillColor, boarderColor);
     //this.strokeWeight = strokeWeight;
-    shape = sketch.createShape(PShape.PATH);
+    shape = sketch.createShape();
   }
 
   protected void init(PApplet sketch){

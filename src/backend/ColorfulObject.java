@@ -22,6 +22,14 @@ public abstract class ColorfulObject extends PollyObject implements Serializable
     this.fillColor[3] = fillColor[3];
   }
 
+  protected void init(PApplet sketch){
+    super.init(sketch);
+    this.strokeWeight = strokeWeight;
+    offset += strokeWeight;
+    //setBoarderColor(boarderColor[0],boarderColor[1],boarderColor[2]);
+    //setFillColor(fillColor[0], fillColor[1], fillColor[2], fillColor[3]);
+  }
+
   protected void setBoarderColor(int r, int g, int b){
     boarderColor[0] = r;
     boarderColor[1] = g;

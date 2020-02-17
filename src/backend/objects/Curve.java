@@ -20,7 +20,7 @@ class Curve extends ColorfulObject implements Serializable{
 
   protected void init(PApplet sketch){
     super.init(sketch);
-    setSettings(points);
+    setSettings(this.points);
   }
 
   protected void setSettings(ArrayList<float[]> points){
