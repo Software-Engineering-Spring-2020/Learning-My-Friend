@@ -347,13 +347,13 @@ public class GUI {
     rSlider.slider.setColorActive(sketch.color(255,0,0));
     rSlider.slider.setColorForeground(sketch.color(255,0,0));
 
-    gSlider.slider.setColorBackground(sketch.color(0,100,0));
-    gSlider.slider.setColorActive(sketch.color(0,255,0));
-    gSlider.slider.setColorForeground(sketch.color(0,255,0));
+    bSlider.slider.setColorBackground(sketch.color(0,100,0));
+    bSlider.slider.setColorActive(sketch.color(0,255,0));
+    bSlider.slider.setColorForeground(sketch.color(0,255,0));
 
-    bSlider.slider.setColorBackground(sketch.color(0,0,100));
-    bSlider.slider.setColorActive(sketch.color(0,0,255));
-    bSlider.slider.setColorForeground(sketch.color(0,0,255));
+    gSlider.slider.setColorBackground(sketch.color(0,0,100));
+    gSlider.slider.setColorActive(sketch.color(0,0,255));
+    gSlider.slider.setColorForeground(sketch.color(0,0,255));
 
 
     ft.addFController(rSlider);
