@@ -183,7 +183,6 @@ public class Window {
 
       if(shapePoints.size() >= numberVertex){
         PollyObject obj = of.createEllipse(shapePoints.get(0)[0], shapePoints.get(0)[1], Math.abs(shapePoints.get(0)[0] - shapePoints.get(1)[0]), Math.abs(shapePoints.get(1)[0] - shapePoints.get(1)[1]), strokeWeight, fillColor, boarderColor);
-        //shapePoints.clear();
         return ds.addObject(obj);
 
       }
@@ -406,6 +405,7 @@ public class Window {
             if (!ds.removeObject(shape))
                 successful = false;
         }
+        selected.clear();
         return successful;
     }
 
