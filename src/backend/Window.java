@@ -42,7 +42,7 @@ public class Window {
         sketch.stroke(boarderColor[0], boarderColor[1], boarderColor[2]);
         sketch.strokeWeight(strokeWeight);
         if(size != ds.getNumObjects()) newToolSelection();
-        
+
         for (int i = 0; i < freePoints.size() - 1; i++) {
             if (freePoints.size() > 1)
                 sketch.line(freePoints.get(i)[0], freePoints.get(i)[1], freePoints.get(i + 1)[0],
@@ -505,7 +505,7 @@ public class Window {
         curvePoints.add(v);
     }
 
-    public void createLine(float pmousex, float pmousey){
+    public void createLine(float pmouseX, float pmouseY){
         createPollyGon(pmouseX, pmouseY, 2);
     }
 
