@@ -142,18 +142,18 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
 		else if(this.keyCode == 65 && ctrl) this.win.toggleComments(); //Toggles Annotations
 		else if(this.keyCode == 66 && ctrl) this.win.toggleGrid();  //Toggles boxes on screen (grid)
 
-		else if(this.key == '<') this.win.changeThickness(-0.1F);
-		else if(this.key == '>') this.win.changeThickness(0.1F);
+		else if(this.key == '<') this.win.changeThickness(-.5F);
+		else if(this.key == '>') this.win.changeThickness(0.5F);
 		else if(this.key == '{') this.win.changeGridSpacing(-5);
 		else if(this.key == '}') this.win.changeGridSpacing(5);
 		else if(this.key == '|') this.win.createLine(this.mouseX, this.mouseY);
 		else if(this.key == 'P') this.win.createPollyGon(this.mouseX, this.mouseY, 3);
 
 
-		else if(this.key == 'R') this.win.createRect(this.mouseX, this.mouseY);
-		else if(this.key == 'T') this.win.createTextBox(this.mouseX, this.mouseY, "This is Text!", "arial", 12);
-		else if(this.key == 'A') this.win.createComment(this.mouseX, this.mouseY, "This is Comment!", "arial", 12);
-		else if(this.key == 'C') this.win.createEllipse(this.mouseX, this.mouseY);
+		//else if(this.key == 'R') this.win.createRect(this.mouseX, this.mouseY);
+		//else if(this.key == 'T') this.win.createTextBox(this.mouseX, this.mouseY, "This is Text!", "arial", 12);
+		//else if(this.key == 'A') this.win.createComment(this.mouseX, this.mouseY, "This is Comment!", "arial", 12);
+		//else if(this.key == 'C') this.win.createEllipse(this.mouseX, this.mouseY);
 
 		else if(this.keyCode == 127) this.win.deleteSelected();  //delete
 		else if(this.keyCode == 37) this.win.rotate(-1); //left

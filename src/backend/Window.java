@@ -94,6 +94,7 @@ public class Window {
     public void newToolSelection(){
       pollyPoints.clear();
       curvePoints.clear();
+      shapePoints.clear();
     }
 
     /*********************************************************
@@ -166,24 +167,27 @@ public class Window {
     public boolean createEllipse(float x, float y, float d) {
         return createEllipse(x, y, d, d);
     }
-
+/*
     public boolean createEllipse(float x, float y){
       return createEllipse(x, y, 20, 20);
-    }
-
-  /*  public boolean createEllipse(float x, float y) {
-        //return createEllipse(x, y, 100, 50);
-        numberVertex = 2;
-        float[] coord = ds.translateCoordinates(x, y, zoom);
-        if (ds.withinScope(coord[0], coord[1])) shapePoints.add(coord);
-
-        System.out.println(numberVertex>=shapePoints.size());
-        if(shapePoints.size() >= numberVertex){
-          PollyObject obj = of.createEllipse(shapePoints.get(0)[0], shapePoints.get(0)[1], Math.abs(shapePoints.get(0)[0] - shapePoints.get(1)[0]), Math.abs(shapePoints.get(1)[0] - shapePoints.get(1)[1]), strokeWeight, fillColor, boarderColor);
-          return ds.addObject(obj);
-          }
-          return false;
     }*/
+
+
+
+
+    public boolean createEllipse(float x, float y) {
+      this.numberVertex = 2;
+      this.size = ds.getNumObjects();
+      float[] coord = ds.translateCoordinates(x, y, zoom);
+      shapePoints.add(coord);
+
+      if(shapePoints.size() >= numberVertex){
+        PollyObject obj = of.createEllipse(shapePoints.get(0)[0], shapePoints.get(0)[1], Math.abs(shapePoints.get(0)[0] - shapePoints.get(1)[0]), Math.abs(shapePoints.get(1)[0] - shapePoints.get(1)[1]), strokeWeight, fillColor, boarderColor);
+        return ds.addObject(obj);
+
+      }
+        return false;
+    }
 
     public boolean createRect(float x, float y, float w, float h) {
         PollyObject obj = null;
@@ -401,6 +405,7 @@ public class Window {
             if (!ds.removeObject(shape))
                 successful = false;
         }
+        selected.clear();
         return successful;
     }
 
@@ -541,8 +546,7 @@ public class Window {
 
     public void exportAs(String saveName, String extension){
         reCenter();
-        float[] dim = ds.getDimensions();
-        PImage toSave = sketch.get((int)dim[0], (int)dim[1], (int)dim[2]+1, (int)dim[3]+1);
+        PImage toSave = sketch.get((int)XINIT, (int)YINIT, (int)WIDTH+1, (int)HEIGHT+1);
         toSave.save(saveName+extension);
     }
 
