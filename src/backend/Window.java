@@ -87,7 +87,6 @@ public class Window {
     }
 
     public void newToolSelection(){
-      freePoints.clear();
       pollyPoints.clear();
       curvePoints.clear();
     }
