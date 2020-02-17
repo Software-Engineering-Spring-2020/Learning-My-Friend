@@ -1,3 +1,44 @@
+Testing (2/16, 8:40PM-10PM) Pulled once at 8:40PM
+New notes/issues are noted here-some stuff from earlier tests today might still be relevant.
+
+Issues
+- There's no toggleGrid() button anymore?
+- Trash doesn't work for comments or text
+- Using the up/down arrows when an object is selected will rescale the object, not the canvas.
+- Copy/pasting a freeDrawn object that is filled doesn't reflect the freeDrawn object's fill color or rotation (does reflect border color and size changes)
+- Copy/paste error when I tried to paste a filled curve. 
+- Copy/paste error when I tried to paste a regular curve.
+- Copy/pasting a line object doesn't reflect if it's been resized/rotated
+- Error message when I tried to save (10)
+- I'm having a hard time selecting lines/PollyGons (even while trying to click on the line or its initial start point). I think I was previously able to select them at least some of the time. Later edit: It's because the bounding boxes for PollyGons, and presumably lines, aren't always aligned with the object (14) They also don't align when the PollyGon rotates.
+- Bounding boxes don't follow a freeDraw object when rotated (11)
+- Bounding boxes don't line up when lines are resized/rotated (can't get an image since I can no longer select lines?)
+- Export works (exports files as PNG)
+- Saving doesn't save polygons. It also does't preserve a freeDraw shape's fill color.
+- I wasn't able to open a saved file. The only difference between this file and a previous file was that I added/saved a curve. (12)
+- Import doesn't work for PDF or SVG files (mentioned in the requirements. An SVG is a type of file that doesn't use pixels, which makes it more scalable.) Got error message "Could not find a method to load [filename]"
+- Bounding boxes work for imported images if you rotate and resize them, but not when you pan them. (13)
+- Import doesn't preserve the color, fill, or rotation of a PollyGon.
+- As an FYI, the console is printing a bunch of statements.
+
+(New) design choices notes
+- It's not super intuitive what "Polly" does
+- There's no way to change the color of just a curve or open freeDraw. If you try to do this, it will "fill" the curve or freeDraw. This is due to there not being a way to change just the border color. (8)
+- Importing a large image: it fills the entire screen. Though, you can select/resize the image.
+
+Successful tests run
+- Polly creates shapes with the correct amount of points. Lines are drawn in the order that the dots are clicked.
+- Import allows you to import images: the file explorer works great! Imported images can be rotated, scaled, etc. Tested png, jpeg, gif
+- After trashing objects, the bounding boxes remain. But when you click away, they disappear.
+- Bounding boxes align with freeDraw objects!
+- When you change the colorSelector and freeDraw, the freeDrawn object is the same color as the color selector. (If you select it and move the color selector, it fills the shape). Lines are also drawn as the color that is selected.
+- Rotate and resize now align with the numbers on the bars. Dragging to 1 or -1 doesn't cause the shape to continue rotating/resizing.
+- Text, shapes, and comments will copy/paste correctly. Sizing, color, and rotation is maintained.
+- Copy/pasting works for lines, curves, rectangles, text, ellipses, etc. Maintains fill color.
+- Saving works for shapes, text, and comments. Accounts for rotation/fill/resizing.
+- Error message pops up if you try to save a file with characters that aren't allowed
+- Warning message pops up if you try to save a file with the same name as a previous file
+
 Testing (2/16, 2:30PM-3:40PM)
 
 Notes
@@ -6,9 +47,9 @@ Notes
 
 Issues
 - Got a nullPointerException when I tried to add a comment and toggle comments. This was before I knew you had to hit enter after inputting text. I'm still noting it here though. (1) 
-- Resize/rotate buttons seem to work so that if click anywhere left, it makes it smaller or rotates left, and if you click anywhere right, it makes it bigger or rotates right. Apart from that, where you click on the bar doesn't seem to matter that much. It also isn't super intuitive (so, clicking all the way right or left doesn't rotate the shape very much. To me, the bar would imply that clicking right or left brings it to an extreme). See design choices notes for thoughts on usability.
-- If you drag all the way to 1 or -1 for rotate or resize, the shape rotates or resizes consistently. When you drag the mouse bag and lift it, the shape stays frozen at that rotation.
-- Bounding boxes don't line up with freeDraw objects. There's also a random dot that pans along with it. But the dot moves different amounts when it pans. (6, look in the upper right corner for dot)
+- Resize/rotate buttons seem to work so that if click anywhere left, it makes it smaller or rotates left, and if you click anywhere right, it makes it bigger or rotates right. Apart from that, where you click on the bar doesn't seem to matter that much. It also isn't super intuitive (so, clicking all the way right or left doesn't rotate the shape very much. To me, the bar would imply that clicking right or left brings it to an extreme). See design choices notes for thoughts on usability. [RESOLVED]
+- If you drag all the way to 1 or -1 for rotate or resize, the shape rotates or resizes consistently. When you drag the mouse bag and lift it, the shape stays frozen at that rotation. [RESOLVED]
+- Bounding boxes don't line up with freeDraw objects. There's also a random dot that pans along with it. But the dot moves different amounts when it pans. (6, look in the upper right corner for dot) [RESOLVED]
 - Once, when I had text boxes and a rectangle multiselected, the rectangle didn't rotate with the text boxes. I also was not able to re-select the text boxes once they were rotated. This may have been a fluke.
 - When text boxes and rectangles do both rotate, the text boxes rotate more than the rectangles.
 - Error message while trying to paste (7)
@@ -20,13 +61,13 @@ Design choices / missing functionality
 - There isn't a clear all button
 - It may be nice to make the color of the grid gray so it doesn't overaly the shapes as much. There also isn't a way to change the grid size (but I don't think this is super important / might clutter up UI).
 - Text works if you input the text, hit enter, then press the text box, then click the screen. It took me a while to figure out how to do it, so if there's a way to make it more user-friendly, that would be great.
-- Usability wise, it may be better to make resize() an "increase size" and "decrease size" button, since that seems to be how it's functioning anyway (increasing if you click right, decreasing left).
-- Ditto for the rotate button: we could have a rotateLeft() and rotateRight()
+- Usability wise, it may be better to make resize() an "increase size" and "decrease size" button, since that seems to be how it's functioning anyway (increasing if you click right, decreasing left). [RESOLVED]
+- Ditto for the rotate button: we could have a rotateLeft() and rotateRight() [RESOLVED]
 - It may be good to highlight buttons when they're clicked/active. It can be hard to see if you have select clicked, for example.
 - Might be too late / not worth this, but I'm not sure grouping offers much more functionalty than multiselect. I think it makes it a bit more confusing for the user.
 - We don't have gradients or spellcheck (but have decided not to implement this)
 - Comments can't be dragged/created far off the drawSpace: they're like other objects in this regard.
-- There isn't a way to zoom the canvas.
+- There isn't a way to zoom the canvas. [RESOLVED, sort of]
 
 Changes from testing document
 - You can't input problematic numerical elements (like for coordinates or RGB values) based on the GUI
