@@ -1,41 +1,59 @@
-Testing (2/17, started at 2PM, will return to this)
+Testing (2/17, 2:50PM-3:50PM) Pulled once at 2:50PM
 
 Issues
 - Trash doens't work for comments
-- Saving cut off a section of the border (15)
 - Toggle Grid button still missing
-
-Design choices notes
+- The fill of a curve isn't preserved when copy-pasting (but all other elements are)
+- Can't easily select lines (bounding boxes not aligned)
+- Can't easily select PollyGons (bounding boxes not aligned. They seem to be more aligned the more rectangular a PollyGon is)
+- Error message when I tried to save (16), but I was able to successfully open the file later
+- Export cut off a section of the border for one instance (15) and a larger section of the border for another instance (17). I think it might be saving a certain section of the screen, rather than the DrawSpace (so if the DrawSpace is panned/zoomed, it doesn't export correctly).
+- Open didn't preserve the fill/location of a curve (17 is the original drawing, which was exported and saved. 18 is an image of 17 after it was opened)
+- Import doesn't work for pdf files. I have Adobe Acrobot: not sure if that makes a difference.
+- Program froze at one point: I was probably trying to do too much with it at once. I think I got an error message (19) around this time.
+- Exporting a PollyGon looked strange (20 is the screenshot, 21 is the export)
+- Saving/opening a drawing with a PollyGon preserved the PollyGon's rotation/color/size, but not its location.
+- DrawSpace doesn't adjust when window is resized.
+- Save/import doesn't preserve the fill/location of curves.
 
 Successful tests run
 - Trash works for text
+- Curves can be easily selected
+- Rotation, size, and line color remain the same when copy-pasting a curve
+- Bounding boxes align with free-drawn objects when they're rotated
+- Saving/importing works for curves, freeDrawn filled objects
+- Can select curves
+- Saving maintains a FreeDraw object's fill color, and also saves PollyGons
+- Import works for svg files
+- Bounding boxes work for imported images when you rotate and also pan them (for panning, they don't follow the image exactly, but they're pretty close
+- Resizing window works pretty well: toolbars adjust. The canvas doesn't move, but you can pan/zoom it.
+- Export preserves curve fill/location/rotation for all elements. Export doesn't show comments.
 
 Testing (2/16, 8:40PM-10PM) Pulled once at 8:40PM
 New notes/issues are noted here-some stuff from earlier tests today might still be relevant.
 
-Issues
-- There's no toggleGrid() button anymore?
-- Trash doesn't work for comments or text [RESOLVED for text, NOT RESOLVED for comments]
+Issues (added notes as of 2/17, 2:50PM test)
+- There's no toggleGrid() button anymore? [NOT RESOLVED]
+- Trash doesn't work for comments or text [PARTIALLY RESOLVED]
 - Using the up/down arrows when an object is selected will rescale the object, not the canvas.
 - Copy/pasting a freeDrawn object that is filled doesn't reflect the freeDrawn object's fill color or rotation (does reflect border color and size changes)
-- Copy/paste error when I tried to paste a filled curve. 
-- Copy/paste error when I tried to paste a regular curve.
+- Copy/paste error when I tried to paste a filled curve. [PARTIALLY RESOLVED]
+- Copy/paste error when I tried to paste a regular curve. [RESOLVED]
 - Copy/pasting a line object doesn't reflect if it's been resized/rotated
 - Error message when I tried to save (10)
-- I'm having a hard time selecting lines/PollyGons (even while trying to click on the line or its initial start point). I think I was previously able to select them at least some of the time. Later edit: It's because the bounding boxes for PollyGons, and presumably lines, aren't always aligned with the object (14) They also don't align when the PollyGon rotates.
-- Bounding boxes don't follow a freeDraw object when rotated (11)
-- Bounding boxes don't line up when lines are resized/rotated (can't get an image since I can no longer select lines?)
-- Export works (exports files as PNG)
-- Saving doesn't save polygons. It also does't preserve a freeDraw shape's fill color.
-- I wasn't able to open a saved file. The only difference between this file and a previous file was that I added/saved a curve. (12)
-- Import doesn't work for PDF or SVG files (mentioned in the requirements. An SVG is a type of file that doesn't use pixels, which makes it more scalable.) Got error message "Could not find a method to load [filename]"
-- Bounding boxes work for imported images if you rotate and resize them, but not when you pan them. (13)
-- Import doesn't preserve the color, fill, or rotation of a PollyGon.
-- As an FYI, the console is printing a bunch of statements.
+- I'm having a hard time selecting lines/PollyGons (even while trying to click on the line or its initial start point). I think I was previously able to select them at least some of the time. Later edit: It's because the bounding boxes for PollyGons, and presumably lines, aren't always aligned with the object (14) They also don't align when the PollyGon rotates. [NOT RESOLVED]
+- Bounding boxes don't follow a freeDraw object when rotated (11) [RESOLVED]
+- Bounding boxes don't line up when lines are resized/rotated (can't get an image since I can no longer select lines?) [RESOLVED]
+- Saving doesn't save polygons. It also does't preserve a freeDraw shape's fill color. [RESOLVED]
+- I wasn't able to open a saved file. The only difference between this file and a previous file was that I added/saved a curve. (12) [RESOLVED]
+- Import doesn't work for PDF or SVG files (mentioned in the requirements. An SVG is a type of file that doesn't use pixels, which makes it more scalable.) Got error message "Could not find a method to load [filename]" [PARTIALLY RESOLVED]
+- Bounding boxes work for imported images if you rotate and resize them, but not when you pan them. (13) [RESOLVED]
+- Import doesn't preserve the color, fill, or rotation of a PollyGon. [PARTIALLY RESOLVED]
+- As an FYI, the console is printing a bunch of statements. [NOT RESOLVED]
 
 (New) design choices notes
 - It's not super intuitive what "Polly" does
-- There's no way to change the color of just a curve or open freeDraw. If you try to do this, it will "fill" the curve or freeDraw. This is due to there not being a way to change just the border color. (8)
+- There's no way to change the color of just a curve or open freeDraw. If you try to do this, it will "fill" the curve or freeDraw. This is due to there not being a way to change just the border color. (8) [NOT RESOLVED]
 - Importing a large image: it fills the entire screen. Though, you can select/resize the image.
 
 Successful tests run
@@ -50,6 +68,7 @@ Successful tests run
 - Saving works for shapes, text, and comments. Accounts for rotation/fill/resizing.
 - Error message pops up if you try to save a file with characters that aren't allowed
 - Warning message pops up if you try to save a file with the same name as a previous file
+- Export works (exports files as PNG)
 
 Testing (2/16, 2:30PM-3:40PM)
 

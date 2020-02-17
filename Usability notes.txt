@@ -5,19 +5,25 @@ To zoom in and out of the canvas:
 To write text:
 - Type text into the text box
 - Hit enter
-- Click the "TEXT" button
+- Click the "TEXT" button on the left
 - Click on the screen where you want your text to appear
 
 To write comments: 
 - Type text into the text box
 - Hit enter
-- Click the "COMMENT" button
+- Click the "COMMENT" button on the left
 - Click on the screen where you want your text to appear
-- Click the "TOGGLE COMMENTS" button to make your comments appear or disappear.
+- Click the "TOGGLECOMMENTS" button on the top to make your comments appear or disappear
+
+To create a custom pollygon:
+- Decide how many sides you want your pollygon to have
+- Click so that the "Polly" bar on the right shows the same number as the sides you want your pollygon to have
+- Click on the screen where you want the points of your pollygon to be
+- When you've clicked enough times, PollyPaint will connect the points that you clicked to make your pollygon
 
 To print your drawing:
 Only the DrawSpace (the white section of the screen that you draw on) will be saved.
-- Click "export"
+- Click the "EXPORT" button on the top
 - Choose a name for your file and location to save your file
 - Exit PollyPaint and go to the file you just saved. 
 - Click on the file to open it; your file will open as a PNG with whatever program your computer uses to open PNGS, such as Photos
