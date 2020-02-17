@@ -11,7 +11,6 @@ public abstract class Shape extends ColorfulObject implements Serializable {
 
   public Shape(PApplet sketch, float x, float y, float strokeWeight, int[] fillColor, int[] boarderColor){
     super(sketch, x, y, strokeWeight, fillColor, boarderColor);
-    //this.strokeWeight = strokeWeight;
     shape = sketch.createShape();
   }
 
@@ -51,8 +50,24 @@ public abstract class Shape extends ColorfulObject implements Serializable {
     shape.setFill(sketch.color(sketch.color(fillColor[0], fillColor[1], fillColor[2]), fillColor[3]));
   }
 
-  protected void setRelativeRotate(float ro) {
-    super.setRelativeRotate(ro);
+  protected void setRelativeRotate(float r) {
+    super.setRelativeRotate(r);
     shape.rotate((float)Math.toRadians(ro));
   }
+
+  /*
+
+  protected void setRotate(float r) {
+      super.setRotate(r);
+      sketch.translate(xcenter, ycenter);
+      ro = r - prevRot;
+      shape.rotate((float)Math.toRadians(ro));
+      prevRot = r;
+  }
+
+  protected void display() {
+      sketch.translate(xcenter, ycenter);
+      //sketch.rotate((float) Math.toRadians(ro));
+      sketch.scale(zoom);
+   }*/
 }

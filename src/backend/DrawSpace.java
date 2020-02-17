@@ -2,6 +2,7 @@ package backend;
 import java.util.ArrayList;
 import processing.core.PApplet;
 import processing.core.PConstants;
+import backend.objects.Comment;
 
 class DrawSpace extends ColorfulObject{
     private float xcenter, ycenter;
@@ -114,6 +115,7 @@ class DrawSpace extends ColorfulObject{
     }
 
     protected boolean removeObject(PollyObject shape){
+      if(shape instanceof Comment) return removeComment(shape);
         return objects.remove(shape);
     } protected PollyObject removeObject(int i){
         return objects.remove(i);

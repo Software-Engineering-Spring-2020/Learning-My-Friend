@@ -7,7 +7,7 @@ import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PConstants;
 
-class Comment extends TextBox implements Serializable {
+public class Comment extends TextBox implements Serializable {
   private static final long serialVersionUID = 1L;
     private PollyObject source;
 

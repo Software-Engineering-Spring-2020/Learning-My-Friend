@@ -13,6 +13,7 @@ public class Window {
     private ArrayList<float[]> freePoints = new ArrayList<float[]>();
     private ArrayList<float[]> pollyPoints = new ArrayList<float[]>();
     private ArrayList<float[]> curvePoints = new ArrayList<float[]>();
+    private ArrayList<float[]> shapePoints = new ArrayList<float[]>();
     private PApplet sketch;
     private DrawSpace ds;
     private ObjectFactory of;
@@ -62,6 +63,10 @@ public class Window {
           if (i >= 1)
               sketch.line(pollyPoints.get(i-1)[0], pollyPoints.get(i-1)[1], pollyPoints.get(i)[0],
               pollyPoints.get(i)[1]);
+        }
+
+        for (int i = 0; i < shapePoints.size(); i++) {
+          sketch.ellipse(shapePoints.get(0)[0], shapePoints.get(0)[1], coord[0]-shapePoints.get(0)[0], coord[1]-shapePoints.get(0)[1]);
         }
         sketch.pop();
 
@@ -148,24 +153,37 @@ public class Window {
      *
      *
      *********************************************************/
-
-    public boolean createEllipse(float x, float y, float w, float h) {
-        PollyObject obj = null;
-        float[] coord = ds.translateCoordinates(x, y, zoom);
-        if (ds.withinScope(coord[0], coord[1]))
-            obj = of.createEllipse(coord[0], coord[1], w, h, strokeWeight, fillColor, boarderColor);
+     public boolean createEllipse(float x, float y, float w, float h) {
+       PollyObject obj = null;
+       float[] coord = ds.translateCoordinates(x, y, zoom);
+       if (ds.withinScope(coord[0], coord[1]))
+          obj = of.createEllipse(coord[0], coord[1], w, h, strokeWeight, fillColor, boarderColor);
         if (obj != null)
             return ds.addObject(obj);
         return false;
-    }
+     }
 
     public boolean createEllipse(float x, float y, float d) {
         return createEllipse(x, y, d, d);
     }
 
-    public boolean createEllipse(float x, float y) {
-        return createEllipse(x, y, 100, 50);
+    public boolean createEllipse(float x, float y){
+      return createEllipse(x, y, 20, 20);
     }
+
+  /*  public boolean createEllipse(float x, float y) {
+        //return createEllipse(x, y, 100, 50);
+        numberVertex = 2;
+        float[] coord = ds.translateCoordinates(x, y, zoom);
+        if (ds.withinScope(coord[0], coord[1])) shapePoints.add(coord);
+
+        System.out.println(numberVertex>=shapePoints.size());
+        if(shapePoints.size() >= numberVertex){
+          PollyObject obj = of.createEllipse(shapePoints.get(0)[0], shapePoints.get(0)[1], Math.abs(shapePoints.get(0)[0] - shapePoints.get(1)[0]), Math.abs(shapePoints.get(1)[0] - shapePoints.get(1)[1]), strokeWeight, fillColor, boarderColor);
+          return ds.addObject(obj);
+          }
+          return false;
+    }*/
 
     public boolean createRect(float x, float y, float w, float h) {
         PollyObject obj = null;
