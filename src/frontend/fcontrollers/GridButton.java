@@ -14,12 +14,12 @@ import frontend.controlP5.*;
 
 public class GridButton extends FButton{
   public GridButton(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "grid", parrent, gui);
+    super(cp5, "toggleGrid", parrent, gui);
     super.button.plugTo(this);
   }
 
 
-  public void grid(int val){
+  public void toggleGrid(int val){
     getGUI().toggleGrid();
 
   }
