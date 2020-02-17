@@ -230,11 +230,13 @@ public class GUI {
       System.out.println("Window was closed or the user hit cancel.");
     } else {
       String fname = selection.getAbsolutePath();
+      String fext = ".png";
       // trim the file extension first.
       if (fname.contains(".")) {
+        fext = fname.substring(fname.lastIndexOf('.'), fname.length());
         fname = fname.substring(0, fname.lastIndexOf('.'));
       }
-      win.importImage(fname, ".png");
+      win.importImage(fname, fext);
     }
  }
 

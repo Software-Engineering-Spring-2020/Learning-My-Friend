@@ -88,9 +88,9 @@ public abstract class PollyObject implements Serializable {
     }
 
     protected PVector[] getBoundingBoxPoints(float xcenter, float ycenter) {
-        float width = pixelWidth;
-        float height = pixelHeight;
-        offset /= zoom;
+        float width = pixelWidth*zoom;
+        float height = pixelHeight*zoom;
+        offset = 3;
         // this uses the existing bounding box system as much as possible
         // using width and height to generate four points
         // these points are NOT rotated per this PollyObject's rotation
@@ -140,7 +140,7 @@ public abstract class PollyObject implements Serializable {
 
     protected void display() {
         sketch.translate(xpos, ypos);
-        sketch.rotate(rot);
+        sketch.rotate((float) Math.toRadians(rot));
         sketch.scale(zoom);
      }
 
@@ -152,8 +152,11 @@ public abstract class PollyObject implements Serializable {
     }
 
     protected void resize(float factor) {
-        pixelHeight *= (1+factor);
-        pixelWidth *= (1+factor);
-        zoom = sketch.max(.1F, 1 + factor);
+        //pixelHeight *= (1+factor);
+        //pixelWidth *= (1+factor);
+        zoom = Math.max(.1F, 1 + factor);
+        sketch.println(pixelWidth+", "+pixelHeight);
+        //pixelHeight *= zoom;
+        //pixelWidth *= zoom;
     }
 }

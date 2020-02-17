@@ -16,8 +16,8 @@ public class RotateSlider extends FSlider{
   public RotateSlider(ControlP5 cp5, FToolbar parrent, GUI gui){
     super(cp5, "rotatel", parrent, gui);
     super.slider.plugTo(this);
-    super.slider.setMin(-1);
-    super.slider.setMax(1);
+    super.slider.setMin(-180);
+    super.slider.setMax(180);
     //super.slider.setColor(new CColor(0, 0,))
   }
 

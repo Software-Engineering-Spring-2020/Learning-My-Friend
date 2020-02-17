@@ -25,13 +25,14 @@ class Image extends PollyObject implements Serializable {
   }
 
   protected void display(){
+    super.display();
     if(img != null) sketch.image(img, xpos, ypos);
   	//if(img.width != 0) sketch.image(img, xpos, ypos);
   }
 
   protected void resize(float factor){
     super.resize(factor);
-    img.resize((int)((1+factor)*pixelWidth), 0);
+   // img.resize((int)((1+factor)*pixelWidth), 0);
   }
   protected void resize(float xfactor, float yfactor){
     //img.resize(xfactor, yfactor);
