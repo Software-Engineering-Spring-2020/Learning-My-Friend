@@ -22,8 +22,6 @@ class PollyGon extends Shape implements Serializable {
     createShape(points);
     setFillColor(255,255,255,0);
     setSettings();
-    this.pixelWidth = shape.width;
-    this.pixelHeight = shape.height;
   }
 
   protected void init(PApplet sketch){
@@ -49,8 +47,8 @@ class PollyGon extends Shape implements Serializable {
 
     if(points.size()>2) shape.endShape(PConstants.CLOSE);
     else shape.endShape();
-    pixelWidth = Math.abs(xmax - xmin);
-    pixelHeight = Math.abs(ymax - ymin);
+    pixelWidth = Math.abs(xmax) - Math.abs(xmin);
+    pixelHeight = Math.abs(ymax) - Math.abs(ymin);
     xcenter = (xmin + xmax)/2;
     ycenter = (ymin + ymax)/2;
   }

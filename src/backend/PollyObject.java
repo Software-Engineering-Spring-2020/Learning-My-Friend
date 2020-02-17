@@ -45,12 +45,12 @@ public abstract class PollyObject implements Serializable {
     }
 
     protected void setRelativeRotate(float r) {
-      prevRot = rot;
       ro = r - prevRot;
-      if(sketch.abs(ro) >= 1){
+      if(sketch.abs(ro) > 0){
         rot += ro;
         rot = rot%360;
       }
+        prevRot = r;
     }
 
     protected float[] getDimensions() {
@@ -140,7 +140,6 @@ public abstract class PollyObject implements Serializable {
 
     protected void display() {
         sketch.translate(xcenter, ycenter);
-        //sketch.translate(xpos, ypos);
         sketch.rotate((float) Math.toRadians(rot));
         sketch.scale(zoom);
      }

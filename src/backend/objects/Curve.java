@@ -15,12 +15,13 @@ class Curve extends ColorfulObject implements Serializable{
 
   Curve(PApplet sketch, float x, float y, ArrayList<float[]> points, float strokeWeight, int[] fillColor, int[] boarderColor){
     super(sketch, x, y, strokeWeight, fillColor, boarderColor);
+    setFillColor(255,255,255,0);
     setSettings(points);
   }
 
   protected void init(PApplet sketch){
     super.init(sketch);
-    setSettings((ArrayList<float[]>)this.points.clone());
+    setSettings(this.points);
   }
 
   protected void setSettings(ArrayList<float[]> points){
@@ -38,7 +39,6 @@ class Curve extends ColorfulObject implements Serializable{
       point[1] -= ypos;
       this.points.add(point);
     }
-    setFillColor(255,255,255,0);
   }
 
   protected void display(){
