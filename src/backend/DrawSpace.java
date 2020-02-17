@@ -147,11 +147,6 @@ class DrawSpace extends ColorfulObject{
         return comments.get(i);
     }
 
-
-    protected float[] getDimensions(){
-        return new float[]{xpos, ypos, pixelWidth, pixelHeight};
-    }
-
     protected void displayGrid(float spacing){
         for(float x = -pixelWidth/2; x<pixelWidth/2; x+=spacing) sketch.line(x, -pixelHeight/2, x, pixelHeight/2);
         for(float y = -pixelHeight/2; y<pixelHeight/2; y+=spacing) sketch.line(-pixelWidth/2, y, pixelWidth/2, y);

@@ -53,8 +53,8 @@ public abstract class PollyObject implements Serializable {
         prevRot = r;
     }
 
-    protected float[] getDimensions() {
-        return new float[]{-1, -1};
+    protected float[] getDimensions(){
+        return new float[]{xpos, ypos, pixelWidth, pixelHeight};
     }
 
     /* description: checks if the provided x, y are within the pivoted bounding box of this
