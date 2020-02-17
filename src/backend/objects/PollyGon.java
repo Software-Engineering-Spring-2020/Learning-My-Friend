@@ -47,8 +47,8 @@ class PollyGon extends Shape implements Serializable {
 
     if(points.size()>2) shape.endShape(PConstants.CLOSE);
     else shape.endShape();
-    pixelWidth = Math.abs(xmax) - Math.abs(xmin);
-    pixelHeight = Math.abs(ymax) - Math.abs(ymin);
+    pixelWidth = Math.abs(xmax - xmin);
+    pixelHeight = Math.abs(ymax - ymin);
     xcenter = (xmin + xmax)/2;
     ycenter = (ymin + ymax)/2;
   }
@@ -82,7 +82,6 @@ class PollyGon extends Shape implements Serializable {
 
   protected boolean withinScope(float x, float y) {
     boolean yes = super.withinScope(x, y);
-    System.out.println(shape.contains(-xcenter+xpos, -ycenter+ypos));
     return yes;
   }
 
