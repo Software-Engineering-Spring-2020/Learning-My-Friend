@@ -27,4 +27,9 @@ class Rectangle extends Shape implements Serializable {
       shape = sketch.createShape(PConstants.RECT, 0, 0, this.pixelWidth, this.pixelHeight);
       setSettings();
     }
+
+    protected void display(){
+      super.display();
+      sketch.shape(shape);
+    }
 }

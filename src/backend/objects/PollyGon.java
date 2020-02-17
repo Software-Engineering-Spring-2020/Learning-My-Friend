@@ -38,6 +38,28 @@ class PollyGon extends Shape implements Serializable {
 
   protected void createShape(ArrayList<float[]> points){
     float xmin = Float.MAX_VALUE, ymin = Float.MAX_VALUE, xmax = Float.MIN_VALUE, ymax = Float.MIN_VALUE;
+    shape.beginShape();
+
+    for(int i = 0; i<points.size(); i++){
+      float[] pos = new float[]{points.get(i)[0], points.get(i)[1]};
+      shape.vertex(pos[0]-xpos, pos[1]-ypos);
+      xmin = Math.min(pos[0], xmin);
+      ymin = Math.min(pos[1], ymin);
+      xmax = Math.max(pos[0], xmax);
+      ymax = Math.max(pos[1], ymax);
+    }
+
+    if(points.size()>2) shape.endShape(PConstants.CLOSE);
+    else shape.endShape();
+    pixelWidth = Math.abs(xmax - xmin);
+    pixelHeight = Math.abs(ymax - ymin);
+    xcenter = (xmin + xmax)/2;
+    ycenter = (ymin + ymax)/2;
+  }
+
+  /*
+  protected void createShape(ArrayList<float[]> points){
+    float xmin = Float.MAX_VALUE, ymin = Float.MAX_VALUE, xmax = Float.MIN_VALUE, ymax = Float.MIN_VALUE;
 
     for(int i = 0; i<points.size(); i++){
       float[] pos = new float[]{points.get(i)[0], points.get(i)[1]};
@@ -49,8 +71,8 @@ class PollyGon extends Shape implements Serializable {
 
     pixelWidth = Math.abs(xmax - xmin);
     pixelHeight = Math.abs(ymax - ymin);
-    xcenter = (xmin + xmax)/2;
-    ycenter = (ymin + ymax)/2;
+    xcenter = (xmin + pixelWidth)/2;
+    ycenter = (ymin + pixelHeight)/2;
 
     shape.beginShape();
     for(int i = 0; i<points.size(); i++){
@@ -60,10 +82,18 @@ class PollyGon extends Shape implements Serializable {
     if(points.size()>2) shape.endShape(PConstants.CLOSE);
     else shape.endShape();
   }
+  */
 
   protected boolean withinScope(float x, float y) {
     boolean yes = super.withinScope(x, y);
     System.out.println(shape.contains(x-xpos, y-ypos));
     return yes;
   }
+
+  protected void display() {
+      super.display();
+      sketch.translate(-xcenter+xpos, -ycenter+ypos);
+      sketch.shape(shape);
+   }
+
 }

@@ -34,8 +34,8 @@ class Curve extends ColorfulObject implements Serializable{
       pixelHeight = Math.abs(ymax - ymin);
       xcenter = (xmin + xmax)/2;
       ycenter = (ymin + ymax)/2;
-      point[0] -= xcenter;
-      point[1] -= ycenter;
+      point[0] -= xpos;
+      point[1] -= ypos;
       this.points.add(point);
     }
     setFillColor(255,255,255,0);
@@ -43,13 +43,7 @@ class Curve extends ColorfulObject implements Serializable{
 
   protected void display(){
     super.display();
+    sketch.translate(-xcenter+xpos, -ycenter+ypos);
     sketch.bezier(points.get(0)[0], points.get(0)[1], points.get(1)[0], points.get(1)[1], points.get(2)[0], points.get(2)[1], points.get(3)[0], points.get(3)[1]);
   }
-/*
-  protected boolean withinScope(float x, float y) {
-    boolean yes = super.withinScope(x, y);
-    System.out.println(shape.contains(x-xpos, y-ypos));
-    return yes;
-  }
-*/
 }

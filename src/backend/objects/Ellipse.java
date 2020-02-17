@@ -27,4 +27,9 @@ class Ellipse extends Shape implements Serializable {
     shape = sketch.createShape(PConstants.ELLIPSE, 0, 0, this.pixelWidth, this.pixelHeight);
     setSettings();
   }
+
+  protected void display(){
+    super.display();
+    sketch.shape(shape);
+  }
 }
