@@ -32,27 +32,30 @@ Only the DrawSpace (the white section of the screen that you draw on) will be sa
 Keyboard shortcuts
 You can use buttons in PollyPaint. If you would prefer, in many cases, you can use keyboard shortcuts instead of buttons. There are also some functions PollyPaint supports that you can't use buttons for, but you can use keyboard shortcuts for.
 
+Keyboard shortcuts (additional features): 
 Control z: Delete the last shape created
 Control y: Restore the last shape deleted
+Control x: Cut elements you have selected (delete where the shape used to be. Then you have to paste it somewhere new)
+
+Keyboard shortcuts (same functionality as buttons):
 Control c: Copy elements you have selected
 Control v: Paste elements you have previously copied
-Control x: Cut elements you have selected (paste them somewhere new, and delete where they used to be)
 Control n: Clear all elements on the screen
 Control g: Toggle whether elements selected are grouped or ungrouped
 Control b: Toggle whether the grid shows
-<: Decrease thickness of DrawSpace border 
->: Increase thickness of DrawSpace border
-{: Decrease the spacing of the grid
-}: Increase the spacing of the grid
+<: Decrease thickness of DrawSpace border // Doesn't work
+>: Increase thickness of DrawSpace border // Doesn't work
+{: Decrease the spacing of the grid // Doesn't work
+}: Increase the spacing of the grid // Doesn't work
 R: Create a rectangle
 P: Create a pollygon (triangle)
 C: Create an ellipse
-delete: delete selected
-Left arrow: rotate selected elements left
-Right arrow: rotate selected elements right 
-Up arrow: Increase size of selected objects. If no objects are selected, it zooms in on the canvas.
-Down arrow: Increase size of selected objects. If no objects are selected, it zooms in on the canvas.
+delete: delete selected // Doesn't work
+Left arrow: rotate selected elements left // Doesn't work
+Right arrow: rotate selected elements right // Doesn't work
+Up arrow: If no objects are selected, it zooms in on the canvas.
+Down arrow: If no objects are selected, it zooms in on the canvas.
 Enter: recenter the drawspace
-~: Create curve
+~: Create curve. Hit ~ each time you want to add a point to the curve.
 
 Keyboard shortcuts (features that you can also use buttons for) 
