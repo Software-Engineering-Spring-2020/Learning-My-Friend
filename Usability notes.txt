@@ -28,3 +28,31 @@ Only the DrawSpace (the white section of the screen that you draw on) will be sa
 - Exit PollyPaint and go to the file you just saved. 
 - Click on the file to open it; your file will open as a PNG with whatever program your computer uses to open PNGS, such as Photos
 - Use the program your computer uses to open PNGS to print your image
+
+Keyboard shortcuts
+You can use buttons in PollyPaint. If you would prefer, in many cases, you can use keyboard shortcuts instead of buttons. There are also some functions PollyPaint supports that you can't use buttons for, but you can use keyboard shortcuts for.
+
+Control z: Delete the last shape created
+Control y: Restore the last shape deleted
+Control c: Copy elements you have selected
+Control v: Paste elements you have previously copied
+Control x: Cut elements you have selected (paste them somewhere new, and delete where they used to be)
+Control n: Clear all elements on the screen
+Control g: Toggle whether elements selected are grouped or ungrouped
+Control b: Toggle whether the grid shows
+<: Decrease thickness of DrawSpace border 
+>: Increase thickness of DrawSpace border
+{: Decrease the spacing of the grid
+}: Increase the spacing of the grid
+R: Create a rectangle
+P: Create a pollygon (triangle)
+C: Create an ellipse
+delete: delete selected
+Left arrow: rotate selected elements left
+Right arrow: rotate selected elements right 
+Up arrow: Increase size of selected objects. If no objects are selected, it zooms in on the canvas.
+Down arrow: Increase size of selected objects. If no objects are selected, it zooms in on the canvas.
+Enter: recenter the drawspace
+~: Create curve
+
+Keyboard shortcuts (features that you can also use buttons for) 
