@@ -106,7 +106,7 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
 	}
 
 	public void keyPressed(){
-		
+
 		if(this.keyCode == 17)  ctrl = true;
 		if(this.keyCode == 16) shift = true;
 

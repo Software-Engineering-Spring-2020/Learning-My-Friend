@@ -20,7 +20,7 @@ public class Window {
     private int[] fillColor, boarderColor;
     private float XINIT, YINIT, WIDTH, HEIGHT, gridSpacing = 30;
     private boolean showGrid = false, showComments = false;
-    private int numberVertex = 0;
+    private int numberVertex = 0, size = 0;
 
     public Window(PApplet sketch, float x, float y, float w, float h) {
         this.sketch = sketch;
@@ -41,6 +41,8 @@ public class Window {
         sketch.fill(fillColor[0], fillColor[1], fillColor[2], fillColor[3]);
         sketch.stroke(boarderColor[0], boarderColor[1], boarderColor[2]);
         sketch.strokeWeight(strokeWeight);
+        if(size != ds.getNumObjects()) newToolSelection();
+        
         for (int i = 0; i < freePoints.size() - 1; i++) {
             if (freePoints.size() > 1)
                 sketch.line(freePoints.get(i)[0], freePoints.get(i)[1], freePoints.get(i + 1)[0],
@@ -82,6 +84,12 @@ public class Window {
 
     private float[] translate(float x, float y) {
         return new float[] { (WIDTH / 2) * (x / ((WIDTH / 2) * zoom)), (HEIGHT / 2) * (y / ((HEIGHT / 2) * zoom)) };
+    }
+
+    public void newToolSelection(){
+      freePoints.clear();
+      pollyPoints.clear();
+      curvePoints.clear();
     }
 
     /*********************************************************
@@ -484,22 +492,21 @@ public class Window {
 
     public void createPollyGon(float pmousex, float pmousey, int numberVertex){
         this.numberVertex = numberVertex;
+        this.size = ds.getNumObjects();
         float[] coord = ds.translateCoordinates(pmousex, pmousey, zoom);
         float[] v = new float[]{coord[0], coord[1]};
         pollyPoints.add(v);
     }
 
     public void createCurve(float pmousex, float pmousey){
+        this.size = ds.getNumObjects();
         float[] coord = ds.translateCoordinates(pmousex, pmousey, zoom);
         float[] v = new float[]{coord[0], coord[1]};
         curvePoints.add(v);
     }
 
-    public void createLine(float pmousex, float pmousey){ //make exta thick???
-        this.numberVertex = 2;
-        float[] coord = ds.translateCoordinates(pmousex, pmousey, zoom);
-        float[] v = new float[]{coord[0], coord[1]};
-        pollyPoints.add(v);
+    public void createLine(float pmousex, float pmousey){
+        createPollyGon(pmouseX, pmouseY, 2);
     }
 
     public void createFreeForm(){ //must be called on the mouseReleased()
