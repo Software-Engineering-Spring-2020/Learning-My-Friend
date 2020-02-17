@@ -38,21 +38,32 @@ class PollyGon extends Shape implements Serializable {
 
   protected void createShape(ArrayList<float[]> points){
     float xmin = Float.MAX_VALUE, ymin = Float.MAX_VALUE, xmax = Float.MIN_VALUE, ymax = Float.MIN_VALUE;
-    shape.beginShape();
+
     for(int i = 0; i<points.size(); i++){
-      shape.vertex(points.get(i)[0]-xpos, points.get(i)[1]-ypos);
-      xmin = Math.min(points.get(i)[0], xmin);
-      ymin = Math.min(points.get(i)[1], ymin);
-      xmax = Math.max(points.get(i)[0], xmax);
-      ymax = Math.max(points.get(i)[1], ymax);
+      float[] pos = new float[]{points.get(i)[0], points.get(i)[1]};
+      xmin = Math.min(pos[0], xmin);
+      ymin = Math.min(pos[1], ymin);
+      xmax = Math.max(pos[0], xmax);
+      ymax = Math.max(pos[1], ymax);
     }
+
     pixelWidth = Math.abs(xmax - xmin);
     pixelHeight = Math.abs(ymax - ymin);
     xcenter = (xmin + xmax)/2;
     ycenter = (ymin + ymax)/2;
-    //if(points.size()>2) shape.endShape(PConstants.CLOSE);
-    //else shape.endShape();
-    shape.endShape(PConstants.CLOSE);
+
+    shape.beginShape();
+    for(int i = 0; i<points.size(); i++){
+      float[] pos = new float[]{points.get(i)[0], points.get(i)[1]};
+      shape.vertex(pos[0]-xcenter, pos[1]-ycenter);
+    }
+    if(points.size()>2) shape.endShape(PConstants.CLOSE);
+    else shape.endShape();
   }
 
+  protected boolean withinScope(float x, float y) {
+    boolean yes = super.withinScope(x, y);
+    System.out.println(shape.contains(x-xpos, y-ypos));
+    return yes;
+  }
 }

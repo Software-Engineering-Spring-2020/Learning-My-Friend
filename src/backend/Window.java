@@ -16,7 +16,7 @@ public class Window {
     private PApplet sketch;
     private DrawSpace ds;
     private ObjectFactory of;
-    private float zoom = 1, strokeWeight = 1;
+    private float zoom = 1, strokeWeight = 3;
     private int[] fillColor, boarderColor;
     private float XINIT, YINIT, WIDTH, HEIGHT, gridSpacing = 30;
     private boolean showGrid = false, showComments = false;
@@ -34,19 +34,32 @@ public class Window {
         HEIGHT = h;
     }
 
-    public void display() {
-        sketch.push();
+    public void display() {sketch.push();
         this.ds.display(zoom, showComments, showGrid, gridSpacing);
+
+        sketch.push();
+        sketch.fill(fillColor[0], fillColor[1], fillColor[2], fillColor[3]);
+        sketch.stroke(boarderColor[0], boarderColor[1], boarderColor[2]);
+        sketch.strokeWeight(strokeWeight);
         for (int i = 0; i < freePoints.size() - 1; i++) {
             if (freePoints.size() > 1)
                 sketch.line(freePoints.get(i)[0], freePoints.get(i)[1], freePoints.get(i + 1)[0],
-                        freePoints.get(i + 1)[1]);
+                freePoints.get(i + 1)[1]);
         }
 
-        sketch.push();
-        sketch.strokeWeight(3);
-        for (float[] v : pollyPoints) {
-            sketch.point(v[0], v[1]);
+        float[] coord = ds.translateCoordinates(sketch.mouseX, sketch.mouseY, zoom);
+        for (int i = 0; i < curvePoints.size(); i++) {
+          sketch.line(curvePoints.get(curvePoints.size()-1)[0], curvePoints.get(curvePoints.size()-1)[1], coord[0], coord[1]);
+          if (i >= 1)
+              sketch.line(curvePoints.get(i-1)[0], curvePoints.get(i-1)[1], curvePoints.get(i)[0],
+              curvePoints.get(i)[1]);
+        }
+
+        for (int i = 0; i < pollyPoints.size(); i++) {
+          sketch.line(pollyPoints.get(pollyPoints.size()-1)[0], pollyPoints.get(pollyPoints.size()-1)[1], coord[0], coord[1]);
+          if (i >= 1)
+              sketch.line(pollyPoints.get(i-1)[0], pollyPoints.get(i-1)[1], pollyPoints.get(i)[0],
+              pollyPoints.get(i)[1]);
         }
         sketch.pop();
 
@@ -55,13 +68,6 @@ public class Window {
             pollyPoints.clear();
             numberVertex = 0;
         }
-
-        sketch.push();
-        sketch.strokeWeight(3);
-        for (float[] v : curvePoints) {
-            sketch.point(v[0], v[1]);
-        }
-        sketch.pop();
 
         if (curvePoints.size() >= 4) {
             ds.addObject(of.createCurve(curvePoints, strokeWeight, fillColor, boarderColor));

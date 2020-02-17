@@ -34,32 +34,31 @@ class FreeForm extends Shape implements Serializable {
 
   protected void createShape(ArrayList<float[]> points){
     float xmin = Float.MAX_VALUE, ymin = Float.MAX_VALUE, xmax = Float.MIN_VALUE, ymax = Float.MIN_VALUE;
-    shape.beginShape();
+
     for(int i = 0; i<points.size(); i++){
       float[] pos = new float[]{points.get(i)[0], points.get(i)[1]};
-      shape.vertex(pos[0]-xpos, pos[1]-ypos);
       xmin = Math.min(pos[0], xmin);
       ymin = Math.min(pos[1], ymin);
       xmax = Math.max(pos[0], xmax);
       ymax = Math.max(pos[1], ymax);
     }
-    shape.endShape();
+
     pixelWidth = Math.abs(xmax - xmin);
     pixelHeight = Math.abs(ymax - ymin);
     xcenter = (xmin + xmax)/2;
     ycenter = (ymin + ymax)/2;
+
+    shape.beginShape();
+    for(int i = 0; i<points.size(); i++){
+      float[] pos = new float[]{points.get(i)[0], points.get(i)[1]};
+      shape.vertex(pos[0]-xcenter, pos[1]-ycenter);
+    }
+    shape.endShape();
   }
 
-  protected void display(){
-    super.display();
-    sketch.push();
-    sketch.strokeWeight(3);
-    //sketch.point(xcenter, ycenter);
-    sketch.pop();
+  protected boolean withinScope(float x, float y) {
+    boolean yes = super.withinScope(x, y);
+    System.out.println(shape.contains(x-xpos, y-ypos));
+    return yes;
   }
-
-  /*protected PVector[] getBoundingBoxPoints() {
-    PVector[] points = super.getBoundingBoxPoints();
-  }*/
-
 }
