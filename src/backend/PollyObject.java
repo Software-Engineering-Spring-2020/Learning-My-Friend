@@ -10,7 +10,7 @@ public abstract class PollyObject implements Serializable {
     transient protected PApplet sketch;
     protected float xpos, ypos, rot = 0, pixelWidth, pixelHeight;
     transient protected float prevRot = 0, ro = 0;
-    float zoom = 1, offset = 3F, xcenter = xpos, ycenter = ypos;
+    protected float zoom = 1, offset = 3F, xcenter = xpos, ycenter = ypos;
 
     public PollyObject(PApplet sketch, float x, float y) {
         this.sketch = sketch;
