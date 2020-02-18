@@ -47,6 +47,7 @@ Control v: Paste elements you have previously copied
 Control n: Clear all elements on the screen
 Control g: Toggle whether elements selected are grouped or ungrouped
 Control b: Toggle whether the grid shows
+Control a: Toggle whether comments show
 R: Create a rectangle
 C: Create an ellipse
 delete: delete selected

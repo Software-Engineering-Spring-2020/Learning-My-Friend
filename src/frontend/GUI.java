@@ -192,7 +192,7 @@ public class GUI {
 
 
   public void trash(){
-    win.deleteSelected();
+    win.delete();
   }
 
   /**
