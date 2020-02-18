@@ -113,11 +113,11 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
 		System.out.println(this.key+ ", "+this.keyCode + " : "+ctrl);
 		System.out.println(this.key=='c'&&ctrl);
 
-		if(this.keyCode == 90 && ctrl) this.win.deleteLast();
+		if(this.keyCode == 90 && ctrl) this.win.delete();
 		else if(this.keyCode == 89 && ctrl) this.win.restoreLast();
-		else if(this.keyCode == 67 && ctrl) this.win.copy();
+		else if(this.keyCode == 67 && ctrl) gui.copy();
 		else if(this.keyCode == 88 && ctrl) this.win.cut();
-		else if(this.keyCode == 86 && ctrl) this.win.paste();
+		else if(this.keyCode == 86 && ctrl) gui.paste();
 
 		else if(this.keyCode == 78 && ctrl) this.win.clear();
 		else if(this.keyCode == 79 && ctrl){
@@ -137,8 +137,8 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
 			}
 		}
 
-		else if(this.keyCode == 69 && ctrl) this.win.exportAs("test", ".png");
-		else if(this.keyCode == 71 && ctrl) this.win.toggleGroup();
+		else if(this.keyCode == 69 && ctrl) gui.export();
+		else if(this.keyCode == 71 && ctrl) gui.group();
 		else if(this.keyCode == 65 && ctrl) this.win.toggleComments(); //Toggles Annotations
 		else if(this.keyCode == 66 && ctrl) this.win.toggleGrid();  //Toggles boxes on screen (grid)
 
