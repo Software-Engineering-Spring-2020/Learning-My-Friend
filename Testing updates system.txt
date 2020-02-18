@@ -1,8 +1,24 @@
+Testing (2/17, 7:20PM)
+
+Issues
+- Confirmed: While exporting images, it will show what's in the center of the screen. The full DrawSpace exports when it's centered, but only parts of it export if it's panned.
+- Curves can't be selected
+- Panning for lines is occasionally choppy.
+
+Successful tests
+- The new way of creating circles with dragging works (though it's harder without a mouse)
+- Toggle fill color works
+- Trash works for comments
+
+Misc
+- One time I got a blank image when I exported... I think this was a fluke / I tried exporting two times in a row too quickly.
+
+
 Testing (2/17, 2:50PM-3:50PM) Pulled once at 2:50PM
 
 Issues
-- Trash doens't work for comments
-- Toggle Grid button still missing
+- Trash doens't work for comments [RESOLVED]
+- Toggle Grid button still missing [RESOLVED]
 - The fill of a curve isn't preserved when copy-pasting (but all other elements are)
 - Can't easily select lines (bounding boxes not aligned)
 - Can't easily select PollyGons (bounding boxes not aligned. They seem to be more aligned the more rectangular a PollyGon is)

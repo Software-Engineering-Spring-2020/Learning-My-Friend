@@ -36,6 +36,7 @@ Keyboard shortcuts (additional features):
 Control z: Delete the last shape created
 Control y: Restore the last shape deleted
 Control x: Cut elements you have selected (delete where the shape used to be. Then you have to paste it somewhere new)
+Control n: Clear all elements on the screen
 <: Decrease thickness of shape borders for when you create new shapes
 >: Increase thickness of shape borders for when you create new shapes
 {: Decrease the spacing of the grid
@@ -44,7 +45,6 @@ Control x: Cut elements you have selected (delete where the shape used to be. Th
 Keyboard shortcuts (same functionality as buttons):
 Control c: Copy elements you have selected
 Control v: Paste elements you have previously copied
-Control n: Clear all elements on the screen
 Control g: Toggle whether elements selected are grouped or ungrouped
 Control b: Toggle whether the grid shows
 Control a: Toggle whether comments show
