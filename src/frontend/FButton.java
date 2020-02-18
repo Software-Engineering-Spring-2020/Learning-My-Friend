@@ -15,8 +15,6 @@ import frontend.controlP5.*;
 public abstract class FButton extends FController{
   public Button button;
 
-  public boolean isToggle = false;
-  public boolean toggle = false;
 
   public FButton(ControlP5 cp5, String name, FToolbar parrent, GUI gui){
     super(cp5, name, parrent, gui);
@@ -27,19 +25,6 @@ public abstract class FButton extends FController{
     return cp5.addButton(this.name).setGroup(parrent.getGroup());
   }
 
-  public void isToggle(boolean b){
-    isToggle = b;
-  }
-
-  public void toggle(){
-    if(isToggle == true){
-      toggle = !toggle;
-      if(toggle)
-        button.setOn();
-      else
-        button.setOff();
-    }
-  }
   /**
    * [update updates the ControlP5 object to the FControlers size]
    */
