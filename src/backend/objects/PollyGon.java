@@ -26,6 +26,10 @@ class PollyGon extends Shape implements Serializable {
 
   protected void init(PApplet sketch){
     super.init(sketch);
+    for (float[] point : points) {
+      point[0] += xpos;
+      point[1] += ypos;
+    }
     createShape(points);
     setSettings();
   }
@@ -35,10 +39,12 @@ class PollyGon extends Shape implements Serializable {
 
     shape = sketch.createShape(PShape.PATH);
     shape.beginShape();
-
+    this.points = new ArrayList<float[]>();
     for(int i = 0; i<points.size(); i++){
       float[] pos = new float[]{points.get(i)[0], points.get(i)[1]};
-      shape.vertex(pos[0]-xpos, pos[1]-ypos);
+      pos[0] -= xpos;
+      pos[1] -= ypos;
+      shape.vertex(pos[0], pos[1]);
       xmin = Math.min(pos[0], xmin);
       ymin = Math.min(pos[1], ymin);
       xmax = Math.max(pos[0], xmax);
