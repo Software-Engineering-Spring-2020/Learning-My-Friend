@@ -21,7 +21,7 @@ class Curve extends ColorfulObject implements Serializable{
 
   protected void init(PApplet sketch){
     super.init(sketch);
-    for(float[] point : points){
+    for (float[] point : points) {
       point[0] += xpos;
       point[1] += ypos;
     }
@@ -30,9 +30,8 @@ class Curve extends ColorfulObject implements Serializable{
 
   protected void setSettings(ArrayList<float[]> points){
     float xmin = Float.MAX_VALUE, ymin = Float.MAX_VALUE, xmax = Float.MIN_VALUE, ymax = Float.MIN_VALUE;
+    this.points = new ArrayList<float[]>();
     for(float[] point : points){
-      point[0] -= xpos;
-      point[1] -= ypos;
       xmin = Math.min(point[0], xmin);
       ymin = Math.min(point[1], ymin);
       xmax = Math.max(point[0], xmax);
@@ -41,6 +40,8 @@ class Curve extends ColorfulObject implements Serializable{
       pixelHeight = Math.abs(ymax - ymin);
       xcenter = (xmin + xmax)/2;
       ycenter = (ymin + ymax)/2;
+      point[0] -= xpos;
+      point[1] -= ypos;
       this.points.add(point);
     }
   }
