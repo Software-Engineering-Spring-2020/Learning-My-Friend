@@ -21,7 +21,6 @@ public class GridButton extends FButton{
 
   public void toggleGrid(int val){
     getGUI().toggleGrid();
-    super.toggle();
   }
 
 }

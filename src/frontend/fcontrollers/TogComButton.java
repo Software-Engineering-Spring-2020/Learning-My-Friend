@@ -21,7 +21,6 @@ public class TogComButton extends FButton{
 
   public void toggleComments(int val){
     getGUI().toggleComments();
-    super.toggle();
   }
 
 }
