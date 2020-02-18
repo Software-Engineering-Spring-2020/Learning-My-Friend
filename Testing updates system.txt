@@ -1,9 +1,17 @@
-Testing (2/17, 7:20PM)
+Testing (2/17, 8:30 PM)
 
 Issues
-- Confirmed: While exporting images, it will show what's in the center of the screen. The full DrawSpace exports when it's centered, but only parts of it export if it's panned.
+- Command prompt is still typing false
+
+Successful tests
+- Export works when canvas is zoomed in, zoomed out, off-centered, etc.
+
+Testing (2/17, 7:20PM) - Notes are from 2/17 8:30PM test
+
+Issues 
+- Confirmed: While exporting images, it will show what's in the center of the screen. The full DrawSpace exports when it's centered, but only parts of it export if it's panned. [RESOLVED]
 - Panning for lines is occasionally choppy
-- Large bounding boxes for PollyGons (22)
+- Large bounding boxes for PollyGons (22) [NOT RELEVANT: features being changed]
 - Saving/opening a drawing with a PollyGon preserved the PollyGon's rotation/color/size, but not its location
 
 Successful tests
