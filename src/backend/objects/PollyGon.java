@@ -17,44 +17,38 @@ class PollyGon extends Shape implements Serializable {
   PollyGon(PApplet sketch, float x, float y, ArrayList<float[]> points, float strokeWeight, int[] fillColor, int[] boarderColor){
     super(sketch, x, y, strokeWeight, fillColor, boarderColor);
     for(float[] point : points){
-      this.points.add(point);
+      point[0] -= xpos;
+      point[1] -= ypos;
+      this.points.add(new float[]{point[0], point[1]});
+      System.out.println(point[0]+" : "+point[1]);
     }
-    createShape(points);
+    createShape();
     setFillColor(255,255,255,0);
     setSettings();
   }
 
   protected void init(PApplet sketch){
     super.init(sketch);
-    for (float[] point : points) {
-      point[0] += xpos;
-      point[1] += ypos;
-    }
-    createShape(points);
+    createShape();
     setSettings();
   }
 
-  protected void createShape(ArrayList<float[]> points){
+  protected void createShape(){
     float xmin = Float.MAX_VALUE, ymin = Float.MAX_VALUE, xmax = Float.MIN_VALUE, ymax = Float.MIN_VALUE;
-
-    shape = sketch.createShape(PShape.PATH);
+    shape = sketch.createShape();
     shape.beginShape();
-    this.points = new ArrayList<float[]>();
     for(int i = 0; i<points.size(); i++){
-      float[] pos = new float[]{points.get(i)[0], points.get(i)[1]};
-      pos[0] -= xpos;
-      pos[1] -= ypos;
-      shape.vertex(pos[0], pos[1]);
-      xmin = Math.min(pos[0], xmin);
-      ymin = Math.min(pos[1], ymin);
-      xmax = Math.max(pos[0], xmax);
-      ymax = Math.max(pos[1], ymax);
+      shape.vertex(points.get(i)[0], points.get(i)[1]);
+      xmin = Math.min(points.get(i)[0], xmin);
+      ymin = Math.min(points.get(i)[1], ymin);
+      xmax = Math.max(points.get(i)[0], xmax);
+      ymax = Math.max(points.get(i)[1], ymax);
     }
 
     if(points.size()>2) shape.endShape(PConstants.CLOSE);
     else shape.endShape();
-    pixelWidth = Math.abs(xmax - xmin);
-    pixelHeight = Math.abs(ymax - ymin);
+    pixelWidth = Math.abs(xmax) - Math.abs(xmin);
+    pixelHeight = Math.abs(ymax) - Math.abs(ymin);
     xcenter = (xmin + xmax)/2;
     ycenter = (ymin + ymax)/2;
   }
@@ -85,12 +79,13 @@ class PollyGon extends Shape implements Serializable {
     else shape.endShape();
   }
   */
-
+/*
   protected boolean withinScope(float x, float y) {
     boolean yes = super.withinScope(x, y);
+    System.out.println(shape.contains(-xcenter+xpos, -ycenter+ypos));
     return yes;
   }
-
+*/
   protected void display() {
       super.display();
       sketch.translate(-xcenter+xpos, -ycenter+ypos);

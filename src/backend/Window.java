@@ -77,7 +77,10 @@ public class Window {
         sketch.pop();
 
         if (pollyPoints.size() >= numberVertex && numberVertex > 1) {
-            ds.addObject(of.createPollyGon(pollyPoints, strokeWeight, fillColor, boarderColor));
+          PollyObject obj = of.createPollyGon(pollyPoints, strokeWeight, fillColor, boarderColor);
+            //ds.addObject(of.createPollyGon(pollyPoints, strokeWeight, fillColor, boarderColor));
+            ds.addObject(obj);
+            selected.add(obj);
             pollyPoints.clear();
             numberVertex = 0;
         }
@@ -311,23 +314,6 @@ public class Window {
         for (PollyObject obj : selected) {
             if (obj instanceof Group)
                 ds.removeObject(obj);
-        }
-    }
-
-    public void selectedPan(float xo, float yo) {
-        for (PollyObject obj : selected) {
-            float[] coord = translate(xo, yo);
-            obj.pan(coord[0], coord[1]);
-        }
-    }
-
-    public void selectedPan(float mouseX, float mouseY, float pmouseX, float pmouseY) {
-        for (PollyObject obj : selected) {
-          float[] coord = ds.translateCoordinates(mouseX, mouseY, zoom);
-          if(obj.withinScope(coord[0], coord[1])){
-            coord = translate(mouseX-pmouseX, mouseY-pmouseY);
-            selectedPan(coord[0], coord[1]);
-          }
         }
     }
 
