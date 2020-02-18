@@ -80,7 +80,7 @@ public class Window {
           PollyObject obj = of.createPollyGon(pollyPoints, strokeWeight, fillColor, boarderColor);
             //ds.addObject(of.createPollyGon(pollyPoints, strokeWeight, fillColor, boarderColor));
             ds.addObject(obj);
-            selected.add(obj);
+            //selected.add(obj);
             pollyPoints.clear();
             numberVertex = 0;
         }
