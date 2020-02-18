@@ -20,7 +20,7 @@ public class PolyButton extends FButton{
 
 
   public void poly(int val){
-    getGUI().tool = 'x';
+    getGUI().setTool('x');
   }
 
 }

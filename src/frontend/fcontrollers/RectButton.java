@@ -26,7 +26,7 @@ public class RectButton extends FButton{
  */
   public void rect(int val){
     //System.out.println(val);
-    getGUI().tool = 'r';
+    getGUI().setTool('r');
 
   }
 

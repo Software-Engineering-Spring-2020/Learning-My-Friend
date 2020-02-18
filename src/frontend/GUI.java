@@ -187,6 +187,7 @@ public class GUI {
    */
   public void setTool(char tool) {
     //System.out.println(tool);
+    win.newToolSelection();
     this.tool = tool;
   }
 

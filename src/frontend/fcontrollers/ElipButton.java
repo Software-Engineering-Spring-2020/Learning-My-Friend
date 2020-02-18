@@ -21,7 +21,7 @@ public class ElipButton extends FButton{
 
   public void elip(int val){
     //System.out.println("Elip " + val);
-    getGUI().tool = 'e';
+    getGUI().setTool('e');
 
   }
 
