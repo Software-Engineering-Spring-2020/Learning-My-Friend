@@ -16,11 +16,13 @@ public class TogFillButton extends FButton{
   public TogFillButton(ControlP5 cp5, FToolbar parrent, GUI gui){
     super(cp5, "toggleFillColor", parrent, gui);
     super.button.plugTo(this);
+    super.isToggle(true);
   }
 
 
   public void toggleFillColor(int val){
     getGUI().toggleFill();
+    super.toggle();
   }
 
 }
