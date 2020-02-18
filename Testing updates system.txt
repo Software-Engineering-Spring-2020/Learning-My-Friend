@@ -9,6 +9,8 @@ Issues
 - When you save/open lines, it doesn't save rotation
 - Extra space in bounding boxes for lines
 - Command line still has a bunch of print statements
+- When you hit enter for text or a comment, it also re-centers the DrawSpace
+- When you import images and pan them, the bounding box doesn't follow them exactly
 
 Successful tests run
 - Bounding boxes work for PollyGons and allow the user to select them
