@@ -71,7 +71,7 @@ public class BackendDriver extends PApplet {
       //else if(this.key == 'A') this.window.createComment(this.mouseX, this.mouseY, "This is Comment!", "arial", 12);
       else if(this.key == 'C') this.window.createEllipse(this.mouseX, this.mouseY);
 
-      else if(this.keyCode == 127) this.window.deleteSelected();  //delete
+      else if(this.keyCode == 127) this.window.delete();  //delete
       else if(this.keyCode == 37) this.window.rotate(-45); //left
       else if(this.keyCode == 39) this.window.rotate(45);  //right
       else if(this.keyCode == 38) this.window.resize(0.1F);  //up

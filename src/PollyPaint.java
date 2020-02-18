@@ -155,7 +155,7 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
 		//else if(this.key == 'A') this.win.createComment(this.mouseX, this.mouseY, "This is Comment!", "arial", 12);
 		//else if(this.key == 'C') this.win.createEllipse(this.mouseX, this.mouseY);
 
-		else if(this.keyCode == 127) this.win.deleteSelected();  //delete
+		else if(this.keyCode == 127) this.win.delete();  //delete
 		else if(this.keyCode == 37) this.win.rotate(-1); //left
 		else if(this.keyCode == 39) this.win.rotate(1);  //right
 		else if(this.keyCode == 38) this.win.resize(0.01F);  //up

@@ -20,7 +20,7 @@ public class Window {
     private float zoom = 1, strokeWeight = 3;
     private int[] fillColor, boarderColor;
     private float XINIT, YINIT, WIDTH, HEIGHT, gridSpacing = 30;
-    private boolean showGrid = false, showComments = false;
+    private boolean showGrid = false, showComments = false, ellipse;
     private int numberVertex = 0, size = 0;
 
     public Window(PApplet sketch, float x, float y, float w, float h) {
@@ -66,8 +66,9 @@ public class Window {
         }
 
         for (int i = 0; i < shapePoints.size(); i++) {
-          sketch.ellipse(shapePoints.get(0)[0], shapePoints.get(0)[1], coord[0]-shapePoints.get(0)[0], coord[1]-shapePoints.get(0)[1]);
+          if(ellipse) sketch.ellipse(shapePoints.get(0)[0], shapePoints.get(0)[1], coord[0]-shapePoints.get(0)[0], coord[1]-shapePoints.get(0)[1]);
         }
+
         sketch.pop();
 
         if (pollyPoints.size() >= numberVertex && numberVertex > 1) {
@@ -176,6 +177,7 @@ public class Window {
 
 
     public boolean createEllipse(float x, float y) {
+      ellipse = true;
       this.numberVertex = 2;
       this.size = ds.getNumObjects();
       float[] coord = ds.translateCoordinates(x, y, zoom);
