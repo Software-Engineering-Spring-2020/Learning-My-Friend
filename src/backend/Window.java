@@ -65,10 +65,14 @@ public class Window {
               pollyPoints.get(i)[1]);
         }
 
-        for (int i = 0; i < shapePoints.size(); i++) {
-          if(ellipse) sketch.ellipse(shapePoints.get(0)[0], shapePoints.get(0)[1], coord[0]-shapePoints.get(0)[0], coord[1]-shapePoints.get(0)[1]);
-        }
+        sketch.push();
+        sketch.noFill();
 
+        for (int i = 0; i < shapePoints.size(); i++) {
+          if(ellipse) sketch.ellipse(shapePoints.get(0)[0], shapePoints.get(0)[1], 2*Math.abs(coord[0]-shapePoints.get(0)[0]), 2*Math.abs(coord[1]-shapePoints.get(0)[1]));
+          else sketch.rect(shapePoints.get(0)[0], shapePoints.get(0)[1], 2*Math.abs(coord[0]-shapePoints.get(0)[0]), 2*Math.abs(coord[1]-shapePoints.get(0)[1]));
+        }
+        sketch.pop();
         sketch.pop();
 
         if (pollyPoints.size() >= numberVertex && numberVertex > 1) {
@@ -184,7 +188,9 @@ public class Window {
       shapePoints.add(coord);
 
       if(shapePoints.size() >= numberVertex){
-        PollyObject obj = of.createEllipse(shapePoints.get(0)[0], shapePoints.get(0)[1], Math.abs(shapePoints.get(0)[0] - shapePoints.get(1)[0]), Math.abs(shapePoints.get(1)[0] - shapePoints.get(1)[1]), strokeWeight, fillColor, boarderColor);
+        PollyObject obj = of.createEllipse(shapePoints.get(0)[0], shapePoints.get(0)[1],
+                  2*Math.abs(shapePoints.get(1)[0]-shapePoints.get(0)[0]), 2*Math.abs(shapePoints.get(1)[1]-shapePoints.get(0)[1]),
+                  strokeWeight, fillColor, boarderColor);
         return ds.addObject(obj);
 
       }
@@ -206,7 +212,20 @@ public class Window {
     }
 
     public boolean createRect(float x, float y) {
-        return createRect(x, y, 100, 50);
+      ellipse = false;
+      this.numberVertex = 2;
+      this.size = ds.getNumObjects();
+      float[] coord = ds.translateCoordinates(x, y, zoom);
+      shapePoints.add(coord);
+
+      if(shapePoints.size() >= numberVertex){
+        PollyObject obj = of.createRect(shapePoints.get(0)[0], shapePoints.get(0)[1],
+                  2*Math.abs(shapePoints.get(1)[0]-shapePoints.get(0)[0]), 2*Math.abs(shapePoints.get(1)[1]-shapePoints.get(0)[1]),
+                  strokeWeight, fillColor, boarderColor);
+        return ds.addObject(obj);
+
+      }
+        return false;
     }
 
     public boolean createTextBox(float x, float y, String str, String font, float textSize) {
