@@ -1,7 +1,24 @@
+Testing (2/17, 9:50-10:20PM)
+
+Issues
+- Copy/pasting a PollyGon doesn't preserve its rotation (23, the top blue PollyGon is the original, the bottom blue PollyGon is the copy)
+- When you save/import a PollyGon, it doesn't preserve its rotation
+-If you copy-paste a PollyGon, the copy is offset. If you copy the copy, the new copy overlays the original PollyGon).
+- Saving/opening a drawing with a PollyGon preserved the PollyGon's rotation/color/size, but not its location 
+- When you copy-paste lines, it doesn't save rotation (24, right line is the original, left line is the copy)
+- When you save/open lines, it doesn't save rotation
+- Extra space in bounding boxes for lines
+- Command line still has a bunch of print statements
+
+Successful tests run
+- Bounding boxes work for PollyGons and allow the user to select them
+- Copy/pasting generally works for PollyGons: see Issues for minor kinks.
+- Bounding boxes remain when objects are copy/pasted or saved/imported 
+
 Testing (2/17, 8:30 PM)
 
 Issues
-- Command prompt is still typing false
+- Command line still has a bunch of print statements. [NOT RESOLVED]
 
 Successful tests
 - Export works when canvas is zoomed in, zoomed out, off-centered, etc.
@@ -12,7 +29,7 @@ Issues
 - Confirmed: While exporting images, it will show what's in the center of the screen. The full DrawSpace exports when it's centered, but only parts of it export if it's panned. [RESOLVED]
 - Panning for lines is occasionally choppy
 - Large bounding boxes for PollyGons (22) [NOT RELEVANT: features being changed]
-- Saving/opening a drawing with a PollyGon preserved the PollyGon's rotation/color/size, but not its location
+- Saving/opening a drawing with a PollyGon preserved the PollyGon's rotation/color/size, but not its location [NOT RESOLVED]
 
 Successful tests
 - The new way of creating circles with dragging works (though it's harder without a mouse)
