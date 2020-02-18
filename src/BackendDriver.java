@@ -36,7 +36,7 @@ public class BackendDriver extends PApplet {
       else if(this.key == 'v' && ctrl) this.window.paste();
 
       else if(this.key == 'n' && ctrl) this.window.clear();
-      else if(this.key == 'o' && ctrl){
+      /*else if(this.key == 'o' && ctrl){
         try {
 					this.window.open("C:/Users/Mei ^.^/Desktop/drawing.polly");
 				} catch (ClassNotFoundException | IOException e) {
@@ -51,9 +51,9 @@ public class BackendDriver extends PApplet {
 					System.out.println(e);
 					e.printStackTrace();
 				}
-      }
+      }*/
 
-      else if(this.key == 'e' && ctrl) this.window.exportAs("test", ".png");
+      //else if(this.key == 'e' && ctrl) this.window.exportAs("test", ".png");
       else if(this.key == 'g' && ctrl) this.window.toggleGroup();
       else if(this.key == 'a' && ctrl) this.window.toggleComments(); //Toggles Annotations
       else if(this.key == 'b' && ctrl) this.window.toggleGrid();  //Toggles boxes on screen (grid)
@@ -72,11 +72,11 @@ public class BackendDriver extends PApplet {
       else if(this.key == 'C') this.window.createEllipse(this.mouseX, this.mouseY);
 
       else if(this.keyCode == 127) this.window.delete();  //delete
-      else if(this.keyCode == 37) this.window.rotate(-45); //left
-      else if(this.keyCode == 39) this.window.rotate(45);  //right
+      //else if(this.keyCode == 37) this.window.rotate(-45); //left
+      //else if(this.keyCode == 39) this.window.rotate(45);  //right
       else if(this.keyCode == 38) this.window.resize(0.1F);  //up
       else if(this.keyCode == 40) this.window.resize(-0.1F); //down
-      else if(this.keyCode == 155) this.window.importImage("grayscrunchie",".png");
+      //else if(this.keyCode == 155) this.window.importImage("grayscrunchie",".png");
 
       else if(this.keyCode == 10) this.window.reCenter();   //enter
       else if(this.keyCode == 192) this.window.createCurve(this.mouseX, this.mouseY); //tilde

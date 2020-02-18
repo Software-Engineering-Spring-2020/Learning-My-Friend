@@ -50,10 +50,8 @@ Control b: Toggle whether the grid shows
 Control a: Toggle whether comments show
 R: Create a rectangle
 C: Create an ellipse
-delete: delete selected
-Left arrow: rotate selected elements left // Doesn't work: rotates 1 degree
-Right arrow: rotate selected elements right // Doesn't work: rotates 1 degree
-Up arrow: If elements are selected, it makes them larger. If no elements are selected, it zooms in on the canvas. // Doesn't work when an object is selected: changes size a tiny bit
-Down arrow: If elements are selected, it makes them smaller. If no elements are selected, it zooms in on the canvas.  // Doesn't work when an object is selected: changes size a tiny bit
+Delete: delete selected
+Up arrow: If no elements are selected, it zooms in on the canvas.
+Down arrow: If no elements are selected, it zooms in on the canvas.
 Enter: recenter the drawspace
 ~: Create curve. Hit ~ each time you want to add a point to the curve.
