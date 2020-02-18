@@ -20,8 +20,9 @@ public class Window {
     private float zoom = 1, strokeWeight = 3;
     private int[] fillColor, boarderColor;
     private float XINIT, YINIT, WIDTH, HEIGHT, gridSpacing = 30;
-    private boolean showGrid = false, showComments = false, ellipse;
+    private boolean showGrid = false, showComments = false, ellipse, export = false;
     private int numberVertex = 0, size = 0;
+    private String savefile = "";
 
     public Window(PApplet sketch, float x, float y, float w, float h) {
         this.sketch = sketch;
@@ -89,6 +90,13 @@ public class Window {
         for(PollyObject obj : selected){
           obj.showBoundingBox();
         }
+
+        if(export && ds.getPosition()[0] == XINIT && ds.getPosition()[1]==YINIT){
+          PImage toSave = sketch.get((int)XINIT+1, (int)YINIT+1, (int)WIDTH-1, (int)HEIGHT-1);
+          toSave.save(savefile);
+          export = false;
+        }
+
         sketch.pop();
     }
 
@@ -567,8 +575,8 @@ public class Window {
 
     public void exportAs(String saveName, String extension){
         reCenter();
-        PImage toSave = sketch.get((int)XINIT, (int)YINIT, (int)WIDTH+1, (int)HEIGHT+1);
-        toSave.save(saveName+extension);
+        export = true;
+        savefile = saveName+extension;
     }
 
     public void save(String filename) throws IOException {
