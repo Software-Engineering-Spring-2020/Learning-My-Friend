@@ -319,7 +319,6 @@ public class GUI {
 
    public void toggleGrid(){
     win.toggleGrid();
-    System.out.println("Grid Toggled");
    }
 
 
