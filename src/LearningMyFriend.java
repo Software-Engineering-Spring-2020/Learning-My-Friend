@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- *<h1> PollyPaint </h1>
+ *<h1> LearningMyFriend </h1>
  * This is our primary class. Our `main` method is stored here. When launching the program this is what launches.
  *
  * This is our `sketch` and it is broken into five methods.
@@ -38,7 +38,7 @@ import java.io.IOException;
  * @since 02.09.2019
  */
 
-public class PollyPaint extends PApplet {
+public class LearningMyFriend extends PApplet {
 GUI gui;
 Window win;
 IOHandler h;
@@ -50,7 +50,7 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
  * @param passedArgs [description]
  */
 	public static void main(String[] passedArgs) {
-		String[] appletArgs = { "PollyPaint" };
+		String[] appletArgs = { "LearningMyFriend" };
 		if (passedArgs != null) {
 			PApplet.main(concat(appletArgs, passedArgs));
 		} else {
@@ -107,6 +107,8 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
 
 	public void keyPressed(){
 
+		win.keyPressed(this.key, this.keyCode);
+
 		if(this.keyCode == 17)  ctrl = true;
 		if(this.keyCode == 16) shift = true;
 
@@ -151,7 +153,8 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
 
 
 		//else if(this.key == 'R') this.win.createRect(this.mouseX, this.mouseY);
-		//else if(this.key == 'T') this.win.createTextBox(this.mouseX, this.mouseY, "This is Text!", "arial", 12);
+		else if(this.key == 'T') this.win.createTextBox(this.mouseX, this.mouseY, "This is Text!", "arial", 12);
+		else if(this.key == 'I') this.win.createInteractiveTextBox(this.mouseX, this.mouseY, this.mouseX + 100, "arial", 12);
 		//else if(this.key == 'A') this.win.createComment(this.mouseX, this.mouseY, "This is Comment!", "arial", 12);
 		//else if(this.key == 'C') this.win.createEllipse(this.mouseX, this.mouseY);
 

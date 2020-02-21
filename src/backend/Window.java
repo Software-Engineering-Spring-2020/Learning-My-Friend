@@ -249,6 +249,17 @@ public class Window {
         return false;
     }
 
+    public boolean createInteractiveTextBox(float x, float y, float x2, String font, float textSize) {
+        PollyObject obj = null;
+        float[] startCoord = ds.translateCoordinates(x, y, zoom);
+        float[] endCoord = ds.translateCoordinates(x + x2, y, zoom);
+        if (ds.withinScope(startCoord[0], startCoord[1]))
+            obj = of.createInteractiveTextBox(startCoord[0], startCoord[1], endCoord[0] + x2, strokeWeight, fillColor, boarderColor, font, textSize);
+        if (obj != null)
+            return ds.addObject(obj);
+        return false;
+    }
+
     public boolean createComment(float x, float y, String str, String font, float textSize) {
         PollyObject obj = null;
         float[] coord = ds.translateCoordinates(x, y, zoom);
@@ -504,6 +515,20 @@ public class Window {
       e.printStackTrace();
     }
       }
+    }
+
+    /**
+     * Takes the key pressed to feed it to any InteractiveTextBoxes.
+     * While backspace is supported, delete is not (yet).
+     * @param key
+     */
+    public void keyPressed(char key, int keyCode) {
+        for (PollyObject obj : selected) {
+            if (obj instanceof TextObject) {
+                TextObject tobj = (TextObject) obj;
+                tobj.handleKey(key, keyCode);
+            }
+        }
     }
 
     /*********************************************************
