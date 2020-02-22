@@ -64,6 +64,12 @@ public class GUI {
 
   boolean toggleFill = true;
 
+  //The top buttonBar responsable for changing topChoice. This will allow the user to select menues
+  FButtonBar buttonBar;
+
+  //the tool bar to be displayed at the top, chosen by the top ButtonBar
+  FToolbar topChoice;
+
   /**
   * End of STATE Deleration
   */
@@ -332,14 +338,10 @@ public class GUI {
    private void setupObjectCreationToolbar(){
      FToolbar ft = toolbarFactory("Obj Create", (float).05, (float).8, (float).0, (float).1);
      ft.addFController(new SelecButton(cp5, ft, this));
-     ft.addFController(new RectButton(cp5, ft, this));
-     ft.addFController(new ElipButton(cp5, ft, this));
      ft.addFController(new PenButton(cp5, ft, this));
      ft.addFController(new LineButton(cp5, ft, this));
      ft.addFController(new CurveButton(cp5, ft, this));
-     ft.addFController(new PolyButton(cp5, ft, this));
      ft.addFController(new TextButton(cp5, ft, this));
-     ft.addFController(new CommentButton(cp5, ft, this));
 
    }
 
@@ -367,14 +369,8 @@ public class GUI {
     ft.addFController(gSlider);
     ft.addFController(bSlider);
     ft.addFController(new TogFillButton(cp5, ft, this));
-    ft.addFController(new Textbox(cp5, ft, this));
-
-    ft.addFController(new GroupButton(cp5, ft, this));
-    ft.addFController(new UngroupButton(cp5, ft, this));
-
     ft.addFController(new SizeSlider(cp5, ft, this));
     ft.addFController(new RotateSlider(cp5, ft, this));
-    ft.addFController(new PolyCountSlider(cp5, ft, this));
     ft.addFController(new TrashButton(cp5, ft, this));
   }
     //ft.addFController(new FColorPicker(cp5, ft, this));
@@ -389,7 +385,6 @@ public class GUI {
     ft.addFController(new OpenButton(cp5, ft, this));
     ft.addFController(new ExportButton(cp5, ft, this));
     ft.addFController(new ImportButton(cp5, ft, this));
-    ft.addFController(new GridButton(cp5, ft, this));
     ft.addFController(new TogComButton(cp5, ft, this));
     //System.out.println(ft.conList);
    }

@@ -1,7 +1,7 @@
 package frontend;
 /**
- * <h1>FButton</h1>
- * FButton
+ * <h1>FSlider</h1>
+ * FSlider
  *
  * @author Hunter Chasens
  * @version 1.0
