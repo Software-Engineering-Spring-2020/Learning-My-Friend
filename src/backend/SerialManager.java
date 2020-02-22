@@ -35,24 +35,24 @@ public class SerialManager {
     }
 
     // saves the draw space to a file that can be opened and restored later
-    protected static void saveDrawSpace(DrawSpace ds, String filename) throws IOException {
+    protected static void saveSlides(ArrayList<DrawSpace> slides, String filename) throws IOException {
         FileOutputStream saveFile = new FileOutputStream(filename);
         ObjectOutputStream fileOutput = new ObjectOutputStream(saveFile);
-        fileOutput.writeObject(ds);
+        fileOutput.writeObject(slides);
         fileOutput.close();
         saveFile.close();
     }
 
     // returns a draw space opened from file that can be made the current draw space
-    protected static DrawSpace openDrawSpace(PApplet sketch, String filename) throws IOException, ClassNotFoundException {
+    protected static ArrayList<DrawSpace> openSlides(PApplet sketch, String filename) throws IOException, ClassNotFoundException {
         FileInputStream openFile = new FileInputStream(filename);
         ObjectInputStream fileInput = new ObjectInputStream(openFile);
         boolean savedDrawSpace = false;
-        DrawSpace ds = new DrawSpace(sketch, 0, 0, 0, 0);
+        ArrayList<DrawSpace> slides = new ArrayList<DrawSpace>();
         try {
-            PollyObject obj = (PollyObject) fileInput.readObject();
-            if (obj instanceof DrawSpace) {
-                ds = (DrawSpace) obj;
+            Object obj = fileInput.readObject();
+            if (obj instanceof ArrayList) {
+                slides = (ArrayList<DrawSpace>) obj;
                 savedDrawSpace = true;
             }
         }
@@ -62,8 +62,8 @@ public class SerialManager {
         fileInput.close();
         openFile.close();
         if (savedDrawSpace) {
-            ds.init(sketch);
-            return ds;
+            for (DrawSpace ds : slides) ds.init(sketch);
+            return slides;
         }
         return null;
     }

@@ -2,9 +2,11 @@ package backend;
 
 import backend.objects.ObjectFactory;
 import processing.core.PApplet;
+import processing.core.PGraphics;
 import processing.core.PImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Window {
     private ArrayList<PollyObject> trash = new ArrayList<PollyObject>();
@@ -15,7 +17,9 @@ public class Window {
     private ArrayList<float[]> curvePoints = new ArrayList<float[]>();
     private ArrayList<float[]> shapePoints = new ArrayList<float[]>();
     private PApplet sketch;
-    private DrawSpace ds;
+    private ArrayList<DrawSpace> slides;
+    private int currentSlide = 0;
+    private boolean currentSlideChanged;
     private ObjectFactory of;
     private float zoom = 1, strokeWeight = 3;
     private int[] fillColor, boarderColor;
@@ -26,7 +30,8 @@ public class Window {
 
     public Window(PApplet sketch, float x, float y, float w, float h) {
         this.sketch = sketch;
-        ds = new DrawSpace(sketch, x, y, w, h);
+        this.slides = new ArrayList<DrawSpace>();
+        slides.add(new DrawSpace(sketch, x, y, w, h));
         of = new ObjectFactory(sketch);
         fillColor = new int[] { 0, 0, 0, 0 };
         boarderColor = new int[] { 0, 0, 0 };
@@ -36,14 +41,16 @@ public class Window {
         HEIGHT = h;
     }
 
-    public void display() {sketch.push();
-        this.ds.display(zoom, showComments, showGrid, gridSpacing);
+    public void display() {
+        // TODO: only call display "recursively" down the heirarchy if we do not have a cached PGraphic
+        sketch.push();
+        this.slides.get(currentSlide).display(zoom, showComments, showGrid, gridSpacing);
 
         sketch.push();
         sketch.fill(fillColor[0], fillColor[1], fillColor[2], fillColor[3]);
         sketch.stroke(boarderColor[0], boarderColor[1], boarderColor[2]);
         sketch.strokeWeight(strokeWeight);
-        if(size != ds.getNumObjects()) newToolSelection();
+        if(size != slides.get(currentSlide).getNumObjects()) newToolSelection();
 
         for (int i = 0; i < freePoints.size() - 1; i++) {
             if (freePoints.size() > 1)
@@ -51,7 +58,7 @@ public class Window {
                 freePoints.get(i + 1)[1]);
         }
 
-        float[] coord = ds.translateCoordinates(sketch.mouseX, sketch.mouseY, zoom);
+        float[] coord = slides.get(currentSlide).translateCoordinates(sketch.mouseX, sketch.mouseY, zoom);
         for (int i = 0; i < curvePoints.size(); i++) {
           sketch.line(curvePoints.get(curvePoints.size()-1)[0], curvePoints.get(curvePoints.size()-1)[1], coord[0], coord[1]);
           if (i >= 1)
@@ -78,15 +85,15 @@ public class Window {
 
         if (pollyPoints.size() >= numberVertex && numberVertex > 1) {
           PollyObject obj = of.createPollyGon(pollyPoints, strokeWeight, fillColor, boarderColor);
-            //ds.addObject(of.createPollyGon(pollyPoints, strokeWeight, fillColor, boarderColor));
-            ds.addObject(obj);
+            //slides.get(currentSlide).addObject(of.createPollyGon(pollyPoints, strokeWeight, fillColor, boarderColor));
+            slides.get(currentSlide).addObject(obj);
             //selected.add(obj);
             pollyPoints.clear();
             numberVertex = 0;
         }
 
         if (curvePoints.size() >= 4) {
-            ds.addObject(of.createCurve(curvePoints, strokeWeight, fillColor, boarderColor));
+            slides.get(currentSlide).addObject(of.createCurve(curvePoints, strokeWeight, fillColor, boarderColor));
             curvePoints.clear();
         }
 
@@ -94,7 +101,7 @@ public class Window {
           obj.showBoundingBox();
         }
 
-        if(export && ds.getPosition()[0] == XINIT && ds.getPosition()[1]==YINIT){
+        if(export && slides.get(currentSlide).getPosition()[0] == XINIT && slides.get(currentSlide).getPosition()[1]==YINIT){
           PImage toSave = sketch.get((int)XINIT+1, (int)YINIT+1, (int)WIDTH-1, (int)HEIGHT-1);
           toSave.save(savefile);
           export = false;
@@ -120,26 +127,26 @@ public class Window {
      *
      *
      *********************************************************/
-    private void createDrawSpace(PApplet sketch, float x, float y, float w, float h) {
-        this.ds = new DrawSpace(sketch, x, y, w, h);
-    }
+    /*private void createDrawSpace(PApplet sketch, float x, float y, float w, float h) {
+        slides.add(new DrawSpace(sketch, x, y, w, h));
+    }*/
 
     public void zoom(float factor) { // draw offcenter once zoom
         zoom = sketch.max(.001F, zoom + factor);
     }
 
     public boolean withinCanvas(float x, float y) {
-        float[] coord = ds.translateCoordinates(x, y, zoom);
-        return ds.withinScope(coord[0], coord[1]);
+        float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
+        return slides.get(currentSlide).withinScope(coord[0], coord[1]);
     }
 
     public void canvasPan(float xo, float yo) { // (this.mouseX - this.pmouseX), (this.mouseY - this.pmouseY)
-        this.ds.pan(xo, yo);
+        this.slides.get(currentSlide).pan(xo, yo);
     }
 
     public void reCenter() {
         zoom = 1;
-        this.ds.setPosition(XINIT, YINIT);
+        this.slides.get(currentSlide).setPosition(XINIT, YINIT);
         this.display();
     }
 
@@ -172,11 +179,11 @@ public class Window {
      *********************************************************/
      public boolean createEllipse(float x, float y, float w, float h) {
        PollyObject obj = null;
-       float[] coord = ds.translateCoordinates(x, y, zoom);
-       if (ds.withinScope(coord[0], coord[1]))
+       float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
+       if (slides.get(currentSlide).withinScope(coord[0], coord[1]))
           obj = of.createEllipse(coord[0], coord[1], w, h, strokeWeight, fillColor, boarderColor);
         if (obj != null)
-            return ds.addObject(obj);
+            return slides.get(currentSlide).addObject(obj);
         return false;
      }
 
@@ -194,15 +201,15 @@ public class Window {
     public boolean createEllipse(float x, float y) {
       ellipse = true;
       this.numberVertex = 2;
-      this.size = ds.getNumObjects();
-      float[] coord = ds.translateCoordinates(x, y, zoom);
+      this.size = slides.get(currentSlide).getNumObjects();
+      float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
       shapePoints.add(coord);
 
       if(shapePoints.size() >= numberVertex){
         PollyObject obj = of.createEllipse(shapePoints.get(0)[0], shapePoints.get(0)[1],
                   2*Math.abs(shapePoints.get(1)[0]-shapePoints.get(0)[0]), 2*Math.abs(shapePoints.get(1)[1]-shapePoints.get(0)[1]),
                   strokeWeight, fillColor, boarderColor);
-        return ds.addObject(obj);
+        return slides.get(currentSlide).addObject(obj);
 
       }
         return false;
@@ -210,11 +217,11 @@ public class Window {
 
     public boolean createRect(float x, float y, float w, float h) {
         PollyObject obj = null;
-        float[] coord = ds.translateCoordinates(x, y, zoom);
-        if (ds.withinScope(coord[0], coord[1]))
+        float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
+        if (slides.get(currentSlide).withinScope(coord[0], coord[1]))
             obj = of.createRect(coord[0], coord[1], w, h, strokeWeight, fillColor, boarderColor);
         if (obj != null)
-            return ds.addObject(obj);
+            return slides.get(currentSlide).addObject(obj);
         return false;
     }
 
@@ -225,15 +232,15 @@ public class Window {
     public boolean createRect(float x, float y) {
       ellipse = false;
       this.numberVertex = 2;
-      this.size = ds.getNumObjects();
-      float[] coord = ds.translateCoordinates(x, y, zoom);
+      this.size = slides.get(currentSlide).getNumObjects();
+      float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
       shapePoints.add(coord);
 
       if(shapePoints.size() >= numberVertex){
         PollyObject obj = of.createRect(shapePoints.get(0)[0], shapePoints.get(0)[1],
                   2*Math.abs(shapePoints.get(1)[0]-shapePoints.get(0)[0]), 2*Math.abs(shapePoints.get(1)[1]-shapePoints.get(0)[1]),
                   strokeWeight, fillColor, boarderColor);
-        return ds.addObject(obj);
+        return slides.get(currentSlide).addObject(obj);
 
       }
         return false;
@@ -241,48 +248,48 @@ public class Window {
 
     public boolean createTextBox(float x, float y, String str, String font, float textSize) {
         PollyObject obj = null;
-        float[] coord = ds.translateCoordinates(x, y, zoom);
-        if (ds.withinScope(coord[0], coord[1]))
+        float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
+        if (slides.get(currentSlide).withinScope(coord[0], coord[1]))
             obj = of.createTextBox(coord[0], coord[1], strokeWeight, fillColor, boarderColor, str, font, textSize);
         if (obj != null)
-            return ds.addObject(obj);
+            return slides.get(currentSlide).addObject(obj);
         return false;
     }
 
     public boolean createInteractiveTextBox(float x, float y, float x2, String font, float textSize) {
         PollyObject obj = null;
-        float[] startCoord = ds.translateCoordinates(x, y, zoom);
-        if (ds.withinScope(startCoord[0], startCoord[1]))
+        float[] startCoord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
+        if (slides.get(currentSlide).withinScope(startCoord[0], startCoord[1]))
             obj = of.createInteractiveTextBox(startCoord[0], startCoord[1], x2, strokeWeight, fillColor, boarderColor, font, textSize);
         if (obj != null)
-            return ds.addObject(obj);
+            return slides.get(currentSlide).addObject(obj);
         return false;
     }
 
     public boolean createComment(float x, float y, String str, String font, float textSize) {
         PollyObject obj = null;
-        float[] coord = ds.translateCoordinates(x, y, zoom);
-        if (ds.withinScope(coord[0], coord[1]))
+        float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
+        if (slides.get(currentSlide).withinScope(coord[0], coord[1]))
             obj = of.createComment(coord[0], coord[1], strokeWeight, fillColor, boarderColor, str, font, textSize);
         if (obj != null)
-            return ds.addComment(obj);
+            return slides.get(currentSlide).addComment(obj);
         return false;
     }
 
     public boolean importImage(float x, float y, String filename, String extension) {
         PollyObject obj = null;
-        float[] coord = ds.translateCoordinates(x, y, zoom);
-        if (ds.withinScope(coord[0], coord[1]))
+        float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
+        if (slides.get(currentSlide).withinScope(coord[0], coord[1]))
             obj = of.importImage(coord[0], coord[1], filename, extension);
         if (obj != null)
-            return ds.addObject(obj);
+            return slides.get(currentSlide).addObject(obj);
         return false;
     }
 
     public boolean importImage(String filename, String extension) {
         PollyObject obj = of.importImage(0, 0, filename, extension);
         if (obj != null)
-            return ds.addObject(obj);
+            return slides.get(currentSlide).addObject(obj);
         return false;
     }
 
@@ -311,28 +318,28 @@ public class Window {
 
      public void toggleGroup(){
        for(PollyObject obj : selected){
-         if(obj instanceof Group) ds.removeObject(obj);
-         else ds.addObject(new Group(sketch, 0, 0, selected));
+         if(obj instanceof Group) slides.get(currentSlide).removeObject(obj);
+         else slides.get(currentSlide).addObject(new Group(sketch, 0, 0, selected));
        }
      }
 
     public void group() {
-        ds.addObject(new Group(sketch, 0, 0, selected));
+        slides.get(currentSlide).addObject(new Group(sketch, 0, 0, selected));
     }
 
     public void unGroup() {
         for (PollyObject obj : selected) {
             if (obj instanceof Group)
-                ds.removeObject(obj);
+                slides.get(currentSlide).removeObject(obj);
         }
     }
 
     public void pan(float mouseX, float mouseY, float pmouseX, float pmouseY) {
       boolean pan = false;
-      float[] coord = ds.translateCoordinates(mouseX, mouseY, zoom);
+      float[] coord = slides.get(currentSlide).translateCoordinates(mouseX, mouseY, zoom);
       float[] translation = translate(mouseX-pmouseX, mouseY-pmouseY);
 
-      if(selected.size() == 0 && withinCanvas(mouseX, mouseY)) this.ds.pan(translation[0], translation[1]);
+      if(selected.size() == 0 && withinCanvas(mouseX, mouseY)) this.slides.get(currentSlide).pan(translation[0], translation[1]);
       else{
         for (PollyObject obj : selected) {
           if(obj.withinScope(coord[0], coord[1])) pan = true;
@@ -404,7 +411,7 @@ public class Window {
     }
 
     public void multiSelect(float x, float y) {
-        PollyObject obj = ds.getObjectAt(x, y, zoom);
+        PollyObject obj = slides.get(currentSlide).getObjectAt(x, y, zoom);
         if (obj != null){
           if(selected.contains(obj)) selected.remove(obj);
           else selected.add(obj);
@@ -412,7 +419,7 @@ public class Window {
     }
 
     public void select(float x, float y) {
-      PollyObject obj = ds.getObjectAt(x, y, zoom);
+      PollyObject obj = slides.get(currentSlide).getObjectAt(x, y, zoom);
       if (obj != null){
         if(selected.contains(obj))
           selected.remove(obj);
@@ -427,7 +434,7 @@ public class Window {
         boolean successful = true;
         for (PollyObject shape : selected) {
             trash.add(shape);
-            if (!ds.removeObject(shape))
+            if (!slides.get(currentSlide).removeObject(shape))
                 successful = false;
         }
         selected.clear();
@@ -438,7 +445,7 @@ public class Window {
         boolean successful = true;
         for (PollyObject shape : selected) {
             trash.add(shape);
-            if (!ds.removeObject(shape))
+            if (!slides.get(currentSlide).removeObject(shape))
                 successful = false;
         }
         return successful;
@@ -447,7 +454,7 @@ public class Window {
     public void duplicateSelected() {
         for (PollyObject shape : selected) {
             try {
-                ds.addObject(SerialManager.deepClonePollyObject(sketch, shape));
+                slides.get(currentSlide).addObject(SerialManager.deepClonePollyObject(sketch, shape));
 			} catch (ClassNotFoundException | IOException e) {
 				System.out.println(e);
 				e.printStackTrace();
@@ -458,7 +465,7 @@ public class Window {
     public void duplicate() {
         for (PollyObject shape : selected) {
             try {
-                ds.addObject(SerialManager.deepClonePollyObject(sketch, shape));
+                slides.get(currentSlide).addObject(SerialManager.deepClonePollyObject(sketch, shape));
 			} catch (ClassNotFoundException | IOException e) {
 				System.out.println(e);
 				e.printStackTrace();
@@ -467,23 +474,23 @@ public class Window {
     }
 
     public boolean deleteLast() {
-        if(ds.getNumObjects() <= 0) return false;
-        return trash.add(ds.removeObject(ds.getNumObjects()-1));
+        if(slides.get(currentSlide).getNumObjects() <= 0) return false;
+        return trash.add(slides.get(currentSlide).removeObject(slides.get(currentSlide).getNumObjects()-1));
     }
 
     public boolean restoreLast() {
         sketch.println(trash.size());
         if (trash.isEmpty()) return false;
-        return ds.addObject(trash.remove(trash.size()-1));
+        return slides.get(currentSlide).addObject(trash.remove(trash.size()-1));
     }
 
     public void clear(){
-        for(PollyObject shape : ds.getAllObjects()){
-            sketch.println(ds.getNumObjects()+" : "+trash.size());
+        for(PollyObject shape : slides.get(currentSlide).getAllObjects()){
+            sketch.println(slides.get(currentSlide).getNumObjects()+" : "+trash.size());
             trash.add(shape);
         }
-        ds.clear();
-        sketch.println(ds.getNumObjects()+" : "+trash.size());
+        slides.get(currentSlide).clear();
+        sketch.println(slides.get(currentSlide).getNumObjects()+" : "+trash.size());
     }
 
     public boolean copy(){
@@ -506,9 +513,9 @@ public class Window {
       for (PollyObject shape : copied) {
           try {
               //shape.pan(10, 10);
-              ds.addObject(SerialManager.deepClonePollyObject(sketch, shape));
+              slides.get(currentSlide).addObject(SerialManager.deepClonePollyObject(sketch, shape));
               //shape.pan(-10, -10);
-              ds.getShape(ds.getNumObjects()-1).pan(10, 10);
+              slides.get(currentSlide).getShape(slides.get(currentSlide).getNumObjects()-1).pan(10, 10);
     } catch (ClassNotFoundException | IOException e) {
       System.out.println(e);
       e.printStackTrace();
@@ -546,22 +553,22 @@ public class Window {
     }
 
     public void freeDraw(float pmousex, float pmousey){ //must call createFreeForm() on mouseRelease()
-        float[] coord = ds.translateCoordinates(pmousex, pmousey, zoom);
+        float[] coord = slides.get(currentSlide).translateCoordinates(pmousex, pmousey, zoom);
         float[] v = new float[]{coord[0], coord[1]};
         freePoints.add(v);
     }
 
     public void createPollyGon(float pmousex, float pmousey, int numberVertex){
         this.numberVertex = numberVertex;
-        this.size = ds.getNumObjects();
-        float[] coord = ds.translateCoordinates(pmousex, pmousey, zoom);
+        this.size = slides.get(currentSlide).getNumObjects();
+        float[] coord = slides.get(currentSlide).translateCoordinates(pmousex, pmousey, zoom);
         float[] v = new float[]{coord[0], coord[1]};
         pollyPoints.add(v);
     }
 
     public void createCurve(float pmousex, float pmousey){
-        this.size = ds.getNumObjects();
-        float[] coord = ds.translateCoordinates(pmousex, pmousey, zoom);
+        this.size = slides.get(currentSlide).getNumObjects();
+        float[] coord = slides.get(currentSlide).translateCoordinates(pmousex, pmousey, zoom);
         float[] v = new float[]{coord[0], coord[1]};
         curvePoints.add(v);
     }
@@ -571,8 +578,69 @@ public class Window {
     }
 
     public void createFreeForm(){ //must be called on the mouseReleased()
-        if(!freePoints.isEmpty()) ds.addObject(of.createFreeForm(freePoints, strokeWeight, fillColor, boarderColor));
+        if(!freePoints.isEmpty()) slides.get(currentSlide).addObject(of.createFreeForm(freePoints, strokeWeight, fillColor, boarderColor));
         freePoints.clear();
+    }
+
+    /*********************************************************
+     *
+     *
+     *          SLIDE RELATED FUNCTIONALITY
+     *
+     *
+     *********************************************************/
+
+    public void nextSlide() {
+        currentSlide++;
+    }
+
+    public void previousSlide() {
+        currentSlide--;
+    }
+
+    /**
+     * Creates a slide beneath the selected slide.
+     */
+    public void createSlideAt() {
+        DrawSpace ds = slides.get(currentSlide);
+        slides.add(new DrawSpace(sketch, ds.xpos, ds.ypos, ds.pixelWidth, ds.pixelHeight));
+    }
+
+    public void moveSlideUp() {
+        if (currentSlide - 1 < 0) {
+            Collections.swap(slides, currentSlide, currentSlide - 1);
+        }
+    }
+
+    public void moveSlideDown() {
+        if (currentSlide + 1 < slides.size()) {
+            Collections.swap(slides, currentSlide, currentSlide + 1);
+        }
+    }
+
+    public void deleteSlide() {
+        if (slides.size() > 0) {
+            slides.remove(currentSlide);
+            currentSlide--;
+        }
+    }
+
+    public void selectSlide(int index) {
+        currentSlide = index;
+    }
+
+    /**
+     * Get the slide thumbnails for use in scroll menus.
+     * @return A list of visual representations of slides with correct indices.
+     */
+    public ArrayList<PGraphics> getSlideThumbnails() {
+        ArrayList<PGraphics> thumbs = new ArrayList<PGraphics>();
+        for (DrawSpace slide : slides) {
+            // TODO: changing to PGraphics is more complicated than I expected
+            // this is because the size of the current slide is relative to
+            // pixelWidth and pixelHeight
+        }
+        return thumbs;
     }
 
     /*********************************************************
@@ -590,11 +658,11 @@ public class Window {
     }
 
     public void save(String filename) throws IOException {
-      SerialManager.saveDrawSpace(ds, filename);
+      SerialManager.saveSlides(slides, filename);
     }
 
     public void open(String filename) throws IOException, ClassNotFoundException {
-      ds = SerialManager.openDrawSpace(sketch, filename);
+      slides = SerialManager.openSlides(sketch, filename);
     }
 
 }
