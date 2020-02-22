@@ -69,7 +69,7 @@ public class InteractiveTextBox extends TextObject implements Serializable {
             cursorPos[1] += textSize;
         }
       }
-      sketch.line(cursorPos[0], cursorPos[1] + textSize / 2, cursorPos[0], cursorPos[1] - textSize / 2);
+      //sketch.line(cursorPos[0], cursorPos[1] + textSize / 2, cursorPos[0], cursorPos[1] - textSize / 2);
       sketch.pop();
   }
 
@@ -156,6 +156,7 @@ public class InteractiveTextBox extends TextObject implements Serializable {
             if (cursorIndex - charactersPerLine >= 0) {
                 cursorIndex -= charactersPerLine;
             }
+            else cursorIndex = 0;
             break;
 		default:
 			break;
@@ -196,16 +197,16 @@ public class InteractiveTextBox extends TextObject implements Serializable {
    */
   protected void removeCharacter() {
     char[] characters = str.toCharArray();
-    if (str.length() > 0) {
+    if (cursorIndex > 0) {
         char[] newCharacters = new char[characters.length - 1];
-        int j = 0;
         cursorIndex--;
+        int o = 0;
         System.out.println(cursorIndex);
-        for (int i = 0; i < characters.length; i++) {
-            if (i != cursorIndex) {
-                newCharacters[i] = characters[j];
-                j++;
+        for (int i = 0; i < characters.length - 1; i++) {
+            if (i == cursorIndex) {
+                o = 1;
             }
+            newCharacters[i] = characters[i + o];
         }
         str = new String(newCharacters);
         charactersSinceNewLine--;
@@ -260,7 +261,23 @@ public class InteractiveTextBox extends TextObject implements Serializable {
         sketch.textLeading(LINE_SPACING);
         sketch.textAlign(PConstants.LEFT);
         sketch.rectMode(PConstants.CORNER);
-        sketch.text(str, 0f - pixelWidth / 2, 0f - pixelHeight / 2, pixelWidth, pixelHeight + 1000);
+        String stringWithCursor = "";
+        char[] characters = str.toCharArray();
+        char[] charactersWithCursor = new char[characters.length + 1];
+        int offset = 0;
+        if (cursorIndex == characters.length) stringWithCursor = str + "|";
+            else {
+            for (int i = 0; i < characters.length; i++) {
+                if (i == cursorIndex) {
+                    charactersWithCursor[i] = '|';
+                    charactersWithCursor[i + 1] = characters[i];
+                    offset = 1;
+                }
+                else charactersWithCursor[i + offset] = characters[i];
+            }
+            stringWithCursor = new String(charactersWithCursor);
+        }
+        sketch.text(stringWithCursor, 0f - pixelWidth / 2, 0f - pixelHeight / 2, pixelWidth, pixelHeight + 1000);
         //sketch.text(str, 0, 0);
   }
 }
