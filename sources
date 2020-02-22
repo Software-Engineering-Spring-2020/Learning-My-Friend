@@ -137,11 +137,13 @@ src\backend\Group.java
 src\backend\objects\Image.java
 src\backend\objects\Rectangle.java
 src\backend\objects\Ellipse.java
+src\backend\objects\InteractiveTextBox.java
+src\backend\objects\TextObject.java
 src\backend\objects\TextBox.java
 src\backend\objects\Comment.java
 src\backend\objects\PollyGon.java
-src\backend\objects\Curve.java
 src\backend\objects\FreeForm.java
+src\backend\objects\Curve.java
 
 
 src\backend\SerialManager.java
