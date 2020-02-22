@@ -389,11 +389,13 @@ public class GUI {
 
 
   private void setupMenuSelectToolbar(){
-    FToolbar ft = toolbarFactory("MenuSelect", (float).8, (float).05, (float).1, (float).0);
+    FToolbar ft = toolbarFactory("MenuSelectTB", (float).8, (float).06, (float).1, (float).0);
+    ft.addFController(new MenuSelect(cp5, ft, this));
+    ft.setBoarder((float).05,(float).05);
   }
 
   private void setUpWorkspaceToolbar(){
-    FToolbar ft = toolbarFactory("Workspace", (float).8, (float).05, (float).1, (float).05);
+    FToolbar ft = toolbarFactory("Workspace", (float).8, (float).05, (float).1, (float).06);
     ft.addFController(new CopyButton(cp5, ft, this));
     ft.addFController(new PasteButton(cp5, ft, this));
 
