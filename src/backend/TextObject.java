@@ -24,7 +24,6 @@ public abstract class TextObject extends ColorfulObject implements Serializable 
 
   protected void init(PApplet sketch){
     super.init(sketch);
-    this.strokeWeight = strokeWeight;
     offset += strokeWeight;
     //setBoarderColor(boarderColor[0],boarderColor[1],boarderColor[2]);
     //setFillColor(fillColor[0], fillColor[1], fillColor[2], fillColor[3]);

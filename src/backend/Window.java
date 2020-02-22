@@ -252,9 +252,8 @@ public class Window {
     public boolean createInteractiveTextBox(float x, float y, float x2, String font, float textSize) {
         PollyObject obj = null;
         float[] startCoord = ds.translateCoordinates(x, y, zoom);
-        float[] endCoord = ds.translateCoordinates(x + x2, y, zoom);
         if (ds.withinScope(startCoord[0], startCoord[1]))
-            obj = of.createInteractiveTextBox(startCoord[0], startCoord[1], endCoord[0] + x2, strokeWeight, fillColor, boarderColor, font, textSize);
+            obj = of.createInteractiveTextBox(startCoord[0], startCoord[1], x2, strokeWeight, fillColor, boarderColor, font, textSize);
         if (obj != null)
             return ds.addObject(obj);
         return false;

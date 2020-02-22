@@ -20,8 +20,8 @@ public class ObjectFactory {
         return new TextBox(sketch, x, y, strokeWeight, fillColor, boarderColor, str, font, textSize);
     }
 
-    public InteractiveTextBox createInteractiveTextBox(float x, float y, float x2, float strokeWeight, int[] fillColor, int[] boarderColor, String font, float textSize) {
-        return new InteractiveTextBox(sketch, x, y, x2, strokeWeight, fillColor, boarderColor, font, textSize);
+    public InteractiveTextBox createInteractiveTextBox(float x, float y, float width, float strokeWeight, int[] fillColor, int[] boarderColor, String font, float textSize) {
+        return new InteractiveTextBox(sketch, x, y, width, strokeWeight, fillColor, boarderColor, font, textSize);
     }
 
     public Comment createComment(float x, float y, float strokeWeight, int[] fillColor, int[] boarderColor, String str, String font, float textSize){
