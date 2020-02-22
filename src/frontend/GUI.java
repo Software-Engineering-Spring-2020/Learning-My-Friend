@@ -328,7 +328,19 @@ public class GUI {
    }
 
 
+
+/**
+ * Start of Toolbar Section
+ */
+
+
+
+/**
+ * [setup is a init for all toolbars]
+ */
+
    private void setup(){
+     setupMenuSelectToolbar();
      setupObjectCreationToolbar();
      setupObjectSettingsToolbar();
      setUpWorkspaceToolbar();
@@ -376,8 +388,12 @@ public class GUI {
     //ft.addFController(new FColorPicker(cp5, ft, this));
 
 
+  private void setupMenuSelectToolbar(){
+    FToolbar ft = toolbarFactory("MenuSelect", (float).8, (float).05, (float).1, (float).0);
+  }
+
   private void setUpWorkspaceToolbar(){
-    FToolbar ft = toolbarFactory("Workspace", (float).8, (float).05, (float).1, (float).0);
+    FToolbar ft = toolbarFactory("Workspace", (float).8, (float).05, (float).1, (float).05);
     ft.addFController(new CopyButton(cp5, ft, this));
     ft.addFController(new PasteButton(cp5, ft, this));
 
