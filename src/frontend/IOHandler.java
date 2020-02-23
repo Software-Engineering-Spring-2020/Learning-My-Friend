@@ -73,7 +73,7 @@ public class IOHandler{
       }
       if(gui.getTool() == 't'){
         //System.out.println("this is running");
-        win.createTextBox(sketch.mouseX, sketch.mouseY, gui.getCurrentString(), "arial", 20);
+        win.createInteractiveTextBox(sketch.mouseX, sketch.mouseY, 100, "arial", 20);
       }
       if(gui.getTool() == 'c'){
         //System.out.println("this is running");
