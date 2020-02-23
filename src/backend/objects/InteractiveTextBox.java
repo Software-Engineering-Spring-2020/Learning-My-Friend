@@ -192,6 +192,7 @@ public class InteractiveTextBox extends TextObject implements Serializable, List
     String bullet = Character.toString(getFirstNonWhitespaceCharacter(line));
     String newBullet = Character.toString(BULLETS[(getIndentationLevel() - 1 + 3) % BULLETS.length]);
     String newLine = line.replaceFirst(indentation, "").replaceFirst("\\" + bullet, newBullet);
+    setCurrentLine(newLine);
     cursorIndex -= INDENTATION_SIZE;
   } 
 
@@ -376,7 +377,7 @@ public class InteractiveTextBox extends TextObject implements Serializable, List
                 else cursor = '|';
                 cursorStartTime = nowTime;
             }
-            if (cursorIndex == characters.length) finalString= str + cursor;
+            if (cursorIndex == characters.length) finalString = str + cursor;
             else {
                 for (int i = 0; i < characters.length; i++) {
                     if (i == cursorIndex) {
