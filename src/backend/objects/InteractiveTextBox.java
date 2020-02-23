@@ -21,11 +21,16 @@ public class InteractiveTextBox extends TextObject implements Serializable {
     private String str, font;
     private float textSize;
     private ArrayList<Float> lineLengths;
-    transient int cursorIndex;
-    transient private PFont pFont;
     private int charactersSinceNewLine;
     private int charactersPerLine;
+    transient private PFont pFont;
+    transient private int cursorIndex;
+    transient private char cursor = '|';
+    transient private long cursorStartTime;
+    transient private boolean displayCursor = false;
+    private final char WIDE_CHAR = 'W';
     private final int LINE_SPACING = 16;
+    private final long CURSOR_BLINK_RATE = 530l;
 
   public InteractiveTextBox(PApplet sketch, float x, float y, float width, float strokeWeight, int[] fillColor, int[] boarderColor, String font, float textSize){
     super(sketch, x, y, strokeWeight, fillColor, boarderColor);
@@ -35,7 +40,8 @@ public class InteractiveTextBox extends TextObject implements Serializable {
     this.lineLengths = new ArrayList<Float>();
     this.lineLengths.add(0f);
     this.str = "";
-    this.charactersPerLine = (int) (width / sketch.textWidth('o'));
+    this.charactersPerLine = (int) (width / sketch.textWidth(WIDE_CHAR));
+    this.cursorStartTime = System.currentTimeMillis();
     String example = "NEW TEXT BOX";
     char[] exampleCharacters = example.toCharArray();
     for (char c: exampleCharacters) {
@@ -56,6 +62,7 @@ public class InteractiveTextBox extends TextObject implements Serializable {
    */
   public void showBoundingBox() {
       super.showBoundingBox();
+      displayCursor = true;
       sketch.push();
       sketch.stroke(0, 0, 0);
       sketch.strokeWeight(2);
@@ -112,14 +119,14 @@ public class InteractiveTextBox extends TextObject implements Serializable {
   }
 
   private void addLine() {
-    ycenter += (textSize + LINE_SPACING) / 2f;
-    pixelHeight += textSize + LINE_SPACING;
+    ycenter += (textSize + LINE_SPACING / 4f) / 2f;
+    pixelHeight += textSize + LINE_SPACING / 4f;
     lineLengths.add(0f);
   }
 
   private void removeLine() {
-    ycenter -= (textSize + LINE_SPACING) / 2f;
-    pixelHeight -= textSize + LINE_SPACING;
+    ycenter -= (textSize + LINE_SPACING / 4f) / 2f;
+    pixelHeight -= textSize + LINE_SPACING / 4f;
     lineLengths.add(0f);
   }
 
@@ -210,7 +217,7 @@ public class InteractiveTextBox extends TextObject implements Serializable {
         }
         str = new String(newCharacters);
         charactersSinceNewLine--;
-        if (charactersSinceNewLine < 0) removeLine();
+        if (charactersSinceNewLine % charactersPerLine == 0 || characters[cursorIndex] == '\n' || characters[cursorIndex] == '\r') removeLine();
     }
   }
 
@@ -257,27 +264,37 @@ public class InteractiveTextBox extends TextObject implements Serializable {
   // this function's text() is why this class does NOT extend TextBox
   protected void display(){
         super.display();
+        String finalString = str;
         sketch.textFont(pFont, textSize);
         sketch.textLeading(LINE_SPACING);
         sketch.textAlign(PConstants.LEFT);
         sketch.rectMode(PConstants.CORNER);
-        String stringWithCursor = "";
         char[] characters = str.toCharArray();
-        char[] charactersWithCursor = new char[characters.length + 1];
-        int offset = 0;
-        if (cursorIndex == characters.length) stringWithCursor = str + "|";
-            else {
-            for (int i = 0; i < characters.length; i++) {
-                if (i == cursorIndex) {
-                    charactersWithCursor[i] = '|';
-                    charactersWithCursor[i + 1] = characters[i];
-                    offset = 1;
-                }
-                else charactersWithCursor[i + offset] = characters[i];
+        if (displayCursor) {
+            displayCursor = false;
+            finalString = "";
+            char[] charactersWithCursor = new char[characters.length + 1];
+            int offset = 0;
+            long nowTime = System.currentTimeMillis();
+            if (nowTime - cursorStartTime >= CURSOR_BLINK_RATE) {
+                if (cursor == '|') cursor = ' ';
+                else cursor = '|';
+                cursorStartTime = nowTime;
             }
-            stringWithCursor = new String(charactersWithCursor);
+            if (cursorIndex == characters.length) finalString= str + cursor;
+            else {
+                for (int i = 0; i < characters.length; i++) {
+                    if (i == cursorIndex) {
+                        charactersWithCursor[i] = cursor;
+                        charactersWithCursor[i + 1] = characters[i];
+                        offset = 1;
+                    }
+                    else charactersWithCursor[i + offset] = characters[i];
+                }
+            finalString = new String(charactersWithCursor);
+            }
         }
-        sketch.text(stringWithCursor, 0f - pixelWidth / 2, 0f - pixelHeight / 2, pixelWidth, pixelHeight + 1000);
+        sketch.text(finalString, 0f - pixelWidth / 2, 0f - pixelHeight / 2, pixelWidth, pixelHeight + 1000);
         //sketch.text(str, 0, 0);
   }
 }
