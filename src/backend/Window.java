@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+* Acts as a conduit between the backend functionality and everything external to the backend package.
+*/
 public class Window {
     private ArrayList<PollyObject> trash = new ArrayList<PollyObject>();
     private ArrayList<PollyObject> selected = new ArrayList<PollyObject>();
@@ -153,7 +156,7 @@ public class Window {
      *********************************************************/
 
      /**
-     * Enlarges or shrinks the slide from its center. If any change should decrease the zoom below 0.1%, it is set to 0.1% instead. Slide starts at 100%
+     * Alter the size of the slide from its center. If any change should decrease the zoom below 0.1%, it is set to 0.1% instead. Slide starts at 100%
      * @param factor The amount to change the current zoom (in percentage) from the current zoom amount
      */
     public void zoom(float factor) { // draw offcenter once zoom
@@ -427,7 +430,7 @@ public class Window {
      *********************************************************/
 
      /**
-     * Enlarges/shrinks each of the selected objects from the relative center of each object
+     * Alter the size of each selected object from the relative center of each object
      * @default 1 Slide starts at 100%
      * @param factor A float representing the amount to change (in percentage) from the current Size
      */
@@ -438,8 +441,8 @@ public class Window {
      }
 
      /**
-     * Enlarges/shrinks each of the selected objects from the relative center of each object. If no object is selected, the slide is zoomed instead
-     * @param factor A float representing the amount to change (in percentage) from the current Size
+     * Alter the size of each selected object from the relative center of each object. If no object is selected, the slide is zoomed instead
+     * @param factor The amount to scale the object (in percentage) from the current size
      */
      public void resize(float factor){
        if(selected.size() == 0) zoom(factor);
@@ -524,7 +527,6 @@ public class Window {
     * @param r Represents the red value in color combinations (range between 0 - 255)
     * @param g Represents the green value in color combinations (range between 0 - 255)
     * @param b Represents the blue value in color combinations (range between 0 - 255)
-    * @param a Represents the alpha (transparent) value for the color (range between 0 - 255)
     */
     public void setBoarderColor(int r, int g, int b) {
         boarderColor[0] = r;
@@ -1002,17 +1004,19 @@ public class Window {
     }
 
     /**
-     * Save all current progress on the slides for editing later. Throws error if unsucessful.
-     * @param filename The desired name for the project
+     * Save all slides to a file that can be opened and restored later.
+     * @param filename The desired name for the file to be saved under
+     * @throws IOException
      */
     public void save(String filename) throws IOException {
       SerialManager.saveSlides(slides, filename);
     }
 
-    /**
-     * Open a previous project and continue editing. Throws error if unsucessful.
-     * @param filename The name of the project you wish to edit
-     */
+     /**
+      * Open and restore a previous slide project to continue editing.
+      * @param filename The name for the slide project to be restored
+      * @throws IOException
+      */
     public void open(String filename) throws IOException, ClassNotFoundException {
       slides = SerialManager.openSlides(sketch, filename);
     }

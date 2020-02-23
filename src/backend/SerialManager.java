@@ -16,9 +16,19 @@ import backend.objects.*;
 import processing.core.PApplet;
 import processing.core.PConstants;
 
+/**
+* Facilitate serialization of objects for saving/opening/cloning purposes.
+*/
 public class SerialManager {
-
-    // returns a deep clone of the provided PollyObject
+    /**
+    * Deep Clone a PollyObject for copy/paste purposes.
+    * @param sketch A reference to a PApplet to allow general functionality of the processing library for object init
+    * @param obj A reference to the PollyObject that is to be cloned
+    * @return A deep clone of the provided PollyObject
+    * @throws IOException
+    * @throws ClassNotFoundException
+    * @see init(PApplet sketch)
+    */
     protected static PollyObject deepClonePollyObject(PApplet sketch, PollyObject obj) throws IOException, ClassNotFoundException {
         ByteArrayOutputStream saveByteArray = new ByteArrayOutputStream();
         ObjectOutputStream byteArrayOutput = new ObjectOutputStream(saveByteArray);
@@ -34,7 +44,12 @@ public class SerialManager {
         return clone;
     }
 
-    // saves the draw space to a file that can be opened and restored later
+    /**
+    * Save slides to a file that can be opened and restored later.
+    * @param slides A list of all slides to be saved
+    * @param filename The desired name for the file to be saved under
+    * @throws IOException
+    */
     protected static void saveSlides(ArrayList<DrawSpace> slides, String filename) throws IOException {
         FileOutputStream saveFile = new FileOutputStream(filename);
         ObjectOutputStream fileOutput = new ObjectOutputStream(saveFile);
@@ -43,7 +58,14 @@ public class SerialManager {
         saveFile.close();
     }
 
-    // returns a draw space opened from file that can be made the current draw space
+    /**
+    * Open and restore a previous slide project to continue editing.
+    * @param sketch A reference to a PApplet to allow general functionality of the processing library for object init
+    * @param filename The name for the slide project to be restored
+    * @return A list of slides from the previous project to be made into the current slide workspace
+    * @throws IOException
+    * @throws ClassNotFoundException
+    */
     protected static ArrayList<DrawSpace> openSlides(PApplet sketch, String filename) throws IOException, ClassNotFoundException {
         FileInputStream openFile = new FileInputStream(filename);
         ObjectInputStream fileInput = new ObjectInputStream(openFile);
