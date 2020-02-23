@@ -88,6 +88,7 @@ public class GUI {
   this.win = win;
   cp5 = new ControlP5(sketch);
   tbList = new LinkedList<FToolbar>();
+  activeTbList = new LinkedList<FToolbar>();
 
   lastAppletWidth = sketch.width;
   lastAppletHeight = sketch.height;
@@ -95,15 +96,25 @@ public class GUI {
   setup();
 }
 
-
+  /**
+   * [toggleFill changes wheather or not the setFill() function sets the boarder color]
+   */
   public void toggleFill(){
     toggleFill = !toggleFill;
   }
 
+/**
+ * [setPolyCount sets the set intiger of polyCount, or the sides the will be allowed during the creation of a polygon]
+ * @param i [polygon side creation count]
+ */
   public void setPolyCount(int i){
     polyCount = i;
   }
 
+/**
+ * [getPolyCount gets the set intiger of polyCount, or the sides the will be allowed during the creation of a polygon]
+ * @return [polygon side creation count]
+ */
   public int getPolyCount(){
     return polyCount;
   }
@@ -411,6 +422,16 @@ public class GUI {
     ft.addFController(new ImportButton(cp5, ft, this));
     ft.addFController(new TogComButton(cp5, ft, this));
     //System.out.println(ft.conList);
+   }
+
+   /**
+    * [setActiveToolbar sets the active toolbar]
+    * @param i [index of the toolbar to activate in order of top toolbar added]
+    */
+   public void setActiveToolbar(int i){
+     for(FToolbar ftb : activeTbList)
+        ftb.setVisable(false);
+     activeTbList.get(i).setVisable(true);
    }
 
 
