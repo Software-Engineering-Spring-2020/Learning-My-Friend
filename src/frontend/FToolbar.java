@@ -340,7 +340,13 @@ public class FToolbar{
     conList.add(con);
   }
 
-
+  /**
+   * [setVisable sets the visability of the toolbar]
+   * @param b [the visability of the toolbar]
+   */
+  public void setVisable(boolean b){
+    g.setVisible(b);
+  }
 
 
 /** TODO compleate this

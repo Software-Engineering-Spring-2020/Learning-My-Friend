@@ -35,6 +35,8 @@ public class Window {
     private boolean presenting;
     private ObjectFactory of;
 
+    PGraphics graphic;
+
     /**
     * Class Constructor to initialize an ArrayList of DrawSpace objects for storing the slides and set the default parameters for color and dimensions
     * @param sketch a reference to a PApplet to allow general functionality of the processing library
@@ -47,6 +49,7 @@ public class Window {
         this.sketch = sketch;
         this.slides = new ArrayList<DrawSpace>();
         slides.add(new DrawSpace(sketch, x, y, w, h));
+        graphic = slides.get(0).getGraphic();
         of = new ObjectFactory(sketch);
         fillColor = new int[] { 0, 0, 0, 0 };
         boarderColor = new int[] { 0, 0, 0 };
@@ -147,140 +150,6 @@ public class Window {
       shapePoints.clear();
     }
 
-    /*********************************************************
-     *
-     *
-     * DRAWSPACE RELATED FUNCTIONALITY
-     *
-     *
-     *********************************************************/
-
-     /**
-     * Alter the size of the slide from its center. If any change should decrease the zoom below 0.1%, it is set to 0.1% instead. Slide starts at 100%
-     * @param factor The amount to change the current zoom (in percentage) from the current zoom amount
-     */
-    public void zoom(float factor) { // draw offcenter once zoom
-        zoom = sketch.max(.001F, zoom + factor);
-    }
-
-    /**
-    * Determines if the current mouse position is over the slide
-    * @param x raw X position of the mouse
-    * @param y raw Y position of the mouse
-    * @return a boolean designating whether the position lies over the slide
-    */
-    public boolean withinCanvas(float x, float y) {
-        float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
-        return slides.get(currentSlide).withinScope(coord[0], coord[1]);
-    }
-
-    /**
-    * @deprecated
-    * @see pan
-    */
-    public void canvasPan(float xo, float yo) { // (this.mouseX - this.pmouseX), (this.mouseY - this.pmouseY)
-        this.slides.get(currentSlide).pan(xo, yo);
-    }
-
-    /**
-    * Resets the current shown slide back to the inital starting position and inital zoom amount
-    */
-    public void reCenter() {
-        zoom = 1;
-        this.slides.get(currentSlide).setPosition(XINIT, YINIT);
-        this.display();
-    }
-
-    /**
-    * Show/Unshow a grid overlaying the slide
-    */
-    public void toggleGrid() {
-        if (showGrid)
-            showGrid = false;
-        else
-            showGrid = true;
-    }
-
-    /**
-    * Alter the sizing of the grid squares, minimum of 2 always set
-    * @default 30 Starting grid space of 30 pixels
-    * @param spacing A float representing the desired size (in pixels) of the squares
-    */
-    public void setGridSpacing(float spacing) {
-        gridSpacing = sketch.max(spacing, 2F);
-    } public void changeGridSpacing(float so) {
-        gridSpacing = sketch.max(gridSpacing+so, 2F);
-    }
-
-    /**
-    * Show/Unshow comments on the slide
-    */
-    public void toggleComments() {
-        if (showComments)
-            showComments = false;
-        else
-            showComments = true;
-    }
-
-    /*********************************************************
-     *
-     *
-     * OBJECT CREATION RELATED FUNCTIONALITY
-     *
-     *
-     *********************************************************/
-     /**
-     * Creates and draws an ellipse on the current slide
-     * @param x Raw X position of the mouse
-     * @param y Raw Y position of the mouse
-     * @param w A float to represent the width (in pixels) of the ellipse
-     * @param h A float to represent the height (in pixels) of the ellipse
-     * @return Whether or not the object was created and added to the slide sucessfully
-     */
-     public boolean createEllipse(float x, float y, float w, float h) {
-       PollyObject obj = null;
-       float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
-       if (slides.get(currentSlide).withinScope(coord[0], coord[1]))
-          obj = of.createEllipse(coord[0], coord[1], w, h, strokeWeight, fillColor, boarderColor);
-        if (obj != null)
-            return slides.get(currentSlide).addObject(obj);
-        return false;
-     }
-
-     /**
-     * Creates and draws a circle on the current slide
-     * @param x Raw X position of the mouse
-     * @param y Raw Y position of the mouse
-     * @param d A float to represent the diameter (in pixels) of the circle
-     * @return Whether or not the object was created and added to the slide sucessfully
-     */
-    public boolean createEllipse(float x, float y, float d) {
-        return createEllipse(x, y, d, d);
-    }
-
-    /**
-    * Starts the creation of an ellipse at first mouse click, finalizes the ellipse at the second click. Between the first and second click, the ellipse shape is dynamic, with the edge following the mouse position.
-    * @param x Raw X position of the mouse
-    * @param y Raw Y position of the mouse
-    * @return Whether or not the object was created and added to the slide successfully
-    */
-    public boolean createEllipse(float x, float y) {
-      ellipse = true;
-      this.numberVertex = 2;
-      this.size = slides.get(currentSlide).getNumObjects();
-      float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
-      shapePoints.add(coord);
-
-      if(shapePoints.size() >= numberVertex){
-        PollyObject obj = of.createEllipse(shapePoints.get(0)[0], shapePoints.get(0)[1],
-                  2*Math.abs(shapePoints.get(1)[0]-shapePoints.get(0)[0]), 2*Math.abs(shapePoints.get(1)[1]-shapePoints.get(0)[1]),
-                  strokeWeight, fillColor, boarderColor);
-        return slides.get(currentSlide).addObject(obj);
-
-      }
-        return false;
-    }
-
     /**
     * Creates and draws an rectangle on the current slide
     * @param x Raw X position of the mouse
@@ -293,129 +162,7 @@ public class Window {
         PollyObject obj = null;
         float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
         if (slides.get(currentSlide).withinScope(coord[0], coord[1]))
-            obj = of.createRect(coord[0], coord[1], w, h, strokeWeight, fillColor, boarderColor);
-        if (obj != null)
-            return slides.get(currentSlide).addObject(obj);
-        return false;
-    }
-
-    /**
-    * Creates and draws a square on the current slide
-    * @param x Raw X position of the mouse
-    * @param y Raw Y position of the mouse
-    * @param d A float to represent the diameter (in pixels) of the rectangle
-    * @return Whether or not the object was created and added to the slide successfully
-    */
-    public boolean createRect(float x, float y, float d) {
-        return createRect(x, y, d, d);
-    }
-
-    /**
-    * Starts the creation of a Rectangle at first mouse click, finalizes the rectangle at the second click. Between the first and second click, the rectangle shape is dynamic, with the bottom right corner following the mouse position.
-    * @param x Raw X position of the mouse
-    * @param y Raw Y position of the mouse
-    * @return Whether or not the object was created and added to the slide successfully
-    */
-    public boolean createRect(float x, float y) {
-      ellipse = false;
-      this.numberVertex = 2;
-      this.size = slides.get(currentSlide).getNumObjects();
-      float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
-      shapePoints.add(coord);
-
-      if(shapePoints.size() >= numberVertex){
-        PollyObject obj = of.createRect(shapePoints.get(0)[0], shapePoints.get(0)[1],
-                  2*Math.abs(shapePoints.get(1)[0]-shapePoints.get(0)[0]), 2*Math.abs(shapePoints.get(1)[1]-shapePoints.get(0)[1]),
-                  strokeWeight, fillColor, boarderColor);
-        return slides.get(currentSlide).addObject(obj);
-
-      }
-        return false;
-    }
-
-    /**
-    * Creates and draws text to the slide
-    * @param x Raw X position of the mouse
-    * @param y Raw Y position of the mouse
-    * @param str The desired text to be displayed
-    * @param font The desired font of the text to be displayed
-    * @param textSize The desired size of the text to be displayed
-    * @return Whether or not the object was created and added to the slide successfully
-    */
-    public boolean createTextBox(float x, float y, String str, String font, float textSize) {
-        PollyObject obj = null;
-        float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
-        if (slides.get(currentSlide).withinScope(coord[0], coord[1]))
-            obj = of.createTextBox(coord[0], coord[1], strokeWeight, fillColor, boarderColor, str, font, textSize);
-        if (obj != null)
-            return slides.get(currentSlide).addObject(obj);
-        return false;
-    }
-
-    /**
-    * Establishes a text box to allow for interactive input from the user onto the slide. Text will wrap around the width of the box.
-    * @param x Raw X position of the mouse
-    * @param y Raw Y position of the mouse
-    * @param x2 Set the starting width of the text box
-    * @param font The desired font of the text to be displayed
-    * @param textSize The desired size of the text to be displayed
-    * @return Whether or not the object was created and added to the slide successfully
-    */
-    public boolean createInteractiveTextBox(float x, float y, float x2, String font, float textSize) {
-        PollyObject obj = null;
-        float[] startCoord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
-        if (slides.get(currentSlide).withinScope(startCoord[0], startCoord[1]))
-            obj = of.createInteractiveTextBox(startCoord[0], startCoord[1], x2, strokeWeight, fillColor, boarderColor, font, textSize);
-        if (obj != null)
-            return slides.get(currentSlide).addObject(obj);
-        return false;
-    }
-
-    /**
-    * Creates and draws a comment to the slide. Comments can be hidden.
-    * @param x Raw X position of the mouse
-    * @param y Raw Y position of the mouse
-    * @param str The desired text to be displayed
-    * @param font The desired font of the text to be displayed
-    * @param textSize The desired size of the text to be displayed
-    * @return Whether or not the object was created and added to the slide successfully
-    */
-    public boolean createComment(float x, float y, String str, String font, float textSize) {
-        PollyObject obj = null;
-        float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
-        if (slides.get(currentSlide).withinScope(coord[0], coord[1]))
-            obj = of.createComment(coord[0], coord[1], strokeWeight, fillColor, boarderColor, str, font, textSize);
-        if (obj != null)
-            return slides.get(currentSlide).addComment(obj);
-        return false;
-    }
-
-    /**
-    * Imports an image from the users computer into the program and displays it at a specified position
-    * @param x Raw X position (relative to the window) to display image
-    * @param y Raw Y position (relative to the window) to display image
-    * @param filename The name of the image to display
-    * @param extension The image file type (the . is still necessary)
-    * @return Whether or not the object was created and added to the slide successfully
-    */
-    public boolean importImage(float x, float y, String filename, String extension) {
-        PollyObject obj = null;
-        float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
-        if (slides.get(currentSlide).withinScope(coord[0], coord[1]))
-            obj = of.importImage(coord[0], coord[1], filename, extension);
-        if (obj != null)
-            return slides.get(currentSlide).addObject(obj);
-        return false;
-    }
-
-    /**
-    * Imports an image from the users computer into the program and displays it at the center of the slide
-    * @param filename The name of the image to display
-    * @param extension The image file type (the . is still necessary)
-    * @return Whether or not the object was created and added to the slide successfully
-    */
-    public boolean importImage(String filename, String extension) {
-        PollyObject obj = of.importImage(0, 0, filename, extension);
+            obj = of.createRect(graphic, coord[0], coord[1], w, h, strokeWeight, fillColor, boarderColor);
         if (obj != null)
             return slides.get(currentSlide).addObject(obj);
         return false;

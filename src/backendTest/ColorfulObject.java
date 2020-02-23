@@ -2,6 +2,7 @@ package backend;
 import java.io.Serializable;
 
 import processing.core.PApplet;
+import processing.core.PGraphics;
 
 /**
 * A basic form of objects that adds color functionality
@@ -21,8 +22,8 @@ public abstract class ColorfulObject extends PollyObject implements Serializable
   * @param fillColor The internal color of the object represented by four values ranged 0-255 (Red, Green, Blue, and Alpha respectively)
   * @param boarderColor The outline color of the object represented by three values ranged 0-255 (Red, Green, and Blue respectively)
   */
-  public ColorfulObject(PApplet sketch, float x, float y, float strokeWeight, int[] fillColor, int[] boarderColor){
-    super(sketch, x, y);
+  public ColorfulObject(PApplet sketch, PGraphics graphic, float x, float y, float strokeWeight, int[] fillColor, int[] boarderColor){
+    super(sketch, graphic, x, y);
     this.strokeWeight = strokeWeight;
     offset += strokeWeight;
     this.boarderColor[0] = boarderColor[0];
@@ -32,18 +33,6 @@ public abstract class ColorfulObject extends PollyObject implements Serializable
     this.fillColor[1] = fillColor[1];
     this.fillColor[2] = fillColor[2];
     this.fillColor[3] = fillColor[3];
-  }
-
-  /**
-  * Function used during the serialization process to restore transient processing library-related variables
-  * @param sketch a reference to a PApplet to allow general functionality of the processing library
-  */
-  protected void init(PApplet sketch){
-    super.init(sketch);
-    this.strokeWeight = strokeWeight;
-    offset += strokeWeight;
-    //setBoarderColor(boarderColor[0],boarderColor[1],boarderColor[2]);
-    //setFillColor(fillColor[0], fillColor[1], fillColor[2], fillColor[3]);
   }
 
   /**
@@ -73,36 +62,12 @@ public abstract class ColorfulObject extends PollyObject implements Serializable
   }
 
   /**
-  * Set the transparency of the object
-  * @param alpha Value representing how transparent the color is (range between 0 - 255)
-  */
-  protected void setAlpha(int alpha){
-    fillColor[3] = alpha;
-  }
-
-  /**
-  * Get the outline/boarder color of object
-  * @return An array of size 3 representing the outline/boarder color of the object
-  */
-  protected int[] getBoarderColor(){
-    return boarderColor;
-  }
-
-  /**
-  * Get the internal/fill color of object
-  * @return An array of size 4 representing the internal/fill color of the object
-  */
-  protected int[] getFillColor(){
-    return fillColor;
-  }
-
-  /**
   * Template to draw a colored object to the slide
   */
   protected void display(){
     super.display();
-    sketch.fill(sketch.color(fillColor[0], fillColor[1], fillColor[2]), fillColor[3]);
-    sketch.stroke(sketch.color(boarderColor[0], boarderColor[1], boarderColor[2]));
-    sketch.strokeWeight(strokeWeight);
+    graphic.fill(graphic.color(fillColor[0], fillColor[1], fillColor[2]), fillColor[3]);
+    graphic.stroke(graphic.color(boarderColor[0], boarderColor[1], boarderColor[2]));
+    graphic.strokeWeight(strokeWeight);
   }
 }
