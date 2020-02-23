@@ -1,2 +1,5 @@
 @echo off
-javadoc -cp src/core.jar -d docs/
+cd src
+javadoc -sourcepath . -cp core.jar -d ../docs -subpackages frontend -subpackages backend
+cd ..
+PAUSE

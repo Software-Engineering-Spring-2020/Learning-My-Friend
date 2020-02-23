@@ -379,7 +379,6 @@ public class GUI {
 
    private void setupDrawToolbar(){
      FToolbar ft = topToolbarFactory("Draw");
-     ft.addFController(new SelecButton(cp5, ft, this));
      ft.addFController(new PenButton(cp5, ft, this));
      ft.addFController(new LineButton(cp5, ft, this));
      ft.addFController(new CurveButton(cp5, ft, this));
@@ -388,12 +387,13 @@ public class GUI {
    private void setupTextToolbar(){
      FToolbar ft = topToolbarFactory("TextOpt");
      ft.addFController(new TextButton(cp5, ft, this));
-     ft.addFController(new CommentButton(cp5, ft, this));
 
    }
 
    private void setupObjectSettingsToolbar(){
     FToolbar ft = toolbarFactory("Obj Set", (float).2, (float).8, (float).8, (float).1);
+    ft.addFController(new SelecButton(cp5, ft, this));
+
     rSlider = new RFillSlider(cp5, ft, this);
     bSlider = new GFillSlider(cp5, ft, this);
     gSlider = new BFillSlider(cp5, ft, this);
@@ -440,8 +440,6 @@ public class GUI {
     ft.addFController(new OpenButton(cp5, ft, this));
     ft.addFController(new ExportButton(cp5, ft, this));
     ft.addFController(new ImportButton(cp5, ft, this));
-    ft.addFController(new TogComButton(cp5, ft, this));
-    //System.out.println(ft.conList);
    }
 
    /**
