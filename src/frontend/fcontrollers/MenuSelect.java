@@ -24,7 +24,8 @@ public class MenuSelect extends FButtonBar{
 
 
   public void MenuSelect(int val){
-    System.out.println(val);
+    //System.out.println(val);
+    getGUI().setActiveToolbar(val);
   }
 
 }
