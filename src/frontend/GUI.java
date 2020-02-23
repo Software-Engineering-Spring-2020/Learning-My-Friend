@@ -337,6 +337,9 @@ public class GUI {
     win.setBoarderColor(boarderColor[0], boarderColor[1], boarderColor[2]);
    }
 
+   /**
+    * [toggleGrid turns the canvas grid on or off]
+    */
    public void toggleGrid(){
     win.toggleGrid();
    }
@@ -354,23 +357,40 @@ public class GUI {
  */
 
    private void setup(){
+     //toolbar menu, very top toolbar
      setupMenuSelectToolbar();
-     setupObjectCreationToolbar();
+
+     //object setings rbg and ect..
      setupObjectSettingsToolbar();
-     setUpWorkspaceToolbar();
+
+     //file, save, save as, export
+     setUpFileToolbar();
+
+     //text menu
+     setupTextToolbar();
+
+     //draw stuff
+     setupDrawToolbar();
+
+
+     setActiveToolbar(0);
      resizeAll();
    }
 
-   private void setupObjectCreationToolbar(){
-     FToolbar ft = toolbarFactory("Obj Create", (float).05, (float).8, (float).0, (float).1);
+   private void setupDrawToolbar(){
+     FToolbar ft = topToolbarFactory("Draw");
      ft.addFController(new SelecButton(cp5, ft, this));
      ft.addFController(new PenButton(cp5, ft, this));
      ft.addFController(new LineButton(cp5, ft, this));
      ft.addFController(new CurveButton(cp5, ft, this));
-     ft.addFController(new TextButton(cp5, ft, this));
-
    }
 
+   private void setupTextToolbar(){
+     FToolbar ft = topToolbarFactory("TextOpt");
+     ft.addFController(new TextButton(cp5, ft, this));
+     ft.addFController(new CommentButton(cp5, ft, this));
+
+   }
 
    private void setupObjectSettingsToolbar(){
     FToolbar ft = toolbarFactory("Obj Set", (float).2, (float).8, (float).8, (float).1);
@@ -399,7 +419,7 @@ public class GUI {
     ft.addFController(new RotateSlider(cp5, ft, this));
     ft.addFController(new TrashButton(cp5, ft, this));
   }
-    //ft.addFController(new FColorPicker(cp5, ft, this));
+
 
 
   private void setupMenuSelectToolbar(){
@@ -410,8 +430,8 @@ public class GUI {
 
   }
 
-  private void setUpWorkspaceToolbar(){
-    FToolbar ft = topToolbarFactory("Workspace");
+  private void setUpFileToolbar(){
+    FToolbar ft = topToolbarFactory("File");
 
     ft.addFController(new CopyButton(cp5, ft, this));
     ft.addFController(new PasteButton(cp5, ft, this));
