@@ -31,6 +31,9 @@ public class InteractiveTextBox extends TextObject implements Serializable {
     private final char WIDE_CHAR = 'W';
     private final int LINE_SPACING = 16;
     private final long CURSOR_BLINK_RATE = 530l;
+    private final char[] BULLETS = {'-', '+', '*'};
+    private final char INDENTATION_CHAR = ' ';
+    private final int INDENTATION_SIZE = 4;
 
   public InteractiveTextBox(PApplet sketch, float x, float y, float width, float strokeWeight, int[] fillColor, int[] boarderColor, String font, float textSize){
     super(sketch, x, y, strokeWeight, fillColor, boarderColor);
@@ -130,8 +133,74 @@ public class InteractiveTextBox extends TextObject implements Serializable {
     lineLengths.add(0f);
   }
 
-  private int getLineNumber() {
-      return 0;
+  /**
+   * 
+   * @return The String starting with the last PConstants.ENTER or PConstants.RETURN, not a Processing line.
+   */
+  private String getCurrentLine() {
+    // TODO: test using cursorIndex
+    char[] characters = str.toCharArray();
+    String reversedLine = "";
+    for (int i = cursorIndex - 1; i >= 0; i--) {
+        if (characters[i] == PConstants.ENTER || characters[i] == PConstants.RETURN) break;
+        reversedLine += characters[i];
+    }
+    System.out.println(reversedLine);
+    char[] reversedLineCharacters = reversedLine.toCharArray();
+    String line = "";
+    for (int i = reversedLineCharacters.length - 1; i >= 0; i--) {
+        line += reversedLineCharacters[i];
+    }
+    for (int i = cursorIndex - 1; i < characters.length; i++) {
+        if (characters[i] == PConstants.ENTER || characters[i] == PConstants.RETURN) break;
+        line += characters[i];
+    }
+    return line;
+  }
+
+  private boolean inBullets() {
+    if (str.length() == 0) return false;
+    char firstNonWhitespaceCharacter = getFirstNonWhitespaceCharacter();
+    for (int i = 0; i < BULLETS.length; i++) if (firstNonWhitespaceCharacter == BULLETS[i]) return true;
+    return false;
+  }
+
+  private int getIndentationLevel() {
+    String line = getCurrentLine();
+    if (line.length() == 0) return 0;
+    char[] lineCharacters = line.toCharArray();
+    int indentation_chars = 0;
+    int i = 0;
+    while (lineCharacters[i] == INDENTATION_CHAR) {
+        indentation_chars++;
+        i++;
+    }
+    if (indentation_chars % INDENTATION_SIZE == 0) return indentation_chars / INDENTATION_SIZE;
+    else return 0;
+  }
+
+  private void indent() {
+      String indentation = "";
+      for (int i = 0; i < INDENTATION_SIZE; i++) indentation += INDENTATION_CHAR;
+      charactersSinceNewLine += INDENTATION_SIZE + 1;
+      str.replace(getCurrentLine(), indentation + getCurrentLine());
+  }
+
+  private void unindent() {
+    String indentation = "";
+    for (int i = 0; i < INDENTATION_SIZE; i++) indentation += INDENTATION_CHAR;
+    charactersSinceNewLine -= INDENTATION_SIZE + 1;
+    str.replaceFirst(indentation, "");
+  }
+
+  private char getFirstNonWhitespaceCharacter() {
+    String line = getCurrentLine();
+    char[] lineCharacters = line.toCharArray();
+    int i = 0;
+    while (lineCharacters[i] == INDENTATION_CHAR) {
+        i++;
+    }
+    return lineCharacters[i];
   }
 
   /**
@@ -190,13 +259,19 @@ public class InteractiveTextBox extends TextObject implements Serializable {
         }
     }
     charactersSinceNewLine++;
-    if (c == PConstants.ENTER || c == PConstants.RETURN) {
-        moveCursor(Direction.DOWN);
-        addLine();
-    }
     if (charactersSinceNewLine % charactersPerLine == 0) addLine();
     cursorIndex++;
     str = new String(newCharacters);
+    if (c == PConstants.ENTER || c == PConstants.RETURN) {
+        moveCursor(Direction.DOWN);
+        if (!(charactersSinceNewLine % charactersPerLine == 0)) addLine();
+        if (inBullets()) {
+            for (int i = cursorIndex; i < cursorIndex + INDENTATION_SIZE * getIndentationLevel(); i++) {
+                addCharacter(INDENTATION_CHAR);
+            }
+            addCharacter(BULLETS[getIndentationLevel() % BULLETS.length]);
+        }
+    }
   }
 
   /**
@@ -216,6 +291,9 @@ public class InteractiveTextBox extends TextObject implements Serializable {
             newCharacters[i] = characters[i + o];
         }
         str = new String(newCharacters);
+        String line = getCurrentLine();
+        char[] lineCharacters = line.toCharArray();
+        if (inBullets() && (lineCharacters[line.length() - 1] == INDENTATION_CHAR || lineCharacters[line.length() - 2] == INDENTATION_CHAR)) unindent();
         charactersSinceNewLine--;
         if (charactersSinceNewLine % charactersPerLine == 0 || characters[cursorIndex] == '\n' || characters[cursorIndex] == '\r') removeLine();
     }
@@ -250,6 +328,10 @@ public class InteractiveTextBox extends TextObject implements Serializable {
     }
     else {
         switch(key) {
+            case PConstants.TAB:
+                if (inBullets()) indent();
+                break;
+            // TODO: case SHIFT + TAB for unindent
             case PConstants.BACKSPACE:
                 removeCharacter();
                 break;
