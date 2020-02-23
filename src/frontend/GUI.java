@@ -387,7 +387,6 @@ public class GUI {
    private void setupTextToolbar(){
      FToolbar ft = topToolbarFactory("TextOpt");
      ft.addFController(new TextButton(cp5, ft, this));
-     ft.addFController(new CommentButton(cp5, ft, this));
 
    }
 
@@ -441,8 +440,6 @@ public class GUI {
     ft.addFController(new OpenButton(cp5, ft, this));
     ft.addFController(new ExportButton(cp5, ft, this));
     ft.addFController(new ImportButton(cp5, ft, this));
-    ft.addFController(new TogComButton(cp5, ft, this));
-    //System.out.println(ft.conList);
    }
 
    /**
