@@ -2,15 +2,18 @@ package backend.objects;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import backend.TextObject;
+import backend.ListenerObject;
+
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PGraphics;
 import processing.core.PVector;
 import processing.core.PConstants;
 
-public class InteractiveTextBox extends TextObject implements Serializable {
+public class InteractiveTextBox extends TextObject implements Serializable, ListenerObject {
     private static final long serialVersionUID = 14L;
     public enum Direction {
         UP,
@@ -18,12 +21,8 @@ public class InteractiveTextBox extends TextObject implements Serializable {
         LEFT,
         RIGHT
     }
-    private String str, font;
-    private float textSize;
-    private ArrayList<Float> lineLengths;
     private int charactersSinceNewLine;
     private int charactersPerLine;
-    transient private PFont pFont;
     transient private int cursorIndex;
     transient private char cursor = '|';
     transient private long cursorStartTime;
@@ -36,12 +35,7 @@ public class InteractiveTextBox extends TextObject implements Serializable {
     private final int INDENTATION_SIZE = 4;
 
   public InteractiveTextBox(PApplet sketch, float x, float y, float width, float strokeWeight, int[] fillColor, int[] boarderColor, String font, float textSize){
-    super(sketch, x, y, strokeWeight, fillColor, boarderColor);
-    this.font = font;
-    this.pFont = sketch.createFont(font, 1);
-    this.textSize = textSize;
-    this.lineLengths = new ArrayList<Float>();
-    this.lineLengths.add(0f);
+    super(sketch, x, y, strokeWeight, fillColor, boarderColor, "", font, textSize);
     this.str = "";
     this.charactersPerLine = (int) (width / sketch.textWidth(WIDE_CHAR));
     this.cursorStartTime = System.currentTimeMillis();
@@ -52,57 +46,18 @@ public class InteractiveTextBox extends TextObject implements Serializable {
     }
     sketch.textSize(textSize);
     pixelWidth = width;
-    pixelHeight = lineLengths.size() * textSize;
+    pixelHeight = textSize;
     cursorIndex = str.length();
-    System.out.println(textSize);
-    System.out.println(pixelWidth);
-    System.out.println(pixelHeight);
     fillColor[3] = 255;
   }
 
   /**
-   * Displays the changed bounding box and the text cursor.
+   * Displays the bounding box and the text cursor.
    */
   public void showBoundingBox() {
       super.showBoundingBox();
       displayCursor = true;
-      sketch.push();
-      sketch.stroke(0, 0, 0);
-      sketch.strokeWeight(2);
-      float[] cursorPos = {xcenter - pixelWidth / 2, ycenter - pixelHeight / 2 + textSize / 2};
-      String untilCursor = str.substring(0, cursorIndex);
-      char[] characters = untilCursor.toCharArray();
-      for (int i = 0; i < characters.length; i++) {
-        cursorPos[0] += sketch.textWidth(characters[i]);
-        if (cursorPos[0] >= xcenter - pixelWidth / 2 + pixelWidth) {
-            cursorPos[0] = xcenter - pixelWidth / 2;
-            cursorPos[1] += textSize;
-        }
-      }
-      //sketch.line(cursorPos[0], cursorPos[1] + textSize / 2, cursorPos[0], cursorPos[1] - textSize / 2);
-      sketch.pop();
   }
-
-  protected PVector[] getBoundingBoxPoints(float xcenter, float ycenter) {
-    float width = pixelWidth*zoom;
-    float height = pixelHeight*zoom;
-    offset = 3;
-    // this uses the existing bounding box system as much as possible
-    // using width and height to generate four points
-    // these points are NOT rotated per this PollyObject's rotation
-
-    // represented with four PVectors: topLeft, topRight, bottomRight, bottomLeft (like NESW)
-    PVector[] boundingBoxPoints = new PVector[4];
-    // topLeft
-    boundingBoxPoints[0] = new PVector(-width/2 + xcenter - offset, -height/2 + ycenter - offset);
-    // topRight
-    boundingBoxPoints[1] = new PVector(width/2 + xcenter + offset, -height/2 + ycenter - offset);
-    // bottomRight
-    boundingBoxPoints[2] = new PVector(width/2 + xcenter + offset, height/2 + ycenter + offset);
-    // bottomLeft
-    boundingBoxPoints[3] = new PVector(-width/2 + xcenter - offset, height/2 + ycenter + offset);
-    return boundingBoxPoints;
-}
 
   /**
    * Adjusts the width and height of the InteractiveTextBox using
@@ -118,19 +73,57 @@ public class InteractiveTextBox extends TextObject implements Serializable {
     for (int i = 0; i < temp.length; i++) {
         addCharacter(temp[i]);
     }
-    pixelHeight = lineLengths.size() * textSize;
   }
 
   private void addLine() {
     ycenter += (textSize + LINE_SPACING / 4f) / 2f;
     pixelHeight += textSize + LINE_SPACING / 4f;
-    lineLengths.add(0f);
   }
 
   private void removeLine() {
     ycenter -= (textSize + LINE_SPACING / 4f) / 2f;
     pixelHeight -= textSize + LINE_SPACING / 4f;
-    lineLengths.add(0f);
+  }
+
+  /**
+   * Replace the line the cursor is currently on.
+   * @param newCurrentLine
+   */
+  private void setCurrentLine(String newCurrentLine) {
+    char[] characters = str.toCharArray();
+    int startIndex = 0;
+    int endIndex = 0;
+    int i = 0;
+    ArrayList<Character> charactersAl = new ArrayList<Character>();
+    for (i = 0; i < characters.length; i++) {
+        charactersAl.add(characters[i]);
+    }
+    for (i = cursorIndex - 1; i >= 0; i--) {
+        if (i > 0) if (characters[i] == PConstants.ENTER || characters[i] == PConstants.RETURN) {
+            i++;
+            break;
+        }
+    }
+    startIndex = i;
+    for (i = cursorIndex; i < characters.length; i++) {
+        if (i > 0) if (characters[i] == PConstants.ENTER || characters[i] == PConstants.RETURN) {
+            break;
+        }
+    }
+    //if (i > 0) i--;
+    endIndex = i;
+    while (endIndex - startIndex > 0) {
+        charactersAl.remove(startIndex);
+        endIndex--;
+    }
+    char[] newCharacters = newCurrentLine.toCharArray();
+    int j = 0;
+    for (i = startIndex; i < startIndex + newCharacters.length; i++) {
+        charactersAl.add(i, newCharacters[j]);
+        j++;
+    }
+    str = "";
+    for (i = 0; i < charactersAl.size(); i++) str += charactersAl.get(i);
   }
 
   /**
@@ -138,20 +131,19 @@ public class InteractiveTextBox extends TextObject implements Serializable {
    * @return The String starting with the last PConstants.ENTER or PConstants.RETURN, not a Processing line.
    */
   private String getCurrentLine() {
-    // TODO: test using cursorIndex
     char[] characters = str.toCharArray();
     String reversedLine = "";
+    if (characters.length == 0) return "";
     for (int i = cursorIndex - 1; i >= 0; i--) {
         if (characters[i] == PConstants.ENTER || characters[i] == PConstants.RETURN) break;
         reversedLine += characters[i];
     }
-    System.out.println(reversedLine);
     char[] reversedLineCharacters = reversedLine.toCharArray();
     String line = "";
     for (int i = reversedLineCharacters.length - 1; i >= 0; i--) {
         line += reversedLineCharacters[i];
     }
-    for (int i = cursorIndex - 1; i < characters.length; i++) {
+    for (int i = cursorIndex; i < characters.length && i >= 0; i++) {
         if (characters[i] == PConstants.ENTER || characters[i] == PConstants.RETURN) break;
         line += characters[i];
     }
@@ -159,8 +151,8 @@ public class InteractiveTextBox extends TextObject implements Serializable {
   }
 
   private boolean inBullets() {
-    if (str.length() == 0) return false;
-    char firstNonWhitespaceCharacter = getFirstNonWhitespaceCharacter();
+    if (getCurrentLine().length() == 0) return false;
+    char firstNonWhitespaceCharacter = getFirstNonWhitespaceCharacter(getCurrentLine());
     for (int i = 0; i < BULLETS.length; i++) if (firstNonWhitespaceCharacter == BULLETS[i]) return true;
     return false;
   }
@@ -180,27 +172,36 @@ public class InteractiveTextBox extends TextObject implements Serializable {
   }
 
   private void indent() {
-      String indentation = "";
-      for (int i = 0; i < INDENTATION_SIZE; i++) indentation += INDENTATION_CHAR;
-      charactersSinceNewLine += INDENTATION_SIZE + 1;
-      str.replace(getCurrentLine(), indentation + getCurrentLine());
+    String indentation = "";
+    for (int i = 0; i < INDENTATION_SIZE; i++) indentation += INDENTATION_CHAR;
+    charactersSinceNewLine += INDENTATION_SIZE + 1;
+    String line = getCurrentLine();
+    String bullet = Character.toString(getFirstNonWhitespaceCharacter(line));
+    String newBullet = Character.toString(BULLETS[(getIndentationLevel() + 1) % BULLETS.length]);
+    String newLine = (indentation + line).replaceFirst("\\" + bullet, newBullet);
+    setCurrentLine(newLine);
+    cursorIndex += INDENTATION_SIZE;
   }
 
   private void unindent() {
     String indentation = "";
     for (int i = 0; i < INDENTATION_SIZE; i++) indentation += INDENTATION_CHAR;
     charactersSinceNewLine -= INDENTATION_SIZE + 1;
-    str.replaceFirst(indentation, "");
+    String line = getCurrentLine();
+    line = line.replaceFirst(indentation, "");
+    String bullet = Character.toString(getFirstNonWhitespaceCharacter(line));
+    String newBullet = Character.toString(BULLETS[(getIndentationLevel() - 1) % BULLETS.length]);
+    String newLine = (indentation + line).replaceFirst("\\" + bullet, newBullet);
+    setCurrentLine(newLine);
   }
 
-  private char getFirstNonWhitespaceCharacter() {
-    String line = getCurrentLine();
-    char[] lineCharacters = line.toCharArray();
+  private char getFirstNonWhitespaceCharacter(String s) {
+    char[] sCharacters = s.toCharArray();
     int i = 0;
-    while (lineCharacters[i] == INDENTATION_CHAR) {
+    while (sCharacters[i] == INDENTATION_CHAR) {
         i++;
     }
-    return lineCharacters[i];
+    return sCharacters[i];
   }
 
   /**
@@ -248,6 +249,9 @@ public class InteractiveTextBox extends TextObject implements Serializable {
   protected void addCharacter(char c) {
     char[] characters = str.toCharArray();
     char[] newCharacters = new char[characters.length + 1];
+    boolean inBullets = inBullets();
+    int indentationLevel = 0;
+    if (inBullets) indentationLevel = getIndentationLevel();
     int j = 0;
     for (int i = 0; i < characters.length + 1; i++) {
         if (i == cursorIndex) {
@@ -263,13 +267,12 @@ public class InteractiveTextBox extends TextObject implements Serializable {
     cursorIndex++;
     str = new String(newCharacters);
     if (c == PConstants.ENTER || c == PConstants.RETURN) {
-        moveCursor(Direction.DOWN);
         if (!(charactersSinceNewLine % charactersPerLine == 0)) addLine();
-        if (inBullets()) {
-            for (int i = cursorIndex; i < cursorIndex + INDENTATION_SIZE * getIndentationLevel(); i++) {
-                addCharacter(INDENTATION_CHAR);
+        if (inBullets) {
+            addCharacter(BULLETS[indentationLevel % BULLETS.length]);
+            for (int i = 0; i < indentationLevel; i++) {
+                indent();
             }
-            addCharacter(BULLETS[getIndentationLevel() % BULLETS.length]);
         }
     }
   }
@@ -283,7 +286,6 @@ public class InteractiveTextBox extends TextObject implements Serializable {
         char[] newCharacters = new char[characters.length - 1];
         cursorIndex--;
         int o = 0;
-        System.out.println(cursorIndex);
         for (int i = 0; i < characters.length - 1; i++) {
             if (i == cursorIndex) {
                 o = 1;
@@ -293,21 +295,13 @@ public class InteractiveTextBox extends TextObject implements Serializable {
         str = new String(newCharacters);
         String line = getCurrentLine();
         char[] lineCharacters = line.toCharArray();
-        if (inBullets() && (lineCharacters[line.length() - 1] == INDENTATION_CHAR || lineCharacters[line.length() - 2] == INDENTATION_CHAR)) unindent();
+        //if (inBullets() && (lineCharacters[cursorIndex - 1]) unindent();
         charactersSinceNewLine--;
         if (charactersSinceNewLine % charactersPerLine == 0 || characters[cursorIndex] == '\n' || characters[cursorIndex] == '\r') removeLine();
     }
   }
 
-  protected void init(PApplet sketch){
-    super.init(sketch);
-    this.pFont = sketch.createFont(font, 1);
-  //  sketch.textSize(textSize);
-    //pixelWidth = sketch.textWidth(str);
-  }
-
-  protected void handleKey(char key, int keyCode) {
-    super.handleKey(key, keyCode);
+  public void handleKey(char key, int keyCode) {
     if (key == sketch.CODED) {
         switch(keyCode) {
             case PConstants.CONTROL:
@@ -349,10 +343,9 @@ public class InteractiveTextBox extends TextObject implements Serializable {
   protected void display(){
         super.display();
         String finalString = str;
-        sketch.textFont(pFont, textSize);
         sketch.textLeading(LINE_SPACING);
-        sketch.textAlign(PConstants.LEFT);
-        sketch.rectMode(PConstants.CORNER);
+        sketch.textAlign(PConstants.LEFT);  //overrides the current default of CENTER, CENTER
+        sketch.rectMode(PConstants.CORNER);  //overrides the current default of CENTER
         char[] characters = str.toCharArray();
         if (displayCursor) {
             displayCursor = false;

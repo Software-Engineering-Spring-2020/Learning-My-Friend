@@ -779,9 +779,9 @@ public class Window {
      */
     public void keyPressed(char key, int keyCode) {
         for (PollyObject obj : selected) {
-            if (obj instanceof TextObject) {
-                TextObject tobj = (TextObject) obj;
-                tobj.handleKey(key, keyCode);
+            if (obj instanceof ListenerObject) {
+                ListenerObject lobj = (ListenerObject) obj;
+                lobj.handleKey(key, keyCode);
             }
         }
     }
