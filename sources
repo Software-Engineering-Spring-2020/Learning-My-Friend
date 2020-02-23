@@ -1,4 +1,4 @@
-src/LearningMyFriend.java
+src\LearningMyFriend.java
 
 src\frontend\GUI.java
 src\frontend\IOHandler.java
