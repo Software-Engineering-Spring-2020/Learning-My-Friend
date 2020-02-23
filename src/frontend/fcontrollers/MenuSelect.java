@@ -17,7 +17,7 @@ import frontend.controlP5.*;
 public class MenuSelect extends FButtonBar{
   public MenuSelect(ControlP5 cp5, FToolbar parrent, GUI gui){
     super(cp5, "MenuSelect", parrent, gui);
-    String items[] = {"File", "Home", "Animate"};
+    String items[] = {"File", "Text", "Draw", "Animate", "Present"};
     super.bb.addItems(items);
     super.bb.plugTo(this);
   }
