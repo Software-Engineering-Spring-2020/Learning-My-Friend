@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Window {
+public class WindowDoc {
     private ArrayList<PollyObject> trash = new ArrayList<PollyObject>();
     private ArrayList<PollyObject> selected = new ArrayList<PollyObject>();
     private ArrayList<PollyObject> copied = new ArrayList<PollyObject>();
@@ -18,6 +18,9 @@ public class Window {
     private ArrayList<float[]> shapePoints = new ArrayList<float[]>();
     private PApplet sketch;
     private ArrayList<DrawSpace> slides;
+    private int currentSlide = 0;
+    private boolean currentSlideChanged;
+    private ObjectFactory of;
     private float zoom = 1, strokeWeight = 3;
     private int[] fillColor, boarderColor;
     private float XINIT, YINIT, WIDTH, HEIGHT, gridSpacing = 30;
@@ -25,21 +28,14 @@ public class Window {
     private int numberVertex = 0, size = 0;
     private String savefile = "";
 
-    private int currentSlide = 0;
-    private boolean currentSlideChanged;
-    private float[] editingPosition;
-    private float editingZoom;
-    private boolean presenting;
-    private ObjectFactory of;
-
-    /**
-    * Class Constructor to initialize an ArrayList of DrawSpace objects for storing the slides and set the default parameters for color and dimensions
-    * @param sketch a reference to a PApplet to allow general functionality of the processing library
-    * @param x a float to represent the initial x starting position (in pixels) of the DrawSpaces
-    * @param y a float to represent the initial y starting position (in pixels) of the DrawSpaces
-    * @param w a float to represent the width (in pixels) of each DrawSpace (slide)
-    * @param h a float to represent the height (in pixels) of each DrawSpace (slide)
-    */
+/**
+* Class Constructor to initialize an ArrayList of DrawSpace objects for storing the slides and set the default parameters for color and dimensions
+* @param sketch a reference to a PApplet to allow general functionality of the processing library
+* @param x a float to represent the initial x starting position (in pixels) of the DrawSpaces
+* @param y a float to represent the initial y starting position (in pixels) of the DrawSpaces
+* @param w a float to represent the width (in pixels) of each DrawSpace (slide)
+* @param h a float to represent the height (in pixels) of each DrawSpace (slide)
+*/
     public Window(PApplet sketch, float x, float y, float w, float h) {
         this.sketch = sketch;
         this.slides = new ArrayList<DrawSpace>();
@@ -151,11 +147,14 @@ public class Window {
      *
      *
      *********************************************************/
+    /*private void createDrawSpace(PApplet sketch, float x, float y, float w, float h) {
+        slides.add(new DrawSpace(sketch, x, y, w, h));
+    }*/
 
-     /**
-     * Enlarges or shrinks the slide from its center. If any change should decrease the zoom below 0.1%, it is set to 0.1% instead. Slide starts at 100%
-     * @param factor The amount to change the current zoom (in percentage) from the current zoom amount
-     */
+    /**
+    * Enlarges or shrinks the slide from its center. If any change should decrease the zoom below 0.1%, it is set to 0.1% instead. Slide starts at 100%
+    * @param factor The amount to change the current zoom (in percentage) from the current zoom amount
+    */
     public void zoom(float factor) { // draw offcenter once zoom
         zoom = sketch.max(.001F, zoom + factor);
     }
@@ -254,6 +253,12 @@ public class Window {
     public boolean createEllipse(float x, float y, float d) {
         return createEllipse(x, y, d, d);
     }
+/*
+    public boolean createEllipse(float x, float y){
+      return createEllipse(x, y, 20, 20);
+    }*/
+
+
 
     /**
     * Starts the creation of an ellipse at first mouse click, finalizes the ellipse at the second click. Between the first and second click, the ellipse shape is dynamic, with the edge following the mouse position.
@@ -427,7 +432,7 @@ public class Window {
      *********************************************************/
 
      /**
-     * Enlarges/shrinks each of the selected objects from the relative center of each object
+     * Enlarges each of the selected objects from the relative center of each object
      * @default 1 Slide starts at 100%
      * @param factor A float representing the amount to change (in percentage) from the current Size
      */
@@ -438,7 +443,7 @@ public class Window {
      }
 
      /**
-     * Enlarges/shrinks each of the selected objects from the relative center of each object. If no object is selected, the slide is zoomed instead
+     * Enlarges each of the selected objects from the relative center of each object. If no object is selected, the slide is zoomed instead
      * @param factor A float representing the amount to change (in percentage) from the current Size
      */
      public void resize(float factor){
@@ -585,11 +590,11 @@ public class Window {
 
     /**
     * Rotate each selected object to the desired angle in degrees
-    * @param a A float representing the desired angle of rotation from the original position for each selected object in degrees
+    * @param ao A float representing the desired angle of rotation for each selected object in degrees
     */
-    public void rotate(float a) {
+    public void rotate(float ao) {
         for (PollyObject shape : selected) {
-            shape.setRotate(a);
+            shape.setRotate(ao);
         }
     }
 
@@ -799,7 +804,6 @@ public class Window {
     public void setThickness(float size){
         strokeWeight = sketch.max(size, 1);
     }
-
     /**
     * Set the current stroke thickness for drawn objects. If any change should decrease the stroke below 1, it is set to 1 instead.
     * @param so The amount to change the current thickness (in pixels)
@@ -826,6 +830,7 @@ public class Window {
     * @param pmousex raw X position of the mouse
     * @param pmousey raw Y position of the mouse
     * @param numberVertex Number of verticies the polygon will have
+    * @see addPollyGon
     */
     public void createPollyGon(float pmousex, float pmousey, int numberVertex){
         this.numberVertex = numberVertex;
@@ -839,6 +844,7 @@ public class Window {
     * Create and display an in-progress curve. The points of the curve coorespond to the position of the each mouse click.
     * @param pmousex raw X position of the mouse
     * @param pmousey raw Y position of the mouse
+    * @see addCuve
     */
     public void createCurve(float pmousex, float pmousey){
         this.size = slides.get(currentSlide).getNumObjects();
@@ -875,40 +881,31 @@ public class Window {
      *
      *********************************************************/
 
-    /**
-     * Go to the slide after the current slide, edit mode allows for slide modification
+     /**
+     * Go to the next slide, edit mode allows for slide modification
      */
     public void nextSlide() {
-        if (currentSlide < slides.size() - 1) {
-            float[] currentSlidePosition = slides.get(currentSlide).getPosition();
-            slides.get(currentSlide + 1).setPosition(currentSlidePosition[0], currentSlidePosition[1]);
-            currentSlide++;
-        }
+        currentSlide++;
     }
 
     /**
-     * Go to the slide before the current slide, edit mode allows for slide modification
-     */
+    *Go to the previous slide, edit mode allows for slide modification
+    */
     public void previousSlide() {
-        if (currentSlide > 0) {
-            float[] currentSlidePosition = slides.get(currentSlide).getPosition();
-            slides.get(currentSlide - 1).setPosition(currentSlidePosition[0], currentSlidePosition[1]);
-            currentSlide--;
-        }
+        currentSlide--;
     }
 
     /**
-     * Creates a new blank slide after the current slide.
+     * Create a new blank slide after the current slide.
      */
     public void createSlideAt() {
         DrawSpace ds = slides.get(currentSlide);
-        currentSlide++;
-        slides.add(currentSlide, new DrawSpace(sketch, ds.xpos, ds.ypos, ds.pixelWidth, ds.pixelHeight));
+        slides.add(new DrawSpace(sketch, ds.xpos, ds.ypos, ds.pixelWidth, ds.pixelHeight));
     }
 
-     /**
-      * Alter the order of the slides by swapping the current slide with the one before it.
-      */
+    /**
+     * Alter the order of the slides by moving the current slide earlier by one.
+     */
     public void moveSlideUp() {
         if (currentSlide - 1 < 0) {
             Collections.swap(slides, currentSlide, currentSlide - 1);
@@ -916,7 +913,7 @@ public class Window {
     }
 
     /**
-     * Alter the order of the slides by swapping the current slide with the one after it.
+     * Alter the order of the slides by moving the current slide later by one.
      */
     public void moveSlideDown() {
         if (currentSlide + 1 < slides.size()) {
@@ -928,7 +925,7 @@ public class Window {
      * Delete the current slide. This slide is not able to be restored.
      */
     public void deleteSlide() {
-        if (slides.size() > 1) {
+        if (slides.size() > 0) {
             slides.remove(currentSlide);
             currentSlide--;
         }
@@ -940,32 +937,6 @@ public class Window {
     */
     public void selectSlide(int index) {
         currentSlide = index;
-    }
-
-    /**
-    * Enter presentation mode. Slides cannot be edited in this mode. Display slides to full screen.
-    */
-    public void present() {
-        if (!presenting) {
-            presenting = true;
-            editingPosition = slides.get(currentSlide).getPosition();
-            editingZoom = zoom;
-            reCenter();
-            slides.get(currentSlide).setPosition(sketch.width / 2, sketch.height / 2);
-            zoom = sketch.width / slides.get(currentSlide).pixelWidth;
-            // TODO: allow animations to trigger
-        }
-    }
-
-    /**
-    * Exit presentation mode to allow for slide modification (editing). Slides displayed at normal size.
-    */
-    public void endPresent() {
-        if (presenting) {
-            slides.get(currentSlide).setPosition(editingPosition[0], editingPosition[1]);
-            zoom = editingZoom;
-        }
-        presenting = false;
     }
 
     /**
