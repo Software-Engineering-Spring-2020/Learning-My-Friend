@@ -296,7 +296,7 @@ public class InteractiveTextBox extends TextObject implements Serializable {
             finalString = new String(charactersWithCursor);
             }
         }
-        sketch.text(finalString, 0f - pixelWidth / 2, 0f - pixelHeight / 2, pixelWidth, pixelHeight + 1000);
+        sketch.text(finalString, 0f - pixelWidth / 2, 0f - pixelHeight / 2, pixelWidth, pixelHeight + textSize);
         //sketch.text(str, 0, 0);
   }
 }
