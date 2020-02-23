@@ -1,8 +1,14 @@
 package backend;
 
 /**
-* A template class for all text objects
+* An interface for handling user input.
 */
 public interface ListenerObject {
+
+  /**
+  * Handles user input.
+  * @param key
+  * @param keyCode
+  */
   public abstract void handleKey(char key, int keyCode);
 }
