@@ -35,6 +35,10 @@ public class GUI {
   // list of toolbars
   LinkedList<FToolbar> tbList;
 
+  //Active Toolbar List
+  LinkedList<FToolbar> activeTbList;
+
+
   // contains the last size for the sketch. If these are diffrent then the curent
   // sketch size the gui will call the toolbars to resize.
   int lastAppletWidth, lastAppletHeight;
@@ -67,8 +71,7 @@ public class GUI {
   //The top buttonBar responsable for changing topChoice. This will allow the user to select menues
   FButtonBar buttonBar;
 
-  //the tool bar to be displayed at the top, chosen by the top ButtonBar
-  FToolbar topChoice;
+
 
   /**
   * End of STATE Deleration
@@ -392,13 +395,12 @@ public class GUI {
     FToolbar ft = toolbarFactory("MenuSelectTB", (float).8, (float).06, (float).1, (float).0);
     ft.setBoarder((float).05,(float).05);
     ft.addFController(new MenuSelect(cp5, ft, this));
+    //ft.setVisable(false);
 
   }
 
   private void setUpWorkspaceToolbar(){
-    FToolbar ft = toolbarFactory("Workspace", (float).8, (float).05, (float).1, (float).06);
-    ft.getGroup().hideBar();
-    ft.getGroup().disableCollapse();
+    FToolbar ft = topToolbarFactory("Workspace");
 
     ft.addFController(new CopyButton(cp5, ft, this));
     ft.addFController(new PasteButton(cp5, ft, this));
@@ -412,6 +414,29 @@ public class GUI {
    }
 
 
+/**
+ * [topToolbarFactory is a factory for creating the top toolbars that are chosen from the buttonbar. This facotry automaticly adds the tb to the internal list of top tooblars and sets its size.]
+ * @param  name [the name to pass to cp5, needs to be unique]
+ * @return      [FToolbar]
+ */
+   private FToolbar topToolbarFactory(String name){
+     FToolbar ft = toolbarFactory(name, (float).8, (float).05, (float).1, (float).06);
+     activeTbList.add(ft);
+     ft.getGroup().hideBar();
+     ft.getGroup().disableCollapse();
+     return ft;
+   }
+
+
+/**
+ * [toolbarFactory is a factory method for creating toolbars]
+ * @param  name  [the given name of the toolbar, needed for cp5, needs to be unique]
+ * @param  sizeX [size of toolbar in percetage of screen]
+ * @param  sizeY [size of toolbar in percetage of screen]
+ * @param  posX  [position of toolbar in percetage of screen]
+ * @param  posY  [position of toolbar in percetage of screen]
+ * @return       [Ftoolbar with requested arguemnts]
+ */
   private FToolbar toolbarFactory(String name, float sizeX, float sizeY, float posX, float posY){
     FToolbar ret = new FToolbar(sketch, cp5, name);
     tbList.add(ret);
@@ -421,7 +446,12 @@ public class GUI {
   }
 
 
-
+/**
+ * [updateRGB updates the rgb sliders in the GUI]
+ * @param r [red value between 0 and 255]
+ * @param g [green value between 0 and 255]
+ * @param b [blue value between 0 and 255]
+ */
   public void updateRGB(int r, int g, int b){
     rSlider.updateState(r);
     gSlider.updateState(g);
@@ -442,6 +472,8 @@ public class GUI {
     }
      //Check for window resize and if so update all toolbars
    }
+
+
 
    /**
     * [resizeAll resizes all the gui elements]
