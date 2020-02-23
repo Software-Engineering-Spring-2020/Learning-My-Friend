@@ -232,6 +232,8 @@ public class InteractiveTextBox extends TextObject implements Serializable {
     super.handleKey(key, keyCode);
     if (key == sketch.CODED) {
         switch(keyCode) {
+            case PConstants.CONTROL:
+                break;
             case PConstants.UP:
                 moveCursor(Direction.UP);
                 break;
