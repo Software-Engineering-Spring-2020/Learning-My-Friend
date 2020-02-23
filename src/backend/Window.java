@@ -18,15 +18,19 @@ public class Window {
     private ArrayList<float[]> shapePoints = new ArrayList<float[]>();
     private PApplet sketch;
     private ArrayList<DrawSpace> slides;
-    private int currentSlide = 0;
-    private boolean currentSlideChanged;
-    private ObjectFactory of;
     private float zoom = 1, strokeWeight = 3;
     private int[] fillColor, boarderColor;
     private float XINIT, YINIT, WIDTH, HEIGHT, gridSpacing = 30;
     private boolean showGrid = false, showComments = false, ellipse, export = false;
     private int numberVertex = 0, size = 0;
     private String savefile = "";
+
+    private int currentSlide = 0;
+    private boolean currentSlideChanged;
+    private float[] editingPosition;
+    private float editingZoom;
+    private boolean presenting;
+    private ObjectFactory of;
 
     public Window(PApplet sketch, float x, float y, float w, float h) {
         this.sketch = sketch;
@@ -590,43 +594,91 @@ public class Window {
      *
      *********************************************************/
 
+    /**
+     * Go to the slide after the current slide.
+     */
     public void nextSlide() {
-        currentSlide++;
-    }
-
-    public void previousSlide() {
-        currentSlide--;
+        if (currentSlide < slides.size() - 1) {
+            float[] currentSlidePosition = slides.get(currentSlide).getPosition();
+            slides.get(currentSlide + 1).setPosition(currentSlidePosition[0], currentSlidePosition[1]);
+            currentSlide++;
+        }
     }
 
     /**
-     * Creates a slide beneath the selected slide.
+     * Go to the slide before the current slide.
+     */
+    public void previousSlide() {
+        if (currentSlide > 0) {
+            float[] currentSlidePosition = slides.get(currentSlide).getPosition();
+            slides.get(currentSlide - 1).setPosition(currentSlidePosition[0], currentSlidePosition[1]);
+            currentSlide--;
+        }
+    }
+
+    /**
+     * Creates a slide after the current slide.
      */
     public void createSlideAt() {
         DrawSpace ds = slides.get(currentSlide);
-        slides.add(new DrawSpace(sketch, ds.xpos, ds.ypos, ds.pixelWidth, ds.pixelHeight));
+        currentSlide++;
+        slides.add(currentSlide, new DrawSpace(sketch, ds.xpos, ds.ypos, ds.pixelWidth, ds.pixelHeight));
     }
 
+    /**
+     * Swap the current slide and the one before it. 
+     */
     public void moveSlideUp() {
         if (currentSlide - 1 < 0) {
             Collections.swap(slides, currentSlide, currentSlide - 1);
         }
     }
 
+    /**
+     * Swap the current slide and the one after it. 
+     */
     public void moveSlideDown() {
         if (currentSlide + 1 < slides.size()) {
             Collections.swap(slides, currentSlide, currentSlide + 1);
         }
     }
 
+    /**
+     * Delete the current slide. 
+     */
     public void deleteSlide() {
-        if (slides.size() > 0) {
+        if (slides.size() > 1) {
             slides.remove(currentSlide);
             currentSlide--;
         }
     }
 
+    /**
+     * Select a slide at a specific index.
+     * @param index The slide to select.
+     */
     public void selectSlide(int index) {
         currentSlide = index;
+    }
+
+    public void present() {
+        if (!presenting) {
+            presenting = true;
+            editingPosition = slides.get(currentSlide).getPosition();
+            editingZoom = zoom;
+            reCenter();
+            slides.get(currentSlide).setPosition(sketch.width / 2, sketch.height / 2);
+            zoom = sketch.width / slides.get(currentSlide).pixelWidth;
+            // TODO: allow animations to trigger
+        }
+    }
+
+    public void endPresent() {
+        if (presenting) {
+            slides.get(currentSlide).setPosition(editingPosition[0], editingPosition[1]);
+            zoom = editingZoom;
+        }
+        presenting = false;
     }
 
     /**
