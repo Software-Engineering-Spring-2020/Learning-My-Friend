@@ -45,18 +45,23 @@ public abstract class Animation extends ColorfulObject implements Serializable {
     }
   }
 
-  public void start() {
+  protected void start() {
     startTime = System.currentTimeMillis();
     display = true;
   }
 
-  public void stop() {
+  protected void stop() {
     display = false;
   }
 
-  public void display() {
+  protected void undo() {
+    
+  }
+
+  protected void display() {
     super.display();
     if (display) elapsedTime = System.currentTimeMillis() - startTime;
+    if (elapsedTime >= duration) stop();
   }
 
   

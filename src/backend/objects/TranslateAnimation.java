@@ -17,6 +17,7 @@ public class TranslateAnimation extends Animation implements Serializable {
     private float startY;
     private float endX;
     private float endY;
+    private float[] distance = new float[2];
     private long lastElapsedTime = 0;
 
     /**
@@ -32,12 +33,21 @@ public class TranslateAnimation extends Animation implements Serializable {
     this.endY = endY;
   }
 
-  public void start() {
+  protected void start() {
     super.start();
+    distance[0] = endX - startX;
+    distance[1] = endY - startY;
   }
 
-  public void stop() {
+  protected void stop() {
     super.stop();
+    for (PollyObject obj : members) {
+        //obj.pan(-distance[0], -distance[1]);
+    }
+  }
+
+  protected void undo() {
+
   }
 
   public void display() {
@@ -45,7 +55,7 @@ public class TranslateAnimation extends Animation implements Serializable {
     if (display) {
         for (PollyObject obj : members) {
             float ratio = (elapsedTime - lastElapsedTime) / duration;
-            obj.pan((endX - startX) * ratio, (endY - startY) * ratio);
+            obj.pan(distance[0] * ratio, distance[1] * ratio);
             lastElapsedTime = elapsedTime;
         }
     }

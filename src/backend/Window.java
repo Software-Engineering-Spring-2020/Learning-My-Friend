@@ -1018,12 +1018,13 @@ public class Window {
     /**
      * Add an animation to all selected objects.
      * @param a The AnimationOption. See FADE_IN, FADE_OUT, and TRANSLATE.
-     * @param x Only used for TRANSLATE. The destination x value.
-     * @param y Only used for TRANSLATE. The destination y value.
+     * @param x Only used for TRANSLATE. The destination mouseX value.
+     * @param y Only used for TRANSLATE. The destination mouseY value.
      */
-    public void addAnimation(AnimationOption a, float x, float y) {
+    public void addAnimation(AnimationOption a, float mouseX, float mouseY) {
         long duration = 1000;
-        Animation anim = new TranslateAnimation(sketch, duration, x, y);
+        float[] end = slides.get(currentSlide).translateCoordinates(sketch.mouseX, sketch.mouseY, zoom);
+        Animation anim = new TranslateAnimation(sketch, duration, end[0], end[1]);
         if (!(a == AnimationOption.TRANSLATE)) {
             if (a == AnimationOption.FADE_IN) anim = new FadeAnimation(sketch, duration, 0, 255);
             else anim = new FadeAnimation(sketch, duration, 255, 0);
