@@ -34,6 +34,7 @@ import java.io.IOException;
  *
  *
  * @author Hunter Chasens
+ * @author Mei Maddox (backend)
  * @version 1.0
  * @since 02.09.2019
  */

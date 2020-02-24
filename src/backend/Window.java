@@ -10,6 +10,9 @@ import java.util.Collections;
 
 /**
 * Acts as a conduit between the backend functionality and everything external to the backend package.
+*
+* @version 1.0
+* @since 02.23.2020
 */
 public class Window {
     private ArrayList<PollyObject> trash = new ArrayList<PollyObject>();
