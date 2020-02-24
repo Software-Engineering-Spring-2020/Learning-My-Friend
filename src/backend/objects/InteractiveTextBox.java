@@ -13,6 +13,9 @@ import processing.core.PGraphics;
 import processing.core.PVector;
 import processing.core.PConstants;
 
+/**
+* Class to display dynamic text to the slide, (Supports interactivity).
+*/
 public class InteractiveTextBox extends TextObject implements Serializable, ListenerObject {
     private static final long serialVersionUID = 14L;
     public enum Direction {
@@ -34,6 +37,18 @@ public class InteractiveTextBox extends TextObject implements Serializable, List
     private final char INDENTATION_CHAR = ' ';
     private final int INDENTATION_SIZE = 4;
 
+    /**
+    * Constructor for InteractiveTextBox
+    * @param x A float to represent the initial x starting position (in pixels) of the object, should be a slide-relative coordinate
+    * @param y A float to represent the initial y starting position (in pixels) of the object, should be a slide-relative coordinate
+    * @param width A float representing the desired width of the text box in pixels (text-wrapping NOT enabled)
+    * @param strokeWeight Represents the line-thickness
+    * @param fillColor The internal color of the object represented by four values ranged 0-255 (Red, Green, Blue, and Alpha respectively)
+    * @param boarderColor The outline color of the object represented by three values ranged 0-255 (Red, Green, and Blue respectively)
+    * @param str The text to be displayed
+    * @param font The font style to display the text as
+    * @param textSize The size of text to be displayed in pixels
+    */
   public InteractiveTextBox(PApplet sketch, float x, float y, float width, float strokeWeight, int[] fillColor, int[] boarderColor, String font, float textSize){
     super(sketch, x, y, strokeWeight, fillColor, boarderColor, "", font, textSize);
     this.str = "";
@@ -51,8 +66,8 @@ public class InteractiveTextBox extends TextObject implements Serializable, List
     fillColor[3] = 255;
   }
 
-  /**
-   * Displays the bounding box and the text cursor.
+   /**
+   * Draws an orange rectangle representing the selection field of the object as well as a text cursor.
    */
   public void showBoundingBox() {
       super.showBoundingBox();
@@ -60,10 +75,8 @@ public class InteractiveTextBox extends TextObject implements Serializable, List
   }
 
   /**
-   * Adjusts the width and height of the InteractiveTextBox using
-   * the supplied width.
-   * 
-   * @param x2 The new (abolute) width.
+   * Adjusts the width of the InteractiveTextBox.
+   * @param width The new (abolute) width.
    */
   protected void changeWidth(float width) {
     pixelWidth = width;
@@ -75,17 +88,23 @@ public class InteractiveTextBox extends TextObject implements Serializable, List
     }
   }
 
+  /**
+  *
+  */
   private void addLine() {
     ycenter += (textSize + LINE_SPACING / 4f) / 2f;
     pixelHeight += textSize + LINE_SPACING / 4f;
   }
 
+  /**
+  *
+  */
   private void removeLine() {
     ycenter -= (textSize + LINE_SPACING / 4f) / 2f;
     pixelHeight -= textSize + LINE_SPACING / 4f;
   }
 
-  /**
+  /**       ASK FOR CLARITY
    * Replace the line the cursor is currently on.
    * @param newCurrentLine
    */
@@ -127,7 +146,7 @@ public class InteractiveTextBox extends TextObject implements Serializable, List
   }
 
   /**
-   * 
+   *  ASK FOR CLARIFICATION
    * @return The String starting with the last PConstants.ENTER or PConstants.RETURN, not a Processing line.
    */
   private String getCurrentLine() {
@@ -194,7 +213,7 @@ public class InteractiveTextBox extends TextObject implements Serializable, List
     String newLine = line.replaceFirst(indentation, "").replaceFirst("\\" + bullet, newBullet);
     setCurrentLine(newLine);
     cursorIndex -= INDENTATION_SIZE;
-  } 
+  }
 
   private boolean lineHasNonWhitespaceCharacter() {
     char[] sCharacters = getCurrentLine().toCharArray();
@@ -216,8 +235,8 @@ public class InteractiveTextBox extends TextObject implements Serializable, List
 
   /**
    * Moves the text cursor UP, DOWN, LEFT, or RIGHT. Use the `directions` enum.
-   * 
    * @param direction The direction to move the text cursor in.
+   * @see Directions
    */
   protected void moveCursor(Direction direction) {
       switch(direction) {
@@ -253,7 +272,7 @@ public class InteractiveTextBox extends TextObject implements Serializable, List
   /**
    * Adds the specified character to the position in the InteractiveTextBox
    * defined by the current cursor position.
-   * 
+   *
    * @param c The character to add to the InteractiveTextBox.
    */
   protected void addCharacter(char c) {
@@ -320,6 +339,11 @@ public class InteractiveTextBox extends TextObject implements Serializable, List
     }
   }
 
+  /**
+  * Handles user input to add text and move the cursor around.
+  * @param key A character representation of the key currently pressed (capital and lower case letters are different, all function keys are the same)
+  * @param keyCode Represents the value of they key currently pressed (capital and lower case letters are the same, all function keys are different)
+  */
   public void handleKey(char key, int keyCode) {
     if (key == sketch.CODED) {
         switch(keyCode) {
@@ -358,7 +382,9 @@ public class InteractiveTextBox extends TextObject implements Serializable, List
     }
   }
 
-  // this function's text() is why this class does NOT extend TextBox
+  /**
+  * Draw colored user-inputted text to the slide
+  */
   protected void display(){
         super.display();
         String finalString = str;
