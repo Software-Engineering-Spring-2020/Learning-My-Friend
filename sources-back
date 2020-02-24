@@ -17,6 +17,9 @@ src\backend\objects\Comment.java
 src\backend\objects\PollyGon.java
 src\backend\objects\FreeForm.java
 src\backend\objects\Curve.java
+src\backend\objects\TranslateAnimation.java
+src\backend\objects\FadeAnimation.java
+
 
 
 src\backend\SerialManager.java
@@ -24,3 +27,4 @@ src\backend\objects\ObjectFactory.java
 src\backend\DrawSpace.java
 src\backend\Window.java
 src\BackendDriver.java
+src\Animation.java
