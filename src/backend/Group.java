@@ -62,7 +62,7 @@ class Group extends PollyObject implements Serializable {
   * @param xo Relative amount to move the objects in the x dimension (in slide-related pixel amounts)
   * @param yo Relative amount to move the objects in the y dimension (in slide-related pixel amounts)
   */
-  protected void pan(float xo, float yo){
+  public void pan(float xo, float yo){
     for(PollyObject obj : members){
     	obj.pan(xo, yo);
     }

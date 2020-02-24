@@ -13,7 +13,7 @@ class DrawSpace extends ColorfulObject{
     transient boolean showComments;
 
     DrawSpace(PApplet sketch, float x, float y, float w, float h){
-        super(sketch, x, y, 0, new int[] {255, 255, 255, 255}, new int[] {255, 255, 255});
+        super(sketch, x, y, 0, new int[] {255, 255, 255, 255}, new int[] {255, 255, 255, 255});
         pixelWidth = w;
         pixelHeight = h;
         xcenter = xpos+pixelWidth/2;
@@ -28,13 +28,17 @@ class DrawSpace extends ColorfulObject{
 
     protected void addAnimation(Animation a) {
         anims.add(a);
+        objects.add(a);
+        System.out.println(anims);
     }
 
     protected void playNextAnimation() {
-        if (animationIndex > anims.size()) {
+        System.out.println("trying to play");
+        if (animationIndex < anims.size()) {
             anims.get(animationIndex).start();
             System.out.println("playing animation " + animationIndex + " " + anims.get(animationIndex));
             if (animationIndex > 0) anims.get(animationIndex - 1).stop();
+            animationIndex++;
         }
     }
 
@@ -91,7 +95,7 @@ class DrawSpace extends ColorfulObject{
         return coord;
     }
 
-    protected void pan(float xo, float yo){
+    public void pan(float xo, float yo){
         super.pan(xo, yo);
         xcenter = xpos+pixelWidth/2;
         ycenter = ypos+pixelHeight/2;

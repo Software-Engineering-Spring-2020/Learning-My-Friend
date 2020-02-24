@@ -200,7 +200,7 @@ public abstract class PollyObject implements Serializable {
     * Template to draw an object to the slide
     */
     protected void display() {
-        sketch.translate(xpos, xpos);
+        sketch.translate(xcenter, ycenter);
         sketch.rotate((float) Math.toRadians(rot));
         sketch.scale(zoom);
      }
@@ -210,7 +210,7 @@ public abstract class PollyObject implements Serializable {
      * @param xo Relative amount to move the object in the x dimension (in slide-related pixel amounts)
      * @param yo Relative amount to move the object in the y dimension (in slide-related pixel amounts)
      */
-    protected void pan(float xo, float yo){
+    public void pan(float xo, float yo){
         xpos = xpos + xo;
         ypos = ypos + yo;
         xcenter += xo;

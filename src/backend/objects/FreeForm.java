@@ -45,7 +45,7 @@ class FreeForm extends Shape implements Serializable {
     setSettings();
   }
 
-  protected void pan(float xo, float yo) {
+  public void pan(float xo, float yo) {
     super.pan(xo, yo);
     for (float[] point : points) {
       point[0] += xo;

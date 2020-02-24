@@ -154,9 +154,9 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
         else if(this.key == 'P') this.win.createPollyGon(this.mouseX, this.mouseY, 3);
         else if(this.key == 'K') this.win.addLink("https://blake.earth");
         else if(this.key == 'K' && ctrl) this.win.removeLink();
-        else if (this.key == 'F') this.win.addAnimation(Window.AnimationOption.FADE_IN, 100, 100);
-        else if (this.key == 'O') this.win.addAnimation(Window.AnimationOption.FADE_OUT, 100, 100);
-        else if (this.key == 'T') this.win.addAnimation(Window.AnimationOption.TRANSLATE, 100, 100);
+        else if (this.key == 'F') this.win.addAnimation(Window.AnimationOption.FADE_IN, mouseX, mouseY);
+        else if (this.key == 'O') this.win.addAnimation(Window.AnimationOption.FADE_OUT, mouseX, mouseY);
+        else if (this.key == 'T') this.win.addAnimation(Window.AnimationOption.TRANSLATE, mouseX, mouseY);
 
 
 		//else if(this.key == 'R') this.win.createRect(this.mouseX, this.mouseY);

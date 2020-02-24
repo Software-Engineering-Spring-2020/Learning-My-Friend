@@ -60,7 +60,7 @@ public class Window {
         slides.add(new DrawSpace(sketch, x, y, w, h));
         of = new ObjectFactory(sketch);
         fillColor = new int[] { 0, 0, 0, 0 };
-        boarderColor = new int[] { 0, 0, 0 };
+        boarderColor = new int[] { 0, 0, 0, 255 };
         XINIT = x;
         YINIT = y;
         WIDTH = w;
@@ -77,7 +77,7 @@ public class Window {
 
         sketch.push();
         sketch.fill(fillColor[0], fillColor[1], fillColor[2], fillColor[3]);
-        sketch.stroke(boarderColor[0], boarderColor[1], boarderColor[2]);
+        sketch.stroke(boarderColor[0], boarderColor[1], boarderColor[2], boarderColor[3]);
         sketch.strokeWeight(strokeWeight);
         if(size != slides.get(currentSlide).getNumObjects()) newToolSelection();
 
@@ -545,6 +545,7 @@ public class Window {
         boarderColor[0] = r;
         boarderColor[1] = g;
         boarderColor[2] = b;
+        boarderColor[3] = 255;
         setSelectedBoarderColor(r, g, b);
     }
 
@@ -659,6 +660,7 @@ public class Window {
     * @param y Raw Y position of the mouse
     */
     public void select(float x, float y) {
+        System.out.println("print presenting!");
       PollyObject obj = slides.get(currentSlide).getObjectAt(x, y, zoom);
       if (obj != null){
         if (presenting) {
@@ -672,6 +674,7 @@ public class Window {
             selected.add(obj);
         }
       }
+      else if (presenting) slides.get(currentSlide).playNextAnimation();
       else if(withinCanvas(x, y))
           selected.clear();
     }
@@ -1029,6 +1032,8 @@ public class Window {
             if (!(a == AnimationOption.TRANSLATE) && !(obj instanceof ColorfulObject)) continue;
             anim.addMember(obj);
         }
+        System.out.println(anim.members);
+        System.out.println("adding animation");
         slides.get(currentSlide).addAnimation(anim);
     }
 
