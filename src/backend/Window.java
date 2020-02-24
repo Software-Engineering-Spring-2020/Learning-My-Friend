@@ -39,7 +39,7 @@ public class Window {
     private float editingZoom;
     private boolean presenting;
     private ObjectFactory of;
-    
+
     public enum AnimationOption {
         FADE_IN,
         FADE_OUT,
@@ -187,7 +187,7 @@ public class Window {
 
     /**
     * @deprecated
-    * @see pan
+    * @see pan(float mouseX, float mouseY, float pmouseX, float pmouseY)
     */
     public void canvasPan(float xo, float yo) { // (this.mouseX - this.pmouseX), (this.mouseY - this.pmouseY)
         if (!presenting) this.slides.get(currentSlide).pan(xo, yo);
@@ -609,7 +609,7 @@ public class Window {
         }
     }
 
-    /**
+    /** ADD CLARIFICATION. DOES THE OBJECT BECOME A LINK? IS THE URL DISPLAYED?
      * Add a link to all selected objects.
      * @param link a String URL to link to in present mode.
      */
@@ -1015,11 +1015,12 @@ public class Window {
         presenting = false;
     }
 
-    /**
-     * Add an animation to all selected objects.
-     * @param a The AnimationOption. See FADE_IN, FADE_OUT, and TRANSLATE.
-     * @param x Only used for TRANSLATE. The destination mouseX value.
-     * @param y Only used for TRANSLATE. The destination mouseY value.
+    /**     REPEITITON HERE
+     * Adds the same animation to all selected objects. If the animation is a translation, the destination for the objects is signified by the location of a mouse-click.
+     * @param a The enum representing the desired type of AnimationOption. See FADE_IN, FADE_OUT, and TRANSLATE.
+     * @param x Only used for TRANSLATE. The destination mouseX coordinate.
+     * @param y Only used for TRANSLATE. The destination mouseY coordinate.
+     * @see AnimationOption
      */
     public void addAnimation(AnimationOption a, float mouseX, float mouseY) {
         long duration = 1000;
@@ -1062,8 +1063,8 @@ public class Window {
 
      /**
       * Export the current slide as an image
-      * @param saveName
-      * @param extension
+      * @param saveName The name to save the slide as
+      * @param extension The type of image to save the slide as. Must include the period.
       */
     public void exportAs(String saveName, String extension){
         reCenter();

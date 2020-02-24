@@ -9,8 +9,8 @@ import backend.PollyObject;
 import processing.core.PApplet;
 
 /**
- * An abstract Animation that applies changes to objects over time.
- */
+* Allows for multiple objects to be treated as a unit and fade over time.
+*/
 public class FadeAnimation extends Animation implements Serializable {
     private static final long serialVersionUID = 17L;
     private int startAlpha;
@@ -19,7 +19,7 @@ public class FadeAnimation extends Animation implements Serializable {
     /**
     * Constructor for FadeAnimation
     * @param sketch a reference to a PApplet to allow general functionality of the processing library
-    * @param duration the duration in milliseconds of the animation
+    * @param duration the duration in milliseconds of the fade
     * @param startAlpha Represents the initial visibility (0-255)
     * @param endAlpha Represents the final visibility (0-255)
     */
@@ -37,6 +37,9 @@ public class FadeAnimation extends Animation implements Serializable {
     super.stop();
   }
 
+  /**
+  * Fade each object in the unit over the specified duration time.
+  */
   public void display() {
     super.display();
     if (display) {
@@ -52,5 +55,5 @@ public class FadeAnimation extends Animation implements Serializable {
     }
   }
 
-  
+
 }

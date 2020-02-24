@@ -9,8 +9,8 @@ import backend.PollyObject;
 import processing.core.PApplet;
 
 /**
- * An abstract Animation that applies changes to objects over time.
- */
+* Allows for multiple objects to be treated as a unit and move over time.
+*/
 public class TranslateAnimation extends Animation implements Serializable {
     private static final long serialVersionUID = 18L;
     private float startX;
@@ -23,7 +23,7 @@ public class TranslateAnimation extends Animation implements Serializable {
     /**
     * Constructor for FadeAnimation
     * @param sketch a reference to a PApplet to allow general functionality of the processing library
-    * @param duration the duration in milliseconds of the animation
+    * @param duration the duration in milliseconds of the translation
     * @param startAlpha Represents the initial visibility (0-255)
     * @param endAlpha Represents the final visibility (0-255)
     */
@@ -33,12 +33,18 @@ public class TranslateAnimation extends Animation implements Serializable {
     this.endY = endY;
   }
 
+  /**
+  * Start the annimation sequence, recording the current starting time to monitor for duration. Records the distance to travel.
+  */
   protected void start() {
     super.start();
     distance[0] = endX - startX;
     distance[1] = endY - startY;
   }
 
+  /**
+  * Stop the annimation sequence.
+  */
   protected void stop() {
     super.stop();
     for (PollyObject obj : members) {
@@ -50,6 +56,9 @@ public class TranslateAnimation extends Animation implements Serializable {
 
   }
 
+  /**
+  * Move each object in the unit over the specified duration time.
+  */
   public void display() {
     super.display();
     if (display) {
@@ -61,5 +70,5 @@ public class TranslateAnimation extends Animation implements Serializable {
     }
   }
 
-  
+
 }
