@@ -73,10 +73,11 @@ public abstract class ColorfulObject extends PollyObject implements Serializable
   }
 
   /**
-  * Set the transparency of the object
+  * Set the transparency of the entire object
   * @param alpha Value representing how transparent the color is (range between 0 - 255)
   */
-  protected void setAlpha(int alpha){
+  public void setAlpha(int alpha){
+    boarderColor[3] = alpha;
     fillColor[3] = alpha;
   }
 

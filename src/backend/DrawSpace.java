@@ -8,6 +8,8 @@ class DrawSpace extends ColorfulObject{
     private float xcenter, ycenter;
     private ArrayList<PollyObject> objects = new ArrayList<PollyObject>();
     private ArrayList<PollyObject> comments = new ArrayList<PollyObject>();
+    private ArrayList<Animation> anims = new ArrayList<Animation>();
+    private int animationIndex = 0;
     transient boolean showComments;
 
     DrawSpace(PApplet sketch, float x, float y, float w, float h){
@@ -22,6 +24,18 @@ class DrawSpace extends ColorfulObject{
         sketch.textMode(PConstants.MODEL);
         sketch.textAlign(PConstants.CENTER, PConstants.CENTER);
         //sketch.shapeMode(PConstants.CENTER);
+    }
+
+    protected void addAnimation(Animation a) {
+        anims.add(a);
+    }
+
+    protected void playNextAnimation() {
+        if (animationIndex > anims.size()) {
+            anims.get(animationIndex).start();
+            System.out.println("playing animation " + animationIndex + " " + anims.get(animationIndex));
+            if (animationIndex > 0) anims.get(animationIndex - 1).stop();
+        }
     }
 
     protected void init(PApplet sketch){

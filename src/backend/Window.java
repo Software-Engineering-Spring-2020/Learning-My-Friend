@@ -1,6 +1,8 @@
 package backend;
 
+import backend.objects.FadeAnimation;
 import backend.objects.ObjectFactory;
+import backend.objects.TranslateAnimation;
 import processing.core.PApplet;
 import processing.core.PGraphics;
 import processing.core.PImage;
@@ -37,6 +39,12 @@ public class Window {
     private float editingZoom;
     private boolean presenting;
     private ObjectFactory of;
+    
+    public enum AnimationOption {
+        FADE_IN,
+        FADE_OUT,
+        TRANSLATE
+    }
 
     /**
     * Class Constructor to initialize an ArrayList of DrawSpace objects for storing the slides and set the default parameters for color and dimensions
@@ -655,6 +663,7 @@ public class Window {
       if (obj != null){
         if (presenting) {
             if (obj.link != null) sketch.link(obj.link);
+            else slides.get(currentSlide).playNextAnimation();
         }
         else {
             if(selected.contains(obj))
@@ -1001,6 +1010,26 @@ public class Window {
             zoom = editingZoom;
         }
         presenting = false;
+    }
+
+    /**
+     * Add an animation to all selected objects.
+     * @param a The AnimationOption. See FADE_IN, FADE_OUT, and TRANSLATE.
+     * @param x Only used for TRANSLATE. The destination x value.
+     * @param y Only used for TRANSLATE. The destination y value.
+     */
+    public void addAnimation(AnimationOption a, float x, float y) {
+        long duration = 1000;
+        Animation anim = new TranslateAnimation(sketch, duration, x, y);
+        if (!(a == AnimationOption.TRANSLATE)) {
+            if (a == AnimationOption.FADE_IN) anim = new FadeAnimation(sketch, duration, 0, 255);
+            else anim = new FadeAnimation(sketch, duration, 255, 0);
+        }
+        for (PollyObject obj : selected) {
+            if (!(a == AnimationOption.TRANSLATE) && !(obj instanceof ColorfulObject)) continue;
+            anim.addMember(obj);
+        }
+        slides.get(currentSlide).addAnimation(anim);
     }
 
     /**

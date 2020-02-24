@@ -1,5 +1,6 @@
 package backend.objects;
 
+import backend.ColorfulObject;
 import backend.PollyObject;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -8,7 +9,7 @@ import java.io.Serializable;
 /**
 * Class which supports the import, save, and display of images.
 */
-class Image extends PollyObject implements Serializable {
+class Image extends ColorfulObject implements Serializable {
   private static final long serialVersionUID = 6L;
   String[] file;
   transient PImage img;
@@ -22,7 +23,7 @@ class Image extends PollyObject implements Serializable {
   * @param extension The image file type (the . is still necessary)
   */
   Image(PApplet sketch, float x, float y, String filename, String extension){
-    super(sketch, x, y);
+    super(sketch, x, y, 1f, new int[] {255, 255, 255, 255}, new int[] {255, 255, 255, 255});
     file = new String[]{filename, extension};
     //img = sketch.requestImage(filename+extension);
     img = sketch.loadImage(filename+extension);
@@ -46,7 +47,10 @@ class Image extends PollyObject implements Serializable {
   */
   protected void display(){
     super.display();
+    sketch.push();
     sketch.translate(-xpos, -xpos);
+    sketch.tint(255, fillColor[3]);
+    sketch.pop();
     if(img != null) sketch.image(img, xcenter, ycenter);
   	//if(img.width != 0) sketch.image(img, xpos, ypos);
   }
