@@ -150,12 +150,12 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
 		else if(this.key == '{') this.win.changeGridSpacing(-5);
 		else if(this.key == '}') this.win.changeGridSpacing(5);
 		else if(this.key == '|') this.win.createLine(this.mouseX, this.mouseY);
-		else if(this.key == 'P') this.win.createPollyGon(this.mouseX, this.mouseY, 3);
+		else if(this.key == 'P' && ctrl) this.win.createPollyGon(this.mouseX, this.mouseY, 3);
 
 
 		//else if(this.key == 'R') this.win.createRect(this.mouseX, this.mouseY);
-		else if(this.key == 'T') this.win.createTextBox(this.mouseX, this.mouseY, "This is Text!", "arial", 12);
-		else if(this.key == 'I') this.win.createInteractiveTextBox(this.mouseX, this.mouseY, this.mouseX + 100, "arial", 12);
+		else if(this.key == 'T' && ctrl) this.win.createTextBox(this.mouseX, this.mouseY, "This is Text!", "arial", 12);
+		else if(this.key == 'I' && ctrl) this.win.createInteractiveTextBox(this.mouseX, this.mouseY, this.mouseX + 100, "arial", 12);
 		//else if(this.key == 'A') this.win.createComment(this.mouseX, this.mouseY, "This is Comment!", "arial", 12);
 		//else if(this.key == 'C') this.win.createEllipse(this.mouseX, this.mouseY);
 
