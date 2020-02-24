@@ -8,10 +8,23 @@ import processing.core.PShape;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+* Handles user free-hand drawn line design.
+*/
 class FreeForm extends Shape implements Serializable {
   private static final long serialVersionUID = 14L;
   private ArrayList<float[]> points = new ArrayList<float[]>();
 
+  /**
+  * Constructor for FreeForm
+  * @param sketch a reference to a PApplet to allow general functionality of the processing library
+  * @param x A float to represent the initial x starting position (in pixels) of the object, should be a slide-relative coordinate
+  * @param y A float to represent the initial y starting position (in pixels) of the object, should be a slide-relative coordinate
+  * @param points The points along the user-drawn free-hand drawn line design
+  * @param strokeWeight Represents the line-thickness
+  * @param fillColor The internal color of the object represented by four values ranged 0-255 (Red, Green, Blue, and Alpha respectively)
+  * @param boarderColor The outline color of the object represented by three values ranged 0-255 (Red, Green, and Blue respectively)
+  */
   FreeForm(PApplet sketch, float x, float y, ArrayList<float[]> points, float strokeWeight, int[] fillColor, int[] boarderColor){
     super(sketch, x, y, strokeWeight, fillColor, boarderColor);
     for(float[] point : points){
@@ -22,13 +35,21 @@ class FreeForm extends Shape implements Serializable {
     setSettings();
   }
 
+  /**
+  * Function used during the serialization process to restore transient processing library-related variables
+  * @param sketch a reference to a PApplet to allow general functionality of the processing library
+  */
   protected void init(PApplet sketch){
     super.init(sketch);
     createShape(points);
     setSettings();
   }
 
-  protected void createShape(ArrayList<float[]> points){
+/**
+* Creates and saves all the points as a single shape object (Effectively treats them as one unit and connects the dots)
+* @param points The points along the user-drawn free-hand drawn line design
+*/
+  private void createShape(ArrayList<float[]> points){
     float xmin = Float.MAX_VALUE, ymin = Float.MAX_VALUE, xmax = Float.MIN_VALUE, ymax = Float.MIN_VALUE;
 
     shape = sketch.createShape(PShape.PATH);
@@ -49,12 +70,9 @@ class FreeForm extends Shape implements Serializable {
     ycenter = (ymin + ymax)/2;
   }
 
-  protected boolean withinScope(float x, float y) {
-    boolean yes = super.withinScope(x, y);
-    System.out.println(shape.contains(-xcenter+xpos, -ycenter+ypos));
-    return yes;
-  }
-
+  /**
+  * Draw the user line design to the screen
+  */
   protected void display() {
       super.display();
       sketch.translate(-xcenter+xpos, -ycenter+ypos);

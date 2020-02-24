@@ -10,6 +10,9 @@ import java.util.Collections;
 
 /**
 * Acts as a conduit between the backend functionality and everything external to the backend package.
+*
+* @version 1.0
+* @since 02.23.2020
 */
 public class Window {
     private ArrayList<PollyObject> trash = new ArrayList<PollyObject>();
@@ -394,7 +397,7 @@ public class Window {
     * Imports an image from the users computer into the program and displays it at a specified position
     * @param x Raw X position (relative to the window) to display image
     * @param y Raw Y position (relative to the window) to display image
-    * @param filename The name of the image to display
+    * @param filename The file (path + name) of the image to display
     * @param extension The image file type (the . is still necessary)
     * @return Whether or not the object was created and added to the slide successfully
     */
@@ -410,7 +413,7 @@ public class Window {
 
     /**
     * Imports an image from the users computer into the program and displays it at the center of the slide
-    * @param filename The name of the image to display
+    * @param filename The file (path + name) of the image to display
     * @param extension The image file type (the . is still necessary)
     * @return Whether or not the object was created and added to the slide successfully
     */
