@@ -372,7 +372,12 @@ public class GUI {
      //draw stuff
      setupDrawToolbar();
 
+     //animate stuff
+     setupAnimateToolbar();
 
+     //present toolbar
+     setupPresentToolbar();
+     
      setActiveToolbar(0);
      resizeAll();
    }
@@ -389,6 +394,17 @@ public class GUI {
      ft.addFController(new TextButton(cp5, ft, this));
 
    }
+
+   private void setupAnimateToolbar(){
+     FToolbar ft = topToolbarFactory("Animate");
+
+   }
+
+   private void setupPresentToolbar(){
+     FToolbar ft = topToolbarFactory("Present");
+
+   }
+
 
    private void setupObjectSettingsToolbar(){
     FToolbar ft = toolbarFactory("Obj Set", (float).2, (float).8, (float).8, (float).1);
