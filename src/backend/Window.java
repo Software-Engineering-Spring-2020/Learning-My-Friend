@@ -182,7 +182,7 @@ public class Window {
     * @see pan
     */
     public void canvasPan(float xo, float yo) { // (this.mouseX - this.pmouseX), (this.mouseY - this.pmouseY)
-        this.slides.get(currentSlide).pan(xo, yo);
+        if (!presenting) this.slides.get(currentSlide).pan(xo, yo);
     }
 
     /**
@@ -498,13 +498,15 @@ public class Window {
       float[] coord = slides.get(currentSlide).translateCoordinates(mouseX, mouseY, zoom);
       float[] translation = translate(mouseX-pmouseX, mouseY-pmouseY);
 
-      if(selected.size() == 0 && withinCanvas(mouseX, mouseY)) this.slides.get(currentSlide).pan(translation[0], translation[1]);
-      else{
-        for (PollyObject obj : selected) {
-          if(obj.withinScope(coord[0], coord[1])) pan = true;
-        }
-        if(pan){
-          for(PollyObject obj : selected) obj.pan(translation[0], translation[1]);
+      if (!presenting) {
+        if(selected.size() == 0 && withinCanvas(mouseX, mouseY)) this.slides.get(currentSlide).pan(translation[0], translation[1]);
+        else{
+            for (PollyObject obj : selected) {
+            if(obj.withinScope(coord[0], coord[1])) pan = true;
+            }
+            if(pan){
+            for(PollyObject obj : selected) obj.pan(translation[0], translation[1]);
+            }
         }
       }
     }
@@ -598,6 +600,10 @@ public class Window {
         }
     }
 
+    /**
+     * Add a link to all selected objects.
+     * @param link a String URL to link to in present mode.
+     */
     public void addLink(String link) {
         System.out.println(link);
         for (PollyObject obj : selected) {
@@ -606,6 +612,9 @@ public class Window {
         }
     }
 
+    /**
+     * Remove links from all selected objects.
+     */
     public void removeLink() {
         for (PollyObject obj : selected) {
             System.out.println(obj.link);
@@ -644,7 +653,9 @@ public class Window {
     public void select(float x, float y) {
       PollyObject obj = slides.get(currentSlide).getObjectAt(x, y, zoom);
       if (obj != null){
-        if (presenting) if (obj.link != null) sketch.link(obj.link);
+        if (presenting) {
+            if (obj.link != null) sketch.link(obj.link);
+        }
         else {
             if(selected.contains(obj))
             selected.remove(obj);
@@ -974,9 +985,9 @@ public class Window {
             selected.clear();
             editingPosition = slides.get(currentSlide).getPosition();
             editingZoom = zoom;
+            zoom = sketch.width / (float) slides.get(currentSlide).pixelWidth;
+            slides.get(currentSlide).setPosition(0, 0);
             reCenter();
-            slides.get(currentSlide).setPosition(sketch.width / 2, sketch.height / 2);
-            zoom = sketch.width / slides.get(currentSlide).pixelWidth;
             // TODO: allow animations to trigger
         }
     }
