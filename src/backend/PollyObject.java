@@ -200,7 +200,7 @@ public abstract class PollyObject implements Serializable {
     * Template to draw an object to the slide
     */
     protected void display() {
-        sketch.translate(xcenter, ycenter);
+        sketch.translate(xpos, xpos);
         sketch.rotate((float) Math.toRadians(rot));
         sketch.scale(zoom);
      }

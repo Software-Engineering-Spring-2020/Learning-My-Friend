@@ -1,4 +1,5 @@
 package backend.objects;
+
 import backend.PollyObject;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -45,7 +46,8 @@ class Image extends PollyObject implements Serializable {
   */
   protected void display(){
     super.display();
-    if(img != null) sketch.image(img, xpos, ypos);
+    sketch.translate(-xpos, -xpos);
+    if(img != null) sketch.image(img, xcenter, ycenter);
   	//if(img.width != 0) sketch.image(img, xpos, ypos);
   }
 
