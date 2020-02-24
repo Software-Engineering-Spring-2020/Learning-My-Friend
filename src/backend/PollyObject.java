@@ -13,7 +13,8 @@ public abstract class PollyObject implements Serializable {
     transient protected PApplet sketch;
     protected float xpos, ypos, rot = 0, pixelWidth, pixelHeight;
     transient protected float prevRot = 0, ro = 0;
-    protected float zoom = 1, offset = 3F, xcenter = xpos, ycenter = ypos;
+    protected float zoom = 1, offset = 3F, xcenter, ycenter;
+    protected String link;
 
     /**
     * Constructor for PollyObject
@@ -199,7 +200,7 @@ public abstract class PollyObject implements Serializable {
     * Template to draw an object to the slide
     */
     protected void display() {
-        sketch.translate(xcenter, ycenter);
+        sketch.translate(xpos, xpos);
         sketch.rotate((float) Math.toRadians(rot));
         sketch.scale(zoom);
      }

@@ -45,6 +45,14 @@ class FreeForm extends Shape implements Serializable {
     setSettings();
   }
 
+  protected void pan(float xo, float yo) {
+    super.pan(xo, yo);
+    for (float[] point : points) {
+      point[0] += xo;
+      point[1] += yo;
+    }
+  }
+
 /**
 * Creates and saves all the points as a single shape object (Effectively treats them as one unit and connects the dots)
 * @param points The points along the user-drawn free-hand drawn line design

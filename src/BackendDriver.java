@@ -50,7 +50,7 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
  * @param passedArgs [description]
  */
 	public static void main(String[] passedArgs) {
-		String[] appletArgs = { "LearningMyFriend" };
+		String[] appletArgs = { "BackendDriver" };
 		if (passedArgs != null) {
 			PApplet.main(concat(appletArgs, passedArgs));
 		} else {
@@ -107,6 +107,8 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
 
 	public void keyPressed(){
 
+        System.out.println(this.key);
+
 		win.keyPressed(this.key, this.keyCode);
 
 		if(this.keyCode == 17)  ctrl = true;
@@ -149,7 +151,12 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
 		else if(this.key == '{') this.win.changeGridSpacing(-5);
 		else if(this.key == '}') this.win.changeGridSpacing(5);
 		else if(this.key == '|') this.win.createLine(this.mouseX, this.mouseY);
-		else if(this.key == 'P') this.win.createPollyGon(this.mouseX, this.mouseY, 3);
+        else if(this.key == 'P') this.win.createPollyGon(this.mouseX, this.mouseY, 3);
+        else if(this.key == 'K') {
+            System.out.println("text");
+            this.win.addLink("https://blake.earth");
+        }
+        else if(this.key == 'K' && ctrl) this.win.removeLink();
 
 
 		//else if(this.key == 'R') this.win.createRect(this.mouseX, this.mouseY);
