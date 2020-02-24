@@ -24,8 +24,9 @@ public class MenuSelect extends FButtonBar{
 
 
   public void MenuSelect(int val){
-    //System.out.println(val);
     getGUI().setActiveToolbar(val);
+    //sets the tool back to select for imporved usability suggested by issue #2
+    getGUI().tool = 's';
   }
 
 }
