@@ -595,6 +595,21 @@ public class Window {
         }
     }
 
+    public void addLink(String link) {
+        System.out.println(link);
+        for (PollyObject obj : selected) {
+            obj.link = link;
+            System.out.println(obj.link);
+        }
+    }
+
+    public void removeLink() {
+        for (PollyObject obj : selected) {
+            System.out.println(obj.link);
+            obj.link = null;
+        }
+    }
+
     /**
     * Select object below current mouse position, only allows for one object selected at a time
     * @deprecated
@@ -626,10 +641,13 @@ public class Window {
     public void select(float x, float y) {
       PollyObject obj = slides.get(currentSlide).getObjectAt(x, y, zoom);
       if (obj != null){
-        if(selected.contains(obj))
-          selected.remove(obj);
-        else
-          selected.add(obj);
+        if (presenting) if (obj.link != null) sketch.link(obj.link);
+        else {
+            if(selected.contains(obj))
+            selected.remove(obj);
+            else
+            selected.add(obj);
+        }
       }
       else if(withinCanvas(x, y))
           selected.clear();
@@ -950,6 +968,7 @@ public class Window {
     public void present() {
         if (!presenting) {
             presenting = true;
+            selected.clear();
             editingPosition = slides.get(currentSlide).getPosition();
             editingZoom = zoom;
             reCenter();

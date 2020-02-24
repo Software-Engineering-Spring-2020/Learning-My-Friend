@@ -14,6 +14,7 @@ public abstract class PollyObject implements Serializable {
     protected float xpos, ypos, rot = 0, pixelWidth, pixelHeight;
     transient protected float prevRot = 0, ro = 0;
     protected float zoom = 1, offset = 3F, xcenter = xpos, ycenter = ypos;
+    protected String link;
 
     /**
     * Constructor for PollyObject
