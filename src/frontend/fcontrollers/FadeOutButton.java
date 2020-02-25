@@ -12,16 +12,16 @@ package frontend.fcontrollers;
 import frontend.*;
 import frontend.controlP5.*;
 
-public class ElipButton extends FButton{
-  public ElipButton(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "elip", parrent, gui);
+public class FadeOutButton extends FButton{
+  public FadeOutButton(ControlP5 cp5, FToolbar parrent, GUI gui){
+    super(cp5, "FadeOut", parrent, gui);
     super.button.plugTo(this);
   }
 
 
-  public void elip(int val){
+  public void FadeOut(int val){
     //System.out.println("Elip " + val);
-    getGUI().setTool('e');
+    getGUI().setTool('g');
 
   }
 
