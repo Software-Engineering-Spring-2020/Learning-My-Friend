@@ -10,6 +10,7 @@ src\frontend\FSlider.java
 src\frontend\fcontrollers\FadeInButton.java
 src\frontend\fcontrollers\FadeOutButton.java
 src\frontend\fcontrollers\FColorPicker.java
+src\frontend\fcontrollers\TranslateButton.java
 src\frontend\fcontrollers\FColorWheel.java
 src\frontend\fcontrollers\PenButton.java
 src\frontend\fcontrollers\GridButton.java

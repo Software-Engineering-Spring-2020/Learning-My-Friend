@@ -405,7 +405,7 @@ public class GUI {
      FToolbar ft = topToolbarFactory("Animate");
      ft.addFController(new FadeInButton(cp5, ft, this));
      ft.addFController(new FadeOutButton(cp5, ft, this));
-
+     ft.addFController(new TranslateButton(cp5, ft, this));
 
    }
 
