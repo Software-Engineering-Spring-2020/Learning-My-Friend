@@ -60,32 +60,26 @@ public class IOHandler{
   public void mouseClicked(){
     //Needs to parse the gui tool selected
     if(onCanvas()){
-      if(gui.getTool() == 'r')
-        win.createRect(sketch.mouseX, sketch.mouseY);
-      if(gui.getTool() == 'e')
-        win.createEllipse(sketch.mouseX, sketch.mouseY);
-      //if((gui.getTool() == 's') && (sketch.keyCode.getKeyCode() == KeyCode.CONTROL))
-      //  win.multiSelect(sketch.mouseX, sketch.mouseY);
       if(gui.getTool() == 's'){
         win.select(sketch.mouseX, sketch.mouseY);
-        //upadte sliderRBG here
-        //gui.updateRGB(win.getRGB)
       }
       if(gui.getTool() == 't'){
-        //System.out.println("this is running");
         win.createInteractiveTextBox(sketch.mouseX, sketch.mouseY, 100, "arial", 20);
       }
       if(gui.getTool() == 'c'){
-        //System.out.println("this is running");
         win.createComment(sketch.mouseX, sketch.mouseY, gui.getCurrentString(), "arial", 20);
       }
       if(gui.getTool() == 'l')
         win.createLine(sketch.mouseX, sketch.mouseY);
       if(gui.getTool() == 'u')
         win.createCurve(sketch.mouseX, sketch.mouseY);
-      if(gui.getTool() == 'x')
-        win.createPollyGon(sketch.mouseX, sketch.mouseY, gui.getPolyCount());
-    }
+      if(gui.getTool() == 'f')
+        win.addAnimation(Window.AnimationOption.FADE_IN, sketch.mouseX, sketch.mouseY);
+      if(gui.getTool() == 'g')
+        win.addAnimation(Window.AnimationOption.FADE_OUT, sketch.mouseX, sketch.mouseY);
+      if(gui.getTool() == 'h')
+        win.addAnimation(Window.AnimationOption.TRANSLATE, sketch.mouseX, sketch.mouseY);
+      }
 
   }
 

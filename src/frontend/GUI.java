@@ -96,6 +96,12 @@ public class GUI {
   setup();
 }
 
+
+  public void present(){
+    win.present();
+  }
+
+
   /**
    * [toggleFill changes wheather or not the setFill() function sets the boarder color]
    */
@@ -377,7 +383,7 @@ public class GUI {
 
      //present toolbar
      setupPresentToolbar();
-     
+
      setActiveToolbar(0);
      resizeAll();
    }
@@ -395,14 +401,14 @@ public class GUI {
 
    }
 
-   private void setupAnimateToolbar(){
+   private void setupAnimateToolbar(){ //TODO
      FToolbar ft = topToolbarFactory("Animate");
 
    }
 
-   private void setupPresentToolbar(){
+   private void setupPresentToolbar(){ //TODO
      FToolbar ft = topToolbarFactory("Present");
-
+     ft.addFController(new PresentButton(cp5, ft, this));
    }
 
 
