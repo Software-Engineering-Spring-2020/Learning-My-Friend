@@ -7,7 +7,7 @@ src\frontend\FController.java
 src\frontend\FButton.java
 src\frontend\FButtonBar.java
 src\frontend\FSlider.java
-src\frontend\fcontrollers\RectButton.java
+src\frontend\fcontrollers\FadeInButton.java
 src\frontend\fcontrollers\ElipButton.java
 src\frontend\fcontrollers\FColorPicker.java
 src\frontend\fcontrollers\FColorWheel.java

@@ -12,10 +12,10 @@ package frontend.fcontrollers;
 import frontend.*;
 import frontend.controlP5.*;
 
-public class RectButton extends FButton{
-  public RectButton(ControlP5 cp5, FToolbar parrent, GUI gui){
+public class FadeInButton extends FButton{
+  public FadeInButton(ControlP5 cp5, FToolbar parrent, GUI gui){
 
-    super(cp5, "rect", parrent, gui);
+    super(cp5, "FadeIn", parrent, gui);
     super.button.plugTo(this);
     //super.button.setImages(loadImage("times-square.png"), loadImage("times-square.png"), loadImage("times-square.png"));
   }
@@ -24,9 +24,9 @@ public class RectButton extends FButton{
  * [rect fuction name must match name given in supper]
  * @param val [description]
  */
-  public void rect(int val){
+  public void FadeIn(int val){
     //System.out.println(val);
-    getGUI().setTool('r');
+    getGUI().setTool('f');
 
   }
 

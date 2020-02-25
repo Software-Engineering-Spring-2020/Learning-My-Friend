@@ -403,6 +403,7 @@ public class GUI {
 
    private void setupAnimateToolbar(){ //TODO
      FToolbar ft = topToolbarFactory("Animate");
+     ft.addFController(new FadeInButton(cp5, ft, this));
 
    }
 
