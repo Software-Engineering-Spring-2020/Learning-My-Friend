@@ -14,6 +14,7 @@ public abstract class Animation extends ColorfulObject implements Serializable {
     protected ArrayList<PollyObject> members;
     protected long startTime;
     protected long elapsedTime;
+    protected long lastElapsedTime = 0;
     protected float duration;
     protected boolean display;
 
@@ -57,6 +58,8 @@ public abstract class Animation extends ColorfulObject implements Serializable {
 * Start the annimation sequence, recording the current starting time to monitor for duration.
 */
   protected void start() {
+    elapsedTime = 0;
+    lastElapsedTime = 0;
     startTime = System.currentTimeMillis();
     display = true;
   }
@@ -71,7 +74,7 @@ public abstract class Animation extends ColorfulObject implements Serializable {
   /**
   *
   */
-  protected void undo() {
+  protected void reset() {
 
   }
 
@@ -80,7 +83,9 @@ public abstract class Animation extends ColorfulObject implements Serializable {
   */
   protected void display() {
     super.display();
-    if (display) elapsedTime = System.currentTimeMillis() - startTime;
-    if (elapsedTime >= duration) stop();
+    if (display) {
+      elapsedTime = System.currentTimeMillis() - startTime;
+      if (elapsedTime >= duration) stop();
+    }
   }
 }

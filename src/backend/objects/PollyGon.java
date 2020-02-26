@@ -16,12 +16,22 @@ class PollyGon extends Shape implements Serializable {
 
   PollyGon(PApplet sketch, float x, float y, ArrayList<float[]> points, float strokeWeight, int[] fillColor, int[] boarderColor){
     super(sketch, x, y, strokeWeight, fillColor, boarderColor);
+    xpos = x;
+    ypos = y;
+    float xmin = Float.MAX_VALUE, ymin = Float.MAX_VALUE, xmax = Float.MIN_VALUE, ymax = Float.MIN_VALUE;
     for(float[] point : points){
-      //point[0] -= xpos;
-      //point[1] -= ypos;
-      this.points.add(new float[]{point[0], point[1]});
-      System.out.println(point[0]+" : "+point[1]);
+      point[0] -= xpos;
+      point[1] -= ypos;
+      xmin = Math.min(point[0], xmin);
+      ymin = Math.min(point[1], ymin);
+      xmax = Math.max(point[0], xmax);
+      ymax = Math.max(point[1], ymax);
     }
+    this.points = points;
+    pixelWidth = Math.abs(xmax - xmin);
+    pixelHeight = Math.abs(ymax - ymin);
+    xcenter = (xmin + xmax)/2 + xpos;
+    ycenter = (ymin + ymax)/2 + ypos;
     createShape();
     setFillColor(255,255,255,0);
     setSettings();
@@ -29,35 +39,46 @@ class PollyGon extends Shape implements Serializable {
 
   protected void init(PApplet sketch){
     super.init(sketch);
-    for (float[] point : points) {
-      point[0] += xpos;
-      point[1] += ypos;
+    float xmin = Float.MAX_VALUE, ymin = Float.MAX_VALUE, xmax = Float.MIN_VALUE, ymax = Float.MIN_VALUE;
+    for(float[] point : points){
+      xmin = Math.min(point[0], xmin);
+      ymin = Math.min(point[1], ymin);
+      xmax = Math.max(point[0], xmax);
+      ymax = Math.max(point[1], ymax);
     }
+    pixelWidth = Math.abs(xmax - xmin);
+    pixelHeight = Math.abs(ymax - ymin);
     createShape();
     setSettings();
   }
 
+  public void pan(float xo, float yo) {
+    super.pan(xo, yo);
+    for (float[] point : points) {
+      point[0] += xo;
+      point[1] += yo;
+    }
+  }
+
   protected void createShape(){
-    float xmin = Float.MAX_VALUE, ymin = Float.MAX_VALUE, xmax = Float.MIN_VALUE, ymax = Float.MIN_VALUE;
     shape = sketch.createShape();
     shape.beginShape();
+    shape.strokeWeight(strokeWeight);
+    shape.fill(fillColor[0], fillColor[1], fillColor[2], fillColor[3]);
+    shape.stroke(boarderColor[0], boarderColor[1], boarderColor[2], boarderColor[3]);
     this.points = (ArrayList<float[]>) this.points.clone();
     for(int i = 0; i<points.size(); i++){
-      xmin = Math.min(points.get(i)[0], xmin);
-      ymin = Math.min(points.get(i)[1], ymin);
-      xmax = Math.max(points.get(i)[0], xmax);
-      ymax = Math.max(points.get(i)[1], ymax);
-      points.get(i)[0] -= xpos;
-      points.get(i)[1] -= ypos;
+
       shape.vertex(points.get(i)[0], points.get(i)[1]);
     }
 
     if(points.size()>2) shape.endShape(PConstants.CLOSE);
     else shape.endShape();
-    pixelWidth = Math.abs(xmax - xmin);
-    pixelHeight = Math.abs(ymax - ymin);
-    xcenter = (xmin + xmax)/2;
-    ycenter = (ymin + ymax)/2;
+  }
+
+  public void setAlpha(int alpha) {
+    super.setAlpha(alpha);
+    createShape();
   }
 
   /*

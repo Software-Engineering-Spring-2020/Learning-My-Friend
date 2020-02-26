@@ -60,8 +60,12 @@ class FreeForm extends Shape implements Serializable {
   private void createShape(ArrayList<float[]> points){
     float xmin = Float.MAX_VALUE, ymin = Float.MAX_VALUE, xmax = Float.MIN_VALUE, ymax = Float.MIN_VALUE;
 
+    
     shape = sketch.createShape(PShape.PATH);
     shape.beginShape();
+    shape.strokeWeight(strokeWeight);
+    shape.fill(fillColor[0], fillColor[1], fillColor[2], fillColor[3]);
+    shape.stroke(boarderColor[0], boarderColor[1], boarderColor[2], boarderColor[3]);
     for(int i = 0; i<points.size(); i++){
       float[] pos = new float[]{points.get(i)[0], points.get(i)[1]};
       shape.vertex(pos[0]-xpos, pos[1]-ypos);
@@ -78,11 +82,17 @@ class FreeForm extends Shape implements Serializable {
     ycenter = (ymin + ymax)/2;
   }
 
+  public void setAlpha(int alpha) {
+    super.setAlpha(alpha);
+    createShape(points);
+  }
+
   /**
   * Draw the user line design to the screen
   */
   protected void display() {
       super.display();
+      //shape.tint(boarderColor[0], boarderColor[1], boarderColor[2], boarderColor[3]);
       sketch.translate(-xcenter+xpos, -ycenter+ypos);
       sketch.shape(shape);
    }

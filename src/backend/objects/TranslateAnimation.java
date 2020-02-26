@@ -2,6 +2,7 @@ package backend.objects;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import backend.Animation;
 import backend.ColorfulObject;
@@ -13,12 +14,9 @@ import processing.core.PApplet;
 */
 public class TranslateAnimation extends Animation implements Serializable {
     private static final long serialVersionUID = 18L;
-    private float startX;
-    private float startY;
-    private float endX;
-    private float endY;
-    private float[] distance = new float[2];
-    private long lastElapsedTime = 0;
+    private HashMap<PollyObject, float[]> distances;
+    private HashMap<PollyObject, float[]> starts;
+    private float[] end = new float[2];
 
     /**
     * Constructor for FadeAnimation
@@ -29,8 +27,15 @@ public class TranslateAnimation extends Animation implements Serializable {
     */
   public TranslateAnimation(PApplet sketch, long duration, float endX, float endY){
     super(sketch, duration);
-    this.endX = endX;
-    this.endY = endY;
+    starts = new HashMap<PollyObject, float[]>();
+    distances = new HashMap<PollyObject, float[]>();
+    end[0] = endX;
+    end[1] = endY;
+  }
+
+  protected void addMember(PollyObject newMember) {
+    super.addMember(newMember);
+    starts.put(newMember, newMember.getPosition());
   }
 
   /**
@@ -38,8 +43,13 @@ public class TranslateAnimation extends Animation implements Serializable {
   */
   protected void start() {
     super.start();
-    distance[0] = endX - startX;
-    distance[1] = endY - startY;
+    for (PollyObject obj : members) {
+      float[] start = obj.getPosition();
+      float[] distance = new float[2];
+      distance[0] = end[0] - start[0];
+      distance[1] = end[1] - start[1];
+      distances.put(obj, distance);
+    }
   }
 
   /**
@@ -48,12 +58,15 @@ public class TranslateAnimation extends Animation implements Serializable {
   protected void stop() {
     super.stop();
     for (PollyObject obj : members) {
-        //obj.pan(-distance[0], -distance[1]);
+      obj.setPosition(end[0], end[1]);
     }
   }
 
-  protected void undo() {
-
+  protected void reset() {
+    super.reset();
+    for (PollyObject obj : members) {
+      obj.setPosition(starts.get(obj)[0], starts.get(obj)[1]);
+    }
   }
 
   /**
@@ -64,7 +77,9 @@ public class TranslateAnimation extends Animation implements Serializable {
     if (display) {
         for (PollyObject obj : members) {
             float ratio = (elapsedTime - lastElapsedTime) / duration;
-            obj.pan(distance[0] * ratio, distance[1] * ratio);
+            float[] pos = obj.getPosition();
+            float[] distance = distances.get(obj);
+            obj.setPosition(distance[0] * ratio + pos[0], distance[1] * ratio + pos[1]);
             lastElapsedTime = elapsedTime;
         }
     }

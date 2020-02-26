@@ -42,7 +42,7 @@ public abstract class PollyObject implements Serializable {
     * Get the current xy position of the object
     * @return The current xy position of the oject in slide-relative coordinates
     */
-    protected float[] getPosition() {
+    public float[] getPosition() {
         return new float[]{xpos, ypos};
     }
 
@@ -51,11 +51,18 @@ public abstract class PollyObject implements Serializable {
     * @param x The current x position of the oject in slide-relative coordinates
     * @param y The current y position of the oject in slide-relative coordinates
     */
-    protected void setPosition(float x, float y) {
-        xcenter += (xpos - x);
-        ycenter += (ypos - y);
+    public void setPosition(float x, float y) {
+        xcenter += (x - xpos);
+        ycenter += (y - ypos);
         xpos = x;
         ypos = y;
+    }
+
+    protected void setCenter(float x, float y) {
+        xcenter = x;
+        ycenter = y;
+        xpos += (xcenter - x);
+        ypos += (ycenter - y);
     }
 
     /**

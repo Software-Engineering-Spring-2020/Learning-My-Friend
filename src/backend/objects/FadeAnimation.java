@@ -35,6 +35,24 @@ public class FadeAnimation extends Animation implements Serializable {
 
   public void stop() {
     super.stop();
+    for (PollyObject obj : members) {
+      ColorfulObject cobj;
+      if (obj instanceof ColorfulObject) {
+          cobj = (ColorfulObject) obj;
+          cobj.setAlpha(endAlpha);
+      }
+    }
+  }
+
+  public void reset() {
+    super.reset();
+    for (PollyObject obj : members) {
+      ColorfulObject cobj;
+      if (obj instanceof ColorfulObject) {
+          cobj = (ColorfulObject) obj;
+          cobj.setAlpha(startAlpha);
+      }
+  }
   }
 
   /**
@@ -47,8 +65,8 @@ public class FadeAnimation extends Animation implements Serializable {
             ColorfulObject cobj;
             if (obj instanceof ColorfulObject) {
                 cobj = (ColorfulObject) obj;
-                int startRatio = (int) (((duration - elapsedTime) / elapsedTime) * startAlpha);
-                int endRatio = (int) ((duration / elapsedTime) * endAlpha);
+                int startRatio = (int) ((1 - (elapsedTime / duration)) * startAlpha);
+                int endRatio = (int) ((elapsedTime / duration) * endAlpha);
                 cobj.setAlpha(startRatio + endRatio);
             }
         }

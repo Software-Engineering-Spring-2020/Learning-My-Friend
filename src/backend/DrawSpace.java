@@ -42,6 +42,13 @@ class DrawSpace extends ColorfulObject{
         }
     }
 
+    protected void resetAnimations() {
+        animationIndex = 0;
+        for (Animation anim : anims) {
+            anim.reset();
+        }
+    }
+
     protected void init(PApplet sketch){
       super.init(sketch);
       for(PollyObject obj : objects){
@@ -101,10 +108,10 @@ class DrawSpace extends ColorfulObject{
         ycenter = ypos+pixelHeight/2;
     }
 
-    protected void setPosition(float x, float y){
+    public void setPosition(float x, float y){ 
         super.setPosition(x, y);
-        xcenter = xpos+pixelWidth/2;
-        ycenter = ypos+pixelHeight/2;
+        xcenter = xpos + pixelWidth / 2;
+        ycenter = ypos + pixelHeight / 2;
     }
 
     protected void display(float zoom, boolean showComments, boolean showGrid, float gridSpacing){

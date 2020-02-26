@@ -116,7 +116,7 @@ public class Window {
           PollyObject obj = of.createPollyGon(pollyPoints, strokeWeight, fillColor, boarderColor);
             //slides.get(currentSlide).addObject(of.createPollyGon(pollyPoints, strokeWeight, fillColor, boarderColor));
             slides.get(currentSlide).addObject(obj);
-            //selected.add(obj);
+            selected.add(obj);
             pollyPoints.clear();
             numberVertex = 0;
         }
@@ -545,7 +545,7 @@ public class Window {
         boarderColor[0] = r;
         boarderColor[1] = g;
         boarderColor[2] = b;
-        boarderColor[3] = 255;
+        boarderColor[3] = 0;
         setSelectedBoarderColor(r, g, b);
     }
 
@@ -660,7 +660,6 @@ public class Window {
     * @param y Raw Y position of the mouse
     */
     public void select(float x, float y) {
-        System.out.println("print presenting!");
       PollyObject obj = slides.get(currentSlide).getObjectAt(x, y, zoom);
       if (obj != null){
         if (presenting) {
@@ -1009,7 +1008,11 @@ public class Window {
     */
     public void endPresent() {
         if (presenting) {
+            if (slides.size() >= 0) currentSlide = 0;
             slides.get(currentSlide).setPosition(editingPosition[0], editingPosition[1]);
+            for (DrawSpace slide : slides) {
+                slide.resetAnimations();
+            }
             zoom = editingZoom;
         }
         presenting = false;
