@@ -20,7 +20,7 @@ public class DelSlideButton extends FButton{
 
 
   public void del(int val){
-    //TODO
+    getGUI().delSlide();
   }
 
 }

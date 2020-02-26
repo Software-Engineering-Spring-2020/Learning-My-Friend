@@ -20,7 +20,7 @@ public class UpSlideButton extends FButton{
 
 
   public void up(int val){
-    //TODO
+    getGUI().upSlide();
   }
 
 }

@@ -20,7 +20,7 @@ public class NewSlideButton extends FButton{
 
 
   public void newS(int val){
-    //TODO
+    getGUI().newSlide();
   }
 
 }
