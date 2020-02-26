@@ -496,6 +496,9 @@ public class GUI {
 
   private void setupSlideToolbar(){
     FToolbar ft = toolbarFactory("Slides", (float).1, (float).05, (float).06, (float).2);
+    //Disables the users ability to clapse the toolbar
+    ft.getGroup().disableCollapse();
+    
   }
 
 
