@@ -388,6 +388,14 @@ public class GUI {
      resizeAll();
    }
 
+
+   /**
+    * Start of toolbar setup functions (1 function per toolbar)
+    */
+
+/**
+ * [setupDrawToolbar initialises the toolbar for Draw]
+ */
    private void setupDrawToolbar(){
      FToolbar ft = topToolbarFactory("Draw");
      ft.addFController(new PenButton(cp5, ft, this));
@@ -395,12 +403,18 @@ public class GUI {
      ft.addFController(new CurveButton(cp5, ft, this));
    }
 
+/**
+ * [setupTextToolbar initialises the toolbar for Text]
+ */
    private void setupTextToolbar(){
      FToolbar ft = topToolbarFactory("TextOpt");
      ft.addFController(new TextButton(cp5, ft, this));
 
    }
 
+/**
+ * [setupAnimateToolbar initialises the toolbar for Animate]
+ */
    private void setupAnimateToolbar(){ //TODO
      FToolbar ft = topToolbarFactory("Animate");
      ft.addFController(new FadeInButton(cp5, ft, this));
@@ -409,12 +423,18 @@ public class GUI {
 
    }
 
+/**
+ * [setupPresentToolbar initialises the toolbar for Present]
+ */
    private void setupPresentToolbar(){ //TODO
      FToolbar ft = topToolbarFactory("Present");
      ft.addFController(new PresentButton(cp5, ft, this));
    }
 
 
+/**
+ * [setupObjectSettingsToolbar initialises the toolbar for object settings]
+ */
    private void setupObjectSettingsToolbar(){
     FToolbar ft = toolbarFactory("Obj Set", (float).2, (float).8, (float).8, (float).1);
     ft.addFController(new SelecButton(cp5, ft, this));
@@ -445,8 +465,24 @@ public class GUI {
     ft.addFController(new TrashButton(cp5, ft, this));
   }
 
+  /**
+   * [setUpFileToolbar initialises the toolbar for File]
+   */
+    private void setUpFileToolbar(){
+      FToolbar ft = topToolbarFactory("File");
 
+      ft.addFController(new CopyButton(cp5, ft, this));
+      ft.addFController(new PasteButton(cp5, ft, this));
 
+      ft.addFController(new SaveButton(cp5, ft, this));
+      ft.addFController(new OpenButton(cp5, ft, this));
+      ft.addFController(new ExportButton(cp5, ft, this));
+      ft.addFController(new ImportButton(cp5, ft, this));
+     }
+     
+/**
+ * [setupMenuSelectToolbar initialises the toolbar for menu selection (big toolbar on top to pic sub toolbar)]
+ */
   private void setupMenuSelectToolbar(){
     FToolbar ft = toolbarFactory("MenuSelectTB", (float).8, (float).06, (float).1, (float).0);
     ft.setBoarder((float).05,(float).05);
@@ -455,17 +491,10 @@ public class GUI {
 
   }
 
-  private void setUpFileToolbar(){
-    FToolbar ft = topToolbarFactory("File");
 
-    ft.addFController(new CopyButton(cp5, ft, this));
-    ft.addFController(new PasteButton(cp5, ft, this));
-
-    ft.addFController(new SaveButton(cp5, ft, this));
-    ft.addFController(new OpenButton(cp5, ft, this));
-    ft.addFController(new ExportButton(cp5, ft, this));
-    ft.addFController(new ImportButton(cp5, ft, this));
-   }
+/**
+ * Start of toolbar administartion functions
+ */
 
    /**
     * [setActiveToolbar sets the active toolbar]
