@@ -384,6 +384,9 @@ public class GUI {
      //present toolbar
      setupPresentToolbar();
 
+     //slide toolbar
+     setupSlideToolbar();
+
      setActiveToolbar(0);
      resizeAll();
    }
@@ -492,7 +495,7 @@ public class GUI {
   }
 
   private void setupSlideToolbar(){
-    FToolbar ft = toolbarFactory("Slides", (float).1, (float).2, (float).3, (float).2);
+    FToolbar ft = toolbarFactory("Slides", (float).1, (float).05, (float).06, (float).2);
   }
 
 
