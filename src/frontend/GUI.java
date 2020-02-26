@@ -5,7 +5,8 @@ package frontend;
   *
   * GUI is responsable for the creation and update of the toolbars and surounding GUI.
   * GUI also holds the toolbars, UIgroups, and UIControllers. It holds state infromation
-  * like what tool is selected.
+  * like what tool is selected. It also acts as an adapter between CP5/fcontrollers buttons
+  * and Window. All Buttons are passed GUI.
   *
   * @author Hunter Chasens
   * @version 1.0
