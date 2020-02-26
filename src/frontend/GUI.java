@@ -493,6 +493,9 @@ public class GUI {
     FToolbar ft = toolbarFactory("Slides", (float).1, (float).05, (float).06, (float).2);
     //Disables the users ability to clapse the toolbar
     ft.getGroup().disableCollapse();
+    //reduces boarder
+    ft.setBoarder((float).005,(float).005);
+
     ft.addFController(new NewSlideButton(cp5, ft, this));
     ft.addFController(new DelSlideButton(cp5, ft, this));
     ft.addFController(new UpSlideButton(cp5, ft, this));
