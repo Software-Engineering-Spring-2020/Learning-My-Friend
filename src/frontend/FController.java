@@ -166,8 +166,9 @@ public abstract class FController{
       return gui;
     }
 
-    //TODO
+
     //Comment on this better
+    //This was suposed to setup a callback but I can't get it to setup properly from an abstract class
     /**
      * [trigger preforms the action the button is for]
      */

@@ -11,12 +11,7 @@ package frontend;
   * @version 1.0
   * @since 02.09.2019
   *
-  * TODO
-  * Comment eveything
-  *
-  *
-  * TODO Make toolbars
- */
+  */
 
 import backend.Window;
 import frontend.controlP5.*;
@@ -418,7 +413,7 @@ public class GUI {
 /**
  * [setupAnimateToolbar initialises the toolbar for Animate]
  */
-   private void setupAnimateToolbar(){ //TODO
+   private void setupAnimateToolbar(){
      FToolbar ft = topToolbarFactory("Animate");
      ft.addFController(new FadeInButton(cp5, ft, this));
      ft.addFController(new FadeOutButton(cp5, ft, this));
@@ -429,7 +424,7 @@ public class GUI {
 /**
  * [setupPresentToolbar initialises the toolbar for Present]
  */
-   private void setupPresentToolbar(){ //TODO
+   private void setupPresentToolbar(){
      FToolbar ft = topToolbarFactory("Present");
      ft.addFController(new PresentButton(cp5, ft, this));
    }
@@ -498,7 +493,7 @@ public class GUI {
     FToolbar ft = toolbarFactory("Slides", (float).1, (float).05, (float).06, (float).2);
     //Disables the users ability to clapse the toolbar
     ft.getGroup().disableCollapse();
-    
+
   }
 
 
@@ -567,7 +562,6 @@ public class GUI {
     * [display checks to see if the applet size has changed. If it has it triggers a resize.]
     */
    public void display(){
-     //TODO
      if(lastAppletWidth != sketch.width || lastAppletHeight != sketch.height){
       resizeAll();
       lastAppletWidth = sketch.width;

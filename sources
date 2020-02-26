@@ -28,6 +28,11 @@ src\frontend\fcontrollers\PolyCountSlider.java
 src\frontend\fcontrollers\TogFillButton.java
 src\frontend\fcontrollers\PresentButton.java
 
+src\frontend\fcontrollers\UpSlideButton.java
+src\frontend\fcontrollers\DelSlideButton.java
+src\frontend\fcontrollers\NewSlideButton.java
+src\frontend\fcontrollers\DownSlideButton.java
+
 src\frontend\fcontrollers\CopyButton.java
 src\frontend\fcontrollers\PasteButton.java
 
