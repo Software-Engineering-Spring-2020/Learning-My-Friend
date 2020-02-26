@@ -91,7 +91,9 @@ public class GUI {
   setup();
 }
 
-
+/**
+ * [present enters present mode]
+ */
   public void present(){
     win.present();
   }
@@ -299,6 +301,38 @@ public class GUI {
 
 
 
+
+  /**
+   * [newSlide creates a new slide]
+   */
+  public void newSlide(){
+    win.createSlideAt();
+  }
+
+
+  /**
+   * [dekSlide deletes the selected slide]
+   */
+  public void delSlide(){
+    win.deleteSlide();
+  }
+
+
+  /**
+   * [upSlide moves the selected slide up in the array]
+   */
+  public void upSlide(){
+    win.moveSlideUp();
+  }
+
+
+  /**
+   * [downSlide moves the selected slide down in the array]
+   */
+  public void downSlide(){
+    win.moveSlideDown();
+  }
+
    /**
     * [setFill sets the fill color]
     * @param i [color from 1 to 255]
@@ -489,6 +523,9 @@ public class GUI {
 
   }
 
+/**
+ * [setupSlideToolbar initialises the toolbar for slides]
+ */
   private void setupSlideToolbar(){
     FToolbar ft = toolbarFactory("Slides", (float).1, (float).05, (float).06, (float).2);
     //Disables the users ability to clapse the toolbar
