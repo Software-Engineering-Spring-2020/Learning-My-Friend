@@ -479,7 +479,7 @@ public class GUI {
       ft.addFController(new ExportButton(cp5, ft, this));
       ft.addFController(new ImportButton(cp5, ft, this));
      }
-     
+
 /**
  * [setupMenuSelectToolbar initialises the toolbar for menu selection (big toolbar on top to pic sub toolbar)]
  */
@@ -489,6 +489,10 @@ public class GUI {
     ft.addFController(new MenuSelect(cp5, ft, this));
     //ft.setVisable(false);
 
+  }
+
+  private void setupSlideToolbar(){
+    FToolbar ft = toolbarFactory("Slides", (float).1, (float).2, (float).3, (float).2);
   }
 
 
