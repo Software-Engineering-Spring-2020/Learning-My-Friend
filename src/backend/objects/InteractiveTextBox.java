@@ -1,22 +1,17 @@
 package backend.objects;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 
 import backend.TextObject;
 import backend.ListenerObject;
 
 import processing.core.PApplet;
-import processing.core.PFont;
-import processing.core.PGraphics;
-import processing.core.PVector;
 import processing.core.PConstants;
 
 /**
 * Class to display dynamic text to the slide, (Supports interactivity).
 */
-public class InteractiveTextBox extends TextObject implements Serializable, ListenerObject {
+public class InteractiveTextBox extends TextObject implements ListenerObject {
     private static final long serialVersionUID = 14L;
     public enum Direction {
         UP,
@@ -345,7 +340,7 @@ public class InteractiveTextBox extends TextObject implements Serializable, List
   * @param keyCode Represents the value of they key currently pressed (capital and lower case letters are the same, all function keys are different)
   */
   public void handleKey(char key, int keyCode) {
-    if (key == sketch.CODED) {
+    if (key == PConstants.CODED) {
         switch(keyCode) {
             case PConstants.CONTROL:
                 break;
