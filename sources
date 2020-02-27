@@ -134,7 +134,8 @@ src\frontend\controlP5\Textlabel.java
 src\frontend\controlP5\TickMark.java
 src\frontend\controlP5\Toggle.java
 src\frontend\controlP5\Tooltip.java
-
+src\frontend\fcontrollers\ElipButton.java
+src\frontend\fcontrollers\RectButton.java
 
 
 

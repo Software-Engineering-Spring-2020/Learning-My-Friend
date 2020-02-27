@@ -434,6 +434,8 @@ public class GUI {
      ft.addFController(new PenButton(cp5, ft, this));
      ft.addFController(new LineButton(cp5, ft, this));
      ft.addFController(new CurveButton(cp5, ft, this));
+     ft.addFController(new RectButton(cp5, ft, this));
+     ft.addFController(new ElipButton(cp5, ft, this));
    }
 
 /**

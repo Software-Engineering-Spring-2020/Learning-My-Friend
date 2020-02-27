@@ -60,25 +60,37 @@ public class IOHandler{
   public void mouseClicked(){
     //Needs to parse the gui tool selected
     if(onCanvas()){
-      if(gui.getTool() == 's'){
+
+      if(gui.getTool() == 's')
         win.select(sketch.mouseX, sketch.mouseY);
-      }
-      if(gui.getTool() == 't'){
+
+      if(gui.getTool() == 'r')
+        win.createRect(sketch.mouseX, sketch.mouseY);
+
+      if(gui.getTool() == 'e')
+        win.createEllipse(sketch.mouseX, sketch.mouseY);
+
+      if(gui.getTool() == 't')
         win.createInteractiveTextBox(sketch.mouseX, sketch.mouseY, 100, "arial", 20);
-      }
-      if(gui.getTool() == 'c'){
+
+      if(gui.getTool() == 'c')
         win.createComment(sketch.mouseX, sketch.mouseY, gui.getCurrentString(), "arial", 20);
-      }
+
       if(gui.getTool() == 'l')
         win.createLine(sketch.mouseX, sketch.mouseY);
+
       if(gui.getTool() == 'u')
         win.createCurve(sketch.mouseX, sketch.mouseY);
+
       if(gui.getTool() == 'f')
         win.addAnimation(Window.AnimationOption.FADE_IN, sketch.mouseX, sketch.mouseY);
+
       if(gui.getTool() == 'g')
         win.addAnimation(Window.AnimationOption.FADE_OUT, sketch.mouseX, sketch.mouseY);
+
       if(gui.getTool() == 'h')
         win.addAnimation(Window.AnimationOption.TRANSLATE, sketch.mouseX, sketch.mouseY);
+
       }
 
   }
