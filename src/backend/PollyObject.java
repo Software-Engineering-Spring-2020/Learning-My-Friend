@@ -59,10 +59,10 @@ public abstract class PollyObject implements Serializable {
     }
 
     protected void setCenter(float x, float y) {
+        xpos += (x - xcenter);
+        ypos += (y - ycenter);
         xcenter = x;
         ycenter = y;
-        xpos += (xcenter - x);
-        ypos += (ycenter - y);
     }
 
     /**

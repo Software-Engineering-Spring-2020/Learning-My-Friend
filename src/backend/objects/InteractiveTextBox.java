@@ -13,7 +13,7 @@ import processing.core.PConstants;
 */
 public class InteractiveTextBox extends TextObject implements ListenerObject {
     private static final long serialVersionUID = 14L;
-    public enum Direction {
+    public enum Directions {
         UP,
         DOWN,
         LEFT,
@@ -26,11 +26,18 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
     transient private long cursorStartTime;
     transient private boolean displayCursor = false;
     private final char WIDE_CHAR = 'W';
-    private final int LINE_SPACING = 16;
+    private final int LINE_SPACING = 20;
     private final long CURSOR_BLINK_RATE = 530l;
     private final char[] BULLETS = {'-', '+', '*'};
+    private final char[] NUMBERS = {'1', 'a'};
     private final char INDENTATION_CHAR = ' ';
     private final int INDENTATION_SIZE = 4;
+    private enum Modes {
+        NUMBERED,
+        BULLETED,
+        PLAIN
+    }
+    private final Modes mode;
 
     /**
     * Constructor for InteractiveTextBox
@@ -49,6 +56,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
     this.str = "";
     this.charactersPerLine = (int) (width / sketch.textWidth(WIDE_CHAR));
     this.cursorStartTime = System.currentTimeMillis();
+    this.mode = Modes.PLAIN;
     String example = "NEW TEXT BOX";
     char[] exampleCharacters = example.toCharArray();
     for (char c: exampleCharacters) {
@@ -149,7 +157,9 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
     String reversedLine = "";
     if (characters.length == 0) return "";
     for (int i = cursorIndex - 1; i >= 0; i--) {
-        if (characters[i] == PConstants.ENTER || characters[i] == PConstants.RETURN) break;
+        if (characters[i] == PConstants.ENTER || characters[i] == PConstants.RETURN) {
+             break;
+        } 
         reversedLine += characters[i];
     }
     char[] reversedLineCharacters = reversedLine.toCharArray();
@@ -167,8 +177,23 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
   private boolean inBullets() {
     if (getCurrentLine().length() == 0) return false;
     if (!lineHasNonWhitespaceCharacter()) return false;
-    char firstNonWhitespaceCharacter = getFirstNonWhitespaceCharacter(getCurrentLine());
+    char firstNonWhitespaceCharacter = getCharacterAfterWhitespace(getCurrentLine(), 0);
     for (int i = 0; i < BULLETS.length; i++) if (firstNonWhitespaceCharacter == BULLETS[i]) return true;
+    return false;
+  }
+
+  private boolean inNumbers() {
+    String line = getCurrentLine();
+    System.out.println("numbers: " + line);
+    if (line.length() < 2) return false;
+    if (!lineHasNonWhitespaceCharacter()) return false;
+    char firstNonWhitespaceCharacter = getCharacterAfterWhitespace(line, 0);
+    if (Character.isAlphabetic(firstNonWhitespaceCharacter) && Character.isLowerCase(firstNonWhitespaceCharacter)) {
+        if (getIndentationLevel() % 2 == 1) return true;
+    }
+    if (Character.isDigit(firstNonWhitespaceCharacter)) {
+        if (getIndentationLevel() % 2 == 0) return true;
+    }
     return false;
   }
 
@@ -176,13 +201,13 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
     String line = getCurrentLine();
     if (line.length() == 0) return 0;
     char[] lineCharacters = line.toCharArray();
-    int indentation_chars = 0;
+    int indentationChars = 0;
     int i = 0;
     while (lineCharacters[i] == INDENTATION_CHAR) {
-        indentation_chars++;
+        indentationChars++;
         i++;
     }
-    if (indentation_chars % INDENTATION_SIZE == 0) return indentation_chars / INDENTATION_SIZE;
+    if (indentationChars % INDENTATION_SIZE == 0) return indentationChars / INDENTATION_SIZE;
     else return 0;
   }
 
@@ -191,7 +216,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
     for (int i = 0; i < INDENTATION_SIZE; i++) indentation += INDENTATION_CHAR;
     charactersSinceNewLine += INDENTATION_SIZE + 1;
     String line = getCurrentLine();
-    String bullet = Character.toString(getFirstNonWhitespaceCharacter(line));
+    String bullet = Character.toString(getCharacterAfterWhitespace(line, 0));
     String newBullet = Character.toString(BULLETS[(getIndentationLevel() + 1) % BULLETS.length]);
     String newLine = (indentation + line).replaceFirst("\\" + bullet, newBullet);
     setCurrentLine(newLine);
@@ -203,7 +228,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
     for (int i = 0; i < INDENTATION_SIZE; i++) indentation += INDENTATION_CHAR;
     charactersSinceNewLine -= INDENTATION_SIZE + 1;
     String line = getCurrentLine();
-    String bullet = Character.toString(getFirstNonWhitespaceCharacter(line));
+    String bullet = Character.toString(getCharacterAfterWhitespace(line, 0));
     String newBullet = Character.toString(BULLETS[(getIndentationLevel() - 1 + 3) % BULLETS.length]);
     String newLine = line.replaceFirst(indentation, "").replaceFirst("\\" + bullet, newBullet);
     setCurrentLine(newLine);
@@ -219,29 +244,26 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
     return !(sCharacters[i] == INDENTATION_CHAR);
   }
 
-  private char getFirstNonWhitespaceCharacter(String s) {
+  private char getCharacterAfterWhitespace(String s, int index) {
     char[] sCharacters = s.toCharArray();
     int i = 0;
     while (sCharacters[i] == INDENTATION_CHAR && i < sCharacters.length) {
         i++;
     }
-    return sCharacters[i];
+    return sCharacters[i + index];
   }
 
   /**
-   * Moves the text cursor UP, DOWN, LEFT, or RIGHT. Use the `directions` enum.
-   * @param direction The direction to move the text cursor in.
-   * @see Directions
+   * Moves the text cursor UP, DOWN, LEFT, or RIGHT. Use the `Directionss` enum.
+   * @param Directions The Directions to move the text cursor in.
+   * @see Directionss
    */
-  protected void moveCursor(Direction direction) {
-      switch(direction) {
+  protected void moveCursor(Directions Directions) {
+      switch(Directions) {
         case DOWN:
-            if (cursorIndex + charactersPerLine <= str.length()) {
-                cursorIndex += charactersPerLine;
-            }
-            else {
-                cursorIndex = str.length();
-            }
+            int index = scan(Directions.RIGHT) + 1;
+            if (index <= str.length()) cursorIndex = index;
+            else cursorIndex = str.length();
 			break;
         case LEFT:
             if (cursorIndex > 0) {
@@ -254,14 +276,33 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
             }
 			break;
         case UP:
-            if (cursorIndex - charactersPerLine >= 0) {
-                cursorIndex -= charactersPerLine;
-            }
+            index = scan(Directions.LEFT) - 1;
+            if (index >= 0) cursorIndex = index;
             else cursorIndex = 0;
             break;
 		default:
 			break;
       }
+  }
+
+  /**
+   * Scans in the specified Directions for a newline or the beginning/end of the string
+   * in this text box, starting at the cursor.
+   * @param d Directions.LEFT or Directions.RIGHT. The direction to scan in.
+   * @return The index of the first encountered newline, or the beginning of the string,
+   * or the end of the string.
+   */
+  private int scan(Directions d) {
+    int index = cursorIndex;
+    if (d == Directions.LEFT) index--;
+    else if (d == Directions.RIGHT) index++;
+    char[] strCharacters = str.toCharArray();
+    while (index >= 1 && index < strCharacters.length &&
+        !(strCharacters[index] == PConstants.RETURN) && !(strCharacters[index] == PConstants.ENTER)) {
+            if (d == Directions.LEFT) index--;
+            else if (d == Directions.RIGHT) index++;
+    }
+    return index;
   }
 
   /**
@@ -274,6 +315,8 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
     char[] characters = str.toCharArray();
     char[] newCharacters = new char[characters.length + 1];
     boolean inBullets = inBullets();
+    boolean inNumbers = inNumbers();
+    System.out.println(inNumbers);
     int indentationLevel = 0;
     if (inBullets) indentationLevel = getIndentationLevel();
     int j = 0;
@@ -292,8 +335,36 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
     str = new String(newCharacters);
     if (c == PConstants.ENTER || c == PConstants.RETURN) {
         if (!(charactersSinceNewLine % charactersPerLine == 0)) addLine();
-        if (inBullets) {
-            addCharacter(BULLETS[indentationLevel % BULLETS.length]);
+        if (inBullets || inNumbers) {
+			if (inBullets) {
+                addCharacter(BULLETS[indentationLevel % BULLETS.length]);
+                addCharacter(' ');
+            }
+            else if (inNumbers) {
+                int cachedCursorIndex = cursorIndex;
+                moveCursor(Directions.UP);
+                int nextIndex = 0;
+                System.out.println("line: " + getCurrentLine());
+                char lastNumber = getCharacterAfterWhitespace(getCurrentLine(), nextIndex);
+                String nextNumber = "a";
+                if (lastNumber == 'z') nextNumber = Character.toString('a');
+                else {
+                    String lastNumberCombined = "";
+                    while (Character.isDigit(lastNumber)) {
+                        System.out.println(lastNumber);
+                        lastNumberCombined += lastNumber;
+                        nextIndex++;
+                        lastNumber = getCharacterAfterWhitespace(getCurrentLine(), nextIndex);
+                        System.out.println(lastNumber);
+                    }
+                    nextNumber = Integer.toString(Integer.parseInt(lastNumberCombined) + 1);
+                }
+                cursorIndex = cachedCursorIndex;
+                char[] nextNumberChars = nextNumber.toCharArray();
+                for (int i = 0; i < nextNumberChars.length; i++) addCharacter(nextNumberChars[i]);
+                addCharacter('.');
+                addCharacter(' ');
+            }
             for (int i = 0; i < indentationLevel; i++) {
                 indent();
             }
@@ -334,6 +405,18 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
     }
   }
 
+  protected void setMode(Modes m) {
+    if (m == Modes.PLAIN) {
+
+    }
+    if (m == Modes.BULLETED) {
+
+    }
+    if (m == Modes.NUMBERED) {
+        
+    }
+  }
+
   /**
   * Handles user input to add text and move the cursor around.
   * @param key A character representation of the key currently pressed (capital and lower case letters are different, all function keys are the same)
@@ -345,23 +428,23 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
             case PConstants.CONTROL:
                 break;
             case PConstants.UP:
-                moveCursor(Direction.UP);
+                moveCursor(Directions.UP);
                 break;
             case PConstants.DOWN:
-                moveCursor(Direction.DOWN);
+                moveCursor(Directions.DOWN);
                 break;
             case PConstants.LEFT:
-                moveCursor(Direction.LEFT);
+                moveCursor(Directions.LEFT);
                 break;
             case PConstants.RIGHT:
-                moveCursor(Direction.RIGHT);
+                moveCursor(Directions.RIGHT);
                 break;
         }
     }
     else {
         switch(key) {
             case PConstants.TAB:
-                if (inBullets()) indent();
+                if (inBullets() || inNumbers()) indent();
                 break;
             // TODO: case SHIFT + TAB for unindent
             case PConstants.BACKSPACE:

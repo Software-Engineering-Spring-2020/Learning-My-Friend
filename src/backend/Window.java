@@ -198,7 +198,8 @@ public class Window {
     */
     public void reCenter() {
         zoom = 1;
-        this.slides.get(currentSlide).setPosition(XINIT, YINIT);
+        DrawSpace slide = this.slides.get(currentSlide);
+        slide.setPosition(sketch.width / 2 - slide.pixelWidth / 2, sketch.height / 2 - slide.pixelHeight / 2);
         this.display();
     }
 
@@ -996,10 +997,7 @@ public class Window {
             selected.clear();
             editingPosition = slides.get(currentSlide).getPosition();
             editingZoom = zoom;
-            zoom = sketch.width / (float) slides.get(currentSlide).pixelWidth;
-            slides.get(currentSlide).setPosition(0, 0);
             reCenter();
-            // TODO: allow animations to trigger
         }
     }
 
