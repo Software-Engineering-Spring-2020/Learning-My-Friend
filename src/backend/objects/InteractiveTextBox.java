@@ -217,16 +217,20 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
     String line = getCurrentLine();
     String newLine = "";
     if (inBullets()) {
-        String bullet = Character.toString(getCharacterAfterWhitespace(line, 0));
+        String lastBullet = Character.toString(getCharacterAfterWhitespace(line, 0));
         String newBullet = Character.toString(BULLETS[(getIndentationLevel() + 1) % BULLETS.length]);
-        newLine = (indentation + line).replaceFirst("\\" + bullet, newBullet);
+        newLine = (indentation + line).replaceFirst("\\" + lastBullet, newBullet);
     }
     else if (inNumbers()) {
-        String number;
         int nextIndex = 0;
         char lastNumber = getCharacterAfterWhitespace(line, nextIndex);
         String nextNumber = "a";
-        if (lastNumber == 'z') nextNumber = Character.toString('a');
+
+        // TODO: the following will not preserve past numbers if you outindent and then indent back
+        // to the bottom of a list.
+        // TODO: make the below a helper method. It will come up at LEAST 4 times in total.
+        
+        /*if (Character.isAlphabetic(lastNumber)) nextNumber = Character.toString('1');
         else {
             String lastNumberCombined = "";
             while (Character.isDigit(lastNumber)) {
@@ -237,8 +241,8 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
             nextNumber = Integer.toString(Integer.parseInt(lastNumberCombined) + 1);
         char newNumber;
         if (Character.isDigit(getCharacterAfterWhitespace(line, 0))) newNumber = NUMBERS[1];
-        else newNumber = NUMBERS[0];
-        newLine = (indentation + line).replaceFirst("\\" + number, newNumber);
+        else newNumber = NUMBERS[0];*/
+        newLine = (indentation + line).replaceFirst("\\" + lastNumber, nextNumber);
     }
     setCurrentLine(newLine);
     cursorIndex += INDENTATION_SIZE;
