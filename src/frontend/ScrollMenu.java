@@ -6,6 +6,9 @@ import processing.core.PConstants;
 
 import java.util.ArrayList;
 
+/**
+* A class to handle scrolling through slide thumbnails and changing the current editable slide.
+*/
 class ScrollMenu{
   private PApplet sketch;
   private PGraphics scrollMenu;
@@ -16,6 +19,10 @@ class ScrollMenu{
 
   private PImage empty;
 
+  /**
+  * @param sketch A reference to a PApplet to allow general functionality of the processing library
+  * @param thumbnails A list of slides to make thumbnails of
+  */
   void init(PApplet sketch, ArrayList<PImage> thumbnails) {
     this.sketch = sketch;
     scrollMenu = sketch.createGraphics(scrollMenuX, scrollMenuY);
@@ -36,14 +43,23 @@ class ScrollMenu{
     }
   }
 
+  /**
+  * Draw the menu of slides to the screen.
+  */
   void display() {
     sketch.image(scrollMenu, scrollMenuX, scrollMenuY);
   }
 
+  /**
+  * Add an empty slide to the slide menu.
+  */
   protected void newSlide(){
     thumbnails.add(empty);
   }
 
+  /**
+  * Change the current editable slide to the slide under the mouse click.
+  */
   protected int selectSlide(){
     PVector pos = new PVector(sketch.mouseX, sketch.mouseY);
     if(pos.x>scrollMenuX && pos.y>scrollMenuY && pos.x<scrollMenuX+menuWidth && pos.y<scrollMenuY+menuHeight){
@@ -53,6 +69,10 @@ class ScrollMenu{
     return currentSlide;
   }
 
+  /**
+  * Call this function to actively scroll through the thumbnails of slides
+  * @param startSlide The topmost slide on the menu
+  */
   protected void scroll(int startSlide) {
     scrollMenu.beginDraw();
     scrollMenu.background(100);
@@ -67,12 +87,21 @@ class ScrollMenu{
     scrollMenu.endDraw();
   }
 
+  /**
+  * Update the thumbnail for the slide just finished editing
+  * @param index The location of the thumbnail to change
+  * @param slide The new slide to be saved into a thumbnail.
+  */
   protected void updateThumbnail(int index, PImage slide){
     PImage img = slide;
     img.resize(100, 50);
     thumbnails.set(index, img);
   }
 
+  /**
+  * Converts a full scale slide into a thumbnail size PImage
+  * @return A 100x50 image representing the slide
+  */
   private PImage convertThumbnail(PImage slide){
     PImage img = slide;
     img.resize(100, 50);
