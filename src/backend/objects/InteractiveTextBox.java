@@ -184,7 +184,6 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
 
   private boolean inNumbers() {
     String line = getCurrentLine();
-    System.out.println("numbers: " + line);
     if (line.length() < 2) return false;
     if (!lineHasNonWhitespaceCharacter()) return false;
     char firstNonWhitespaceCharacter = getCharacterAfterWhitespace(line, 0);
@@ -216,9 +215,31 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
     for (int i = 0; i < INDENTATION_SIZE; i++) indentation += INDENTATION_CHAR;
     charactersSinceNewLine += INDENTATION_SIZE + 1;
     String line = getCurrentLine();
-    String bullet = Character.toString(getCharacterAfterWhitespace(line, 0));
-    String newBullet = Character.toString(BULLETS[(getIndentationLevel() + 1) % BULLETS.length]);
-    String newLine = (indentation + line).replaceFirst("\\" + bullet, newBullet);
+    String newLine = "";
+    if (inBullets()) {
+        String bullet = Character.toString(getCharacterAfterWhitespace(line, 0));
+        String newBullet = Character.toString(BULLETS[(getIndentationLevel() + 1) % BULLETS.length]);
+        newLine = (indentation + line).replaceFirst("\\" + bullet, newBullet);
+    }
+    else if (inNumbers()) {
+        String number;
+        int nextIndex = 0;
+        char lastNumber = getCharacterAfterWhitespace(line, nextIndex);
+        String nextNumber = "a";
+        if (lastNumber == 'z') nextNumber = Character.toString('a');
+        else {
+            String lastNumberCombined = "";
+            while (Character.isDigit(lastNumber)) {
+                lastNumberCombined += lastNumber;
+                nextIndex++;
+                lastNumber = getCharacterAfterWhitespace(getCurrentLine(), nextIndex);
+            }
+            nextNumber = Integer.toString(Integer.parseInt(lastNumberCombined) + 1);
+        char newNumber;
+        if (Character.isDigit(getCharacterAfterWhitespace(line, 0))) newNumber = NUMBERS[1];
+        else newNumber = NUMBERS[0];
+        newLine = (indentation + line).replaceFirst("\\" + number, newNumber);
+    }
     setCurrentLine(newLine);
     cursorIndex += INDENTATION_SIZE;
   }
@@ -316,7 +337,6 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
     char[] newCharacters = new char[characters.length + 1];
     boolean inBullets = inBullets();
     boolean inNumbers = inNumbers();
-    System.out.println(inNumbers);
     int indentationLevel = 0;
     if (inBullets) indentationLevel = getIndentationLevel();
     int j = 0;
@@ -344,18 +364,15 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
                 int cachedCursorIndex = cursorIndex;
                 moveCursor(Directions.UP);
                 int nextIndex = 0;
-                System.out.println("line: " + getCurrentLine());
                 char lastNumber = getCharacterAfterWhitespace(getCurrentLine(), nextIndex);
                 String nextNumber = "a";
                 if (lastNumber == 'z') nextNumber = Character.toString('a');
                 else {
                     String lastNumberCombined = "";
                     while (Character.isDigit(lastNumber)) {
-                        System.out.println(lastNumber);
                         lastNumberCombined += lastNumber;
                         nextIndex++;
                         lastNumber = getCharacterAfterWhitespace(getCurrentLine(), nextIndex);
-                        System.out.println(lastNumber);
                     }
                     nextNumber = Integer.toString(Integer.parseInt(lastNumberCombined) + 1);
                 }
@@ -477,7 +494,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
             int offset = 0;
             long nowTime = System.currentTimeMillis();
             if (nowTime - cursorStartTime >= CURSOR_BLINK_RATE) {
-                if (cursor == '|') cursor = ' ';
+                if (cursor == '|') cursor = ' ';
                 else cursor = '|';
                 cursorStartTime = nowTime;
             }
