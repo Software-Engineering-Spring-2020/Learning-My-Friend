@@ -2,6 +2,7 @@ package backend;
 
 import backend.objects.FadeAnimation;
 import backend.objects.ObjectFactory;
+import backend.objects.SoundPlayerAnimation;
 import backend.objects.TranslateAnimation;
 import processing.core.PApplet;
 import processing.core.PGraphics;
@@ -43,7 +44,8 @@ public class Window {
     public enum AnimationOption {
         FADE_IN,
         FADE_OUT,
-        TRANSLATE
+        TRANSLATE,
+        PLAY_SOUND
     }
 
     /**
@@ -668,15 +670,12 @@ public class Window {
             else slides.get(currentSlide).playNextAnimation();
         }
         else {
-            if(selected.contains(obj))
-            selected.remove(obj);
-            else
-            selected.add(obj);
+            if(selected.contains(obj)) selected.remove(obj);
+            else selected.add(obj);
         }
       }
       else if (presenting) slides.get(currentSlide).playNextAnimation();
-      else if(withinCanvas(x, y))
-          selected.clear();
+      else if(withinCanvas(x, y)) selected.clear();
     }
 
     /**  DO A CHANGE HERE SLKFGAPOFGNSDFDFNLKSDF MSDFKLHF SD,FHLSDK ***************************************
@@ -1016,20 +1015,31 @@ public class Window {
         presenting = false;
     }
 
+    public void addAnimation(AnimationOption a, float mouseX, float mouseY) {
+        addAnimation(a, mouseX, mouseY, "", "");
+    }
+
+    public void addAnimation(AnimationOption a, String filename, String extension) {
+        addAnimation(a, 0, 0, filename, extension);
+    }
+
     /**     REPEITITON HERE
      * Adds the same animation to all selected objects. If the animation is a translation, the destination for the objects is signified by the location of a mouse-click.
      * @param a The enum representing the desired type of AnimationOption. See FADE_IN, FADE_OUT, and TRANSLATE.
-     * @param x Only used for TRANSLATE. The destination mouseX coordinate.
-     * @param y Only used for TRANSLATE. The destination mouseY coordinate.
+     * @param mouseX Only used for TRANSLATE. The destination mouseX coordinate.
+     * @param mouseY Only used for TRANSLATE. The destination mouseY coordinate.
+     * @param filename Only used for SOUND. The filename without extension of the sound file to be played.
+     * @param extension Only used for SOUND. The extension of the sound file to be played.
      * @see AnimationOption
      */
-    public void addAnimation(AnimationOption a, float mouseX, float mouseY) {
+    public void addAnimation(AnimationOption a, float mouseX, float mouseY, String filename, String extension) {
         long duration = 1000;
         float[] end = slides.get(currentSlide).translateCoordinates(sketch.mouseX, sketch.mouseY, zoom);
         Animation anim = new TranslateAnimation(sketch, duration, end[0], end[1]);
         if (!(a == AnimationOption.TRANSLATE)) {
             if (a == AnimationOption.FADE_IN) anim = new FadeAnimation(sketch, duration, 0, 255);
-            else anim = new FadeAnimation(sketch, duration, 255, 0);
+            else if (a == AnimationOption.FADE_OUT) anim = new FadeAnimation(sketch, duration, 255, 0);
+            else if (a == AnimationOption.PLAY_SOUND) anim = new SoundPlayerAnimation(sketch, duration, filename, extension);
         }
         for (PollyObject obj : selected) {
             if (!(a == AnimationOption.TRANSLATE) && !(obj instanceof ColorfulObject)) continue;

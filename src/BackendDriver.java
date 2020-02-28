@@ -156,7 +156,9 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
         else if(this.key == 'K' && ctrl) this.win.removeLink();
         else if (this.key == 'F') this.win.addAnimation(Window.AnimationOption.FADE_IN, mouseX, mouseY);
         else if (this.key == 'O') this.win.addAnimation(Window.AnimationOption.FADE_OUT, mouseX, mouseY);
-        else if (this.key == 'T') this.win.addAnimation(Window.AnimationOption.TRANSLATE, mouseX, mouseY);
+		else if (this.key == 'T') this.win.addAnimation(Window.AnimationOption.TRANSLATE, mouseX, mouseY);
+		else if (this.key == 'S') this.win.addAnimation(Window.AnimationOption.PLAY_SOUND, "C:/Users/isaac/Documents/Git/notebook/school/spring-2020/software-engineering/Sounds/Fireworks", ".wav");
+		
 
 
 		//else if(this.key == 'R') this.win.createRect(this.mouseX, this.mouseY);

@@ -19,7 +19,7 @@ src\backend\objects\FreeForm.java
 src\backend\objects\Curve.java
 src\backend\objects\TranslateAnimation.java
 src\backend\objects\FadeAnimation.java
-
+src\backend\objects\SoundPlayerAnimation.java
 
 
 src\backend\SerialManager.java
