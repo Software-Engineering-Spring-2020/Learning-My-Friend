@@ -24,9 +24,34 @@ public abstract class FSlider extends FController{
     return cp5.addSlider(this.name).setGroup(parrent.getGroup());
   }
 
+  /**
+   * [updateState updates the slider state to the given int]
+   * @param i [the state to update the sldier too]
+   */
   public void updateState(int i){
     slider.setValue(i);
   }
+
+  /**
+   * [setMin sets the minimum value of the slider]
+   * @param i [minimum value]
+   */
+  protected void setMin(int i){
+    slider.setMin(i);
+    slider.setNumberOfTickMarks((int)((slider.getMax() - slider.getMin()) - 1));
+  }
+
+/**
+ * [setMax sets the maximum value of the slider]
+ * @param i [the maximum]
+ */
+  protected void setMax(int i){
+    slider.setMax(i);
+    slider.setNumberOfTickMarks((int)((slider.getMax() - slider.getMin()) - 1));
+  }
+
+
+
 
   /**
    * [update updates the ControlP5 object to the FControlers size]
