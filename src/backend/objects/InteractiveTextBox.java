@@ -22,7 +22,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
     private int charactersSinceNewLine;
     private int charactersPerLine;
     transient private int cursorIndex;
-    transient private String cursor = "|";
+    transient private char cursor = '|';
     transient private long cursorStartTime;
     transient private boolean displayCursor = false;
     private final char WIDE_CHAR = 'W';
@@ -494,23 +494,23 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
         if (displayCursor) {
             displayCursor = false;
             finalString = "";
-            char[] charactersWithCursor = new char[characters.length + 1];
+            char[] charactersWithCursor;
             int offset = 0;
             long nowTime = System.currentTimeMillis();
             if (nowTime - cursorStartTime >= CURSOR_BLINK_RATE) {
-                if (cursor == Character.toString('|')) cursor = " ";
-                else cursor = Character.toString('|');
+                if (cursor == '|') cursor = '\u202F';
+                else cursor = '|';
                 cursorStartTime = nowTime;
             }
+            charactersWithCursor = new char[characters.length + 1];
             if (cursorIndex == characters.length) finalString = str + cursor;
             else {
                 for (int i = 0; i < characters.length; i++) {
                     if (i == cursorIndex) {
-                        charactersWithCursor[i] = cursor.charAt(0);
-                        charactersWithCursor[i + 1] = characters[i];
+                        charactersWithCursor[i + 1] = cursor;
                         offset = 1;
                     }
-                    else charactersWithCursor[i + offset] = characters[i];
+                    charactersWithCursor[i + offset] = characters[i];
                 }
             finalString = new String(charactersWithCursor);
             }
