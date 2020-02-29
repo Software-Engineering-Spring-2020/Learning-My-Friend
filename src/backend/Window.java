@@ -41,6 +41,8 @@ public class Window {
     private boolean presenting;
     private ObjectFactory of;
 
+    private ScrollMenu menu;
+
     public enum AnimationOption {
         FADE_IN,
         FADE_OUT,
@@ -67,6 +69,8 @@ public class Window {
         YINIT = y;
         WIDTH = w;
         HEIGHT = h;
+
+        menu = new ScrollMenu(sketch);
     }
 
     /**
@@ -139,6 +143,8 @@ public class Window {
         }
 
         sketch.pop();
+
+        if(menu != null) menu.display();
     }
 
     /**
@@ -159,6 +165,33 @@ public class Window {
       curvePoints.clear();
       shapePoints.clear();
     }
+
+    /*********************************************************
+     *
+     *
+     * SCROLL MENU RELATED FUNCTIONALITY
+     *
+     *
+     *********************************************************/
+     public void initScrollMenu(int x, int y, int w, int h){
+       menu = new ScrollMenu(this, x, y, w, h);
+     }
+
+     public void setMenuPosition(int x, int y){
+       menu.setPos(x, y);
+     }
+
+     public void setMenuSize(int width, int height){
+       menu.setSize(width, height);
+     }
+
+     public void selectSlide(float x, float y){
+       menu.selectSlide(x, y);
+     }
+
+     public void scroll(int startSlide) {
+       menu.scroll(startSlide);
+     }
 
     /*********************************************************
      *
@@ -938,6 +971,12 @@ public class Window {
             slides.get(currentSlide + 1).setPosition(currentSlidePosition[0], currentSlidePosition[1]);
             currentSlide++;
         }
+        menu.selectSlide(currentSlide);
+
+
+
+
+        //somewhere add the update of the slide
     }
 
     /**
@@ -949,15 +988,27 @@ public class Window {
             slides.get(currentSlide - 1).setPosition(currentSlidePosition[0], currentSlidePosition[1]);
             currentSlide--;
         }
+        menu.selectSlide(currentSlide);
+
+
+
+
+        //somewhere add the update of the slide
     }
 
     /**
      * Creates a new blank slide after the current slide.
      */
     public void createSlideAt() {
+
+      //somewhere add the update of the slide
+
+
         DrawSpace ds = slides.get(currentSlide);
         currentSlide++;
         slides.add(currentSlide, new DrawSpace(sketch, ds.xpos, ds.ypos, ds.pixelWidth, ds.pixelHeight));
+        menu.newSlideAt(currentSlide);
+        menu.selectSlide(currentSlide);
     }
 
      /**
@@ -966,6 +1017,7 @@ public class Window {
     public void moveSlideUp() {
         if (currentSlide - 1 < 0) {
             Collections.swap(slides, currentSlide, currentSlide - 1);
+            menu.swapSlides(currentSlide, currentSlide - 1);
         }
     }
 
@@ -975,6 +1027,7 @@ public class Window {
     public void moveSlideDown() {
         if (currentSlide + 1 < slides.size()) {
             Collections.swap(slides, currentSlide, currentSlide + 1);
+            menu.swapSlides(currentSlide, currentSlide + 1);
         }
     }
 
@@ -984,6 +1037,7 @@ public class Window {
     public void deleteSlide() {
         if (slides.size() > 1) {
             slides.remove(currentSlide);
+            menu.deleteSlide(currentSlide);
             currentSlide--;
         }
     }
@@ -994,6 +1048,7 @@ public class Window {
     */
     public void selectSlide(int index) {
         currentSlide = index;
+        menu.selectSlide(index);
     }
 
     /**
@@ -1108,6 +1163,8 @@ public class Window {
       */
     public void open(String filename) throws IOException, ClassNotFoundException {
       slides = SerialManager.openSlides(sketch, filename);
+
+      //menu.loadSlides(<inserthere>);
     }
 
 }
