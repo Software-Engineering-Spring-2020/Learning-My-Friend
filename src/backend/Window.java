@@ -69,6 +69,8 @@ public class Window {
         YINIT = y;
         WIDTH = w;
         HEIGHT = h;
+
+        menu = new ScrollMenu(sketch);
     }
 
     /**
@@ -171,6 +173,9 @@ public class Window {
      *
      *
      *********************************************************/
+     public void initScrollMenu(int x, int y, int w, int h){
+       menu = new ScrollMenu(this, x, y, w, h);
+     }
 
      public void setMenuPosition(int x, int y){
        menu.setPos(x, y);
