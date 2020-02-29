@@ -1,18 +1,5 @@
 package frontend;
 
-/**
-  * <h1>GUI/h1>
-  *
-  * GUI is responsable for the creation and update of the toolbars and surounding GUI.
-  * GUI also holds the toolbars, UIgroups, and UIControllers. It holds state infromation
-  * like what tool is selected. It also acts as an adapter between CP5/fcontrollers buttons
-  * and Window. All Buttons are passed GUI.
-  *
-  * @author Hunter Chasens
-  * @version 1.0
-  * @since 02.29.2019
-  *
-  */
 
 import backend.Window;
 import frontend.controlP5.*;
@@ -23,6 +10,19 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.ArrayList;
 import processing.core.*;
+
+
+/**
+  * GUI is responsable for the creation and update of the toolbars and surounding GUI.
+  * GUI also holds the toolbars, UIgroups, and UIControllers. It holds state infromation
+  * like what tool is selected. It also acts as an adapter between CP5/fcontrollers buttons
+  * and Window. All Buttons are passed GUI.
+  *
+  * @author Hunter Chasens
+  * @version 1.0
+  * @since 02.29.2019
+  *
+  */
 
 public class GUI {
   PApplet sketch;
@@ -75,6 +75,9 @@ public class GUI {
   //ScrollMenu to display thumbnails and slide selection
   ScrollMenu sm;
 
+  //PresentMode Toolbar (must have visability set to false during normal use, then set to true during presentations)
+  FToolbar presentModeToolbar;
+
   /**
   * End of STATE Deleration
   */
@@ -110,6 +113,7 @@ public class GUI {
     win.present();
     for(FToolbar ft : tbList)
       ft.setVisable(false);
+    presentModeToolbar.setVisable(true);
   }
 
 
@@ -433,6 +437,9 @@ public class GUI {
      //scrollbar toolbar
      setupScrollbar();
 
+     //sets up presentModeToolbar
+     setupPresentModeToolbar();
+
      setActiveToolbar(0);
      resizeAll();
    }
@@ -571,6 +578,14 @@ public class GUI {
     ft.addFController(sb);
   }
 
+
+/**
+ * [setupPresentModeToolbar description]
+ */
+  private void setupPresentModeToolbar(){
+    presentModeToolbar = toolbarFactory("PresentMode", (float).1, (float).05, (float).9, (float).9);
+    presentModeToolbar.setVisable(false);
+  }
 
 /**
  * Start of toolbar administartion functions
