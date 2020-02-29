@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 /**
 * A class to handle scrolling through slide thumbnails and changing the current editable slide.
+* @deprecated in favor of relocation to backend
 */
 class ScrollMenu{
   private PApplet sketch;

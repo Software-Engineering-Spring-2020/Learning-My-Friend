@@ -10,7 +10,7 @@ package frontend;
   *
   * @author Hunter Chasens
   * @version 1.0
-  * @since 02.09.2019
+  * @since 02.29.2019
   *
   */
 
@@ -101,11 +101,15 @@ public class GUI {
   setup();
 }
 
+
+
 /**
- * [present enters present mode]
+ * [present enters present mode and hides all toolbars untill presentation is finished]
  */
   public void present(){
     win.present();
+    for(FToolbar ft : tbList)
+      ft.setVisable(false);
   }
 
 
