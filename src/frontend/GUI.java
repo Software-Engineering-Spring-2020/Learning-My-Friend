@@ -67,8 +67,8 @@ public class GUI {
   //The top buttonBar responsable for changing topChoice. This will allow the user to select menues
   FButtonBar buttonBar;
 
-
-
+  //scrollbar for thumbnails and slide selection
+  Scrollbar sb;
   /**
   * End of STATE Deleration
   */
@@ -417,6 +417,9 @@ public class GUI {
      //slide toolbar
      setupSlideToolbar();
 
+     //scrollbar toolbar
+     setupScrollbar();
+
      setActiveToolbar(0);
      resizeAll();
    }
@@ -544,6 +547,17 @@ public class GUI {
 
   }
 
+  /**
+   * [setupScrollbar initialises the toolbar for scrolling thumbnails and slides]
+   */
+  private void setupScrollbar(){
+    FToolbar ft = toolbarFactory("Scrollbar", (float).01, (float).8, (float).16, (float).2);
+    ft.getGroup().hideBar();
+    ft.getGroup().disableCollapse();
+    sb = new Scrollbar(cp5, ft, this);
+    ft.addFController(sb);
+  }
+
 
 /**
  * Start of toolbar administartion functions
@@ -604,6 +618,8 @@ public class GUI {
     bSlider.updateState(b);
 
   }
+
+
 
 
    /**
