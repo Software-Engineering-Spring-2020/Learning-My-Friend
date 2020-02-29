@@ -21,6 +21,7 @@ import frontend.fcontrollers.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.ArrayList;
 import processing.core.*;
 
 public class GUI {
@@ -69,6 +70,11 @@ public class GUI {
 
   //scrollbar for thumbnails and slide selection
   Scrollbar sb;
+
+
+  //ScrollMenu to display thumbnails and slide selection
+  ScrollMenu sm;
+
   /**
   * End of STATE Deleration
   */
@@ -88,6 +94,9 @@ public class GUI {
 
   lastAppletWidth = sketch.width;
   lastAppletHeight = sketch.height;
+
+  sm = new ScrollMenu(sketch, 200, 400, 200, 400, new ArrayList<PImage>());
+
 
   setup();
 }
@@ -632,6 +641,9 @@ public class GUI {
       lastAppletHeight = sketch.height;
     }
      //Check for window resize and if so update all toolbars
+
+     //displays ScrollMenu
+     sm.display();
    }
 
 

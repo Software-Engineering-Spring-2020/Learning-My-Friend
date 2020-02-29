@@ -14,10 +14,11 @@ import java.util.ArrayList;
 class ScrollMenu{
   private PApplet sketch;
   private PGraphics scrollMenu;
-  private int offset = 10, thumbnailWidth = 100, thumbnailHeight = 50;
-  private int menuWidth = 100+2*offset, menuHeight = 400, topSlide = 0;
-  protected int scrollMenuX = 10, scrollMenuY = 10, currentSlide = 0;
-  private ArrayList<PImage> thumbnails = new ArrayList<PImage>();
+  private int offset = 10, thumbnailWidth, thumbnailHeight;
+  private int menuWidth, menuHeight, topSlide = 0;
+  private int scrollMenuX = 10, scrollMenuY = 10, currentSlide = 0;
+  private ArrayList<PImage> thumbnails = new ArrayList<PImage>(),
+          fullSlides = new ArrayList<PImage>();
 
   private PImage empty;
 
@@ -25,24 +26,47 @@ class ScrollMenu{
   * @param sketch A reference to a PApplet to allow general functionality of the processing library
   * @param thumbnails A list of slides to make thumbnails of
   */
-  void init(PApplet sketch, ArrayList<PImage> thumbnails) {
+  public ScrollMenu (PApplet sketch, int x, int y, int w, int h, ArrayList<PImage> fullSlides) {
     this.sketch = sketch;
-    scrollMenu = sketch.createGraphics(scrollMenuX, scrollMenuY);
+    this.fullSlides = fullSlides;
 
-    empty = sketch.createImage(100,50, PConstants.RGB);
+    setPos(x, y);
+    setSize(w, h);
+
+    if(thumbnails.isEmpty()) this.thumbnails.add(empty);
+    else{
+      for(PImage img : fullSlides){
+        this.thumbnails.add(convertThumbnail(img));
+      }
+    }
+
+    scroll(0);
+  }
+
+
+
+  protected void setPos(int x, int y){
+    scrollMenuX = x;
+    scrollMenuY = y;
+  }
+
+  protected void setSize(int width, int height){
+    menuWidth = width;
+    menuHeight = height;
+    thumbnailWidth = width - 2*offset;
+    thumbnailHeight = thumbnailWidth/2;
+
+    scrollMenu = sketch.createGraphics(menuWidth, menuHeight);
+    createEmpty();
+    scroll(currentSlide);
+  }
+
+  private void createEmpty(){
+    empty = sketch.createImage(thumbnailWidth,thumbnailHeight, PConstants.RGB);
     empty.loadPixels();
     for (int i = 0; i < empty.pixels.length; i++)
       empty.pixels[i] = sketch.color(255, 255, 255);
     empty.updatePixels();
-
-    scroll(0);
-
-    if(thumbnails.isEmpty()) this.thumbnails.add(empty);
-    else{
-      for(PImage img : thumbnails){
-        this.thumbnails.add(convertThumbnail(img));
-      }
-    }
   }
 
   /**
@@ -56,7 +80,8 @@ class ScrollMenu{
   * Add an empty slide to the slide menu.
   */
   protected void newSlide(){
-    thumbnails.add(empty);
+    thumbnails.add(currentSlide+1, empty);
+    fullSlides.add(currentSlide+1, empty); //will get over-ridden
   }
 
   /**
@@ -96,8 +121,9 @@ class ScrollMenu{
   */
   protected void updateThumbnail(int index, PImage slide){
     PImage img = slide;
-    img.resize(100, 50);
+    img.resize(thumbnailWidth, thumbnailHeight);
     thumbnails.set(index, img);
+    fullSlides.set(index, slide);
   }
 
   /**
@@ -106,7 +132,7 @@ class ScrollMenu{
   */
   private PImage convertThumbnail(PImage slide){
     PImage img = slide;
-    img.resize(100, 50);
+    img.resize(thumbnailWidth, thumbnailHeight);
     return img;
   }
 }
