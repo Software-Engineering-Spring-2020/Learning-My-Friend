@@ -5,6 +5,7 @@ import processing.core.PConstants;
 import backend.objects.Comment;
 
 class DrawSpace extends ColorfulObject{
+    static final long serialVersionUID = 23l;
     private float xcenter, ycenter;
     private ArrayList<PollyObject> objects = new ArrayList<PollyObject>();
     private ArrayList<PollyObject> comments = new ArrayList<PollyObject>();
@@ -33,10 +34,9 @@ class DrawSpace extends ColorfulObject{
     }
 
     protected void playNextAnimation() {
-        System.out.println("trying to play");
         if (animationIndex < anims.size()) {
             anims.get(animationIndex).start();
-            System.out.println("playing animation " + animationIndex + " " + anims.get(animationIndex));
+            System.out.println("Playing animation " + animationIndex + " " + anims.get(animationIndex));
             if (animationIndex > 0) anims.get(animationIndex - 1).stop();
             animationIndex++;
         }

@@ -144,7 +144,7 @@ public class Window {
 
         sketch.pop();
 
-        if(menu != null) menu.display();
+        if(menu != null && !presenting) menu.display();
     }
 
     /**
@@ -964,14 +964,17 @@ public class Window {
 
     /**
      * Go to the slide after the current slide, edit mode allows for slide modification
+     * @return Whether the new slide is the last slide.
      */
-    public void nextSlide() {
+    public boolean nextSlide() {
         if (currentSlide < slides.size() - 1) {
             float[] currentSlidePosition = slides.get(currentSlide).getPosition();
             slides.get(currentSlide + 1).setPosition(currentSlidePosition[0], currentSlidePosition[1]);
+            menu.updateThumbnail(currentSlide, slide);
             currentSlide++;
         }
         menu.selectSlide(currentSlide);
+        return (currentSlide == slides.size() - 1);
 
 
 
