@@ -1,9 +1,14 @@
 package backend.objects;
+
 import backend.Shape;
 import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PConstants;
 import processing.core.PVector;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
@@ -28,6 +33,14 @@ public class ObjectFactory {
     * @param extension The image file type (the . is still necessary)
     */
     public Image importImage(float x, float y, String filename, String extension){
+        try {
+            if (Files.probeContentType(Paths.get(filename + extension)).equals("image/gif")) {
+                System.out.println("issa gif!!");
+                return new AnimatedImage(sketch, x, y, filename, extension, 1);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return new Image(sketch, x, y, filename, extension);
     }
 

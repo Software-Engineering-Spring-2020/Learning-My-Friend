@@ -12,6 +12,7 @@ class Image extends ColorfulObject {
   private static final long serialVersionUID = 6L;
   String[] file;
   transient PImage img;
+  public boolean display = true;
 
   /**
   * Constructor for Image
@@ -46,11 +47,13 @@ class Image extends ColorfulObject {
   */
   protected void display(){
     super.display();
-    sketch.push();
-    sketch.translate(-xpos, -ypos);
-    sketch.tint(255, fillColor[3]);
-    if(img != null) sketch.image(img, xcenter, ycenter);
-    sketch.pop();
+    if (display) {
+      sketch.push();
+      sketch.translate(-xpos, -ypos);
+      sketch.tint(255, fillColor[3]);
+      if(img != null) sketch.image(img, xcenter, ycenter);
+      sketch.pop();
+    }
   	//if(img.width != 0) sketch.image(img, xpos, ypos);
   }
 

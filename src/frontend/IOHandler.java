@@ -71,7 +71,7 @@ public class IOHandler{
         win.createEllipse(sketch.mouseX, sketch.mouseY);
 
       if(gui.getTool() == 't')
-        win.createInteractiveTextBox(sketch.mouseX, sketch.mouseY, 100, "arial", 20);
+        win.createInteractiveTextBox(sketch.mouseX, sketch.mouseY, "arial", 20);
 
       if(gui.getTool() == 'c')
         win.createComment(sketch.mouseX, sketch.mouseY, gui.getCurrentString(), "arial", 20);

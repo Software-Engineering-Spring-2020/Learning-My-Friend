@@ -78,7 +78,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
   }
 
   /**
-   * Adjusts the width of the InteractiveTextBox.
+   * Adjusts the width of the InteractiveTextBox. FORBIDDEN!!!!!!!!!
    * @param width The new (abolute) width.
    */
   protected void changeWidth(float width) {
@@ -465,7 +465,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
     else {
         switch(key) {
             case PConstants.TAB:
-                if (inBullets() || inNumbers()) indent();
+                if (inBullets()) indent();
                 break;
             // TODO: case SHIFT + TAB for unindent
             case PConstants.BACKSPACE:

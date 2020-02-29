@@ -150,6 +150,7 @@ src\backend\Group.java
 
 
 src\backend\objects\Image.java
+src\backend\objects\AnimatedImage.java
 src\backend\objects\Rectangle.java
 src\backend\objects\Ellipse.java
 src\backend\objects\InteractiveTextBox.java
