@@ -14,12 +14,12 @@ import frontend.controlP5.*;
 
 public class ExitSlideButton extends FButton{
   public ExitSlideButton(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "exit", parrent, gui);
-    super.button.plugTo(this);
+    super(cp5, "esc", parrent, gui);
+    super.button.plugTo(this, "exitSlide");
   }
 
 
-  public void exit(int val){
+  public void exitSlide(int val){
     getGUI().exitPresentMode();
 
   }

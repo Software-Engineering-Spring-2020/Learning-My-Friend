@@ -134,8 +134,6 @@ public class GUI {
  */
   public void exitPresentMode(){
     win.endPresent();
-    System.out.println("didnt crash");
-
     for(FToolbar ft : tbList)
       ft.setVisable(true);
     presentModeToolbar.setVisable(false);
