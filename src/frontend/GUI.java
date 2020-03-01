@@ -72,9 +72,6 @@ public class GUI {
   Scrollbar sb;
 
 
-  //ScrollMenu to display thumbnails and slide selection
-  ScrollMenu sm;
-
   //PresentMode Toolbar (must have visability set to false during normal use, then set to true during presentations)
   FToolbar presentModeToolbar;
 
@@ -97,8 +94,6 @@ public class GUI {
 
   lastAppletWidth = sketch.width;
   lastAppletHeight = sketch.height;
-
-  sm = new ScrollMenu(sketch, 200, 400, 200, 400, new ArrayList<PImage>());
 
 
   setup();
@@ -682,8 +677,7 @@ public class GUI {
     }
      //Check for window resize and if so update all toolbars
 
-     //displays ScrollMenu
-     sm.display();
+
    }
 
 
