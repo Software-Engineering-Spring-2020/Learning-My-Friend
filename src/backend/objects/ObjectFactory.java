@@ -35,7 +35,7 @@ public class ObjectFactory {
     public Image importImage(float x, float y, String filename, String extension){
         try {
             if (Files.probeContentType(Paths.get(filename + extension)).equals("image/gif")) {
-                return new AnimatedImage(sketch, x, y, filename, extension, 1);
+                return new AnimatedImage(sketch, x, y, filename, extension, 10);
             }
         } catch (IOException e) {
             e.printStackTrace();
