@@ -6,6 +6,14 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Hunter Chasens/Documents/Software Engineering/PollyPaint/src/core.jar"/>
+	<classpathentry kind="lib" path="src/core.jar"/>
+	<classpathentry kind="lib" path="src/gst1.jar"/>
+	<classpathentry kind="lib" path="src/javamp3-1.0.4.jar"/>
+	<classpathentry kind="lib" path="src/jna.jar"/>
+	<classpathentry kind="lib" path="src/jsyn-20171016.jar"/>
+	<classpathentry kind="lib" path="src/sound.jar"/>
+	<classpathentry kind="lib" path="src/video.jar"/>
+	<classpathentry kind="lib" path="src/yt.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
