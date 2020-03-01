@@ -111,9 +111,30 @@ public class GUI {
  */
   public void present(){
     win.present();
+    setTool('s');
     for(FToolbar ft : tbList)
       ft.setVisable(false);
     presentModeToolbar.setVisable(true);
+  }
+
+/**
+ * [nextSlide changes the slide in present mode, it also check to see if the presentation is done, and if so, exits present mode returning the gui]
+ */
+  public void nextSlide(){
+    //TODO uncomment this if statemnet after API change
+    //if(nextSlide())
+      exitPresentMode();
+  }
+
+
+/**
+ * [exitPresentMode exits presentation mode]
+ */
+  private void exitPresentMode(){
+    for(FToolbar ft : tbList)
+      ft.setVisable(true);
+    presentModeToolbar.setVisable(false);
+    setActiveToolbar(0);
   }
 
 
