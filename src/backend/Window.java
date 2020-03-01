@@ -144,7 +144,7 @@ public class Window {
 
         sketch.pop();
 
-        if(menu != null && !presenting) menu.display();
+        if(menu != null) menu.display();
     }
 
     /**
@@ -174,7 +174,7 @@ public class Window {
      *
      *********************************************************/
      public void initScrollMenu(int x, int y, int w, int h){
-       menu = new ScrollMenu(this, x, y, w, h);
+       menu = new ScrollMenu(sketch, x, y, w, h);
      }
 
      public void setMenuPosition(int x, int y){
@@ -401,29 +401,20 @@ public class Window {
 
     /**
     * Establishes a text box to allow for interactive input from the user onto the slide. Text will wrap around the width of the box.
-    * Like createRect, draws rectangles after the first click to illustrate width and finalizes on the second click.
     * @param x Raw X position of the mouse
     * @param y Raw Y position of the mouse
+    * @param x2 Set the starting width of the text box
     * @param font The desired font of the text to be displayed
     * @param textSize The desired size of the text to be displayed
     * @return Whether or not the object was created and added to the slide successfully
     */
-    public boolean createInteractiveTextBox(float x, float y, String font, float textSize) {
+    public boolean createInteractiveTextBox(float x, float y, float x2, String font, float textSize) {
         PollyObject obj = null;
-        float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
-        ellipse = false;
-        this.numberVertex = 2;
-        this.size = slides.get(currentSlide).getNumObjects();
-        if (slides.get(currentSlide).withinScope(coord[0], coord[1])) shapePoints.add(coord);
-
-        if(shapePoints.size() >= numberVertex){
-            PollyObject widthRect = of.createRect(shapePoints.get(0)[0], shapePoints.get(0)[1],
-                        2*Math.abs(shapePoints.get(1)[0]-shapePoints.get(0)[0]), 2*Math.abs(shapePoints.get(1)[1]-shapePoints.get(0)[1]),
-                        strokeWeight, fillColor, boarderColor);
-            float width = widthRect.pixelWidth;
-            obj = of.createInteractiveTextBox(shapePoints.get(0)[0], shapePoints.get(0)[1], width, strokeWeight, fillColor, boarderColor, font, textSize);
-            if (obj != null) return slides.get(currentSlide).addObject(obj);
-        }
+        float[] startCoord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
+        if (slides.get(currentSlide).withinScope(startCoord[0], startCoord[1]))
+            obj = of.createInteractiveTextBox(startCoord[0], startCoord[1], x2, strokeWeight, fillColor, boarderColor, font, textSize);
+        if (obj != null)
+            return slides.get(currentSlide).addObject(obj);
         return false;
     }
 
@@ -964,17 +955,14 @@ public class Window {
 
     /**
      * Go to the slide after the current slide, edit mode allows for slide modification
-     * @return Whether the new slide is the last slide.
      */
-    public boolean nextSlide() {
+    public void nextSlide() {
         if (currentSlide < slides.size() - 1) {
             float[] currentSlidePosition = slides.get(currentSlide).getPosition();
             slides.get(currentSlide + 1).setPosition(currentSlidePosition[0], currentSlidePosition[1]);
-            menu.updateThumbnail(currentSlide, slide);
             currentSlide++;
         }
         menu.selectSlide(currentSlide);
-        return (currentSlide == slides.size() - 1);
 
 
 
