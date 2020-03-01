@@ -229,7 +229,7 @@ public class Window {
      }
 
      public void selectSlide(float x, float y){
-       menu.selectSlide(x, y);
+       currentSlide = menu.selectSlide(x, y);
      }
 
      public void scroll(int startSlide) {
@@ -1023,7 +1023,7 @@ public class Window {
      * @return Whether the slide change was successful.
      */
     public boolean nextSlide() {
-        return goToSlide(currentSlide + 1);     
+        return goToSlide(currentSlide + 1);
     }
 
     /**
