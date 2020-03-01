@@ -57,6 +57,9 @@ src\frontend\fcontrollers\Textbox.java
 
 src\frontend\fcontrollers\MenuSelect.java
 
+src\frontend\fcontrollers\PrevSlideButton.java
+src\frontend\fcontrollers\NextSlideButton.java
+src\frontend\fcontrollers\ExitSlideButton.java
 
 src\frontend\controlP5\Accordion.java
 src\frontend\controlP5\Background.java

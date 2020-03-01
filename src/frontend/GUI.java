@@ -116,16 +116,26 @@ public class GUI {
  * [nextSlide changes the slide in present mode, it also check to see if the presentation is done, and if so, exits present mode returning the gui]
  */
   public void nextSlide(){
-    //TODO uncomment this if statemnet after API change
-    //if(nextSlide())
+    //TODO does this return true or false if done?
+    if(!win.nextSlide())
       exitPresentMode();
+  }
+
+/**
+ * [previousSlide changes the slide in present mode]
+ */
+  public void previousSlide(){
+    win.previousSlide();
   }
 
 
 /**
  * [exitPresentMode exits presentation mode]
  */
-  private void exitPresentMode(){
+  public void exitPresentMode(){
+    win.endPresent();
+    System.out.println("didnt crash");
+
     for(FToolbar ft : tbList)
       ft.setVisable(true);
     presentModeToolbar.setVisable(false);
@@ -576,11 +586,9 @@ public class GUI {
     ft.setBoarder((float).005,(float).005);
 
     ft.addFController(new NewSlideButton(cp5, ft, this));
-    ft.addFController(new DelSlideButton(cp5, ft, this));
     ft.addFController(new UpSlideButton(cp5, ft, this));
     ft.addFController(new DownSlideButton(cp5, ft, this));
-
-
+    ft.addFController(new DelSlideButton(cp5, ft, this));
   }
 
   /**
@@ -601,6 +609,9 @@ public class GUI {
   private void setupPresentModeToolbar(){
     presentModeToolbar = toolbarFactory("PresentMode", (float).1, (float).05, (float).9, (float).9);
     presentModeToolbar.setVisable(false);
+    presentModeToolbar.addFController(new NextSlideButton(cp5, presentModeToolbar, this));
+    presentModeToolbar.addFController(new PrevSlideButton(cp5, presentModeToolbar, this));
+    presentModeToolbar.addFController(new ExitSlideButton(cp5, presentModeToolbar, this));
   }
 
 /**
