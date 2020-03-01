@@ -13,8 +13,6 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import org.apache.commons.io.FileUtils;
-
 import java.awt.image.BufferedImage;
 
 import processing.core.PApplet;
@@ -63,7 +61,8 @@ public class SerialManager {
             directory.mkdir();
         }
         else {
-            FileUtils.cleanDirectory(directory);
+            // will not delete any sub-directories.
+            for(File file: directory.listFiles()) if (!file.isDirectory()) file.delete();
         }
         for (int i = 0; i < slides.size(); i++) {
             File image = new File(directoryName + "/" + i + ".png");
