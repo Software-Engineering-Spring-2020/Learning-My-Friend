@@ -97,6 +97,8 @@ public class GUI {
 
 
   setup();
+
+  win.initScrollMenu((int)(sketch.width*.1), (int)(sketch.height*.57), (int)(sketch.width*.1), (int)(sketch.height*.6));
 }
 
 
@@ -697,7 +699,9 @@ public class GUI {
    public void resizeAll(){
      for(FToolbar tb : tbList)
       tb.update();
-
+    //System.out.println("% of width " + (sketch.width*.15) + "   --   % of height" + (sketch.height*.20));
+     win.setMenuPosition((int)(sketch.width*.1), (int)(sketch.height*.57));
+     win.setMenuSize((int)(sketch.width*.1), (int)(sketch.height*.6));
    }
 
 }
