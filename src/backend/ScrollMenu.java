@@ -103,7 +103,6 @@ class ScrollMenu{
     PVector pos = new PVector(x, y);
     if(pos.x>scrollMenuX && pos.y>scrollMenuY && pos.x<scrollMenuX+menuWidth && pos.y<scrollMenuY+menuHeight){
       int index = (int)((pos.y - scrollMenuY)/(empty.height+offset));
-            System.out.println(index);
       if(index >= 0 && index+topSlide < thumbnails.size()) currentSlide = topSlide + index;
     }
     scroll(topSlide);
