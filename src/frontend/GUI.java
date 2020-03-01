@@ -117,7 +117,7 @@ public class GUI {
  */
   public void nextSlide(){
     //TODO does this return true or false if done?
-    if(win.nextSlide())
+    if(!win.nextSlide())
       exitPresentMode();
   }
 

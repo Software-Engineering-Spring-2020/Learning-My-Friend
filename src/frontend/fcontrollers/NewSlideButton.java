@@ -14,12 +14,13 @@ import frontend.controlP5.*;
 
 public class NewSlideButton extends FButton{
   public NewSlideButton(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "newS", parrent, gui);
-    super.button.plugTo(this);
+    super(cp5, "new", parrent, gui);
+    super.button.plugTo(this, "newSlide");
   }
 
 
-  public void newS(int val){
+  public void newSlide(int val){
+    //System.out.println("newSlide");
     getGUI().newSlide();
   }
 
