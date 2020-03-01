@@ -17,7 +17,7 @@ class ScrollMenu{
   private PApplet sketch;
   private PGraphics scrollMenu;
   private int offset = 10, thumbnailWidth = 100, thumbnailHeight = 50;
-  private int menuWidth, menuHeight, topSlide = 0;
+  private int menuWidth, menuHeight, topSlide = -1;
   private int scrollMenuX = 10, scrollMenuY = 10, currentSlide = 0;
   private ArrayList<PImage> thumbnails = new ArrayList<PImage>(),
           fullSlides = new ArrayList<PImage>();
@@ -98,13 +98,16 @@ class ScrollMenu{
     PVector pos = new PVector(x, y);
     if(pos.x>scrollMenuX && pos.y>scrollMenuY && pos.x<scrollMenuX+menuWidth && pos.y<scrollMenuY+menuHeight){
       int index = (int)((pos.y - scrollMenuY)/(empty.height+offset));
+            System.out.println(index);
       if(index >= 0 && index+topSlide < thumbnails.size()) currentSlide = topSlide + index;
     }
+    scroll(topSlide);
     return currentSlide;
   }
 
   protected void selectSlide(int index){
     currentSlide = index;
+    scroll(topSlide);
   }
 
   protected void deleteSlide(int index){
@@ -135,6 +138,14 @@ class ScrollMenu{
     for(int i = offset; i<scrollMenu.height; i+=empty.height+offset){
       if(slide>= thumbnails.size()) break;
       scrollMenu.image(thumbnails.get(slide), offset, i);
+      if(slide == currentSlide){
+        scrollMenu.push();
+        scrollMenu.noFill();
+        scrollMenu.stroke(215,165,0);
+        scrollMenu.strokeWeight(2);
+        scrollMenu.rect(offset/2, i-offset/2, thumbnailWidth+offset, thumbnailHeight+offset);
+        scrollMenu.pop();
+      }
       slide ++;
     }
     scrollMenu.endDraw();
