@@ -116,11 +116,15 @@ public class GUI {
  * [nextSlide changes the slide in present mode, it also check to see if the presentation is done, and if so, exits present mode returning the gui]
  */
   public void nextSlide(){
-    //TODO uncomment this if statemnet after API change
-    //if(nextSlide())
+    //TODO does this return true or false if done?
+    if(win.nextSlide())
       exitPresentMode();
   }
 
+
+  public void previousSlide(){
+    win.previousSlide();
+  }
 
 /**
  * [exitPresentMode exits presentation mode]
@@ -601,6 +605,9 @@ public class GUI {
   private void setupPresentModeToolbar(){
     presentModeToolbar = toolbarFactory("PresentMode", (float).1, (float).05, (float).9, (float).9);
     presentModeToolbar.setVisable(false);
+    presentModeToolbar.addFController(new NextSlideButton(cp5, presentModeToolbar, this));
+    presentModeToolbar.addFController(new PrevSlideButton(cp5, presentModeToolbar, this));
+
   }
 
 /**

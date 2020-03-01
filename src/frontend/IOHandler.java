@@ -92,6 +92,9 @@ public class IOHandler{
         win.addAnimation(Window.AnimationOption.TRANSLATE, sketch.mouseX, sketch.mouseY);
 
       }
+      else{
+        win.selectSlide(sketch.mouseX, sketch.mouseY);
+      }
 
   }
 
