@@ -18,7 +18,7 @@ class ScrollMenu{
   private PGraphics scrollMenu;
   private int offset = 10, thumbnailWidth = 100, thumbnailHeight = 50;
   private int menuWidth, menuHeight, topSlide = -1;
-  private int scrollMenuX = 10, scrollMenuY = 10, currentSlide = 0;
+  private int scrollMenuX = 10, scrollMenuY = 10, centerMenuX = 10, centerMenuY = 10, currentSlide = 0;
   private ArrayList<PImage> thumbnails = new ArrayList<PImage>(),
           fullSlides = new ArrayList<PImage>();
 
@@ -58,8 +58,10 @@ class ScrollMenu{
 
 
   protected void setPos(int x, int y){
-    scrollMenuX = x;
-    scrollMenuY = y;
+    centerMenuX = x;
+    centerMenuY = y;
+    scrollMenuX = centerMenuX - menuWidth/2;
+    scrollMenuY = centerMenuY - menuHeight/2;
   }
 
   protected void setSize(int width, int height){
@@ -67,6 +69,9 @@ class ScrollMenu{
     menuHeight = height;
     thumbnailWidth = width - 2*offset;
     thumbnailHeight = thumbnailWidth/2;
+
+    scrollMenuX = centerMenuX - menuWidth/2;
+    scrollMenuY = centerMenuY - menuHeight/2;
 
     scrollMenu = sketch.createGraphics(menuWidth, menuHeight);
     createEmpty();
@@ -86,7 +91,7 @@ class ScrollMenu{
   * Draw the menu of slides to the screen.
   */
   protected void display() {
-    sketch.image(scrollMenu, scrollMenuX, scrollMenuY);
+    sketch.image(scrollMenu, centerMenuX, centerMenuY);
   }
 
   /**
