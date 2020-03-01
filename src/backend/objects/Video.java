@@ -12,12 +12,13 @@ import com.github.kiulian.downloader.model.formats.Format;
 
 import backend.ColorfulObject;
 import processing.core.PApplet;
+import processing.core.PConstants;
 import processing.video.*;
 
 /**
 * Class which supports the download and display of videos.
 */
-class Video extends ColorfulObject {
+public class Video extends ColorfulObject {
   private static final long serialVersionUID = 21L;
   Movie pvideo;
   String videoPath;
@@ -66,15 +67,16 @@ class Video extends ColorfulObject {
     //img = sketch.requestImage(file[0]+file[1]);
   }
 
-  protected boolean isPlaying() {
-    return pvideo.isPlaying();
+  public boolean isPlaying() {
+      if (pvideo != null) return pvideo.isPlaying();
+      return false;
   }
 
-  protected void play() {
+  public void play() {
     pvideo.play();
   }
 
-  protected void stop() {
+  public void stop() {
     pvideo.stop();
   }
 
@@ -90,7 +92,10 @@ class Video extends ColorfulObject {
     sketch.translate(-xpos, -ypos);
     sketch.tint(255, fillColor[3]);
     //System.out.println(pvideo);
-    sketch.image(pvideo.get(), xcenter, ycenter, pixelWidth, pixelHeight);
+    if (pvideo.isPlaying()){
+        sketch.image(pvideo.get(), xcenter, ycenter, pixelWidth, pixelHeight);
+    }
+    else sketch.rect(xpos, ypos, pixelWidth, pixelHeight);
     sketch.pop();
   }
 

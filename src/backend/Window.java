@@ -4,6 +4,7 @@ import backend.objects.FadeAnimation;
 import backend.objects.ObjectFactory;
 import backend.objects.SoundPlayerAnimation;
 import backend.objects.TranslateAnimation;
+import backend.objects.Video;
 import processing.core.PApplet;
 import processing.core.PGraphics;
 import processing.core.PImage;
@@ -84,6 +85,13 @@ public class Window {
     public void display() {
         // TODO: only call display "recursively" down the heirarchy if we do not have a cached PGraphic
         sketch.push();
+        for (PollyObject obj : this.slides.get(currentSlide).getAllObjects()) {
+            if (obj instanceof Video) {
+                Video vobj = (Video) obj;
+                if (presenting && !vobj.isPlaying()) vobj.play();
+                else if (!presenting && vobj.isPlaying()) vobj.stop();
+            }
+        }
         this.slides.get(currentSlide).display(zoom, showComments, showGrid, gridSpacing);
 
         sketch.push();
