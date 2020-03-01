@@ -19,7 +19,7 @@ public class ExitSlideButton extends FButton{
   }
 
 
-  public void exitSlide(int val){
+  public void exit(int val){
     getGUI().exitPresentMode();
 
   }

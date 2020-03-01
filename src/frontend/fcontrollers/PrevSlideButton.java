@@ -19,7 +19,7 @@ public class PrevSlideButton extends FButton{
   }
 
 
-  public void prevSlide(int val){
+  public void prev(int val){
     getGUI().previousSlide();
 
   }

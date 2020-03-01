@@ -19,7 +19,7 @@ public class NextSlideButton extends FButton{
   }
 
 
-  public void nextSlide(int val){
+  public void next(int val){
     getGUI().nextSlide();
 
   }
