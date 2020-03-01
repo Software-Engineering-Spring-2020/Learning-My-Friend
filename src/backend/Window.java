@@ -35,8 +35,11 @@ public class Window {
     private String savefile = "";
 
     private int currentSlide = 0;
-    private boolean currentSlideChanged;
+    private int slideOffset = 0;
+    private ArrayList<PImage> slideImages;
     private float[] editingPosition;
+    private float[] preScreenshotPosition;
+    private float preScreenshotZoom;
     private float editingZoom;
     private boolean presenting;
     private ObjectFactory of;
@@ -70,7 +73,13 @@ public class Window {
         WIDTH = w;
         HEIGHT = h;
 
+        slideImages = new ArrayList<PImage>();
+
         menu = new ScrollMenu(sketch);
+        menu.setPos(100, 300);
+        menu.setSize(100, 300);
+        menu.newSlideAt(0);
+        menu.scroll(0);
     }
 
     /**
@@ -136,10 +145,20 @@ public class Window {
           obj.showBoundingBox();
         }
 
-        if(export && slides.get(currentSlide).getPosition()[0] == XINIT && slides.get(currentSlide).getPosition()[1]==YINIT){
-          PImage toSave = sketch.get((int)XINIT+1, (int)YINIT+1, (int)WIDTH-1, (int)HEIGHT-1);
+        if(export && zoom == 1 && selected.size() == 0){
+          PImage toSave = getSlideImage();
           toSave.save(savefile);
           export = false;
+        }
+
+        if (slideOffset != 0 && zoom == 1 && selected.size() == 0) {
+            System.out.println("Saving a new thumbnail and changing slides.");
+            slides.get(currentSlide + slideOffset).setPosition(preScreenshotPosition[0], preScreenshotPosition[1]);
+            menu.updateThumbnail(currentSlide, getSlideImage());
+            currentSlide += slideOffset;
+            menu.selectSlide(currentSlide);
+            menu.scroll(0);
+            slideOffset = 0;
         }
 
         sketch.pop();
@@ -148,7 +167,9 @@ public class Window {
     }
 
     private PImage getSlideImage() {
-        return null;
+        DrawSpace slide = slides.get(currentSlide);
+        float[] slidePos = slide.getPosition();
+        return sketch.get((int) slidePos[0] + 1, (int) slidePos[1] + 1, (int) (WIDTH - 1), (int) (HEIGHT - 1));
     }
 
     /**
@@ -239,6 +260,7 @@ public class Window {
         zoom = 1;
         DrawSpace slide = this.slides.get(currentSlide);
         slide.setPosition(sketch.width / 2 - slide.pixelWidth / 2, sketch.height / 2 - slide.pixelHeight / 2);
+        selected.clear();
         this.display();
     }
 
@@ -968,54 +990,39 @@ public class Window {
 
     /**
      * Go to the slide after the current slide, edit mode allows for slide modification
-     * @return Whether the new slide is the last slide.
+     * @return Whether the slide change was successful.
      */
     public boolean nextSlide() {
-        if (currentSlide < slides.size() - 1) {
-            float[] currentSlidePosition = slides.get(currentSlide).getPosition();
-            slides.get(currentSlide + 1).setPosition(currentSlidePosition[0], currentSlidePosition[1]);
-            //menu.updateThumbnail(currentSlide, slide);
-            currentSlide++;
-        }
-        menu.selectSlide(currentSlide);
-        return (currentSlide == slides.size() - 1);
-
-
-
-
-        //somewhere add the update of the slide
+        return goToSlide(currentSlide + 1);     
     }
 
     /**
      * Go to the slide before the current slide, edit mode allows for slide modification
      */
     public void previousSlide() {
-        if (currentSlide > 0) {
-            float[] currentSlidePosition = slides.get(currentSlide).getPosition();
-            slides.get(currentSlide - 1).setPosition(currentSlidePosition[0], currentSlidePosition[1]);
-            currentSlide--;
-        }
-        menu.selectSlide(currentSlide);
-
-
-
-
-        //somewhere add the update of the slide
+        goToSlide(currentSlide - 1);
     }
 
     /**
      * Creates a new blank slide after the current slide.
      */
     public void createSlideAt() {
-
-      //somewhere add the update of the slide
-
-
         DrawSpace ds = slides.get(currentSlide);
-        currentSlide++;
-        slides.add(currentSlide, new DrawSpace(sketch, ds.xpos, ds.ypos, ds.pixelWidth, ds.pixelHeight));
         menu.newSlideAt(currentSlide);
         menu.selectSlide(currentSlide);
+        slides.add(currentSlide + 1, new DrawSpace(sketch, ds.xpos, ds.ypos, ds.pixelWidth, ds.pixelHeight));
+        nextSlide();
+    }
+
+    private boolean goToSlide(int slide) {
+        if (slide >= 0 && slide < slides.size()) {
+            preScreenshotPosition = slides.get(currentSlide).getPosition();
+            preScreenshotZoom = zoom;
+            slideOffset = slide - currentSlide;
+            reCenter();
+            return true;
+        }
+        else return false;
     }
 
      /**
@@ -1116,8 +1123,6 @@ public class Window {
             if (!(a == AnimationOption.TRANSLATE) && !(obj instanceof ColorfulObject)) continue;
             anim.addMember(obj);
         }
-        System.out.println(anim.members);
-        System.out.println("adding animation");
         slides.get(currentSlide).addAnimation(anim);
     }
 
@@ -1125,8 +1130,8 @@ public class Window {
      * Get all currernt slides for use in the slide scroll menu.
      * @return A list of buffered images of all the slides in order
      */
-    public ArrayList<PGraphics> getSlideThumbnails() {
-        ArrayList<PGraphics> thumbs = new ArrayList<PGraphics>();
+    public ArrayList<PImage> getSlideThumbnails() {
+        ArrayList<PImage> thumbs = new ArrayList<PImage>();
         for (DrawSpace slide : slides) {
             // TODO: changing to PGraphics is more complicated than I expected
             // this is because the size of the current slide is relative to
