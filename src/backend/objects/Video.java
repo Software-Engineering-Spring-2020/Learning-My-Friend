@@ -2,24 +2,20 @@ package backend.objects;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 import com.github.kiulian.downloader.YoutubeDownloader;
 import com.github.kiulian.downloader.YoutubeException;
-import com.github.kiulian.downloader.model.Itag;
 import com.github.kiulian.downloader.model.YoutubeVideo;
 import com.github.kiulian.downloader.model.formats.AudioVideoFormat;
 import com.github.kiulian.downloader.model.formats.Format;
-import com.github.kiulian.downloader.model.formats.VideoFormat;
-import com.github.kiulian.downloader.model.quality.VideoQuality;
+
 
 import backend.ColorfulObject;
-import backend.PollyObject;
 import processing.core.PApplet;
 import processing.video.*;
 
 /**
-* Class which supports the import, save, and display of images.
+* Class which supports the download and display of videos.
 */
 class Video extends ColorfulObject {
   private static final long serialVersionUID = 21L;
@@ -29,7 +25,7 @@ class Video extends ColorfulObject {
   boolean downloaded;
 
   /**
-  * Constructor for Image
+  * Constructor for Video
   * @param sketch A reference to a PApplet to allow general functionality of the processing library
   * @param x A float to represent the initial x starting position (in pixels) of the object, should be a slide-relative coordinate
   * @param y A float to represent the initial y starting position (in pixels) of the object, should be a slide-relative coordinate
@@ -83,7 +79,7 @@ class Video extends ColorfulObject {
   }
 
   /**
-  * Draw the image to the slide
+  * Draw the video's current frame to the slide
   */
   protected void display(){
     super.display();
