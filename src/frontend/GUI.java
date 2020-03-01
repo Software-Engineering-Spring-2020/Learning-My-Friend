@@ -367,10 +367,16 @@ public class GUI {
    */
   public void upSlide(){
     System.out.println("upslide");
-
     win.moveSlideUp();
   }
 
+/**
+ * [scrollTo sets the scrollMenu to the slide listed]
+ * @param i [the slide to be the new start of displayed slides on the scrollMenu]
+ */
+  public void scrollTo(int i){
+    	win.scroll(i);
+  }
 
   /**
    * [downSlide moves the selected slide down in the array]

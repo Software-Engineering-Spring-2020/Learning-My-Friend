@@ -23,7 +23,7 @@ public class Scrollbar extends FSlider{
 
 
   public void scrollbar(int val){
-    getGUI().setPolyCount(val);
+    getGUI().scrollTo(val);
   }
 
 }
