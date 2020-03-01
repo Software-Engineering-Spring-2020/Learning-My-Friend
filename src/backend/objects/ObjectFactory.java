@@ -43,6 +43,10 @@ public class ObjectFactory {
         return new Image(sketch, x, y, filename, extension);
     }
 
+    public Video importVideo(float x, float y, String vid, String filepath) {
+        return new Video(sketch, x, y, 256, 144, vid, filepath);
+    }
+
     /**
     * Instanciate a TextBox
     * @param x A float to represent the initial x starting position (in pixels) of the object, should be a slide-relative coordinate

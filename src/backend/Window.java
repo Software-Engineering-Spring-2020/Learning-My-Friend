@@ -513,6 +513,18 @@ public class Window {
         return false;
     }
 
+    /**
+    * Downloads a video from YouTube into the program and displays it at the center of the slide
+    * @param vid The YouTube video ID.
+    * @return Whether or not the object was created and added to the slide successfully
+    */
+   public boolean importVideo(String vid, String filepath) {
+    PollyObject obj = of.importVideo(0, 0, vid, filepath);
+    if (obj != null)
+        return slides.get(currentSlide).addObject(obj);
+    return false;
+}
+
     /*********************************************************
      *
      *
