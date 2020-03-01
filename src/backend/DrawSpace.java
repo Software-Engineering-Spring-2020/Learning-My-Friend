@@ -1,7 +1,9 @@
 package backend;
+
 import java.util.ArrayList;
 import processing.core.PApplet;
 import processing.core.PConstants;
+import processing.core.PImage;
 import backend.objects.Comment;
 
 class DrawSpace extends ColorfulObject{
@@ -12,6 +14,7 @@ class DrawSpace extends ColorfulObject{
     private ArrayList<Animation> anims = new ArrayList<Animation>();
     private int animationIndex = 0;
     transient boolean showComments;
+    transient PImage image;
 
     DrawSpace(PApplet sketch, float x, float y, float w, float h){
         super(sketch, x, y, 0, new int[] {255, 255, 255, 255}, new int[] {255, 255, 255, 255});
@@ -25,6 +28,14 @@ class DrawSpace extends ColorfulObject{
         sketch.textMode(PConstants.MODEL);
         sketch.textAlign(PConstants.CENTER, PConstants.CENTER);
         //sketch.shapeMode(PConstants.CENTER);
+    }
+
+    protected void setImage(PImage image) {
+        this.image = image;
+    }
+
+    protected PImage getImage() {
+        return this.image;
     }
 
     protected void addAnimation(Animation a) {
@@ -133,6 +144,7 @@ class DrawSpace extends ColorfulObject{
                 sketch.pop();
             }
         }
+        //if (image != null) sketch.image(image, 0, 0);
     }
 
     protected boolean addObject(PollyObject shape){

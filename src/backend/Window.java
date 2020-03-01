@@ -30,7 +30,7 @@ public class Window {
     private float zoom = 1, strokeWeight = 3;
     private int[] fillColor, boarderColor;
     private float XINIT, YINIT, WIDTH, HEIGHT, gridSpacing = 30;
-    private boolean showGrid = false, showComments = false, ellipse, export = false;
+    private boolean showGrid = false, showComments = false, ellipse, export = false, save = false;;
     private int numberVertex = 0, size = 0;
     private String savefile = "";
 
@@ -75,11 +75,7 @@ public class Window {
 
         slideImages = new ArrayList<PImage>();
 
-        menu = new ScrollMenu(sketch);
-        menu.setPos(100, 300);
-        menu.setSize(100, 300);
-        menu.newSlideAt(0);
-        menu.scroll(0);
+        initScrollMenu(100, 300, 100, 300);
     }
 
     /**
@@ -151,6 +147,17 @@ public class Window {
           export = false;
         }
 
+        if (save && zoom == 1 && selected.size() == 0) {
+            System.out.println("Saving a new thumbnail and exporting.");
+            menu.updateThumbnail(currentSlide, getSlideImage());
+            try {
+				SerialManager.saveSlides(slides, savefile);
+			} catch (IOException e) {
+				e.printStackTrace();
+            }
+            save = false;
+        }
+
         if (slideOffset != 0 && zoom == 1 && selected.size() == 0) {
             System.out.println("Saving a new thumbnail and changing slides.");
             slides.get(currentSlide + slideOffset).setPosition(preScreenshotPosition[0], preScreenshotPosition[1]);
@@ -161,6 +168,7 @@ public class Window {
             slideOffset = 0;
         }
 
+
         sketch.pop();
 
         if(menu != null && !presenting) menu.display();
@@ -169,7 +177,9 @@ public class Window {
     private PImage getSlideImage() {
         DrawSpace slide = slides.get(currentSlide);
         float[] slidePos = slide.getPosition();
-        return sketch.get((int) slidePos[0] + 1, (int) slidePos[1] + 1, (int) (WIDTH - 1), (int) (HEIGHT - 1));
+        PImage image = sketch.get((int) slidePos[0] + 1, (int) slidePos[1] + 1, (int) (WIDTH - 1), (int) (HEIGHT - 1));
+        slide.setImage(image);
+        return image;
     }
 
     /**
@@ -1131,13 +1141,7 @@ public class Window {
      * @return A list of buffered images of all the slides in order
      */
     public ArrayList<PImage> getSlideThumbnails() {
-        ArrayList<PImage> thumbs = new ArrayList<PImage>();
-        for (DrawSpace slide : slides) {
-            // TODO: changing to PGraphics is more complicated than I expected
-            // this is because the size of the current slide is relative to
-            // pixelWidth and pixelHeight
-        }
-        return thumbs;
+        return slideImages;
     }
 
     /*********************************************************
@@ -1165,7 +1169,9 @@ public class Window {
      * @throws IOException
      */
     public void save(String filename) throws IOException {
-      SerialManager.saveSlides(slides, filename);
+      reCenter();
+      save = true;
+      savefile = filename;
     }
 
      /**
@@ -1175,8 +1181,12 @@ public class Window {
       */
     public void open(String filename) throws IOException, ClassNotFoundException {
       slides = SerialManager.openSlides(sketch, filename);
-
-      //menu.loadSlides(<inserthere>);
+      slideImages = new ArrayList<PImage>();
+      for (DrawSpace slide : slides) {
+          System.out.println(slide.getImage());
+          if (slide.getImage() != null) slideImages.add(slide.getImage());
+      }
+      menu.loadSlides(slideImages);
     }
 
 }

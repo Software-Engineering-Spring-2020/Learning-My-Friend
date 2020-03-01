@@ -8,7 +8,7 @@ import processing.core.PImage;
 /**
 * Class which supports the import, save, and display of images.
 */
-class Image extends ColorfulObject {
+public class Image extends ColorfulObject {
   private static final long serialVersionUID = 6L;
   String[] file;
   transient PImage img;
@@ -22,7 +22,7 @@ class Image extends ColorfulObject {
   * @param filename The file (path + name) of the image to display
   * @param extension The image file type (the . is still necessary)
   */
-  Image(PApplet sketch, float x, float y, String filename, String extension){
+  public Image(PApplet sketch, float x, float y, String filename, String extension){
     super(sketch, x, y, 1f, new int[] {255, 255, 255, 255}, new int[] {255, 255, 255, 255});
     file = new String[]{filename, extension};
     //img = sketch.requestImage(filename+extension);

@@ -3,18 +3,21 @@ package backend;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 
-import backend.objects.*;
+import javax.imageio.ImageIO;
+
+import org.apache.commons.io.FileUtils;
+
+import java.awt.image.BufferedImage;
 
 import processing.core.PApplet;
-import processing.core.PConstants;
 
 /**
 * Facilitate serialization of objects for saving/opening/cloning purposes.
@@ -51,6 +54,22 @@ public class SerialManager {
     * @throws IOException
     */
     protected static void saveSlides(ArrayList<DrawSpace> slides, String filename) throws IOException {
+        String directoryName = "";
+        if (filename.contains(".")) directoryName = filename.substring(0, filename.lastIndexOf('.'));
+        else directoryName = filename;
+        directoryName += "Images";
+        File directory = new File(directoryName);
+        if (!directory.exists()){
+            directory.mkdir();
+        }
+        else {
+            FileUtils.cleanDirectory(directory);
+        }
+        for (int i = 0; i < slides.size(); i++) {
+            File image = new File(directoryName + "/" + i + ".png");
+            BufferedImage bs = (BufferedImage) slides.get(i).getImage().getNative();
+            ImageIO.write(bs, "png", image);
+        }
         FileOutputStream saveFile = new FileOutputStream(filename);
         ObjectOutputStream fileOutput = new ObjectOutputStream(saveFile);
         fileOutput.writeObject(slides);
@@ -85,6 +104,17 @@ public class SerialManager {
         openFile.close();
         if (savedDrawSpace) {
             for (DrawSpace ds : slides) ds.init(sketch);
+            String directoryName = "";
+            if (filename.contains(".")) directoryName = filename.substring(0, filename.lastIndexOf('.'));
+            else directoryName = filename;
+            directoryName += "Images";
+            File directory = new File(directoryName);
+            if (directory.exists()){
+                directory.mkdir();
+                for (int i = 0; i < slides.size(); i++) {
+                    slides.get(i).setImage(sketch.loadImage(directoryName + "/" + i + ".png"));
+                }
+            }
             return slides;
         }
         return null;
