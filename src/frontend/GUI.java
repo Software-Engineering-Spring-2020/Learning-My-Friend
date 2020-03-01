@@ -580,11 +580,9 @@ public class GUI {
     ft.setBoarder((float).005,(float).005);
 
     ft.addFController(new NewSlideButton(cp5, ft, this));
-    ft.addFController(new DelSlideButton(cp5, ft, this));
     ft.addFController(new UpSlideButton(cp5, ft, this));
     ft.addFController(new DownSlideButton(cp5, ft, this));
-
-
+    ft.addFController(new DelSlideButton(cp5, ft, this));
   }
 
   /**
