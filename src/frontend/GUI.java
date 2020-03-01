@@ -121,15 +121,18 @@ public class GUI {
       exitPresentMode();
   }
 
-
+/**
+ * [previousSlide changes the slide in present mode]
+ */
   public void previousSlide(){
     win.previousSlide();
   }
 
+
 /**
  * [exitPresentMode exits presentation mode]
  */
-  private void exitPresentMode(){
+  public void exitPresentMode(){
     for(FToolbar ft : tbList)
       ft.setVisable(true);
     presentModeToolbar.setVisable(false);
@@ -605,7 +608,7 @@ public class GUI {
     presentModeToolbar.setVisable(false);
     presentModeToolbar.addFController(new NextSlideButton(cp5, presentModeToolbar, this));
     presentModeToolbar.addFController(new PrevSlideButton(cp5, presentModeToolbar, this));
-
+    presentModeToolbar.addFController(new ExitSlideButton(cp5, presentModeToolbar, this));
   }
 
 /**
