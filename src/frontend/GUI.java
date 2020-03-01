@@ -366,6 +366,8 @@ public class GUI {
    * [upSlide moves the selected slide up in the array]
    */
   public void upSlide(){
+    System.out.println("upslide");
+
     win.moveSlideUp();
   }
 

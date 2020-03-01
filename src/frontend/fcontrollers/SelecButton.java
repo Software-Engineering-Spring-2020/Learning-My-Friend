@@ -14,12 +14,12 @@ import frontend.controlP5.*;
 
 public class SelecButton extends FButton{
   public SelecButton(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "selec", parrent, gui);
+    super(cp5, "select", parrent, gui);
     super.button.plugTo(this);
   }
 
 
-  public void selec(int val){
+  public void select(int val){
     //System.out.println("Elip " + val);
     getGUI().tool = 's';
 
