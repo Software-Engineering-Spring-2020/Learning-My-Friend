@@ -86,8 +86,8 @@ public class TranslateAnimation extends Animation implements Serializable {
   public void display() {
     super.display();
     if (display) {
+      float ratio = (elapsedTime - lastElapsedTime) / duration;
         for (PollyObject obj : members) {
-            float ratio = (elapsedTime - lastElapsedTime) / duration;
             float[] pos = obj.getPosition();
             float[] distance = distances.get(obj);
             obj.setPosition(distance[0] * ratio + pos[0], distance[1] * ratio + pos[1]);
