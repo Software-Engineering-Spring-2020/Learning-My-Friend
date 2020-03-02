@@ -37,6 +37,10 @@ public abstract class Animation extends ColorfulObject implements Serializable {
     members.add(newMember);
   }
 
+  protected ArrayList<PollyObject> getMembers() {
+    return members;
+  }
+
   /**
   * Remove the current annimation sequence from anobject. The annimation for the other objects in the unit is preserved.
   * @param member The desired object to remove the annimation from
@@ -48,10 +52,8 @@ public abstract class Animation extends ColorfulObject implements Serializable {
   /**
   * Draw an orange rectangle representing the selection field around each individual object in the group.
   */
-  protected void showBoundingBox() {
-    for (PollyObject obj : members) {
-      obj.showBoundingBox();
-    }
+  protected void showBoundingBox(float r, float g, float b) {
+    for (PollyObject obj : members) obj.showBoundingBox(r, g, b);
   }
 
 /**

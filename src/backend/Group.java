@@ -39,7 +39,7 @@ class Group extends PollyObject implements Serializable {
   */
   protected void showBoundingBox(){
     for(PollyObject obj : members){
-      obj.showBoundingBox();
+      obj.showBoundingBox(215,165,0);
     }
   }
 

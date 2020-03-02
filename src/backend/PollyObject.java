@@ -121,12 +121,12 @@ public abstract class PollyObject implements Serializable {
     }
 
     /**
-    * Draws an orange rectangle representing the selection field of the object.
+    * Draws a rectangle representing the selection field of the object.
     */
-    protected void showBoundingBox(){
+    protected void showBoundingBox(float r, float g, float b){
       sketch.push();
       sketch.noFill();
-      sketch.stroke(215,165,0);
+      sketch.stroke(r, g, b);
       sketch.strokeWeight(2);
       PVector[] vert = getRotatedBoundingBoxPoints(xcenter, ycenter);
       sketch.quad(vert[0].x, vert[0].y, vert[1].x, vert[1].y, vert[2].x, vert[2].y, vert[3].x, vert[3].y);

@@ -72,8 +72,8 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
    /**
    * Draws an orange rectangle representing the selection field of the object as well as a text cursor.
    */
-  public void showBoundingBox() {
-      super.showBoundingBox();
+  public void showBoundingBox(float r, float g, float b) {
+      super.showBoundingBox(r, g, b);
       displayCursor = true;
   }
 

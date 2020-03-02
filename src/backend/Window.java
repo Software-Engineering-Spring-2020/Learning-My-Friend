@@ -145,9 +145,8 @@ public class Window {
             curvePoints.clear();
         }
 
-        for(PollyObject obj : selected){
-          obj.showBoundingBox();
-        }
+        if (!presenting) slides.get(currentSlide).showAnimationBoundingBoxes();
+        for(PollyObject obj : selected) obj.showBoundingBox(215,165,0);
 
         if(export && zoom == 1 && selected.size() == 0){
           PImage toSave = getSlideImage();
@@ -783,9 +782,9 @@ public class Window {
     public boolean delete() {
         boolean successful = true;
         for (PollyObject shape : selected) {
-            trash.add(shape);
             if (!slides.get(currentSlide).removeObject(shape))
                 successful = false;
+            else trash.add(shape);
         }
         selected.clear();
         return successful;

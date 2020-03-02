@@ -60,6 +60,10 @@ class DrawSpace extends ColorfulObject{
         }
     }
 
+    protected void showAnimationBoundingBoxes() {
+        for (Animation anim : anims) anim.showBoundingBox(50, 255, 75);
+    }
+
     protected void init(PApplet sketch){
       super.init(sketch);
       for(PollyObject obj : objects){
@@ -152,6 +156,11 @@ class DrawSpace extends ColorfulObject{
     }
 
     protected boolean removeObject(PollyObject shape){
+        for (Animation anim : anims) if (anim.getMembers().contains(shape)) {
+            anim.removeMember(shape);
+            // deleted an animation instead of an object
+            return false;
+        }
       if(shape instanceof Comment) return removeComment(shape);
         return objects.remove(shape);
     } protected PollyObject removeObject(int i){
