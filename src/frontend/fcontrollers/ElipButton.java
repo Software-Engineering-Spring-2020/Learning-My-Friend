@@ -14,8 +14,8 @@ import frontend.controlP5.*;
 
 public class ElipButton extends FButton{
   public ElipButton(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "elip", parrent, gui);
-    super.button.plugTo(this);
+    super(cp5, "oval", parrent, gui);
+    super.button.plugTo(this, "elip");
   }
 
 
