@@ -165,6 +165,7 @@ class ScrollMenu{
     img.resize(thumbnailWidth, thumbnailHeight);
     thumbnails.set(index, img);
     fullSlides.set(index, slide);
+    scroll(topSlide);
   }
 
   /**
