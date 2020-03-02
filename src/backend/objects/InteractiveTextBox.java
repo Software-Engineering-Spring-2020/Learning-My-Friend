@@ -49,7 +49,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
   public InteractiveTextBox(PApplet sketch, float x, float y, float width, float strokeWeight, int[] fillColor, int[] boarderColor, String font, float textSize, TextMode m){
     super(sketch, x, y, strokeWeight, fillColor, boarderColor, "", font, textSize);
     this.str = "";
-    this.charactersPerLine = Math.max(int) (width / sketch.textWidth(WIDE_CHAR)), 1);
+    this.charactersPerLine = Math.max((int) (width / sketch.textWidth(WIDE_CHAR)), 1);
     this.cursorStartTime = System.currentTimeMillis();
     sketch.textSize(textSize);
     pixelWidth = width;
@@ -154,7 +154,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
     for (int i = cursorIndex - 1; i >= 0; i--) {
         if (characters[i] == PConstants.ENTER || characters[i] == PConstants.RETURN) {
              break;
-        } 
+        }
         reversedLine += characters[i];
     }
     char[] reversedLineCharacters = reversedLine.toCharArray();
@@ -224,7 +224,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
         // TODO: the following will not preserve past numbers if you outindent and then indent back
         // to the bottom of a list.
         // TODO: make the below a helper method. It will come up at LEAST 4 times in total.
-        
+
         /*if (Character.isAlphabetic(lastNumber)) nextNumber = Character.toString('1');
         else {
             String lastNumberCombined = "";
