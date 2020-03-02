@@ -153,6 +153,8 @@ public class Window {
 
         if (!presenting) slides.get(currentSlide).showAnimationBoundingBoxes();
         for(PollyObject obj : selected) obj.showBoundingBox(215,165,0);
+        ArrayList<PollyObject> objs = slides.get(currentSlide).getAllObjects();
+        for(PollyObject obj : objs) if (obj.link != null) obj.showBoundingBox(0, 0, 255);
 
         if(export && zoom == 1 && selected.size() == 0){
           menu.updateThumbnail(currentSlide, getSlideImage());
