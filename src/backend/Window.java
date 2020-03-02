@@ -1056,7 +1056,7 @@ public class Window {
       * Alter the order of the slides by swapping the current slide with the one before it.
       */
     public void moveSlideUp() {
-        if (currentSlide - 1 < 0) {
+        if (!(currentSlide - 1 < 0)) {
             Collections.swap(slides, currentSlide, currentSlide - 1);
             menu.swapSlides(currentSlide, currentSlide - 1);
         }
@@ -1079,7 +1079,7 @@ public class Window {
         if (slides.size() > 1) {
             slides.remove(currentSlide);
             menu.deleteSlide(currentSlide);
-            currentSlide--;
+            if (currentSlide > 0) currentSlide--;
         }
     }
 
