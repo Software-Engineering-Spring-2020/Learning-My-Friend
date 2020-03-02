@@ -16,6 +16,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 /**
 * Facilitate serialization of objects for saving/opening/cloning purposes.
@@ -120,5 +121,25 @@ public class SerialManager {
             return slides;
         }
         return null;
+    }
+
+    protected static void exportThumbnails(ArrayList<DrawSpace> slides, String filename) {
+        String directoryName = "";
+        if (filename.contains(".")) directoryName = filename.substring(0, filename.lastIndexOf('.'));
+        else directoryName = filename;
+        File directory = new File(directoryName);
+        if (!directory.exists()){
+            directory.mkdir();
+        }
+        else {
+            // will not delete any sub-directories.
+            for(File file: directory.listFiles()) if (!file.isDirectory()) file.delete();
+        }
+        for (int i = 0; i < slides.size(); i++) {
+            PImage image = slides.get(i).getImage();
+            if (!(image == null)) {
+                image.save(directoryName + "/" + i + ".png");
+            }
+        }
     }
 }

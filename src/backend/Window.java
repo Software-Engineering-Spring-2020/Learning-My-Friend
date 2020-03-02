@@ -155,8 +155,8 @@ public class Window {
         for(PollyObject obj : selected) obj.showBoundingBox(215,165,0);
 
         if(export && zoom == 1 && selected.size() == 0){
-          PImage toSave = getSlideImage();
-          toSave.save(savefile);
+          menu.updateThumbnail(currentSlide, getSlideImage());
+          SerialManager.exportThumbnails(slides, savefile);
           export = false;
         }
 
@@ -189,7 +189,7 @@ public class Window {
         DrawSpace slide = slides.get(currentSlide);
         float[] slidePos = slide.getPosition();
         PImage image = sketch.get((int) slidePos[0] + 1, (int) slidePos[1] + 1, (int) (WIDTH - 1), (int) (HEIGHT - 1));
-        slide.setImage(image);
+        slide.setImage(image.copy());
         return image;
     }
 
@@ -1053,6 +1053,7 @@ public class Window {
 
     private boolean goToSlide(int slide) {
         if (slide >= 0 && slide < slides.size()) {
+            selected.clear();
             preScreenshotPosition = slides.get(currentSlide).getPosition();
             preScreenshotZoom = zoom;
             slideOffset = slide - currentSlide;
@@ -1181,15 +1182,27 @@ public class Window {
      *********************************************************/
 
      /**
+      * @deprecated
       * Export the current slide as an image
-      * @param saveName The name to save the slide as
+      * @param saveName The directory to save the images in. If the directory does not exist, it will be
+      * created.
       * @param extension The type of image to save the slide as. Must include the period.
       */
     public void exportAs(String saveName, String extension){
         reCenter();
         export = true;
         savefile = saveName+extension;
-        if (!savefile.endsWith(".png")) savefile += ".png";
+        //if (!savefile.endsWith(".png")) savefile += ".png";
+    }
+
+    /**
+     * @param saveName The directory to save the images in. If the directory does not exist, it will be
+     * created.
+     */
+    public void exportAs(String saveName){
+        reCenter();
+        export = true;
+        savefile = saveName;
     }
 
     /**
@@ -1212,7 +1225,6 @@ public class Window {
       slides = SerialManager.openSlides(sketch, filename);
       slideImages = new ArrayList<PImage>();
       for (DrawSpace slide : slides) {
-          System.out.println(slide.getImage());
           if (slide.getImage() != null) slideImages.add(slide.getImage());
       }
       menu.loadSlides(slideImages);
