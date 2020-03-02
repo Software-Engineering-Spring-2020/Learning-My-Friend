@@ -1039,6 +1039,10 @@ public class Window {
      *
      *********************************************************/
 
+     public int numberOfSlides(){
+       return slides.size();
+     }
+
     /**
      * Go to the slide after the current slide, edit mode allows for slide modification
      * @return Whether the slide change was successful.
