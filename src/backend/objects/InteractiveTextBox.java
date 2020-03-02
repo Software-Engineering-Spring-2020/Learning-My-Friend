@@ -49,7 +49,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
   public InteractiveTextBox(PApplet sketch, float x, float y, float width, float strokeWeight, int[] fillColor, int[] boarderColor, String font, float textSize, TextMode m){
     super(sketch, x, y, strokeWeight, fillColor, boarderColor, "", font, textSize);
     this.str = "";
-    this.charactersPerLine = (int) (width / sketch.textWidth(WIDE_CHAR));
+    this.charactersPerLine = Math.max(int) (width / sketch.textWidth(WIDE_CHAR)), 1);
     this.cursorStartTime = System.currentTimeMillis();
     sketch.textSize(textSize);
     pixelWidth = width;
