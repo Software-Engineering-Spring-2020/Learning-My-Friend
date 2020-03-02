@@ -1,6 +1,7 @@
 package backend;
 
 import backend.objects.FadeAnimation;
+import backend.objects.InteractiveTextBox;
 import backend.objects.ObjectFactory;
 import backend.objects.SoundPlayerAnimation;
 import backend.objects.TranslateAnimation;
@@ -719,7 +720,8 @@ public class Window {
     }
 
     /** ADD CLARIFICATION. DOES THE OBJECT BECOME A LINK? IS THE URL DISPLAYED?
-     * Add a link to all selected objects.
+     * Add a link to all selected objects. Causes a blue border to be displayed
+     * around the linked PollyObject. Does not display URL.
      * @param link a String URL to link to in present mode.
      */
     public void addLink(String link) {
@@ -727,6 +729,17 @@ public class Window {
         for (PollyObject obj : selected) {
             obj.link = link;
             System.out.println(obj.link);
+        }
+    }
+
+    public void addLink() {
+        ArrayList<PollyObject> objs = slides.get(currentSlide).getAllObjects();
+        for(PollyObject obj : objs) {
+            if (obj instanceof InteractiveTextBox) {
+                InteractiveTextBox iobj = (InteractiveTextBox) obj;
+                iobj.link();
+            }
+            if (obj.link != null) obj.showBoundingBox(0, 0, 255);
         }
     }
 

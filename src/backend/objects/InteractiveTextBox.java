@@ -27,7 +27,6 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
     transient private char cursor = '|';
     transient private long cursorStartTime;
     transient private boolean displayCursor = false;
-    transient private boolean wasSelected = false;
     private final char WIDE_CHAR = 'W';
     private final int LINE_SPACING = 20;
     private final long CURSOR_BLINK_RATE = 530l;
@@ -85,7 +84,6 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
         // bad design, but I don't think I have any other way to detect selection
         if (r == 215 && g == 165 && b == 0) {
             displayCursor = true;
-            wasSelected = true;
         }
     }
 
@@ -463,7 +461,6 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
     }
 
     protected void setMode(TextMode m) {
-        System.out.println(m);
         if (m == TextMode.PLAIN) {
             // TODO ???
         }
@@ -537,29 +534,29 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
         }
     }
 
+
+    public void link() {
+        link = null;
+        String[] words = str.split(" |\n|\r");
+        for (String word : words) {
+            if (word.contains("https://") || word.contains("http://")) {
+                try {
+                    new URI(word);
+                    link = word;
+                    break;
+                } catch (URISyntaxException e) {
+                    //e.printStackTrace();
+                    link = null;
+                }
+            }
+        }
+    }
+
     /**
      * Draw colored user-inputted text to the slide
      */
     protected void display() {
         super.display();
-        if (wasSelected && !displayCursor) {
-            // check for links
-            link = null;
-            String[] words = str.split(" |\n|\r");
-            for (String word : words) {
-                if (word.contains("https://") || word.contains("http://")) {
-                    try {
-                        new URI(word);
-                        link = word;
-                        break;
-                    } catch (URISyntaxException e) {
-                        //e.printStackTrace();
-                        link = null;
-                    }
-                }
-            }
-            wasSelected = false;
-        }
         String finalString = str;
         sketch.textLeading(LINE_SPACING);
         sketch.textAlign(PConstants.LEFT);  //overrides the current default of CENTER, CENTER
