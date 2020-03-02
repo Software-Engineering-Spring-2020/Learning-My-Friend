@@ -11,6 +11,7 @@ package frontend.fcontrollers;
 
 import frontend.*;
 import frontend.controlP5.*;
+import backend.Window;
 
 public class TextButton extends FButton{
   public TextButton(ControlP5 cp5, FToolbar parrent, GUI gui){
@@ -21,6 +22,8 @@ public class TextButton extends FButton{
 
   public void Text(int val){
     getGUI().setTool('t');
+    getGUI().setTextMode(Window.TextMode.PLAIN);
+
   }
 
 }

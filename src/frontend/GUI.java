@@ -520,6 +520,8 @@ public Window.TextMode getTextMode(){
    private void setupTextToolbar(){
      FToolbar ft = topToolbarFactory("TextOpt");
      ft.addFController(new TextButton(cp5, ft, this));
+     ft.addFController(new NumListButton(cp5, ft, this));
+     ft.addFController(new BulletListButton(cp5, ft, this));
 
    }
 
