@@ -258,22 +258,6 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
             int nextIndex = 0;
             char lastNumber = getCharacterAfterWhitespace(line, nextIndex);
             String nextNumber = "a";
-
-            // TODO: the following will not preserve past numbers if you outindent and then
-            // indent back
-            // to the bottom of a list.
-            // TODO: make the below a helper method. It will come up at LEAST 4 times in
-            // total.
-
-            /*
-             * if (Character.isAlphabetic(lastNumber)) nextNumber = Character.toString('1');
-             * else { String lastNumberCombined = ""; while (Character.isDigit(lastNumber))
-             * { lastNumberCombined += lastNumber; nextIndex++; lastNumber =
-             * getCharacterAfterWhitespace(getCurrentLine(), nextIndex); } nextNumber =
-             * Integer.toString(Integer.parseInt(lastNumberCombined) + 1); char newNumber;
-             * if (Character.isDigit(getCharacterAfterWhitespace(line, 0))) newNumber =
-             * NUMBERS[1]; else newNumber = NUMBERS[0];
-             */
             newLine = (indentation + line).replaceFirst("\\" + lastNumber, nextNumber);
         }
         setCurrentLine(newLine);

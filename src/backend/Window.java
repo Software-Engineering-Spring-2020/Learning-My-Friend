@@ -183,7 +183,6 @@ public class Window {
 
 
         sketch.pop();
-
         if(menu != null && !presenting) menu.display();
     }
 
@@ -234,7 +233,7 @@ public class Window {
      }
 
      public void selectSlide(float x, float y){
-       currentSlide = menu.selectSlide(x, y);
+       goToSlide(menu.selectSlide(x, y));
      }
 
      public void scroll(int startSlide) {
@@ -475,7 +474,7 @@ public class Window {
         }
         return false;
     }
-    
+
     public boolean createInteractiveTextBox(float x, float y, String font, float textSize) {
         return createInteractiveTextBox(x, y, font, textSize, TextMode.PLAIN);
     }

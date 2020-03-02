@@ -76,7 +76,7 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
  * [setup provides instructions to PApplet after init]
  */
 	public void setup(){
-		surface.setResizable(true);
+		//surface.setResizable(true);
 
 		//Init Canvas Position and Size in center of the screen
 	 	canvasX = width/4;

@@ -33,6 +33,8 @@ src\frontend\fcontrollers\UpSlideButton.java
 src\frontend\fcontrollers\DelSlideButton.java
 src\frontend\fcontrollers\NewSlideButton.java
 src\frontend\fcontrollers\DownSlideButton.java
+src\frontend\fcontrollers\NumListButton.java
+src\frontend\fcontrollers\BulletListButton.java
 
 src\frontend\fcontrollers\CopyButton.java
 src\frontend\fcontrollers\PasteButton.java

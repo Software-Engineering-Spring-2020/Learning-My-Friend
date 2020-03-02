@@ -75,6 +75,9 @@ public class GUI {
   //PresentMode Toolbar (must have visability set to false during normal use, then set to true during presentations)
   FToolbar presentModeToolbar;
 
+  //TextMode affects what type of textbox is made, plain text, bullets, numbered list
+  Window.TextMode textMode;
+
   /**
   * End of STATE Deleration
   */
@@ -97,11 +100,27 @@ public class GUI {
 
 
   setup();
-
+  textMode = Window.TextMode.PLAIN;
   win.initScrollMenu((int)(sketch.width*.1), (int)(sketch.height*.57), (int)(sketch.width*.1), (int)(sketch.height*.6));
 }
 
 
+
+/**
+ * [setTextMode sets the `state` to be called by IOHandler, this method changes the TextMode]
+ * @param e [Window.TextMode enum, : BULLETED, NUMBERED, PLAIN]
+ */
+public void setTextMode(Window.TextMode e){
+  textMode = e;
+}
+
+/**
+ * [getTextMode returns textMode, to be called by IOHandler]
+ * @return [returns the state of textMode]
+ */
+public Window.TextMode getTextMode(){
+  return textMode;
+}
 
 /**
  * [present enters present mode and hides all toolbars untill presentation is finished]
@@ -501,6 +520,8 @@ public class GUI {
    private void setupTextToolbar(){
      FToolbar ft = topToolbarFactory("TextOpt");
      ft.addFController(new TextButton(cp5, ft, this));
+     ft.addFController(new NumListButton(cp5, ft, this));
+     ft.addFController(new BulletListButton(cp5, ft, this));
 
    }
 
