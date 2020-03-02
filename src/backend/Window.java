@@ -1114,6 +1114,7 @@ public class Window {
             editingPosition = slides.get(currentSlide).getPosition();
             editingZoom = zoom;
             reCenter();
+            zoom = (sketch.height / slides.get(currentSlide).pixelHeight);
         }
     }
 
