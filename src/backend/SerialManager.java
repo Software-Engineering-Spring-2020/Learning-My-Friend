@@ -53,6 +53,7 @@ public class SerialManager {
     */
     protected static void saveSlides(ArrayList<DrawSpace> slides, String filename) throws IOException {
         String directoryName = "";
+        if (!filename.endsWith(".polly")) filename += ".polly";
         if (filename.contains(".")) directoryName = filename.substring(0, filename.lastIndexOf('.'));
         else directoryName = filename;
         directoryName += "Images";
@@ -65,9 +66,11 @@ public class SerialManager {
             for(File file: directory.listFiles()) if (!file.isDirectory()) file.delete();
         }
         for (int i = 0; i < slides.size(); i++) {
-            File image = new File(directoryName + "/" + i + ".png");
-            BufferedImage bs = (BufferedImage) slides.get(i).getImage().getNative();
-            ImageIO.write(bs, "png", image);
+            if (!(slides.get(i).getImage() == null)) {
+                File image = new File(directoryName + "/" + i + ".png");
+                BufferedImage bs = (BufferedImage) slides.get(i).getImage().getNative();
+                ImageIO.write(bs, "png", image);
+            }
         }
         FileOutputStream saveFile = new FileOutputStream(filename);
         ObjectOutputStream fileOutput = new ObjectOutputStream(saveFile);
