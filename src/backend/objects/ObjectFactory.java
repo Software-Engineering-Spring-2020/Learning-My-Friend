@@ -1,6 +1,7 @@
 package backend.objects;
 
 import backend.Shape;
+import backend.Window.TextMode;
 import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PConstants;
@@ -74,8 +75,8 @@ public class ObjectFactory {
     * @param font The font style to display the text as
     * @param textSize The size of text to be displayed in pixels
     */
-    public InteractiveTextBox createInteractiveTextBox(float x, float y, float width, float strokeWeight, int[] fillColor, int[] boarderColor, String font, float textSize) {
-        return new InteractiveTextBox(sketch, x, y, width, strokeWeight, fillColor, boarderColor, font, textSize);
+    public InteractiveTextBox createInteractiveTextBox(float x, float y, float width, float strokeWeight, int[] fillColor, int[] boarderColor, String font, float textSize, TextMode m) {
+        return new InteractiveTextBox(sketch, x, y, width, strokeWeight, fillColor, boarderColor, font, textSize, m);
     }
 
     /**

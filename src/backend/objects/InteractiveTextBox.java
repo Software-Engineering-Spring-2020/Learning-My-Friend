@@ -3,6 +3,7 @@ package backend.objects;
 import java.util.ArrayList;
 
 import backend.TextObject;
+import backend.Window.TextMode;
 import backend.ListenerObject;
 
 import processing.core.PApplet;
@@ -32,12 +33,6 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
     private final char[] NUMBERS = {'1', 'a'};
     private final char INDENTATION_CHAR = ' ';
     private final int INDENTATION_SIZE = 4;
-    private enum Modes {
-        NUMBERED,
-        BULLETED,
-        PLAIN
-    }
-    private final Modes mode;
 
     /**
     * Constructor for InteractiveTextBox
@@ -51,20 +46,20 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
     * @param font The font style to display the text as
     * @param textSize The size of text to be displayed in pixels
     */
-  public InteractiveTextBox(PApplet sketch, float x, float y, float width, float strokeWeight, int[] fillColor, int[] boarderColor, String font, float textSize){
+  public InteractiveTextBox(PApplet sketch, float x, float y, float width, float strokeWeight, int[] fillColor, int[] boarderColor, String font, float textSize, TextMode m){
     super(sketch, x, y, strokeWeight, fillColor, boarderColor, "", font, textSize);
     this.str = "";
     this.charactersPerLine = (int) (width / sketch.textWidth(WIDE_CHAR));
     this.cursorStartTime = System.currentTimeMillis();
-    this.mode = Modes.PLAIN;
+    sketch.textSize(textSize);
+    pixelWidth = width;
+    pixelHeight = 0;
     String example = "NEW TEXT BOX";
     char[] exampleCharacters = example.toCharArray();
     for (char c: exampleCharacters) {
         addCharacter(c);
     }
-    sketch.textSize(textSize);
-    pixelWidth = width;
-    pixelHeight = textSize;
+    setMode(m);
     cursorIndex = str.length();
     fillColor[3] = 255;
   }
@@ -104,7 +99,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
   */
   private void removeLine() {
     ycenter -= (textSize + LINE_SPACING / 4f) / 2f;
-    pixelHeight -= textSize + LINE_SPACING / 4f;
+    if (pixelHeight > textSize + LINE_SPACING / 4f) pixelHeight -= textSize + LINE_SPACING / 4f;
   }
 
   /**       ASK FOR CLARITY
@@ -344,7 +339,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
     int indentationLevel = 0;
     if (inBullets) indentationLevel = getIndentationLevel();
     int j = 0;
-    for (int i = 0; i < characters.length + 1; i++) {
+    if (newCharacters.length > 1) for (int i = 0; i < characters.length + 1; i++) {
         if (i == cursorIndex) {
             newCharacters[i] = c;
         }
@@ -353,6 +348,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
             j++;
         }
     }
+    else newCharacters[0] = c;
     charactersSinceNewLine++;
     if (charactersSinceNewLine % charactersPerLine == 0) addLine();
     cursorIndex++;
@@ -426,15 +422,33 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
     }
   }
 
-  protected void setMode(Modes m) {
-    if (m == Modes.PLAIN) {
-
-    }
-    if (m == Modes.BULLETED) {
-
-    }
-    if (m == Modes.NUMBERED) {
-        
+  protected void setMode(TextMode m) {
+      System.out.println(m);
+      if (m == TextMode.PLAIN) {
+        System.out.println("plaing" + m);
+          // TODO ???
+      }
+      if (m == TextMode.BULLETED) {
+        System.out.println("plaing" + m);
+          String temp = "- " + str;
+          char[] tempChars = temp.toCharArray();
+          str = "";
+          charactersSinceNewLine = 0;
+          cursorIndex = 0;
+          for (int i = 0; i < tempChars.length; i++) {
+              addCharacter(tempChars[i]);
+          }
+      }
+      if (m == TextMode.NUMBERED) {
+        System.out.println("plaing" + m);
+        String temp = "1. " + str;
+        char[] tempChars = temp.toCharArray();
+        str = "";
+        charactersSinceNewLine = 0;
+        cursorIndex = 0;
+        for (int i = 0; i < tempChars.length; i++) {
+            addCharacter(tempChars[i]);
+        }
     }
   }
 
@@ -515,7 +529,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
             finalString = new String(charactersWithCursor);
             }
         }
-        sketch.text(finalString, 0f - pixelWidth / 2, 0f - pixelHeight / 2, pixelWidth, pixelHeight + textSize);
+        sketch.text(finalString, 0f - pixelWidth / 2, 0f - pixelHeight / 2, pixelWidth, pixelHeight + textSize + 1000);
         //sketch.text(str, 0, 0);
   }
 }

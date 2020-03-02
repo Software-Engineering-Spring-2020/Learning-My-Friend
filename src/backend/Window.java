@@ -54,6 +54,12 @@ public class Window {
         PLAY_SOUND
     }
 
+    public enum TextMode {
+        BULLETED,
+        NUMBERED,
+        PLAIN // default
+    }
+
     /**
     * Class Constructor to initialize an ArrayList of DrawSpace objects for storing the slides and set the default parameters for color and dimensions
     * @param sketch a reference to a PApplet to allow general functionality of the processing library
@@ -449,7 +455,7 @@ public class Window {
     * @param textSize The desired size of the text to be displayed
     * @return Whether or not the object was created and added to the slide successfully
     */
-    public boolean createInteractiveTextBox(float x, float y, String font, float textSize) {
+    public boolean createInteractiveTextBox(float x, float y, String font, float textSize, TextMode m) {
         PollyObject obj = null;
         float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
         ellipse = false;
@@ -462,10 +468,14 @@ public class Window {
                         2*Math.abs(shapePoints.get(1)[0]-shapePoints.get(0)[0]), 2*Math.abs(shapePoints.get(1)[1]-shapePoints.get(0)[1]),
                         strokeWeight, fillColor, boarderColor);
             float width = widthRect.pixelWidth;
-            obj = of.createInteractiveTextBox(shapePoints.get(0)[0], shapePoints.get(0)[1], width, strokeWeight, fillColor, boarderColor, font, textSize);
+            obj = of.createInteractiveTextBox(shapePoints.get(0)[0], shapePoints.get(0)[1], width, strokeWeight, fillColor, boarderColor, font, textSize, m);
             if (obj != null) return slides.get(currentSlide).addObject(obj);
         }
         return false;
+    }
+    
+    public boolean createInteractiveTextBox(float x, float y, String font, float textSize) {
+        return createInteractiveTextBox(x, y, font, textSize, TextMode.PLAIN);
     }
 
     /**
