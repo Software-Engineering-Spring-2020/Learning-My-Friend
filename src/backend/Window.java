@@ -1089,6 +1089,7 @@ public class Window {
         if (slides.size() > 1) {
             slides.remove(currentSlide);
             menu.deleteSlide(currentSlide);
+            // TODO: Scroll here to prevent crashing?
             if (currentSlide > 0) currentSlide--;
         }
     }
@@ -1188,6 +1189,7 @@ public class Window {
         reCenter();
         export = true;
         savefile = saveName+extension;
+        if (!savefile.endsWith(".png")) savefile += ".png";
     }
 
     /**
