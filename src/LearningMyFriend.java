@@ -113,8 +113,8 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
 		if(this.keyCode == 17)  ctrl = true;
 		if(this.keyCode == 16) shift = true;
 
-		System.out.println(this.key+ ", "+this.keyCode + " : "+ctrl);
-		System.out.println(this.key=='c'&&ctrl);
+		//System.out.println(this.key+ ", "+this.keyCode + " : "+ctrl);
+		//System.out.println(this.key=='c'&&ctrl);
 
 		if(this.keyCode == 90 && ctrl) this.win.delete();
 		else if(this.keyCode == 89 && ctrl) this.win.restoreLast();

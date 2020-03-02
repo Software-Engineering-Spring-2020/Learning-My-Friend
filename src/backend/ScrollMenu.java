@@ -48,9 +48,11 @@ class ScrollMenu{
   }
 
   public void loadSlides(ArrayList<PImage> fullSlides){
-    fullSlides.clear();
+    this.fullSlides.clear();
+    thumbnails.clear();
     for(PImage slide : fullSlides){
       this.fullSlides.add(slide);
+      thumbnails.add(empty);
     }
     convertThumbnails();
     scroll(0);
@@ -174,6 +176,7 @@ class ScrollMenu{
   */
   private void convertThumbnails(){
     for(int i = 0; i < fullSlides.size(); i++){
+      System.out.println(i);
       PImage img = fullSlides.get(i);
       img.resize(thumbnailWidth, thumbnailHeight);
       thumbnails.set(i, img);
