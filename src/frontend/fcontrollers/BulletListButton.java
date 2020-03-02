@@ -13,16 +13,16 @@ import frontend.*;
 import frontend.controlP5.*;
 import backend.Window;
 
-public class NumListButton extends FButton{
-  public NumListButton(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "Numbered List", parrent, gui);
+public class BulletListButton extends FButton{
+  public BulletListButton(ControlP5 cp5, FToolbar parrent, GUI gui){
+    super(cp5, "Bullet List", parrent, gui);
     super.button.plugTo(this, "plug");
   }
 
 
   public void plug(int val){
     getGUI().setTool('t');
-    getGUI().setTextMode(Window.TextMode.NUMBERED);
+    getGUI().setTextMode(Window.TextMode.BULLETED);
   }
 
 }
