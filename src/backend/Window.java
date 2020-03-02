@@ -168,10 +168,8 @@ public class Window {
         if (slideOffset != 0 && zoom == 1 && selected.size() == 0) {
             System.out.println("Saving a new thumbnail and changing slides.");
             slides.get(currentSlide + slideOffset).setPosition(preScreenshotPosition[0], preScreenshotPosition[1]);
-            menu.updateThumbnail(currentSlide, getSlideImage());
+            if (!presenting) menu.updateThumbnail(currentSlide, getSlideImage());
             currentSlide += slideOffset;
-            menu.selectSlide(currentSlide);
-            menu.scroll(0);
             slideOffset = 0;
         }
 
