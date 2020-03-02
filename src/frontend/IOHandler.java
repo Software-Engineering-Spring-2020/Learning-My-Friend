@@ -32,7 +32,7 @@ public class IOHandler{
   //For example the selected tool and color are stored in the state.
   GUI gui;
 
-
+  String font;
 
 
   //zoom sensitivity
@@ -45,6 +45,8 @@ public class IOHandler{
     this.sketch = sketch;
     this.gui = gui;
     this.win = win;
+
+    font = "Bangla.ttf";
   }
 
 /**
@@ -71,10 +73,10 @@ public class IOHandler{
         win.createEllipse(sketch.mouseX, sketch.mouseY);
 
       if(gui.getTool() == 't')
-        win.createInteractiveTextBox(sketch.mouseX, sketch.mouseY, "arial", 20);
+        win.createInteractiveTextBox(sketch.mouseX, sketch.mouseY, font, 20);
 
       if(gui.getTool() == 'c')
-        win.createComment(sketch.mouseX, sketch.mouseY, gui.getCurrentString(), "arial", 20);
+        win.createComment(sketch.mouseX, sketch.mouseY, gui.getCurrentString(), font, 20);
 
       if(gui.getTool() == 'l')
         win.createLine(sketch.mouseX, sketch.mouseY);
