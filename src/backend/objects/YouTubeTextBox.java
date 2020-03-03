@@ -25,7 +25,6 @@ public class YouTubeTextBox extends InteractiveTextBox {
     public void display() {
         super.display();
         if (wasSelected && !isSelected && str.length() > 32) {
-            System.out.println("susann!!!");
             readyForVideo = true;
             wasSelected = false;
             System.out.println(getVID());
