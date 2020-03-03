@@ -224,6 +224,9 @@ public class Window {
       shapePoints.clear();
     }
 
+    /**
+     * @return Whether any objects are currently selected.
+     */
     public boolean isSelected() {
         return (selected.size() > 0);
     }
