@@ -80,6 +80,9 @@ public class GUI {
   //TextMode affects what type of textbox is made, plain text, bullets, numbered list
   Window.TextMode textMode;
 
+  //font, the selected font to pass to IOhandler
+  String font;
+
   /**
   * End of STATE Deleration
   */
@@ -103,10 +106,25 @@ public class GUI {
 
   setup();
   textMode = Window.TextMode.PLAIN;
+  font = "Bangla.ttf";
   win.initScrollMenu((int)(sketch.width*.1), (int)(sketch.height*.57), (int)(sketch.width*.1), (int)(sketch.height*.6));
 }
 
+  /**
+   * [getFont returns the string of the curently selected font]
+   * @return [the curent font]
+   */
+  public String getFont(){
+    return font;
+  }
 
+/**
+ * [setFont sets the font as listed in PFont.list()]
+ * @param i [the number in PFont.list() of the selected font]
+ */
+  public void setFont(int i){
+    font = PFont.list()[i];
+  }
 
 /**
  * [setTextMode sets the `state` to be called by IOHandler, this method changes the TextMode]

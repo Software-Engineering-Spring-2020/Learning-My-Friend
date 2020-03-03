@@ -24,7 +24,8 @@ public class FontDropdown extends FDropdown{
  * @param val [description]
  */
   public void font(int val){
-    System.out.println(val);
+    //System.out.println(val);
+    getGUI().setFont(val);
   }
 
 }
