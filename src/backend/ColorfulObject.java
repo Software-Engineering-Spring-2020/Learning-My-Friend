@@ -54,9 +54,7 @@ public abstract class ColorfulObject extends PollyObject implements Serializable
   * @param b Represents the blue value in color combinations (range between 0 - 255)
   */
   protected void setBoarderColor(int r, int g, int b){
-    boarderColor[0] = r;
-    boarderColor[1] = g;
-    boarderColor[2] = b;
+    setColor(r, g, b);
   }
 
   /**
@@ -67,10 +65,16 @@ public abstract class ColorfulObject extends PollyObject implements Serializable
   * @param a Represents the alpha (transparent) value for the color (range between 0 - 255)
   */
   protected void setFillColor(int r, int g, int b, int a){
+    setColor(r, g, b);
+  }
+
+  private void setColor(int r, int g, int b) {
     fillColor[0] = r;
     fillColor[1] = g;
     fillColor[2] = b;
-    fillColor[3] = a;
+    boarderColor[0] = r;
+    boarderColor[1] = g;
+    boarderColor[2] = b;
   }
 
   /**

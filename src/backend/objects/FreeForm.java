@@ -92,6 +92,7 @@ class FreeForm extends Shape implements Serializable {
   */
   protected void display() {
       super.display();
+      sketch.noFill();
       //shape.tint(boarderColor[0], boarderColor[1], boarderColor[2], boarderColor[3]);
       sketch.translate(-xcenter+xpos, -ycenter+ypos);
       sketch.shape(shape);

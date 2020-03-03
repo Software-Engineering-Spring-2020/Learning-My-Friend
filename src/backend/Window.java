@@ -480,6 +480,11 @@ public class Window {
         return createInteractiveTextBox(x, y, font, textSize, TextMode.PLAIN);
     }
 
+    public boolean createYouTubeTextBox(float x, float y) {
+        // TODO
+        return false;
+    }
+
     /**
     * Creates and draws a comment to the slide. Comments can be hidden.
     * @param x Raw X position of the mouse
