@@ -550,6 +550,11 @@ public Window.TextMode getTextMode(){
      //sets up presentModeToolbar
      setupPresentModeToolbar();
 
+
+
+     //image, vido, audio, link
+     setUpImportToolbar();
+
      setActiveToolbar(0);
      resizeAll();
    }
@@ -656,8 +661,8 @@ public Window.TextMode getTextMode(){
 
       ft.addFController(new SaveButton(cp5, ft, this));
       ft.addFController(new OpenButton(cp5, ft, this));
-      ft.addFController(new ExportButton(cp5, ft, this));
-      ft.addFController(new ImportButton(cp5, ft, this));
+      //ft.addFController(new ExportButton(cp5, ft, this));
+      //ft.addFController(new ImportButton(cp5, ft, this));
      }
 
 /**
@@ -714,6 +719,17 @@ public Window.TextMode getTextMode(){
     presentModeToolbar.addFController(new NextSlideButton(cp5, presentModeToolbar, this));
     presentModeToolbar.addFController(new ExitSlideButton(cp5, presentModeToolbar, this));
   }
+
+
+       /**
+        * [setUpFileToolbar initialises the toolbar for File]
+        */
+         private void setUpImportToolbar(){
+           FToolbar ft = topToolbarFactory("Import");
+
+           ft.addFController(new ExportButton(cp5, ft, this));
+           ft.addFController(new ImportButton(cp5, ft, this));
+          }
 
 /**
  * Start of toolbar administartion functions
