@@ -819,6 +819,7 @@ public Window.TextMode getTextMode(){
     * [resizeAll resizes all the gui elements]
     */
    public void resizeAll(){
+     cp5.setGraphics(sketch,0,0);
      for(FToolbar tb : tbList)
       tb.update();
     //System.out.println("% of width " + (sketch.width*.15) + "   --   % of height" + (sketch.height*.20));
