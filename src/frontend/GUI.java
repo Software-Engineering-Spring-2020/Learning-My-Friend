@@ -656,13 +656,13 @@ public Window.TextMode getTextMode(){
     private void setUpFileToolbar(){
       FToolbar ft = topToolbarFactory("File");
 
-      ft.addFController(new CopyButton(cp5, ft, this));
-      ft.addFController(new PasteButton(cp5, ft, this));
+      //ft.addFController(new CopyButton(cp5, ft, this));
+      //ft.addFController(new PasteButton(cp5, ft, this));
 
       ft.addFController(new SaveButton(cp5, ft, this));
       ft.addFController(new OpenButton(cp5, ft, this));
-      //ft.addFController(new ExportButton(cp5, ft, this));
-      //ft.addFController(new ImportButton(cp5, ft, this));
+      ft.addFController(new ExportButton(cp5, ft, this));
+      ft.addFController(new ImportButton(cp5, ft, this));
      }
 
 /**
