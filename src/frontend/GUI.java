@@ -550,6 +550,11 @@ public Window.TextMode getTextMode(){
      //sets up presentModeToolbar
      setupPresentModeToolbar();
 
+
+
+     //image, vido, audio, link
+     setUpImportToolbar();
+
      setActiveToolbar(0);
      resizeAll();
    }
@@ -656,8 +661,8 @@ public Window.TextMode getTextMode(){
 
       ft.addFController(new SaveButton(cp5, ft, this));
       ft.addFController(new OpenButton(cp5, ft, this));
-      ft.addFController(new ExportButton(cp5, ft, this));
-      ft.addFController(new ImportButton(cp5, ft, this));
+      //ft.addFController(new ExportButton(cp5, ft, this));
+      //ft.addFController(new ImportButton(cp5, ft, this));
      }
 
 /**
@@ -691,7 +696,7 @@ public Window.TextMode getTextMode(){
    * [setupScrollbar initialises the toolbar for scrolling thumbnails and slides]
    */
   private void setupScrollbar(){
-    FToolbar ft = toolbarFactory("Scrollbar", (float).01, (float).7, (float).16, (float).2);
+    FToolbar ft = toolbarFactory("Scrollbar", (float).02, (float).7, (float).16, (float).2);
     ft.getGroup().hideBar();
     ft.getGroup().disableCollapse();
     sb = new Scrollbar(cp5, ft, this);
@@ -710,10 +715,21 @@ public Window.TextMode getTextMode(){
   private void setupPresentModeToolbar(){
     presentModeToolbar = toolbarFactory("PresentMode", (float).1, (float).05, (float).9, (float).9);
     presentModeToolbar.setVisable(false);
-    presentModeToolbar.addFController(new NextSlideButton(cp5, presentModeToolbar, this));
     presentModeToolbar.addFController(new PrevSlideButton(cp5, presentModeToolbar, this));
+    presentModeToolbar.addFController(new NextSlideButton(cp5, presentModeToolbar, this));
     presentModeToolbar.addFController(new ExitSlideButton(cp5, presentModeToolbar, this));
   }
+
+
+       /**
+        * [setUpFileToolbar initialises the toolbar for File]
+        */
+         private void setUpImportToolbar(){
+           FToolbar ft = topToolbarFactory("Import");
+
+           ft.addFController(new ExportButton(cp5, ft, this));
+           ft.addFController(new ImportButton(cp5, ft, this));
+          }
 
 /**
  * Start of toolbar administartion functions
