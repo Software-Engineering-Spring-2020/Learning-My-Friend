@@ -550,11 +550,6 @@ public Window.TextMode getTextMode(){
      //sets up presentModeToolbar
      setupPresentModeToolbar();
 
-
-
-     //image, vido, audio, link
-     setUpImportToolbar();
-
      setActiveToolbar(0);
      resizeAll();
    }
