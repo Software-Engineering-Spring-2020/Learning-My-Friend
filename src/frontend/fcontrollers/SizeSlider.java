@@ -17,7 +17,7 @@ public class SizeSlider extends FSlider{
     super(cp5, "size", parrent, gui);
     super.slider.plugTo(this);
     super.slider.setMin(-1);
-    super.slider.setMax(1);
+    super.slider.setMax(5);
     //super.slider.setColor(new CColor(0, 0,))
   }
 

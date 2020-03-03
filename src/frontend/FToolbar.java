@@ -63,7 +63,7 @@ public class FToolbar{
  */
   private Group groupFactory(String name){
     return cp5.addGroup(name)
-    .setBackgroundColor(100)
+    .setBackgroundColor(150)
     //.setMoveable(true)
     ;
   }

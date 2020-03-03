@@ -109,7 +109,7 @@ public class IOHandler{
     //if pan tool is selected
     if(gui.getTool() == 'p' && onCanvas())
       win.freeDraw(sketch.mouseX, sketch.mouseY);
-    else if(onCanvas())
+    else if(onCanvas() && sketch.mouseButton == PConstants.RIGHT)
       win.pan(sketch.mouseX, sketch.mouseY, sketch.pmouseX, sketch.pmouseY);
   }
 

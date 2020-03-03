@@ -76,7 +76,7 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
  * [setup provides instructions to PApplet after init]
  */
 	public void setup(){
-		//surface.setResizable(true);
+		surface.setResizable(true);
 
 		//Init Canvas Position and Size in center of the screen
 	 	canvasX = width/4;
@@ -94,7 +94,7 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
  * [draw description]
  */
 	public void draw(){
-		background(64);
+		background(150);
 		win.display();
 		gui.display();
 	}
@@ -160,13 +160,13 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
 		//else if(this.key == 'C') this.win.createEllipse(this.mouseX, this.mouseY);
 
 		else if(this.keyCode == 127) this.win.delete();  //delete
-		else if(this.keyCode == 37) this.win.rotate(-1); //left
-		else if(this.keyCode == 39) this.win.rotate(1);  //right
-		else if(this.keyCode == 38) this.win.resize(0.01F);  //up
-		else if(this.keyCode == 40) this.win.resize(-0.01F); //down
+		else if(this.keyCode == 37 && false) this.win.previousSlide(); //left
+		else if(this.keyCode == 39 && false) this.win.nextSlide();  //right
+		//else if(this.keyCode == 38) this.win.resize(0.01F);  //up
+		//else if(this.keyCode == 40) this.win.resize(-0.01F); //down
 		else if(this.keyCode == 155) this.win.importImage("grayscrunchie",".png");
 
-		else if(this.keyCode == 10) this.win.reCenter();   //enter
+		//else if(this.keyCode == 10) this.win.reCenter();   //enter
 		else if(this.keyCode == 192) this.win.createCurve(this.mouseX, this.mouseY); //tilde
 	}
 

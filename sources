@@ -28,6 +28,8 @@ src\frontend\fcontrollers\PolyButton.java
 src\frontend\fcontrollers\PolyCountSlider.java
 src\frontend\fcontrollers\TogFillButton.java
 src\frontend\fcontrollers\PresentButton.java
+src\frontend\fcontrollers\PresentStartButton.java
+src\frontend\fcontrollers\PresentCurrentButton.java
 src\frontend\fcontrollers\Scrollbar.java
 src\frontend\fcontrollers\UpSlideButton.java
 src\frontend\fcontrollers\DelSlideButton.java
@@ -52,6 +54,7 @@ src\frontend\fcontrollers\BFillSlider.java
 
 
 src\frontend\fcontrollers\SelecButton.java
+src\frontend\fcontrollers\RestoreTrashButton.java
 src\frontend\fcontrollers\TrashButton.java
 
 src\frontend\FTextfield.java

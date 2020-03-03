@@ -49,6 +49,8 @@ public class GUI {
   public int fillColor[] = { 0, 0, 0, 0 };
   public int boarderColor[] = { 0, 0, 0 };
 
+  public int color[] = { 0, 0, 0, 0 };
+
   /**
    * slider objects for rgb control
    */
@@ -125,13 +127,29 @@ public Window.TextMode getTextMode(){
 /**
  * [present enters present mode and hides all toolbars untill presentation is finished]
  */
-  public void present(){
-    win.present();
+  public void present(boolean fromStart){
+    if(true){
+      win.selectSlide(0);
+      win.present();
+    }
+    else
+      win.present();
     setTool('s');
     for(FToolbar ft : tbList)
       ft.setVisable(false);
     presentModeToolbar.setVisable(true);
   }
+
+  /**
+   * [present enters present mode and hides all toolbars untill presentation is finished]
+   */
+    public void present(){
+      win.present();
+      setTool('s');
+      for(FToolbar ft : tbList)
+        ft.setVisable(false);
+      presentModeToolbar.setVisable(true);
+    }
 
 /**
  * [nextSlide changes the slide in present mode, it also check to see if the presentation is done, and if so, exits present mode returning the gui]
@@ -282,6 +300,10 @@ public Window.TextMode getTextMode(){
     win.delete();
   }
 
+  public void restore(){
+    win.restoreLast();
+  }
+
   /**
    * [save opens file exploreor and passes save func]
    */
@@ -404,6 +426,25 @@ public Window.TextMode getTextMode(){
     win.moveSlideDown();
   }
 
+  /**
+   * [setFill sets the color]
+   * @param i [color from 1 to 255]
+   * @param c [color r, b, g]
+   * currently unused as client did not ask for boarder settings and it takes up space in the gui, is controlled by setFill
+   */
+  public void setColor(int i, char c){
+    if(c == 'r')
+      color[0] = i;
+    if(c == 'g')
+      color[1] = i;
+    if(c == 'b')
+      color[2] = i;
+    if(c == 'a')
+      color[3] = i;
+    win.setBoarderColor(color[0], color[1], color[2]);
+    win.setFillColor(color[0], color[1], color[2], 255);
+  }
+
    /**
     * [setFill sets the fill color]
     * @param i [color from 1 to 255]
@@ -419,7 +460,10 @@ public Window.TextMode getTextMode(){
       fillColor[2] = i;
     if(c == 'a')
       fillColor[3] = i;
+    //win.setFillColor(fillColor[0], fillColor[1], fillColor[2], fillColor[3]);
+    if(toggleFill)
       win.setFillColor(fillColor[0], fillColor[1], fillColor[2], 255);
+    else
       setBoarder(i, c);
    }
 
@@ -538,7 +582,9 @@ public Window.TextMode getTextMode(){
  */
    private void setupPresentToolbar(){
      FToolbar ft = topToolbarFactory("Present");
-     ft.addFController(new PresentButton(cp5, ft, this));
+     //ft.addFController(new PresentButton(cp5, ft, this));
+     ft.addFController(new PresentStartButton(cp5, ft, this));
+     ft.addFController(new PresentCurrentButton(cp5, ft, this));
    }
 
 
@@ -569,8 +615,10 @@ public Window.TextMode getTextMode(){
     ft.addFController(rSlider);
     ft.addFController(gSlider);
     ft.addFController(bSlider);
+    //ft.addFController(new TogFillButton(cp5, ft, this));
     ft.addFController(new SizeSlider(cp5, ft, this));
     ft.addFController(new RotateSlider(cp5, ft, this));
+    ft.addFController(new RestoreTrashButton(cp5, ft, this));
     ft.addFController(new TrashButton(cp5, ft, this));
   }
 
@@ -656,6 +704,16 @@ public Window.TextMode getTextMode(){
      for(FToolbar ftb : activeTbList)
         ftb.setVisable(false);
      activeTbList.get(i).setVisable(true);
+   }
+
+   /**
+    * [setActiveToolbar sets the active toolbar]
+    * @param i [index of the toolbar to activate in order of top toolbar added]
+    */
+   public void setActiveSubToolbar(int i){
+     for(FToolbar ftb : tbList)
+        ftb.setVisable(false);
+     tbList.get(i).setVisable(true);
    }
 
 

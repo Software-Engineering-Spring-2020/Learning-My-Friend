@@ -15,8 +15,8 @@ import frontend.controlP5.*;
 public class RectButton extends FButton{
   public RectButton(ControlP5 cp5, FToolbar parrent, GUI gui){
 
-    super(cp5, "rect", parrent, gui);
-    super.button.plugTo(this);
+    super(cp5, "Rectangle", parrent, gui);
+    super.button.plugTo(this, "rect");
     //super.button.setImages(loadImage("times-square.png"), loadImage("times-square.png"), loadImage("times-square.png"));
   }
 
