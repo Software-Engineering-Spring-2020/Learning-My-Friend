@@ -238,7 +238,7 @@ public class Window {
      }
 
      public void scroll(int startSlide) {
-       menu.scroll(startSlide);
+       menu.scroll(Math.max(startSlide, 0));
      }
 
     /*********************************************************

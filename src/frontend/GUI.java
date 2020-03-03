@@ -691,7 +691,7 @@ public Window.TextMode getTextMode(){
    * [setupScrollbar initialises the toolbar for scrolling thumbnails and slides]
    */
   private void setupScrollbar(){
-    FToolbar ft = toolbarFactory("Scrollbar", (float).01, (float).7, (float).16, (float).2);
+    FToolbar ft = toolbarFactory("Scrollbar", (float).02, (float).7, (float).16, (float).2);
     ft.getGroup().hideBar();
     ft.getGroup().disableCollapse();
     sb = new Scrollbar(cp5, ft, this);
