@@ -57,7 +57,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
      * @param textSize     The size of text to be displayed in pixels
      */
     public InteractiveTextBox(PApplet sketch, float x, float y, float width, float strokeWeight, int[] fillColor,
-            int[] boarderColor, String font, float textSize, TextMode m) {
+            int[] boarderColor, String font, float textSize, TextMode m, String start) {
         super(sketch, x, y, strokeWeight, fillColor, boarderColor, "", font, textSize);
         this.str = "";
         this.charactersPerLine = Math.max((int) (width / sketch.textWidth(WIDE_CHAR)), 1);
@@ -65,9 +65,8 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
         sketch.textSize(textSize);
         pixelWidth = width;
         pixelHeight = 0;
-        String example = "NEW TEXT BOX";
-        char[] exampleCharacters = example.toCharArray();
-        for (char c : exampleCharacters) {
+        char[] startCharacters = start.toCharArray();
+        for (char c : startCharacters) {
             addCharacter(c);
         }
         setMode(m);

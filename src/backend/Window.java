@@ -5,6 +5,7 @@ import backend.objects.InteractiveTextBox;
 import backend.objects.ObjectFactory;
 import backend.objects.SoundPlayerAnimation;
 import backend.objects.TranslateAnimation;
+import backend.objects.YouTubeTextBox;
 import backend.objects.Video;
 import processing.core.PApplet;
 import processing.core.PGraphics;
@@ -99,9 +100,7 @@ public class Window {
                 else if (!presenting && vobj.isPlaying()) vobj.stop();
             }
         }
-        sketch.push();
         this.slides.get(currentSlide).display(zoom, showComments, showGrid, gridSpacing);
-        sketch.pop();
 
         sketch.push();
         sketch.fill(fillColor[0], fillColor[1], fillColor[2], fillColor[3]);
@@ -144,7 +143,6 @@ public class Window {
           PollyObject obj = of.createPollyGon(pollyPoints, strokeWeight, fillColor, boarderColor);
             //slides.get(currentSlide).addObject(of.createPollyGon(pollyPoints, strokeWeight, fillColor, boarderColor));
             slides.get(currentSlide).addObject(obj);
-            selected.add(obj);
             pollyPoints.clear();
             numberVertex = 0;
         }
@@ -156,7 +154,13 @@ public class Window {
 
         if (!presenting) slides.get(currentSlide).showAnimationBoundingBoxes();
         ArrayList<PollyObject> objs = slides.get(currentSlide).getAllObjects();
-        for(PollyObject obj : objs) if (obj.link != null) obj.showBoundingBox(0, 0, 255);
+        for(PollyObject obj : objs) {
+            if (obj.link != null) obj.showBoundingBox(0, 0, 255);
+            if (obj instanceof YouTubeTextBox) {
+                YouTubeTextBox vobj = (YouTubeTextBox) obj;
+                if (vobj.readyForVideo()) importVideo(vobj.getVID(), ".");
+            }
+        }
         for(PollyObject obj : selected) obj.showBoundingBox(215,165,0);
 
         if(export && zoom == 1 && selected.size() == 0){
@@ -482,8 +486,21 @@ public class Window {
         return createInteractiveTextBox(x, y, font, textSize, TextMode.PLAIN);
     }
 
+    /**
+    * Makes a type of InteractiveTextBox that comes prefilled with a YouTube link so that the user only has to enter the
+    * video ID. On creation, the box is selected immediately so that the user can start typing right away.
+    * @param x Raw X position of the mouse
+    * @param y Raw Y position of the mouse
+    * @return Whether or not the object was created and added to the slide successfully
+    */
     public boolean createYouTubeTextBox(float x, float y) {
-        // TODO
+        float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
+        PollyObject obj = null;
+        if (slides.get(currentSlide).withinScope(coord[0], coord[1])) obj = of.createYouTubeTextBox(coord[0], coord[1]);
+        if (obj != null) {
+            selected.add(obj);
+            return slides.get(currentSlide).addObject(obj);
+        }
         return false;
     }
 

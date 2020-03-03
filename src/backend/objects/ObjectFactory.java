@@ -76,7 +76,18 @@ public class ObjectFactory {
     * @param textSize The size of text to be displayed in pixels
     */
     public InteractiveTextBox createInteractiveTextBox(float x, float y, float width, float strokeWeight, int[] fillColor, int[] boarderColor, String font, float textSize, TextMode m) {
-        return new InteractiveTextBox(sketch, x, y, width, strokeWeight, fillColor, boarderColor, font, textSize, m);
+        return new InteractiveTextBox(sketch, x, y, width, strokeWeight, fillColor, boarderColor, font, textSize, m, "NEW TEXT BOX");
+    }
+
+    /**
+    * Instantiate a new YouTubeTextBox
+    * @param x A float to represent the initial x starting position (in pixels) of the object, should be a slide-relative coordinate
+    * @param y A float to represent the initial y starting position (in pixels) of the object, should be a slide-relative coordinate
+    **/
+    public YouTubeTextBox createYouTubeTextBox(float x, float y) {
+        int[] fillColor = {255, 255, 255, 255};
+        int[] boarderColor = {255, 255, 255, 255};
+        return new YouTubeTextBox(sketch, x, y, 200, 2, fillColor, boarderColor, "arial", 12, TextMode.PLAIN, "https://www.youtube.com/watch?v=");
     }
 
     /**

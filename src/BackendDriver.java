@@ -167,6 +167,7 @@ public class BackendDriver extends PApplet {
 		//else if(this.key == 'R') this.win.createRect(this.mouseX, this.mouseY);
 		else if(this.key == 'T') this.win.createTextBox(this.mouseX, this.mouseY, "This is Text!", "arial", 12);
 		else if(this.key == 'I') this.win.createInteractiveTextBox(this.mouseX, this.mouseY, "arial", 12, TextMode.NUMBERED);
+		else if(this.key == 'D') this.win.createYouTubeTextBox(this.mouseX, this.mouseY);
 		//else if(this.key == 'A') this.win.createComment(this.mouseX, this.mouseY, "This is Comment!", "arial", 12);
 		//else if(this.key == 'C') this.win.createEllipse(this.mouseX, this.mouseY);
 
