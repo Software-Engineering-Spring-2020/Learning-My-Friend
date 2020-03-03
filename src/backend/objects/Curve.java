@@ -70,6 +70,7 @@ class Curve extends ColorfulObject implements Serializable{
   */
   protected void display(){
     super.display();
+    sketch.fill(0, 0);
     sketch.translate(-xcenter+xpos, -ycenter+ypos);
     sketch.bezier(points.get(0)[0], points.get(0)[1], points.get(1)[0], points.get(1)[1], points.get(2)[0], points.get(2)[1], points.get(3)[0], points.get(3)[1]);
   }

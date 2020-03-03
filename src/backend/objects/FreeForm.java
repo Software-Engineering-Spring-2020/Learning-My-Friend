@@ -64,7 +64,8 @@ class FreeForm extends Shape implements Serializable {
     shape = sketch.createShape(PShape.PATH);
     shape.beginShape();
     shape.strokeWeight(strokeWeight);
-    shape.fill(fillColor[0], fillColor[1], fillColor[2], fillColor[3]);
+    sketch.fill(255, 0);
+    shape.fill(fillColor[0], fillColor[1], fillColor[2], 0);
     shape.stroke(boarderColor[0], boarderColor[1], boarderColor[2], boarderColor[3]);
     for(int i = 0; i<points.size(); i++){
       float[] pos = new float[]{points.get(i)[0], points.get(i)[1]};
@@ -92,6 +93,7 @@ class FreeForm extends Shape implements Serializable {
   */
   protected void display() {
       super.display();
+      sketch.fill(255, 0);
       //shape.tint(boarderColor[0], boarderColor[1], boarderColor[2], boarderColor[3]);
       sketch.translate(-xcenter+xpos, -ycenter+ypos);
       sketch.shape(shape);

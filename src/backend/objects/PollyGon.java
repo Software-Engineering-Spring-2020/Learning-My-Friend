@@ -116,6 +116,7 @@ class PollyGon extends Shape implements Serializable {
 */
   protected void display() {
       super.display();
+      sketch.fill(0, 255);
       sketch.translate(-xcenter+xpos, -ycenter+ypos);
       sketch.shape(shape);
    }

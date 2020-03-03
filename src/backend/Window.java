@@ -480,6 +480,11 @@ public class Window {
         return createInteractiveTextBox(x, y, font, textSize, TextMode.PLAIN);
     }
 
+    public boolean createYouTubeTextBox(float x, float y) {
+        // TODO
+        return false;
+    }
+
     /**
     * Creates and draws a comment to the slide. Comments can be hidden.
     * @param x Raw X position of the mouse
@@ -668,6 +673,7 @@ public class Window {
         for (PollyObject shape : selected) {
             if (shape instanceof ColorfulObject)
                 ((ColorfulObject) shape).setFillColor(r, g, b, a);
+                ((ColorfulObject) shape).setBoarderColor(r, g, b);
         }
     }
 
@@ -680,6 +686,7 @@ public class Window {
         for (PollyObject shape : selected) {
             if (shape instanceof ColorfulObject)
                 ((ColorfulObject) shape).setBoarderColor(r, g, b);
+                ((ColorfulObject) shape).setFillColor(r, g, b, 255);
         }
     }
 
