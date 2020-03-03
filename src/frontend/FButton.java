@@ -19,6 +19,8 @@ public abstract class FButton extends FController{
   public FButton(ControlP5 cp5, String name, FToolbar parrent, GUI gui){
     super(cp5, name, parrent, gui);
     button = buttonFactory();
+    //button.setColorBackground(getGUI().returnColor(30,80,255));
+    //button.setColorForeground(getGUI().returnColor(30,80,255));
   }
 
   private Button buttonFactory(){
