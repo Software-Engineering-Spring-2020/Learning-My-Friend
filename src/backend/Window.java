@@ -99,7 +99,9 @@ public class Window {
                 else if (!presenting && vobj.isPlaying()) vobj.stop();
             }
         }
+        sketch.push();
         this.slides.get(currentSlide).display(zoom, showComments, showGrid, gridSpacing);
+        sketch.pop();
 
         sketch.push();
         sketch.fill(fillColor[0], fillColor[1], fillColor[2], fillColor[3]);
@@ -660,7 +662,7 @@ public class Window {
         boarderColor[0] = r;
         boarderColor[1] = g;
         boarderColor[2] = b;
-        boarderColor[3] = 0;
+        boarderColor[3] = 255;
         setSelectedBoarderColor(r, g, b);
     }
 
