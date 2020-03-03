@@ -128,16 +128,9 @@ public Window.TextMode getTextMode(){
  * [present enters present mode and hides all toolbars untill presentation is finished]
  */
   public void present(boolean fromStart){
-    if(true){
+    if(fromStart)
       win.selectSlide(0);
-      win.present();
-    }
-    else
-      win.present();
-    setTool('s');
-    for(FToolbar ft : tbList)
-      ft.setVisable(false);
-    presentModeToolbar.setVisable(true);
+    present();
   }
 
   /**
