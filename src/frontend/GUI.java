@@ -419,10 +419,7 @@ public Window.TextMode getTextMode(){
       fillColor[2] = i;
     if(c == 'a')
       fillColor[3] = i;
-    //win.setFillColor(fillColor[0], fillColor[1], fillColor[2], fillColor[3]);
-    if(toggleFill)
       win.setFillColor(fillColor[0], fillColor[1], fillColor[2], 255);
-    else
       setBoarder(i, c);
    }
 
@@ -572,7 +569,6 @@ public Window.TextMode getTextMode(){
     ft.addFController(rSlider);
     ft.addFController(gSlider);
     ft.addFController(bSlider);
-    ft.addFController(new TogFillButton(cp5, ft, this));
     ft.addFController(new SizeSlider(cp5, ft, this));
     ft.addFController(new RotateSlider(cp5, ft, this));
     ft.addFController(new TrashButton(cp5, ft, this));
