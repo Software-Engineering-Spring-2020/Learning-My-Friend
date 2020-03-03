@@ -224,6 +224,10 @@ public class Window {
       shapePoints.clear();
     }
 
+    public boolean isSelected() {
+        return (selected.size() > 0);
+    }
+
     /*********************************************************
      *
      *
