@@ -14,7 +14,7 @@ import frontend.controlP5.*;
 
 public class RestoreTrashButton extends FButton{
   public RestoreTrashButton(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "Restore Trash", parrent, gui);
+    super(cp5, "Undo Trash", parrent, gui);
     super.button.plugTo(this, "restore");
   }
 
