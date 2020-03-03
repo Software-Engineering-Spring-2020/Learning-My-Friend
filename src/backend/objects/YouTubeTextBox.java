@@ -24,10 +24,13 @@ public class YouTubeTextBox extends InteractiveTextBox {
 
     public void display() {
         super.display();
-        if (wasSelected && !isSelected) {
+        if (wasSelected && !isSelected && str.length() > 32) {
+            System.out.println("susann!!!");
             readyForVideo = true;
             wasSelected = false;
+            System.out.println(getVID());
         }
+        isSelected = false;
     }
 
     public boolean readyForVideo() {
@@ -36,6 +39,6 @@ public class YouTubeTextBox extends InteractiveTextBox {
     }
 
     public String getVID() {
-        return str.substring(31);
-    } 
+        return str.substring(32);
+    }
 }

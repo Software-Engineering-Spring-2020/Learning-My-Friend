@@ -85,8 +85,8 @@ public class ObjectFactory {
     * @param y A float to represent the initial y starting position (in pixels) of the object, should be a slide-relative coordinate
     **/
     public YouTubeTextBox createYouTubeTextBox(float x, float y) {
-        int[] fillColor = {255, 255, 255, 255};
-        int[] boarderColor = {255, 255, 255, 255};
+        int[] fillColor = {0, 0, 0, 255};
+        int[] boarderColor = {0, 0, 0, 255};
         return new YouTubeTextBox(sketch, x, y, 200, 2, fillColor, boarderColor, "arial", 12, TextMode.PLAIN, "https://www.youtube.com/watch?v=");
     }
 

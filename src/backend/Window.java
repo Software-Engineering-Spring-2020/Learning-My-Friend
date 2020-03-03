@@ -158,7 +158,11 @@ public class Window {
             if (obj.link != null) obj.showBoundingBox(0, 0, 255);
             if (obj instanceof YouTubeTextBox) {
                 YouTubeTextBox vobj = (YouTubeTextBox) obj;
-                if (vobj.readyForVideo()) importVideo(vobj.getVID(), ".");
+                if (vobj.readyForVideo()) {
+                    importVideo(vobj.getVID(), ".");
+                    slides.get(currentSlide).removeObject(vobj);
+                }
+                break;
             }
         }
         for(PollyObject obj : selected) obj.showBoundingBox(215,165,0);
