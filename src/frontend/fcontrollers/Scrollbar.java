@@ -16,14 +16,14 @@ public class Scrollbar extends FSlider{
   public Scrollbar(ControlP5 cp5, FToolbar parrent, GUI gui){
     super(cp5, "scrollbar", parrent, gui);
     super.slider.plugTo(this);
-    setMin(1);
-    setMax(10);
+    setMin(-10);
+    setMax(-1);
     super.slider.snapToTickMarks(true);
   }
 
 
   public void scrollbar(int val){
-    getGUI().scrollTo(val);
+    getGUI().scrollTo(val+1);
   }
 
 }

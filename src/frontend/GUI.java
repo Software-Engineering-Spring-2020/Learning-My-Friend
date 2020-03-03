@@ -428,7 +428,7 @@ public Window.TextMode getTextMode(){
  * @param i [the slide to be the new start of displayed slides on the scrollMenu]
  */
   public void scrollTo(int i){
-    	win.scroll(i);
+    	win.scroll(-1*i);
   }
 
   /**
@@ -455,6 +455,10 @@ public Window.TextMode getTextMode(){
       color[3] = i;
     win.setBoarderColor(color[0], color[1], color[2]);
     win.setFillColor(color[0], color[1], color[2], 255);
+  }
+
+  public int returnColor(int r, int g, int b){
+    return sketch.color(r, g, b);
   }
 
    /**
