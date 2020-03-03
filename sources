@@ -41,6 +41,8 @@ src\frontend\fcontrollers\BulletListButton.java
 src\frontend\fcontrollers\CopyButton.java
 src\frontend\fcontrollers\PasteButton.java
 
+src\frontend\FDropdown.java
+src\frontend\fcontrollers\FontDropdown.java
 
 src\frontend\fcontrollers\UngroupButton.java
 src\frontend\fcontrollers\GroupButton.java

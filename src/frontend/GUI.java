@@ -4,7 +4,7 @@ package frontend;
 import backend.Window;
 import frontend.controlP5.*;
 import frontend.fcontrollers.*;
-
+import java.util.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -151,6 +151,7 @@ public Window.TextMode getTextMode(){
     //TODO does this return true or false if done?
     if(!win.nextSlide())
       exitPresentMode();
+    System.out.println("nextslide");
   }
 
 /**
@@ -556,6 +557,13 @@ public Window.TextMode getTextMode(){
      ft.addFController(new TextButton(cp5, ft, this));
      ft.addFController(new NumListButton(cp5, ft, this));
      ft.addFController(new BulletListButton(cp5, ft, this));
+     FDropdown fd = new FontDropdown(cp5, ft, this);
+
+     //String[] fonts
+     //List l = ArrayList<String>("a", "b", "c", "d", "e", "f", "g", "h");
+
+     fd.setItems(PFont.list());
+     ft.addFController(fd);
 
    }
 

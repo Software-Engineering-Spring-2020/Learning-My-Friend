@@ -115,7 +115,9 @@ public class IOHandler{
 
 
   public void mouseWheel(MouseEvent event) {
-    win.zoom(event.getCount()/mouseSense);
+    //had to change scroll to on canvas only to protect gui elements
+    if(onCanvas())
+      win.zoom(event.getCount()/mouseSense);
   }
 
 
