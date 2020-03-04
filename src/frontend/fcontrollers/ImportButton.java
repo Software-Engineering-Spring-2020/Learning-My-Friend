@@ -14,7 +14,7 @@ import frontend.controlP5.*;
 
 public class ImportButton extends FButton{
   public ImportButton(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "Import", parrent, gui);
+    super(cp5, "Import(dept)", parrent, gui);
     super.button.plugTo(this);
   }
 

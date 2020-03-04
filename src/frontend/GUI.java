@@ -111,6 +111,16 @@ public class GUI {
   win.initScrollMenu((int)(sketch.width*.1), (int)(sketch.height*.57), (int)(sketch.width*.1), (int)(sketch.height*.6));
 }
 
+
+/**
+ * [input allows buttons to select multiple import types to be triggered]
+ * @param i [the int code of the input to trigger]
+ */
+  public void input(int i){
+
+  }
+
+
   /**
    * [getFont returns the string of the curently selected font]
    * @return [the curent font]
@@ -310,6 +320,7 @@ public Window.TextMode getTextMode(){
 
 
   public void trash(){
+    System.out.println("test");
     win.delete();
   }
 
