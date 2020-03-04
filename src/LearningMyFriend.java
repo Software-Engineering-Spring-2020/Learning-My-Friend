@@ -176,9 +176,9 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
 	}
 
 
-	public void mouseClicked(){
+	public void mousePressed(){
 		//if the mouse is on the canvas
-		h.mouseClicked();
+		h.mousePressed();
 
 	}
 
