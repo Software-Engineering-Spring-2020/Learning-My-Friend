@@ -118,8 +118,8 @@ public class IOHandler{
         win.createCurve(sketch.mouseX, sketch.mouseY);
 
    }
-   //else
-    //win.selectSlide(sketch.mouseX, sketch.mouseY);
+   else
+    win.selectSlide(sketch.mouseX, sketch.mouseY);
   }
 
 }
