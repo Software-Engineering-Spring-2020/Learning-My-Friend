@@ -1,0 +1,3 @@
+# List of generated media files. The columns are tab-separated:
+# id | media file type | display name | media file path
+174	windows	Windows Archive	C:\Users\Mei ^.^\Documents\College\Software_Engineering\myapp\LearningMyFriend_windows-x64_1_0.zip
