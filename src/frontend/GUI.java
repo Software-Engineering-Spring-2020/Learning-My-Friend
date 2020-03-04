@@ -647,9 +647,25 @@ public Window.TextMode getTextMode(){
  */
    private void setupAnimateToolbar(){
      FToolbar ft = topToolbarFactory("Animate");
-     ft.addFController(new FadeInButton(cp5, ft, this));
-     ft.addFController(new FadeOutButton(cp5, ft, this));
-     ft.addFController(new TranslateButton(cp5, ft, this));
+
+     FButton fadeIn = new FadeInButton(cp5, ft, this);
+     fadeIn.button.setColorBackground(sketch.color(150,0,0));
+     fadeIn.button.setColorActive(sketch.color(200,0,0));
+     fadeIn.button.setColorForeground(sketch.color(200,0,0));
+
+     FButton fadeOut = new FadeOutButton(cp5, ft, this);
+     fadeOut.button.setColorBackground(sketch.color(0,150,0));
+     fadeOut.button.setColorActive(sketch.color(0,200,0));
+     fadeOut.button.setColorForeground(sketch.color(0,200,0));
+
+     FButton translate = new TranslateButton(cp5, ft, this);
+     translate.button.setColorBackground(sketch.color(0,0,100));
+     translate.button.setColorActive(sketch.color(0,0,200));
+     translate.button.setColorForeground(sketch.color(0,0,200));
+
+     ft.addFController(fadeIn);
+     ft.addFController(fadeOut);
+     ft.addFController(translate);
 
    }
 

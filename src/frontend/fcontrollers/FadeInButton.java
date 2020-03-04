@@ -11,6 +11,7 @@ package frontend.fcontrollers;
 
 import frontend.*;
 import frontend.controlP5.*;
+import processing.core.*;
 
 public class FadeInButton extends FButton{
   public FadeInButton(ControlP5 cp5, FToolbar parrent, GUI gui){
