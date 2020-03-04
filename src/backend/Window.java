@@ -227,7 +227,7 @@ public class Window {
     /**
      * @return Whether any objects are currently selected.
      */
-    public boolean isSelected() {
+    public boolean isObjectSelected() {
         return (selected.size() > 0);
     }
 
