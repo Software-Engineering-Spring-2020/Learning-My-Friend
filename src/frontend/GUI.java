@@ -83,6 +83,8 @@ public class GUI {
   //font, the selected font to pass to IOhandler
   String font;
 
+  String[] fontList = {"AmarBangla.ttf", "Amar-Desh.ttf", "BenSenHandwriting.ttf", "Ekushey-Bangla.ttf", "Lal-Sabuj.ttf", "NikoshGrameen.ttf", "SiyamRupali.ttf"};
+
   /**
   * End of STATE Deleration
   */
@@ -145,7 +147,7 @@ public class GUI {
  * @param i [the number in PFont.list() of the selected font]
  */
   public void setFont(int i){
-    font = PFont.list()[i];
+    font = fontList[i];
   }
 
 /**
@@ -633,9 +635,9 @@ public Window.TextMode getTextMode(){
      FDropdown fd = new FontDropdown(cp5, ft, this);
 
      //String[] fonts
-     //List l = ArrayList<String>("a", "b", "c", "d", "e", "f", "g", "h");
+     String[] fonts = {"AmarBangla", "Amar-Desh", "BenSenHandwriting", "Ekushey-Bangla", "Lal-Sabuj", "NikoshGrameen", "SiyamRupali"};
 
-     fd.setItems(PFont.list());
+     fd.setItems(fonts);
      ft.addFController(fd);
 
    }
