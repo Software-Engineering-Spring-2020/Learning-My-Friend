@@ -98,7 +98,7 @@ public class IOHandler{
 
   private void action(){
     if(onCanvas()){
-        System.out.println("this is being called with tool " + gui.getTool());
+        //System.out.println("this is being called with tool " + gui.getTool());
       if(gui.getTool() == 'p')
         win.createFreeForm();
 
@@ -118,8 +118,8 @@ public class IOHandler{
         win.createCurve(sketch.mouseX, sketch.mouseY);
 
    }
-   else
-    win.selectSlide(sketch.mouseX, sketch.mouseY);
+   //else
+    //win.selectSlide(sketch.mouseX, sketch.mouseY);
   }
 
 }
