@@ -85,6 +85,8 @@ public class GUI {
 
   String[] fontList = {"AmarBangla.ttf", "Amar-Desh.ttf", "BenSenHandwriting.ttf", "Ekushey-Bangla.ttf", "Lal-Sabuj.ttf", "NikoshGrameen.ttf", "SiyamRupali.ttf"};
 
+
+
   /**
   * End of STATE Deleration
   */
@@ -110,8 +112,24 @@ public class GUI {
   setup();
   textMode = Window.TextMode.PLAIN;
   font = "Bangla.ttf";
-  win.initScrollMenu((int)(sketch.width*.1), (int)(sketch.height*.57), (int)(sketch.width*.1), (int)(sketch.height*.6));
+
+  win.initScrollMenu(getCurrentMenuPosX(), getCurrentMenuPosY(), getCurrentMenuSizeX(), getCurrentMenuSizeY());
 }
+
+
+  private int getCurrentMenuPosX(){
+    return (int)(sketch.width*(.15/2));
+  }
+  private int getCurrentMenuPosY(){
+    return (int)(sketch.height*.54);
+  }
+  private int getCurrentMenuSizeX(){
+    return (int)(sketch.width*.15);
+  }
+  private int getCurrentMenuSizeY(){
+    return (int)(sketch.height*.8);
+  }
+
 
 
 /**
@@ -365,7 +383,7 @@ public Window.TextMode getTextMode(){
    * [export opens file exploreor and passes export func]
    */
   public void export() {
-    File f = new File("drawing.png");
+    File f = new File("drawing");
     sketch.selectOutput("Select a file to save to export to", "exportFileSelected", f, this);
   }
 
@@ -384,7 +402,8 @@ public Window.TextMode getTextMode(){
 
   public void soundImport(){
     File f = new File("sound.mp3");
-    sketch.selectInput("Select a file to open:", "importFileSelected", f, this);
+    System.out.println("asking soundImport()");
+    sketch.selectInput("Select a file to open:", "importSoundCallback", f, this);
   }
 
   /**
@@ -402,6 +421,7 @@ public Window.TextMode getTextMode(){
         fext = fname.substring(fname.lastIndexOf('.'), fname.length());
         fname = fname.substring(0, fname.lastIndexOf('.'));
       }
+      System.out.println("asking winow to add sound");
       win.addAnimation(Window.AnimationOption.PLAY_SOUND, fname, fext);
     }
   }
@@ -746,7 +766,7 @@ public Window.TextMode getTextMode(){
  * [setupSlideToolbar initialises the toolbar for slides]
  */
   private void setupSlideToolbar(){
-    FToolbar ft = toolbarFactory("Slides", (float).1, (float).05, (float).06, (float).2);
+    FToolbar ft = toolbarFactory("Slides", (float).15, (float).05, (float).0, (float).08);
     //Disables the users ability to clapse the toolbar
     ft.getGroup().disableCollapse();
     //reduces boarder
@@ -894,8 +914,8 @@ public Window.TextMode getTextMode(){
      for(FToolbar tb : tbList)
       tb.update();
     //System.out.println("% of width " + (sketch.width*.15) + "   --   % of height" + (sketch.height*.20));
-     win.setMenuPosition((int)(sketch.width*.1), (int)(sketch.height*.57));
-     win.setMenuSize((int)(sketch.width*.1), (int)(sketch.height*.6));
+     win.setMenuPosition(getCurrentMenuPosX(), getCurrentMenuPosY());
+     win.setMenuSize(getCurrentMenuSizeX(), getCurrentMenuSizeY());
      win.reCenter();
    }
 

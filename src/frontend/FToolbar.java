@@ -391,7 +391,6 @@ public class FToolbar{
       int p = 0;
       if(getSizeX() < getSizeY()){
         for(float i = boarderY; i < deltaY; i+= (deltaY/conList.size())){
-          //System.out.println("Delta Y: " + deltaY + " i: " + (1/conList.size()));
           fc = conList.get(p);
           fc.setPos((float)boarderX, (float)i);
           fc.setSize((float)deltaX, (float)deltaY/conList.size());
@@ -406,24 +405,22 @@ public class FToolbar{
           fc.setPos((float)i, (float)boarderY);
           fc.setSize((float)deltaX/conList.size(), (float)deltaY);
           fc.update();
-          //System.out.println(fc.getName());
-          //System.out.println("p: " + p + " deltaX = " + deltaX + " delta/size = " + (deltaX/conList.size()) + " Current i: " + i);
           p++;
-          //System.out.println("forloop should continue to run if " + i + " < " + deltaX + " " + (i < deltaX));
         }
       }
     }
-
-
-
-
-
-    /*
-    private int pixlePercentX(float f){}
-
-    private int pixlePercentY(float f){}
-   */
   }
 
+/**
+ * [boarder creates a boarder around FControllers that call it (not working, CP5 draws over this)]
+ * @param xPos  [x start postion]
+ * @param yPos  [y start postion]
+ * @param xSize [width]
+ * @param ySize [height]
+ */
+  protected void boarder(int xPos, int yPos, int xSize, int ySize){
+
+    sketch.rect(xPos, yPos, xSize, ySize);
+  }
 
 }

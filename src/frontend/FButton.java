@@ -11,6 +11,7 @@ package frontend;
 import frontend.*;
 import frontend.controlP5.*;
 
+
 //make proteced?
 public abstract class FButton extends FController{
   public Button button;
@@ -33,6 +34,9 @@ public abstract class FButton extends FController{
   protected void update(){
     button.setSize((int)Math.round(parrent.getRealSizeRX()*getSizeX()), (int)Math.round(parrent.getRealSizeRY()*getSizeY()));
     button.setPosition((int)Math.round(parrent.getRealSizeRX()*getPosX()), (int)Math.round(parrent.getRealSizeRY()*getPosY()));
+
+  //  parrent.boarder((int)Math.round(parrent.getRealSizeRX()*getPosX()), (int)Math.round(parrent.getRealSizeRY()*getPosY()), (int)Math.round(parrent.getRealSizeRX()*getSizeX()), (int)Math.round(parrent.getRealSizeRY()*getSizeY()));
+
   }
 
 
