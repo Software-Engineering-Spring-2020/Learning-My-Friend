@@ -118,11 +118,10 @@ public class IOHandler{
     if(gui.getTool() == 'h')
       win.addAnimation(Window.AnimationOption.TRANSLATE, sketch.mouseX, sketch.mouseY);
 
-    else{
-      win.selectSlide(sketch.mouseX, sketch.mouseY);
-    }
     gui.setTool('s');
    }
+   else
+    win.selectSlide(sketch.mouseX, sketch.mouseY);
   }
 
 }
