@@ -103,11 +103,13 @@ class ScrollMenu{
   */
   protected int selectSlide(float x, float y){
     PVector pos = new PVector(x, y);
+    int cSlide = currentSlide;
     if(pos.x>scrollMenuX && pos.y>scrollMenuY && pos.x<scrollMenuX+menuWidth && pos.y<scrollMenuY+menuHeight){
       int index = (int)((pos.y - scrollMenuY)/(empty.height+offset));
       if(index >= 0 && index+topSlide < thumbnails.size()) currentSlide = topSlide + index;
     }
     scroll(topSlide);
+    if(currentSlide == cSlide) return -1;
     return currentSlide;
   }
 
