@@ -402,7 +402,7 @@ public Window.TextMode getTextMode(){
         fext = fname.substring(fname.lastIndexOf('.'), fname.length());
         fname = fname.substring(0, fname.lastIndexOf('.'));
       }
-      win.addAnimation(Window.AnimationOption.FADE_OUT, fname, fext);
+      win.addAnimation(Window.AnimationOption.PLAY_SOUND, fname, fext);
     }
   }
 

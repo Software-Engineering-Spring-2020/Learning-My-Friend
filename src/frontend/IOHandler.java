@@ -56,6 +56,14 @@ public class IOHandler{
     if(onCanvas()){
       if(gui.getTool() == 's')
         win.select(sketch.mouseX, sketch.mouseY);
+      if(gui.getTool() == 'f')
+        win.addAnimation(Window.AnimationOption.FADE_IN, sketch.mouseX, sketch.mouseY);
+
+      if(gui.getTool() == 'g')
+        win.addAnimation(Window.AnimationOption.FADE_OUT, sketch.mouseX, sketch.mouseY);
+
+      if(gui.getTool() == 'h')
+        win.addAnimation(Window.AnimationOption.TRANSLATE, sketch.mouseX, sketch.mouseY);
     }
   }
 
@@ -65,6 +73,9 @@ public class IOHandler{
 
   public void mouseReleased(){
     action();
+    //reequip the select tool only if on canvas
+    if(onCanvas())
+      gui.setTool('s');
   }
 
   public void mouseDragged() {
@@ -87,38 +98,25 @@ public class IOHandler{
 
   private void action(){
     if(onCanvas()){
+        System.out.println("this is being called with tool " + gui.getTool());
+      if(gui.getTool() == 'p')
+        win.createFreeForm();
 
-    if(gui.getTool() == 'p')
-      win.createFreeForm();
+      if(gui.getTool() == 'r')
+        win.createRect(sketch.mouseX, sketch.mouseY);
 
-    if(gui.getTool() == 'r')
-      win.createRect(sketch.mouseX, sketch.mouseY);
+      if(gui.getTool() == 'e')
+        win.createEllipse(sketch.mouseX, sketch.mouseY);
 
-    if(gui.getTool() == 'e')
-      win.createEllipse(sketch.mouseX, sketch.mouseY);
+      if(gui.getTool() == 't')
+        win.createInteractiveTextBox(sketch.mouseX, sketch.mouseY, gui.getFont(), 20, gui.getTextMode());
 
-    if(gui.getTool() == 't')
-      win.createInteractiveTextBox(sketch.mouseX, sketch.mouseY, gui.getFont(), 20, gui.getTextMode());
+      if(gui.getTool() == 'l')
+        win.createLine(sketch.mouseX, sketch.mouseY);
 
-    if(gui.getTool() == 'c')
-      win.createComment(sketch.mouseX, sketch.mouseY, gui.getCurrentString(), gui.getFont(), 20);
+      if(gui.getTool() == 'u')
+        win.createCurve(sketch.mouseX, sketch.mouseY);
 
-    if(gui.getTool() == 'l')
-      win.createLine(sketch.mouseX, sketch.mouseY);
-
-    if(gui.getTool() == 'u')
-      win.createCurve(sketch.mouseX, sketch.mouseY);
-
-    if(gui.getTool() == 'f')
-      win.addAnimation(Window.AnimationOption.FADE_IN, sketch.mouseX, sketch.mouseY);
-
-    if(gui.getTool() == 'g')
-      win.addAnimation(Window.AnimationOption.FADE_OUT, sketch.mouseX, sketch.mouseY);
-
-    if(gui.getTool() == 'h')
-      win.addAnimation(Window.AnimationOption.TRANSLATE, sketch.mouseX, sketch.mouseY);
-
-    gui.setTool('s');
    }
    else
     win.selectSlide(sketch.mouseX, sketch.mouseY);
