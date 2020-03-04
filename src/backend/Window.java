@@ -267,11 +267,12 @@ public class Window {
      *********************************************************/
 
      /**
+     * @deprecated Please do not use this method; it is completely disabled 
      * Alter the size of the slide from its center. If any change should decrease the zoom below 0.1%, it is set to 0.1% instead. Slide starts at 100%
      * @param factor The amount to change the current zoom (in percentage) from the current zoom amount
      */
     public void zoom(float factor) { // draw offcenter once zoom
-        zoom = sketch.max(.001F, zoom + factor);
+        //zoom = sketch.max(.001F, zoom + factor);
     }
 
     /**
@@ -597,16 +598,13 @@ public class Window {
      }
 
      /**
-     * Alter the size of each selected object from the relative center of each object. If no object is selected, the slide is zoomed instead
+     * Alter the size of each selected object from the relative center of each object.
      * @param factor The amount to scale the object (in percentage) from the current size
      */
      public void resize(float factor){
-       if(selected.size() == 0) zoom(factor);
-       else{
-         for(PollyObject obj : selected){
+       for(PollyObject obj : selected){
            obj.resize(factor);
-         }
-       }
+        }
      }
 
      /**
@@ -652,8 +650,8 @@ public class Window {
       float[] translation = translate(mouseX-pmouseX, mouseY-pmouseY);
 
       if (!presenting) {
-        if(selected.size() == 0 && withinCanvas(mouseX, mouseY)) this.slides.get(currentSlide).pan(translation[0], translation[1]);
-        else{
+        //if(selected.size() == 0 && withinCanvas(mouseX, mouseY)) this.slides.get(currentSlide).pan(translation[0], translation[1]);
+        if (selected.size() > 0) {
             for (PollyObject obj : selected) {
             if(obj.withinScope(coord[0], coord[1])) pan = true;
             }
