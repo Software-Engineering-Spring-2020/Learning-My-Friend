@@ -117,7 +117,7 @@ public class GUI {
  * @param i [the int code of the input to trigger]
  */
   public void input(int i){
-
+    
   }
 
 
@@ -628,8 +628,6 @@ public Window.TextMode getTextMode(){
  */
    private void setupObjectSettingsToolbar(){
     FToolbar ft = toolbarFactory("Obj Set", (float).2, (float).8, (float).8, (float).1);
-    ft.addFController(new SelecButton(cp5, ft, this));
-
     rSlider = new RFillSlider(cp5, ft, this);
     bSlider = new GFillSlider(cp5, ft, this);
     gSlider = new BFillSlider(cp5, ft, this);
@@ -669,7 +667,11 @@ public Window.TextMode getTextMode(){
       ft.addFController(new SaveButton(cp5, ft, this));
       ft.addFController(new OpenButton(cp5, ft, this));
       ft.addFController(new ExportButton(cp5, ft, this));
-      ft.addFController(new ImportButton(cp5, ft, this));
+
+      String[] importMethods = {"Picture", "Sound", "Youtube"};
+      FDropdown fd = new ImportDropdown(cp5, ft, this);
+      fd.setItems(importMethods);
+      ft.addFController(fd);
      }
 
 /**

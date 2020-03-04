@@ -24,7 +24,7 @@ public class ImportDropdown extends FDropdown{
  * @param val [description]
  */
   public void plug(int val){
-    getGUI().setFont(val);
+    getGUI().input(val);
   }
 
 }
