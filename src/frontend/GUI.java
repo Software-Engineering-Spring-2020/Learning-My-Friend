@@ -113,11 +113,19 @@ public class GUI {
 
 
 /**
- * [input allows buttons to select multiple import types to be triggered]
+ * [import allows buttons to select multiple import types to be triggered]
  * @param i [the int code of the input to trigger]
  */
-  public void input(int i){
-    
+  public void importMethod(int i){
+    if(i == 0)
+      fileImport();
+    //else if(i == 1)
+
+    //else if(i ==2)
+
+    else{
+      fileImport();
+    }
   }
 
 
