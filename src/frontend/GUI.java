@@ -97,6 +97,7 @@ public class GUI {
   this.sketch = sketch;
   this.win = win;
   cp5 = new ControlP5(sketch);
+  cp5.setFont(sketch.createFont("Arial", 12));
   tbList = new LinkedList<FToolbar>();
   activeTbList = new LinkedList<FToolbar>();
 
@@ -825,6 +826,7 @@ public Window.TextMode getTextMode(){
     //System.out.println("% of width " + (sketch.width*.15) + "   --   % of height" + (sketch.height*.20));
      win.setMenuPosition((int)(sketch.width*.1), (int)(sketch.height*.57));
      win.setMenuSize((int)(sketch.width*.1), (int)(sketch.height*.6));
+     win.reCenter();
    }
 
 }
