@@ -60,44 +60,32 @@ public class IOHandler{
   }
 
   public void mousePressed(){
-    //Needs to parse the gui tool selected
-    if(onCanvas()){
-
-      if(gui.getTool() == 'r')
-        win.createRect(sketch.mouseX, sketch.mouseY);
-
-      if(gui.getTool() == 'e')
-        win.createEllipse(sketch.mouseX, sketch.mouseY);
-
-      if(gui.getTool() == 't')
-        win.createInteractiveTextBox(sketch.mouseX, sketch.mouseY, gui.getFont(), 20, gui.getTextMode());
-
-      if(gui.getTool() == 'c')
-        win.createComment(sketch.mouseX, sketch.mouseY, gui.getCurrentString(), gui.getFont(), 20);
-
-      if(gui.getTool() == 'l')
-        win.createLine(sketch.mouseX, sketch.mouseY);
-
-      if(gui.getTool() == 'u')
-        win.createCurve(sketch.mouseX, sketch.mouseY);
-
-      if(gui.getTool() == 'f')
-        win.addAnimation(Window.AnimationOption.FADE_IN, sketch.mouseX, sketch.mouseY);
-
-      if(gui.getTool() == 'g')
-        win.addAnimation(Window.AnimationOption.FADE_OUT, sketch.mouseX, sketch.mouseY);
-
-      if(gui.getTool() == 'h')
-        win.addAnimation(Window.AnimationOption.TRANSLATE, sketch.mouseX, sketch.mouseY);
-
-      }
-      else{
-        //win.selectSlide(sketch.mouseX, sketch.mouseY);
-      }
-
+    action();
   }
 
   public void mouseReleased(){
+    action();
+  }
+
+  public void mouseDragged() {
+    //if pan tool is selected
+    if(gui.getTool() == 'p' && onCanvas())
+      win.freeDraw(sketch.mouseX, sketch.mouseY);
+    else if(onCanvas())
+      win.pan(sketch.mouseX, sketch.mouseY, sketch.pmouseX, sketch.pmouseY);
+  }
+
+
+  public void mouseWheel(MouseEvent event) {
+    //had to change scroll to on canvas only to protect gui elements
+    //if(onCanvas())
+    //  win.zoom(event.getCount()/mouseSense);
+  }
+
+
+
+
+  private void action(){
     if(onCanvas()){
 
     if(gui.getTool() == 'p')
@@ -131,26 +119,10 @@ public class IOHandler{
       win.addAnimation(Window.AnimationOption.TRANSLATE, sketch.mouseX, sketch.mouseY);
 
     else{
-      //win.selectSlide(sketch.mouseX, sketch.mouseY);
+      win.selectSlide(sketch.mouseX, sketch.mouseY);
     }
     gui.setTool('s');
    }
   }
-
-  public void mouseDragged() {
-    //if pan tool is selected
-    if(gui.getTool() == 'p' && onCanvas())
-      win.freeDraw(sketch.mouseX, sketch.mouseY);
-    else if(onCanvas())
-      win.pan(sketch.mouseX, sketch.mouseY, sketch.pmouseX, sketch.pmouseY);
-  }
-
-
-  public void mouseWheel(MouseEvent event) {
-    //had to change scroll to on canvas only to protect gui elements
-    //if(onCanvas())
-    //  win.zoom(event.getCount()/mouseSense);
-  }
-
 
 }
