@@ -119,14 +119,17 @@ public class GUI {
   public void importMethod(int i){
     if(i == 0)
       fileImport();
-    //else if(i == 1)
-
+    else if(i == 1)
+      soundImport();
     //else if(i ==2)
 
     else{
       fileImport();
     }
   }
+
+
+
 
 
   /**
@@ -377,11 +380,39 @@ public Window.TextMode getTextMode(){
     }
  }
 
+  public void soundImport(){
+    File f = new File("sound.mp3");
+    sketch.selectInput("Select a file to open:", "importFileSelected", f, this);
+  }
+
+  /**
+   * [importSoundCallback callback called by PApplet]
+   * @param selection [file in callback arugemnt]
+   */
+  public void importSoundCallback(File selection){
+    if (selection == null) {
+      System.out.println("Window was closed or the user hit cancel.");
+    } else {
+      String fname = selection.getAbsolutePath();
+      String fext = ".mp3";
+      // trim the file extension first.
+      if (fname.contains(".")) {
+        fext = fname.substring(fname.lastIndexOf('.'), fname.length());
+        fname = fname.substring(0, fname.lastIndexOf('.'));
+      }
+      win.addAnimation(Window.AnimationOption.FADE_OUT, fname, fext);
+    }
+  }
+
+  /**
+   * [fileImport is called to import images]
+   */
    public void fileImport() {
     File f = new File("drawing.png");
     sketch.selectInput("Select a file to open:", "importFileSelected", f, this);
 
   }
+
 
   public void importFileSelected(File selection) {
     if (selection == null) {
