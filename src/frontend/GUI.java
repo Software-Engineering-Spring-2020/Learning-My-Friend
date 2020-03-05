@@ -840,7 +840,7 @@ public Window.TextMode getTextMode(){
  * [setupObjectSettingsToolbar initialises the toolbar for object settings]
  */
    private void setupObjectSettingsToolbar(){
-    FToolbar ft = toolbarFactory("Obj Set", (float).2, (float).8, (float).8, (float).1);
+    FToolbar ft = toolbarFactory("Obj Set", (float).2, (float).8, (float).78, (float).1);
     rSlider = new RFillSlider(cp5, ft, this);
     bSlider = new GFillSlider(cp5, ft, this);
     gSlider = new BFillSlider(cp5, ft, this);
@@ -848,6 +848,10 @@ public Window.TextMode getTextMode(){
     rSlider.slider.setColorBackground(sketch.color(100,0,0));
     rSlider.slider.setColorActive(sketch.color(255,0,0));
     rSlider.slider.setColorForeground(sketch.color(255,0,0));
+    //rSlider.slider.setNumberOfTickMarks(6);
+    //rSlider.slider.snapToTickMarks(false);
+    //rSlider.slider.showTickMarks(true);
+
 
     bSlider.slider.setColorBackground(sketch.color(0,100,0));
     bSlider.slider.setColorActive(sketch.color(0,255,0));

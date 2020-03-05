@@ -77,7 +77,6 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
  */
 	public void setup(){
 		surface.setResizable(true);
-
 		//Init Canvas Position and Size in center of the screen
 	 	canvasX = width/4;
 		canvasY  = height/4;
@@ -94,7 +93,7 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
  * [draw description]
  */
 	public void draw(){
-		background(150);
+		background(200);
 		win.display();
 		gui.display();
 	}
