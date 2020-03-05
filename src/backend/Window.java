@@ -142,13 +142,13 @@ public class Window {
         if (pollyPoints.size() >= numberVertex && numberVertex > 1) {
           PollyObject obj = of.createPollyGon(pollyPoints, strokeWeight, fillColor, boarderColor);
             //slides.get(currentSlide).addObject(of.createPollyGon(pollyPoints, strokeWeight, fillColor, boarderColor));
-            slides.get(currentSlide).addObject(obj);
+            addObjectToCurrentSlide(obj);
             pollyPoints.clear();
             numberVertex = 0;
         }
 
         if (curvePoints.size() >= 4) {
-            slides.get(currentSlide).addObject(of.createCurve(curvePoints, strokeWeight, fillColor, boarderColor));
+            addObjectToCurrentSlide(of.createCurve(curvePoints, strokeWeight, fillColor, boarderColor));
             curvePoints.clear();
         }
 
@@ -356,12 +356,7 @@ public class Window {
        float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
        if (slides.get(currentSlide).withinScope(coord[0], coord[1]))
           obj = of.createEllipse(coord[0], coord[1], w, h, strokeWeight, fillColor, boarderColor);
-        if (obj != null) {
-            selected.clear();
-            selected.add(obj);
-            return slides.get(currentSlide).addObject(obj);
-        }
-        return false;
+        return addObjectToCurrentSlide(obj);
      }
 
      /**
@@ -392,11 +387,7 @@ public class Window {
         PollyObject obj = of.createEllipse(shapePoints.get(0)[0], shapePoints.get(0)[1],
                   2*Math.abs(shapePoints.get(1)[0]-shapePoints.get(0)[0]), 2*Math.abs(shapePoints.get(1)[1]-shapePoints.get(0)[1]),
                   strokeWeight, fillColor, boarderColor);
-        if (obj != null) {
-        selected.clear();
-        selected.add(obj);
-        return slides.get(currentSlide).addObject(obj);
-        }
+        return addObjectToCurrentSlide(obj);
       }
         return false;
     }
@@ -414,12 +405,7 @@ public class Window {
         float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
         if (slides.get(currentSlide).withinScope(coord[0], coord[1]))
             obj = of.createRect(coord[0], coord[1], w, h, strokeWeight, fillColor, boarderColor);
-        if (obj != null) {
-            selected.clear();
-            selected.add(obj);
-            return slides.get(currentSlide).addObject(obj);
-        }
-        return false;
+        return addObjectToCurrentSlide(obj);
     }
 
     /**
@@ -450,7 +436,7 @@ public class Window {
         PollyObject obj = of.createRect(shapePoints.get(0)[0], shapePoints.get(0)[1],
                   2*Math.abs(shapePoints.get(1)[0]-shapePoints.get(0)[0]), 2*Math.abs(shapePoints.get(1)[1]-shapePoints.get(0)[1]),
                   strokeWeight, fillColor, boarderColor);
-        return slides.get(currentSlide).addObject(obj);
+        return addObjectToCurrentSlide(obj);
 
       }
         return false;
@@ -470,12 +456,7 @@ public class Window {
         float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
         if (slides.get(currentSlide).withinScope(coord[0], coord[1]))
             obj = of.createTextBox(coord[0], coord[1], strokeWeight, fillColor, boarderColor, str, font, textSize);
-        if (obj != null) {
-            selected.clear();
-            selected.add(obj);
-            return slides.get(currentSlide).addObject(obj);
-        }
-        return false;
+        return addObjectToCurrentSlide(obj);
     }
 
     /**
@@ -501,11 +482,7 @@ public class Window {
                         strokeWeight, fillColor, boarderColor);
             float width = widthRect.pixelWidth;
             obj = of.createInteractiveTextBox(shapePoints.get(0)[0], shapePoints.get(0)[1], width, strokeWeight, fillColor, boarderColor, font, textSize, m);
-            if (obj != null) {
-                selected.clear();
-                selected.add(obj);
-                return slides.get(currentSlide).addObject(obj);
-            }
+            return addObjectToCurrentSlide(obj);
         }
         return false;
     }
@@ -525,12 +502,7 @@ public class Window {
         float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
         PollyObject obj = null;
         if (slides.get(currentSlide).withinScope(coord[0], coord[1])) obj = of.createYouTubeTextBox(coord[0], coord[1]);
-        if (obj != null) {
-            selected.clear();
-            selected.add(obj);
-            return slides.get(currentSlide).addObject(obj);
-        }
-        return false;
+        return addObjectToCurrentSlide(obj);
     }
 
     /**
@@ -547,12 +519,7 @@ public class Window {
         float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
         if (slides.get(currentSlide).withinScope(coord[0], coord[1]))
             obj = of.createComment(coord[0], coord[1], strokeWeight, fillColor, boarderColor, str, font, textSize);
-        if (obj != null) {
-            selected.clear();
-            selected.add(obj);
-            return slides.get(currentSlide).addObject(obj);
-        }
-        return false;
+        return addObjectToCurrentSlide(obj);
     }
 
     /**
@@ -568,12 +535,7 @@ public class Window {
         float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
         if (slides.get(currentSlide).withinScope(coord[0], coord[1]))
             obj = of.importImage(coord[0], coord[1], filename, extension);
-        if (obj != null) {
-            selected.clear();
-            selected.add(obj);
-            return slides.get(currentSlide).addObject(obj);
-        }
-        return false;
+        return addObjectToCurrentSlide(obj);
     }
 
     /**
@@ -584,12 +546,7 @@ public class Window {
     */
     public boolean importImage(String filename, String extension) {
         PollyObject obj = of.importImage(0, 0, filename, extension);
-        if (obj != null) {
-            selected.clear();
-            selected.add(obj);
-            return slides.get(currentSlide).addObject(obj);
-        }
-        return false;
+        return addObjectToCurrentSlide(obj);
     }
 
     /**
@@ -599,13 +556,18 @@ public class Window {
     */
    public boolean importVideo(String vid, String filepath) {
     PollyObject obj = of.importVideo(0, 0, vid, filepath);
-    if (obj != null) {
-        selected.clear();
-        selected.add(obj);
-        return slides.get(currentSlide).addObject(obj);
-    }
+    addObjectToCurrentSlide(obj);
     return false;
-}
+    }
+
+    private boolean addObjectToCurrentSlide(PollyObject obj) {
+        if (obj != null) {
+            selected.clear();
+            selected.add(obj);
+            return slides.get(currentSlide).addObject(obj);
+        }
+        return false;
+    }
 
     /*********************************************************
      *
@@ -643,7 +605,7 @@ public class Window {
      public void toggleGroup(){
        for(PollyObject obj : selected){
          if(obj instanceof Group) slides.get(currentSlide).removeObject(obj);
-         else slides.get(currentSlide).addObject(new Group(sketch, 0, 0, selected));
+         addObjectToCurrentSlide(new Group(sketch, 0, 0, selected));
        }
      }
 
@@ -652,7 +614,7 @@ public class Window {
      * @deprecated Grouping is not a supported mechanic in slides
      */
     public void group() {
-        slides.get(currentSlide).addObject(new Group(sketch, 0, 0, selected));
+        addObjectToCurrentSlide(new Group(sketch, 0, 0, selected));
     }
 
     /**
@@ -900,7 +862,7 @@ public class Window {
     public void duplicateSelected() {
         for (PollyObject shape : selected) {
             try {
-                slides.get(currentSlide).addObject(SerialManager.deepClonePollyObject(sketch, shape));
+                addObjectToCurrentSlide(SerialManager.deepClonePollyObject(sketch, shape));
 			} catch (ClassNotFoundException | IOException e) {
 				System.out.println(e);
 				e.printStackTrace();
@@ -916,7 +878,7 @@ public class Window {
     public void duplicate() {
         for (PollyObject shape : selected) {
             try {
-                slides.get(currentSlide).addObject(SerialManager.deepClonePollyObject(sketch, shape));
+                addObjectToCurrentSlide(SerialManager.deepClonePollyObject(sketch, shape));
 			} catch (ClassNotFoundException | IOException e) {
 				System.out.println(e);
 				e.printStackTrace();
@@ -940,7 +902,7 @@ public class Window {
     public boolean restoreLast() {
         sketch.println(trash.size());
         if (trash.isEmpty()) return false;
-        return slides.get(currentSlide).addObject(trash.remove(trash.size()-1));
+        return addObjectToCurrentSlide(trash.remove(trash.size()-1));
     }
 
     /**
@@ -988,7 +950,7 @@ public class Window {
       for (PollyObject shape : copied) {
           try {
               //shape.pan(10, 10);
-              slides.get(currentSlide).addObject(SerialManager.deepClonePollyObject(sketch, shape));
+              addObjectToCurrentSlide(SerialManager.deepClonePollyObject(sketch, shape));
               //shape.pan(-10, -10);
               slides.get(currentSlide).getShape(slides.get(currentSlide).getNumObjects()-1).pan(10, 10);
     } catch (ClassNotFoundException | IOException e) {
@@ -1091,7 +1053,7 @@ public class Window {
     * @see mouseRelease()
     */
     public void createFreeForm(){ //must be called on the mouseReleased()
-        if(!freePoints.isEmpty()) slides.get(currentSlide).addObject(of.createFreeForm(freePoints, strokeWeight, fillColor, boarderColor));
+        if(!freePoints.isEmpty()) addObjectToCurrentSlide(of.createFreeForm(freePoints, strokeWeight, fillColor, boarderColor));
         freePoints.clear();
     }
 
