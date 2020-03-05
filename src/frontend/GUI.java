@@ -158,8 +158,8 @@ public class GUI {
       fileImport();
     else if(i == 1)
       soundImport();
-    //else if(i ==2)
-
+    else if(i ==2)
+      win.createYouTubeTextBox(sketch.width/2, sketch.height/2);
     else{
       fileImport();
     }
