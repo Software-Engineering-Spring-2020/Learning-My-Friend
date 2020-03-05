@@ -1,6 +1,8 @@
 package backend;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
@@ -65,8 +67,26 @@ class DrawSpace extends ColorfulObject{
     }
 
     protected void showAnimationBoundingBoxes() {
-        for (Animation anim : anims) {
-            if (anim instanceof TranslateAnimation) anim.showBoundingBox(0, 0, 100);
+        HashMap<PollyObject, float[]> locations = new HashMap<PollyObject, float[]>();
+        for (int i = 0; i < anims.size(); i++) {
+            Animation anim = anims.get(i);
+            if (anim instanceof TranslateAnimation) {
+                TranslateAnimation tanim = (TranslateAnimation) anim;
+                for (PollyObject member : tanim.getMembers()) {
+                    float[] start = member.getPosition();
+                    float[] end = tanim.getDestination();
+                    if (locations.containsKey(member)) {
+                        start = locations.get(member);
+                        end = tanim.getDestination();
+                    }
+                    sketch.push();
+                    sketch.stroke(0, 0, 100);
+                    sketch.line(start[0], start[1], end[0], end[1]);
+                    sketch.pop();
+                    locations.put(member, end);
+                }
+                anim.showBoundingBox(0, 0, 100);
+            }
             if (anim instanceof FadeAnimation) {
                 FadeAnimation fanim = (FadeAnimation) anim;
                 if (fanim.getEndAlpha() == 0) fanim.showBoundingBox(0, 150, 0);

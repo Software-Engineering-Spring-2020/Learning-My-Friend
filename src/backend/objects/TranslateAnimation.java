@@ -39,9 +39,21 @@ public class TranslateAnimation extends Animation implements Serializable {
       sketch.push();
       sketch.strokeWeight(3);
       sketch.stroke(r, g, b);
-      sketch.line(obj.getPosition()[0], obj.getPosition()[1], end[0], end[1]);
       sketch.pop();
     }
+  }
+
+  public void showLine(float[] start, float r, float g, float b) {
+    boolean original = false;
+    if (start == null) original = true;
+    for (PollyObject obj : members) {
+      if (original) start = obj.getPosition();
+      sketch.line(start[0], start[1], end[0], end[1]);
+    }
+  }
+
+  public float[] getDestination() {
+    return end;
   }
 
   protected void addMember(PollyObject newMember) {
