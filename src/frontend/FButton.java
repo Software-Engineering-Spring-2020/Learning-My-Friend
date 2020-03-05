@@ -29,6 +29,14 @@ public abstract class FButton extends FController{
   }
 
   /**
+   * [setLabelColor sets the color of the lable]
+   * @param i [0-255 grey lable scale]
+   */
+    public void setLabelColor(int i){
+      button.getCaptionLabel().setColor(i);
+    }
+
+  /**
    * [update updates the ControlP5 object to the FControlers size]
    */
   protected void update(){
