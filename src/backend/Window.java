@@ -356,8 +356,11 @@ public class Window {
        float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
        if (slides.get(currentSlide).withinScope(coord[0], coord[1]))
           obj = of.createEllipse(coord[0], coord[1], w, h, strokeWeight, fillColor, boarderColor);
-        if (obj != null)
+        if (obj != null) {
+            selected.clear();
+            selected.add(obj);
             return slides.get(currentSlide).addObject(obj);
+        }
         return false;
      }
 
@@ -389,8 +392,11 @@ public class Window {
         PollyObject obj = of.createEllipse(shapePoints.get(0)[0], shapePoints.get(0)[1],
                   2*Math.abs(shapePoints.get(1)[0]-shapePoints.get(0)[0]), 2*Math.abs(shapePoints.get(1)[1]-shapePoints.get(0)[1]),
                   strokeWeight, fillColor, boarderColor);
+        if (obj != null) {
+        selected.clear();
+        selected.add(obj);
         return slides.get(currentSlide).addObject(obj);
-
+        }
       }
         return false;
     }
@@ -408,8 +414,11 @@ public class Window {
         float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
         if (slides.get(currentSlide).withinScope(coord[0], coord[1]))
             obj = of.createRect(coord[0], coord[1], w, h, strokeWeight, fillColor, boarderColor);
-        if (obj != null)
+        if (obj != null) {
+            selected.clear();
+            selected.add(obj);
             return slides.get(currentSlide).addObject(obj);
+        }
         return false;
     }
 
@@ -461,8 +470,11 @@ public class Window {
         float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
         if (slides.get(currentSlide).withinScope(coord[0], coord[1]))
             obj = of.createTextBox(coord[0], coord[1], strokeWeight, fillColor, boarderColor, str, font, textSize);
-        if (obj != null)
+        if (obj != null) {
+            selected.clear();
+            selected.add(obj);
             return slides.get(currentSlide).addObject(obj);
+        }
         return false;
     }
 
@@ -489,7 +501,11 @@ public class Window {
                         strokeWeight, fillColor, boarderColor);
             float width = widthRect.pixelWidth;
             obj = of.createInteractiveTextBox(shapePoints.get(0)[0], shapePoints.get(0)[1], width, strokeWeight, fillColor, boarderColor, font, textSize, m);
-            if (obj != null) return slides.get(currentSlide).addObject(obj);
+            if (obj != null) {
+                selected.clear();
+                selected.add(obj);
+                return slides.get(currentSlide).addObject(obj);
+            }
         }
         return false;
     }
@@ -510,6 +526,7 @@ public class Window {
         PollyObject obj = null;
         if (slides.get(currentSlide).withinScope(coord[0], coord[1])) obj = of.createYouTubeTextBox(coord[0], coord[1]);
         if (obj != null) {
+            selected.clear();
             selected.add(obj);
             return slides.get(currentSlide).addObject(obj);
         }
@@ -530,8 +547,11 @@ public class Window {
         float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
         if (slides.get(currentSlide).withinScope(coord[0], coord[1]))
             obj = of.createComment(coord[0], coord[1], strokeWeight, fillColor, boarderColor, str, font, textSize);
-        if (obj != null)
-            return slides.get(currentSlide).addComment(obj);
+        if (obj != null) {
+            selected.clear();
+            selected.add(obj);
+            return slides.get(currentSlide).addObject(obj);
+        }
         return false;
     }
 
@@ -548,8 +568,11 @@ public class Window {
         float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
         if (slides.get(currentSlide).withinScope(coord[0], coord[1]))
             obj = of.importImage(coord[0], coord[1], filename, extension);
-        if (obj != null)
+        if (obj != null) {
+            selected.clear();
+            selected.add(obj);
             return slides.get(currentSlide).addObject(obj);
+        }
         return false;
     }
 
@@ -561,8 +584,11 @@ public class Window {
     */
     public boolean importImage(String filename, String extension) {
         PollyObject obj = of.importImage(0, 0, filename, extension);
-        if (obj != null)
+        if (obj != null) {
+            selected.clear();
+            selected.add(obj);
             return slides.get(currentSlide).addObject(obj);
+        }
         return false;
     }
 
@@ -573,8 +599,11 @@ public class Window {
     */
    public boolean importVideo(String vid, String filepath) {
     PollyObject obj = of.importVideo(0, 0, vid, filepath);
-    if (obj != null)
+    if (obj != null) {
+        selected.clear();
+        selected.add(obj);
         return slides.get(currentSlide).addObject(obj);
+    }
     return false;
 }
 

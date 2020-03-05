@@ -351,7 +351,6 @@ public Window.TextMode getTextMode(){
 
 
   public void trash(){
-    System.out.println("test");
     win.delete();
   }
 
