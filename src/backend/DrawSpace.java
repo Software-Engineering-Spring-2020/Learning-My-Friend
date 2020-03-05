@@ -49,10 +49,10 @@ class DrawSpace extends ColorfulObject{
     }
 
     protected boolean playNextAnimation() {
+        if (animationIndex > 0) anims.get(animationIndex - 1).stop();
         if (animationIndex < anims.size()) {
             anims.get(animationIndex).start();
             System.out.println("Playing animation " + animationIndex + " " + anims.get(animationIndex));
-            if (animationIndex > 0) anims.get(animationIndex - 1).stop();
             animationIndex++;
             return true;
         }
@@ -62,6 +62,7 @@ class DrawSpace extends ColorfulObject{
     protected void resetAnimations() {
         animationIndex = 0;
         for (Animation anim : anims) {
+            anim.stop();
             anim.reset();
         }
     }
