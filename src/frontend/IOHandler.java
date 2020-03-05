@@ -56,13 +56,12 @@ public class IOHandler{
     if(onCanvas()){
       if(gui.getTool() == 's')
         win.select(sketch.mouseX, sketch.mouseY);
-      if(gui.getTool() == 'h')
-        win.addAnimation(Window.AnimationOption.TRANSLATE, sketch.mouseX, sketch.mouseY);
-
     }
   }
 
   public void mousePressed(){
+    if(gui.getTool() == 'h')
+      win.addAnimation(Window.AnimationOption.TRANSLATE, sketch.mouseX, sketch.mouseY);
     action();
   }
 
@@ -108,6 +107,7 @@ public class IOHandler{
 
       if(gui.getTool() == 'l')
         win.createLine(sketch.mouseX, sketch.mouseY);
+
 
    }
    else

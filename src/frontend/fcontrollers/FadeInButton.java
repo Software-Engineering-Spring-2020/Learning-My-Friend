@@ -27,6 +27,7 @@ public class FadeInButton extends FButton{
  */
   public void FadeIn(int val){
     //System.out.println(val);
+    getGUI().animate(1);
     getGUI().setTool('f');
 
   }

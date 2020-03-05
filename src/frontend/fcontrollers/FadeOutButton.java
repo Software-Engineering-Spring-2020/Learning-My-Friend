@@ -21,6 +21,7 @@ public class FadeOutButton extends FButton{
 
   public void FadeOut(int val){
     //System.out.println("Elip " + val);
+    getGUI().animate(0);
     getGUI().setTool('g');
 
   }
