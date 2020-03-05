@@ -735,9 +735,9 @@ public Window.TextMode getTextMode(){
      penButton = new PenButton(cp5, ft, this);
      ft.addFController(penButton);
      lineButton = new LineButton(cp5, ft, this);
-     ft.addFController(lineButton);
+     //ft.addFController(lineButton);
      curveButton = new CurveButton(cp5, ft, this);
-     ft.addFController(curveButton);
+     //ft.addFController(curveButton);
      rectangleButton = new RectButton(cp5, ft, this);
      ft.addFController(rectangleButton);
      ovalButton = new ElipButton(cp5, ft, this);
