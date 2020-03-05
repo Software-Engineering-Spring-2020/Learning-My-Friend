@@ -55,6 +55,10 @@ public class FadeAnimation extends Animation implements Serializable {
   }
   }
 
+  public int getEndAlpha() {
+    return endAlpha;
+  }
+
   /**
   * Fade each object in the unit over the specified duration time.
   */

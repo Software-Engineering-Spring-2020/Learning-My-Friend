@@ -5,6 +5,8 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
 import backend.objects.Comment;
+import backend.objects.FadeAnimation;
+import backend.objects.TranslateAnimation;
 
 class DrawSpace extends ColorfulObject{
     static final long serialVersionUID = 23l;
@@ -44,13 +46,15 @@ class DrawSpace extends ColorfulObject{
         System.out.println(anims);
     }
 
-    protected void playNextAnimation() {
+    protected boolean playNextAnimation() {
         if (animationIndex < anims.size()) {
             anims.get(animationIndex).start();
             System.out.println("Playing animation " + animationIndex + " " + anims.get(animationIndex));
             if (animationIndex > 0) anims.get(animationIndex - 1).stop();
             animationIndex++;
+            return true;
         }
+        return false;
     }
 
     protected void resetAnimations() {
@@ -61,7 +65,14 @@ class DrawSpace extends ColorfulObject{
     }
 
     protected void showAnimationBoundingBoxes() {
-        for (Animation anim : anims) anim.showBoundingBox(50, 255, 75);
+        for (Animation anim : anims) {
+            if (anim instanceof TranslateAnimation) anim.showBoundingBox(0, 0, 100);
+            if (anim instanceof FadeAnimation) {
+                FadeAnimation fanim = (FadeAnimation) anim;
+                if (fanim.getEndAlpha() == 0) fanim.showBoundingBox(0, 150, 0);
+                else fanim.showBoundingBox(150, 0, 0);
+            }
+        }
     }
 
     protected void init(PApplet sketch){
