@@ -21,8 +21,8 @@ public class BulletListButton extends FButton{
 
 
   public void plug(int val){
-    getGUI().setTool('t');
     getGUI().setTextMode(Window.TextMode.BULLETED);
+    getGUI().setTool('t');
   }
 
 }

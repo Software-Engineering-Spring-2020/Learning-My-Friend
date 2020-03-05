@@ -21,8 +21,8 @@ public class NumListButton extends FButton{
 
 
   public void plug(int val){
-    getGUI().setTool('t');
     getGUI().setTextMode(Window.TextMode.NUMBERED);
+    getGUI().setTool('t');
   }
 
 }
