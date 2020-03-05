@@ -21,9 +21,8 @@ public class TextButton extends FButton{
 
 
   public void Text(int val){
-    getGUI().setTool('t');
     getGUI().setTextMode(Window.TextMode.PLAIN);
-
+    getGUI().setTool('t');
   }
 
 }

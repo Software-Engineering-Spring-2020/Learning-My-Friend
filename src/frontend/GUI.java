@@ -85,6 +85,23 @@ public class GUI {
 
   String[] fontList = {"AmarBangla.ttf", "Amar-Desh.ttf", "BenSenHandwriting.ttf", "Ekushey-Bangla.ttf", "Lal-Sabuj.ttf", "NikoshGrameen.ttf", "SiyamRupali.ttf"};
 
+  // buttons that can be highlighted when tools are selected
+  FButton textButton;
+  FButton numberedListButton;
+  FButton bulletListButton;
+  FButton penButton;
+  FButton lineButton;
+  FButton curveButton;
+  FButton rectangleButton;
+  FButton ovalButton;
+  FButton fadeInButton;
+  FButton fadeOutButton;
+  FButton translateButton;
+
+  FButton lastSelected;
+  FButton currentSelected;
+
+  boolean objectToolSelected;
 
 
   /**
@@ -347,11 +364,88 @@ public Window.TextMode getTextMode(){
     //System.out.println(tool);
     win.newToolSelection();
     this.tool = tool;
+
+    // Highlight button based on tool selected
+
+    objectToolSelected = false;
+
+    if((tool == 'p') && (penButton != null)){
+      setSelectedButton(penButton);
+    }
+    if((tool == 'l') && (lineButton != null)){
+      setSelectedButton(lineButton);
+    }
+    if ((tool == 'u') && (curveButton != null)){
+      setSelectedButton(curveButton);
+    }
+    if ((tool == 'r') && (rectangleButton != null)){
+      setSelectedButton(rectangleButton);
+    }
+    if ((tool == 'e') && (ovalButton != null)){
+      setSelectedButton(ovalButton);
+    }
+    if ((tool == 't')){
+      if((getTextMode() == Window.TextMode.PLAIN) && (textButton != null)){
+        setSelectedButton(textButton);
+      }
+      if((getTextMode() == Window.TextMode.BULLETED) && (bulletListButton != null)){
+        setSelectedButton(bulletListButton);
+      }
+      if((getTextMode() == Window.TextMode.NUMBERED) && (numberedListButton != null)){
+        setSelectedButton(numberedListButton);
+      }
+    }
+    if ((tool == 'f' ) && (fadeInButton != null)){ // fade in
+      setSelectedButton(fadeInButton);
+    }
+    if ((tool == 'g' ) && (fadeOutButton != null)){ // fade in
+      setSelectedButton(fadeOutButton);
+    }
+    if ((tool == 'h' ) && (translateButton != null)){ // fade in
+      setSelectedButton(translateButton);
+    }
+    if (lastSelected != null){
+      if ((!objectToolSelected) || (lastSelected != currentSelected)){
+        // If the new tool selected isn't an object-manipulation tool
+        // Or if the current tool selected isn't the past selected tool
+        // De-highlight the current button
+        if(lastSelected==fadeInButton){
+          lastSelected.button.setColorBackground(sketch.color(150,0,0));
+        }
+        else if(lastSelected==fadeOutButton){
+          lastSelected.button.setColorBackground(sketch.color(0,150,0));
+        }
+        else if(lastSelected==translateButton){
+          lastSelected.button.setColorBackground(sketch.color(0,0,100));
+        }
+        else{
+          lastSelected.button.setColorBackground(sketch.color(0, 45, 90));;
+        }
+      }
+    }
+    lastSelected = currentSelected;
+  }
+
+  private void setSelectedButton(FButton b){
+    if(b==fadeInButton){
+      b.button.setColorBackground(sketch.color(200,0,0));
+    }
+    else if(b==fadeOutButton){
+      b.button.setColorBackground(sketch.color(0,200,0));
+    }
+    else if(b==translateButton){
+      b.button.setColorBackground(sketch.color(0,0,200));
+    }
+    else{
+      b.button.setColorBackground(sketch.color(0, 170, 255));
+    }
+    currentSelected = b;
+    objectToolSelected = true;
   }
 
 
   public void trash(){
-    System.out.println("test");
+    //System.out.println("test");
     win.delete();
   }
 
@@ -369,7 +463,7 @@ public Window.TextMode getTextMode(){
 
   public void saveFileSelected(File selection) {
     if (selection == null) {
-      System.out.println("Window was closed or the user hit cancel.");
+      //System.out.println("Window was closed or the user hit cancel.");
     } else {
       try {
         win.save(selection.getAbsolutePath());
@@ -492,7 +586,7 @@ public Window.TextMode getTextMode(){
    * [upSlide moves the selected slide up in the array]
    */
   public void upSlide(){
-    System.out.println("upslide");
+    //System.out.println("upslide");
     win.moveSlideUp();
   }
 
@@ -637,11 +731,16 @@ public Window.TextMode getTextMode(){
  */
    private void setupDrawToolbar(){
      FToolbar ft = topToolbarFactory("Draw");
-     ft.addFController(new PenButton(cp5, ft, this));
-     ft.addFController(new LineButton(cp5, ft, this));
-     ft.addFController(new CurveButton(cp5, ft, this));
-     ft.addFController(new RectButton(cp5, ft, this));
-     ft.addFController(new ElipButton(cp5, ft, this));
+     penButton = new PenButton(cp5, ft, this);
+     ft.addFController(penButton);
+     lineButton = new LineButton(cp5, ft, this);
+     ft.addFController(lineButton);
+     curveButton = new CurveButton(cp5, ft, this);
+     ft.addFController(curveButton);
+     rectangleButton = new RectButton(cp5, ft, this);
+     ft.addFController(rectangleButton);
+     ovalButton = new ElipButton(cp5, ft, this);
+     ft.addFController(ovalButton);
    }
 
 /**
@@ -649,9 +748,12 @@ public Window.TextMode getTextMode(){
  */
    private void setupTextToolbar(){
      FToolbar ft = topToolbarFactory("TextOpt");
-     ft.addFController(new TextButton(cp5, ft, this));
-     ft.addFController(new NumListButton(cp5, ft, this));
-     ft.addFController(new BulletListButton(cp5, ft, this));
+     textButton = new TextButton(cp5, ft, this);
+     ft.addFController(textButton);
+     numberedListButton = new NumListButton(cp5, ft, this);
+     ft.addFController(numberedListButton);
+     bulletListButton = new BulletListButton(cp5, ft, this);
+     ft.addFController(bulletListButton);
      FDropdown fd = new FontDropdown(cp5, ft, this);
 
      //String[] fonts
@@ -668,24 +770,24 @@ public Window.TextMode getTextMode(){
    private void setupAnimateToolbar(){
      FToolbar ft = topToolbarFactory("Animate");
 
-     FButton fadeIn = new FadeInButton(cp5, ft, this);
-     fadeIn.button.setColorBackground(sketch.color(150,0,0));
-     fadeIn.button.setColorActive(sketch.color(200,0,0));
-     fadeIn.button.setColorForeground(sketch.color(200,0,0));
+     fadeInButton = new FadeInButton(cp5, ft, this);
+     fadeInButton.button.setColorBackground(sketch.color(150,0,0));
+     fadeInButton.button.setColorActive(sketch.color(200,0,0));
+     fadeInButton.button.setColorForeground(sketch.color(200,0,0));
 
-     FButton fadeOut = new FadeOutButton(cp5, ft, this);
-     fadeOut.button.setColorBackground(sketch.color(0,150,0));
-     fadeOut.button.setColorActive(sketch.color(0,200,0));
-     fadeOut.button.setColorForeground(sketch.color(0,200,0));
+     fadeOutButton = new FadeOutButton(cp5, ft, this);
+     fadeOutButton.button.setColorBackground(sketch.color(0,150,0));
+     fadeOutButton.button.setColorActive(sketch.color(0,200,0));
+     fadeOutButton.button.setColorForeground(sketch.color(0,200,0));
 
-     FButton translate = new TranslateButton(cp5, ft, this);
-     translate.button.setColorBackground(sketch.color(0,0,100));
-     translate.button.setColorActive(sketch.color(0,0,200));
-     translate.button.setColorForeground(sketch.color(0,0,200));
+     translateButton = new TranslateButton(cp5, ft, this);
+     translateButton.button.setColorBackground(sketch.color(0,0,100));
+     translateButton.button.setColorActive(sketch.color(0,0,200));
+     translateButton.button.setColorForeground(sketch.color(0,0,200));
 
-     ft.addFController(fadeIn);
-     ft.addFController(fadeOut);
-     ft.addFController(translate);
+     ft.addFController(fadeInButton);
+     ft.addFController(fadeOutButton);
+     ft.addFController(translateButton);
 
    }
 
