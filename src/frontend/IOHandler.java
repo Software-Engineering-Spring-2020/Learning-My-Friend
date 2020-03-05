@@ -64,6 +64,7 @@ public class IOHandler{
 
       if(gui.getTool() == 'h')
         win.addAnimation(Window.AnimationOption.TRANSLATE, sketch.mouseX, sketch.mouseY);
+
     }
   }
 
@@ -113,9 +114,6 @@ public class IOHandler{
 
       if(gui.getTool() == 'l')
         win.createLine(sketch.mouseX, sketch.mouseY);
-
-      if(gui.getTool() == 'u')
-        win.createCurve(sketch.mouseX, sketch.mouseY);
 
    }
    else
