@@ -848,6 +848,7 @@ public Window.TextMode getTextMode(){
     rSlider.slider.setColorBackground(sketch.color(100,0,0));
     rSlider.slider.setColorActive(sketch.color(255,0,0));
     rSlider.slider.setColorForeground(sketch.color(255,0,0));
+    rSlider.setLabelColor(20);
     //rSlider.slider.setNumberOfTickMarks(6);
     //rSlider.slider.snapToTickMarks(false);
     //rSlider.slider.showTickMarks(true);
@@ -856,18 +857,28 @@ public Window.TextMode getTextMode(){
     bSlider.slider.setColorBackground(sketch.color(0,100,0));
     bSlider.slider.setColorActive(sketch.color(0,255,0));
     bSlider.slider.setColorForeground(sketch.color(0,255,0));
+    bSlider.setLabelColor(20);
+
 
     gSlider.slider.setColorBackground(sketch.color(0,0,100));
     gSlider.slider.setColorActive(sketch.color(0,0,255));
     gSlider.slider.setColorForeground(sketch.color(0,0,255));
+    gSlider.setLabelColor(20);
+
 
 
     ft.addFController(rSlider);
     ft.addFController(gSlider);
     ft.addFController(bSlider);
     //ft.addFController(new TogFillButton(cp5, ft, this));
-    ft.addFController(new SizeSlider(cp5, ft, this));
-    ft.addFController(new RotateSlider(cp5, ft, this));
+    FSlider ss = new SizeSlider(cp5, ft, this);
+    ss.setLabelColor(20);
+    ft.addFController(ss);
+
+    FSlider rs = new RotateSlider(cp5, ft, this);
+    rs.setLabelColor(20);
+    ft.addFController(rs);
+
     ft.addFController(new RestoreTrashButton(cp5, ft, this));
     ft.addFController(new TrashButton(cp5, ft, this));
   }

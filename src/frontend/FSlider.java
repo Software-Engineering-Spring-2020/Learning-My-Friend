@@ -50,7 +50,13 @@ public abstract class FSlider extends FController{
     slider.setNumberOfTickMarks((int)((slider.getMax() - slider.getMin()) - 1));
   }
 
-
+/**
+ * [setLabelColor sets the color of the lable]
+ * @param i [0-255 grey lable scale]
+ */
+  public void setLabelColor(int i){
+    slider.getCaptionLabel().setColor(i);
+  }
 
 
   /**
