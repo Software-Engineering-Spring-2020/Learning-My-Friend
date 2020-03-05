@@ -731,6 +731,7 @@ public Window.TextMode getTextMode(){
  */
    private void setupDrawToolbar(){
      FToolbar ft = topToolbarFactory("Draw");
+
      penButton = new PenButton(cp5, ft, this);
      ft.addFController(penButton);
      lineButton = new LineButton(cp5, ft, this);
@@ -741,6 +742,7 @@ public Window.TextMode getTextMode(){
      ft.addFController(rectangleButton);
      ovalButton = new ElipButton(cp5, ft, this);
      ft.addFController(ovalButton);
+
    }
 
 /**
