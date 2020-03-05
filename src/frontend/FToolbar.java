@@ -55,6 +55,9 @@ public class FToolbar{
     this.sketch = sketch;
     g = groupFactory(name);
     update();
+    //hides top bar and lables
+    g.hideBar();
+    g.disableCollapse();
   }
 
 /**
@@ -63,7 +66,7 @@ public class FToolbar{
  */
   private Group groupFactory(String name){
     return cp5.addGroup(name)
-    .setBackgroundColor(150)
+    .setBackgroundColor(200)
     //.setMoveable(true)
     ;
   }
