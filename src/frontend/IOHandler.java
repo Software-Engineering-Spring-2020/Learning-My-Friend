@@ -56,12 +56,6 @@ public class IOHandler{
     if(onCanvas()){
       if(gui.getTool() == 's')
         win.select(sketch.mouseX, sketch.mouseY);
-      if(gui.getTool() == 'f')
-        win.addAnimation(Window.AnimationOption.FADE_IN, sketch.mouseX, sketch.mouseY);
-
-      if(gui.getTool() == 'g')
-        win.addAnimation(Window.AnimationOption.FADE_OUT, sketch.mouseX, sketch.mouseY);
-
       if(gui.getTool() == 'h')
         win.addAnimation(Window.AnimationOption.TRANSLATE, sketch.mouseX, sketch.mouseY);
 

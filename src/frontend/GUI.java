@@ -128,21 +128,51 @@ public class GUI {
 
   setup();
   textMode = Window.TextMode.PLAIN;
-  font = "Bangla.ttf";
+  font = "AmarBangla.ttf";
 
   win.initScrollMenu(getCurrentMenuPosX(), getCurrentMenuPosY(), getCurrentMenuSizeX(), getCurrentMenuSizeY());
 }
 
+/**
+ * [animate will animate selected object or equip the animate tool]
+ * @param i [the type of animation, 0 = FadeOut, 1 = FadeIn, 2 = Transilate]
+ */
+  public void animate(int i){
+    if(i == 0)
+      win.addAnimation(Window.AnimationOption.FADE_IN, sketch.mouseX, sketch.mouseY);
+    if(i == 1)
+      win.addAnimation(Window.AnimationOption.FADE_IN, sketch.mouseX, sketch.mouseY);
+    if(i == 2)
+      setTool('h');
+  }
 
+
+
+/**
+ * [getCurrentMenuPosX getst the thumbnail menu position X]
+ * @return [thumbnail menu position in precentage of screen, X]
+ */
   private int getCurrentMenuPosX(){
     return (int)(sketch.width*(.15/2));
   }
+  /**
+   * [getCurrentMenuPosY  getst the thumbnail menu position Y]
+   * @return [thumbnail menu position in precentage of screen, Y]
+   */
   private int getCurrentMenuPosY(){
     return (int)(sketch.height*.54);
   }
+  /**
+   * [getCurrentMenuSizeX  getst the thumbnail menu size X]
+   * @return [thumbnail menu size in precentage of screen, X]
+   */
   private int getCurrentMenuSizeX(){
     return (int)(sketch.width*.15);
   }
+  /**
+   * [getCurrentMenuSizeY  getst the thumbnail menu size Y]
+   * @return [thumbnail menu size in precentage of screen, Y]
+   */
   private int getCurrentMenuSizeY(){
     return (int)(sketch.height*.8);
   }
