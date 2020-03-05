@@ -41,7 +41,7 @@ public class Video extends ColorfulObject {
     YoutubeDownloader downloader = new YoutubeDownloader();
     try {
         YoutubeVideo video = downloader.getVideo(vid);
-        System.out.println(videoPath);
+        System.out.println("Downloading " + video.details().title() + " to " + videoPath);
         File f = new File(videoPath);
         for (Format format : video.formats()) {
             // Itag.i17 is the lowest resolution available
@@ -85,18 +85,19 @@ public class Video extends ColorfulObject {
   */
   protected void display(){
     super.display();
-    if (pvideo.available()) {    
-        pvideo.read();  
+    if (pvideo != null) {
+      if (pvideo.available()) {    
+          pvideo.read();  
+      }
+      sketch.push();
+      sketch.translate(-xpos, -ypos);
+      sketch.tint(255, fillColor[3]);
+      //System.out.println(pvideo);
+      if (pvideo.isPlaying()){
+          sketch.image(pvideo.get(), xcenter, ycenter, pixelWidth, pixelHeight);
+      }
+      else sketch.rect(xpos, ypos, pixelWidth, pixelHeight);
+      sketch.pop();
     }
-    sketch.push();
-    sketch.translate(-xpos, -ypos);
-    sketch.tint(255, fillColor[3]);
-    //System.out.println(pvideo);
-    if (pvideo.isPlaying()){
-        sketch.image(pvideo.get(), xcenter, ycenter, pixelWidth, pixelHeight);
-    }
-    else sketch.rect(xpos, ypos, pixelWidth, pixelHeight);
-    sketch.pop();
   }
-
 }
