@@ -38,7 +38,7 @@ public class TranslateAnimation extends Animation implements Serializable {
     for (PollyObject obj : members) {
       sketch.push();
       sketch.strokeWeight(3);
-      sketch.stroke(255, 255, 0);
+      sketch.stroke(r, g, b);
       sketch.line(obj.getPosition()[0], obj.getPosition()[1], end[0], end[1]);
       sketch.pop();
     }
