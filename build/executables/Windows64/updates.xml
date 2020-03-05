@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<updateDescriptor baseUrl="">
-  <entry targetMediaFileId="174" updatableVersionMin="" updatableVersionMax="" fileName="LearningMyFriend_windows-x64_1_0.zip" newVersion="1.0" newMediaFileId="174" fileSize="62987352" md5Sum="2b7361d8bf432cc33d0c2dc3c3379f2e" sha256Sum="121850bf00935b913ac0e3f59f10dd4c312aaa9a7e91a51f6327b82a4dc55bc5" bundledJre="windows-amd64-1.8.0_221.tar.gz" archive="true" singleBundle="false">
-    <comment language="en" />
-  </entry>
-</updateDescriptor>
