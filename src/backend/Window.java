@@ -492,6 +492,7 @@ public class Window {
     }
 
     /**
+    * @deprecated
     * Makes a type of InteractiveTextBox that comes prefilled with a YouTube link so that the user only has to enter the
     * video ID. On creation, the box is selected immediately so that the user can start typing right away.
     * @param x Raw X position of the mouse
@@ -500,6 +501,18 @@ public class Window {
     */
     public boolean createYouTubeTextBox(float x, float y) {
         float[] coord = slides.get(currentSlide).translateCoordinates(x, y, zoom);
+        PollyObject obj = null;
+        if (slides.get(currentSlide).withinScope(coord[0], coord[1])) obj = of.createYouTubeTextBox(coord[0], coord[1]);
+        return addObjectToCurrentSlide(obj);
+    }
+
+    /**
+    * Makes a type of InteractiveTextBox that comes prefilled with a YouTube link so that the user only has to enter the
+    * video ID. On creation, the box is selected immediately so that the user can start typing right away.
+    * @return Whether or not the object was created and added to the slide successfully
+    */
+    public boolean createYouTubeTextBox() {
+        float[] coord = {0, 0};
         PollyObject obj = null;
         if (slides.get(currentSlide).withinScope(coord[0], coord[1])) obj = of.createYouTubeTextBox(coord[0], coord[1]);
         return addObjectToCurrentSlide(obj);
@@ -1026,6 +1039,7 @@ public class Window {
     }
 
     /**     DO A CHANGE *********************************
+    * @deprecated
     * Create and display an in-progress curve. The points of the curve coorespond to the position of the each mouse click.
     * @param pmousex raw X position of the mouse
     * @param pmousey raw Y position of the mouse
