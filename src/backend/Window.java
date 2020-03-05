@@ -1161,6 +1161,8 @@ public class Window {
         if (!(currentSlide - 1 < 0)) {
             Collections.swap(slides, currentSlide, currentSlide - 1);
             menu.swapSlides(currentSlide, currentSlide - 1);
+            menu.selectSlide(currentSlide - 1);
+            currentSlide--;
         }
     }
 
@@ -1171,6 +1173,8 @@ public class Window {
         if (currentSlide + 1 < slides.size()) {
             Collections.swap(slides, currentSlide, currentSlide + 1);
             menu.swapSlides(currentSlide, currentSlide + 1);
+            menu.selectSlide(currentSlide + 1);
+            currentSlide++;
         }
     }
 
