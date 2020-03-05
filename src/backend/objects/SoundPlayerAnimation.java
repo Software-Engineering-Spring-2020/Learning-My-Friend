@@ -12,7 +12,9 @@ import processing.sound.*;
 */
 public class SoundPlayerAnimation extends Animation {
     private static final long serialVersionUID = 19L;
-    private SoundFile sf;
+    transient private SoundFile sf;
+    String filename;
+    String extension;
 
     /**
     * Constructor for SoundPlayerAnimation
@@ -23,6 +25,13 @@ public class SoundPlayerAnimation extends Animation {
     */
   public SoundPlayerAnimation(PApplet sketch, long duration, String filename, String extension){
     super(sketch, duration);
+    this.filename = filename;
+    this.extension = extension;
+    sf = new SoundFile(sketch, filename + extension);
+  }
+
+  protected void init(PApplet sketch) {
+    super.init(sketch);
     sf = new SoundFile(sketch, filename + extension);
   }
 

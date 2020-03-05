@@ -19,11 +19,14 @@ import processing.video.*;
 * Class which supports the download and display of videos.
 */
 public class Video extends ColorfulObject {
-  private static final long serialVersionUID = 21L;
-  Movie pvideo;
+  private static final long serialVersionUID = 29L;
+  transient Movie pvideo;
   String videoPath;
-  String[] file;
+  String vid;
+  transient String[] file;
   boolean downloaded;
+  String title;
+  private boolean broken;
 
   /**
   * Constructor for Video
@@ -37,7 +40,16 @@ public class Video extends ColorfulObject {
     super(sketch, x, y, 1, new int[4], new int[4]);
     fillColor[3] = 255;
     boarderColor[3] = 255;
+    pixelWidth = width;
+    pixelHeight = height;
     videoPath = filepath;
+    this.vid = vid;
+    File vf = new File(videoPath + "/" + title + ".mp4");
+    if (!vf.exists()) downloadVideo();
+    pvideo = new Movie(sketch, videoPath + "/" + title + ".mp4");
+  }
+
+  private void downloadVideo() {
     YoutubeDownloader downloader = new YoutubeDownloader();
     try {
         YoutubeVideo video = downloader.getVideo(vid);
@@ -47,13 +59,12 @@ public class Video extends ColorfulObject {
             // Itag.i17 is the lowest resolution available
             if (format instanceof AudioVideoFormat) {
                 video.download(format, f);
-                pvideo = new Movie(sketch, videoPath + "/" + video.details().title() + ".mp4");
-                pixelWidth = width;
-                pixelHeight = height;
+                title = video.details().title();
                 break;
             }
         }
     } catch (YoutubeException | IOException e) {
+        broken = true;
         e.printStackTrace();
     }
   }
@@ -64,7 +75,9 @@ public class Video extends ColorfulObject {
   */
   protected void init(PApplet sketch){
     super.init(sketch);
-    //img = sketch.requestImage(file[0]+file[1]);
+    File vf = new File(videoPath + "/" + title + ".mp4");
+    if (!vf.exists()) downloadVideo();
+    pvideo = new Movie(sketch, videoPath + "/" + title + ".mp4");
   }
 
   public boolean isPlaying() {
@@ -73,11 +86,15 @@ public class Video extends ColorfulObject {
   }
 
   public void play() {
-    pvideo.play();
+    if (pvideo != null) pvideo.play();
   }
 
   public void stop() {
-    pvideo.stop();
+    if (pvideo != null) pvideo.stop();
+  }
+
+  public boolean broken() {
+    return broken;
   }
 
   /**

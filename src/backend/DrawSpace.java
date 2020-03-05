@@ -1,10 +1,14 @@
 package backend;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
 import backend.objects.Comment;
+import backend.objects.FadeAnimation;
+import backend.objects.TranslateAnimation;
 
 class DrawSpace extends ColorfulObject{
     static final long serialVersionUID = 23l;
@@ -44,24 +48,52 @@ class DrawSpace extends ColorfulObject{
         System.out.println(anims);
     }
 
-    protected void playNextAnimation() {
+    protected boolean playNextAnimation() {
+        if (animationIndex > 0) anims.get(animationIndex - 1).stop();
         if (animationIndex < anims.size()) {
             anims.get(animationIndex).start();
             System.out.println("Playing animation " + animationIndex + " " + anims.get(animationIndex));
-            if (animationIndex > 0) anims.get(animationIndex - 1).stop();
             animationIndex++;
+            return true;
         }
+        return false;
     }
 
     protected void resetAnimations() {
         animationIndex = 0;
         for (Animation anim : anims) {
+            anim.stop();
             anim.reset();
         }
     }
 
     protected void showAnimationBoundingBoxes() {
-        for (Animation anim : anims) anim.showBoundingBox(50, 255, 75);
+        HashMap<PollyObject, float[]> locations = new HashMap<PollyObject, float[]>();
+        for (int i = 0; i < anims.size(); i++) {
+            Animation anim = anims.get(i);
+            if (anim instanceof TranslateAnimation) {
+                TranslateAnimation tanim = (TranslateAnimation) anim;
+                for (PollyObject member : tanim.getMembers()) {
+                    float[] start = member.getPosition();
+                    float[] end = tanim.getDestination();
+                    if (locations.containsKey(member)) {
+                        start = locations.get(member);
+                        end = tanim.getDestination();
+                    }
+                    sketch.push();
+                    sketch.stroke(0, 0, 100);
+                    sketch.line(start[0], start[1], end[0], end[1]);
+                    sketch.pop();
+                    locations.put(member, end);
+                }
+                anim.showBoundingBox(0, 0, 100);
+            }
+            if (anim instanceof FadeAnimation) {
+                FadeAnimation fanim = (FadeAnimation) anim;
+                if (fanim.getEndAlpha() == 0) fanim.showBoundingBox(0, 150, 0);
+                else fanim.showBoundingBox(150, 0, 0);
+            }
+        }
     }
 
     protected void init(PApplet sketch){

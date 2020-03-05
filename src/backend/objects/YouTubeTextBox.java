@@ -2,6 +2,7 @@ package backend.objects;
 
 import backend.Window.TextMode;
 import processing.core.PApplet;
+import processing.core.PConstants;
 
 public class YouTubeTextBox extends InteractiveTextBox {
 
@@ -29,7 +30,14 @@ public class YouTubeTextBox extends InteractiveTextBox {
             wasSelected = false;
             System.out.println(getVID());
         }
+        sketch.text("You copied:", 0f - pixelWidth / 2, 0f - pixelHeight / 2 - textSize - 5, pixelWidth, pixelHeight + textSize + 1000);
+        sketch.text("Press ENTER to confirm.", 0f - pixelWidth / 2, 0f - pixelHeight / 2 + pixelHeight + 5, pixelWidth + 1000, pixelHeight + textSize + 1000);
         isSelected = false;
+    }
+    
+    protected void addCharacter(char c) {
+        super.addCharacter(c);
+        if (c == PConstants.ENTER || c == PConstants.RETURN) readyForVideo = true;
     }
 
     public boolean readyForVideo() {

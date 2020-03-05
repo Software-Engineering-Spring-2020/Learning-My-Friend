@@ -65,6 +65,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
         sketch.textSize(textSize);
         pixelWidth = width;
         pixelHeight = 0;
+        addLine();
         char[] startCharacters = start.toCharArray();
         for (char c : startCharacters) {
             addCharacter(c);
@@ -453,7 +454,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
             }
             str = new String(newCharacters);
             charactersSinceNewLine--;
-            if (charactersSinceNewLine % charactersPerLine == 0 || characters[cursorIndex] == '\n'
+            if (str.length() > charactersPerLine && charactersSinceNewLine % charactersPerLine == 0 || characters[cursorIndex] == '\n'
                     || characters[cursorIndex] == '\r')
                 removeLine();
         }

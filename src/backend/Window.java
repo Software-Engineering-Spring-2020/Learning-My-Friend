@@ -39,6 +39,7 @@ public class Window {
 
     private int currentSlide = 0;
     private int slideOffset = 0;
+    private int bonusClick = 1;
     private ArrayList<PImage> slideImages;
     private float[] editingPosition;
     private float[] preScreenshotPosition;
@@ -156,6 +157,12 @@ public class Window {
         ArrayList<PollyObject> objs = slides.get(currentSlide).getAllObjects();
         for(PollyObject obj : objs) {
             if (obj.link != null) obj.showBoundingBox(0, 0, 255);
+            if (obj instanceof Video) {
+                Video vobj = (Video) obj;
+                if (vobj.broken()) {
+                    // TODO: replace the video with another YTTB
+                }
+            }
             if (obj instanceof YouTubeTextBox) {
                 YouTubeTextBox vobj = (YouTubeTextBox) obj;
                 if (vobj.readyForVideo()) {
@@ -184,10 +191,14 @@ public class Window {
             save = false;
         }
 
-        if (slideOffset != 0 && zoom == 1 && selected.size() == 0) {
-            System.out.println("Saving a new thumbnail and changing slides.");
-            slides.get(currentSlide + slideOffset).setPosition(preScreenshotPosition[0], preScreenshotPosition[1]);
-            if (!presenting) menu.updateThumbnail(currentSlide, getSlideImage());
+        if (slideOffset != 0 && selected.size() == 0) {
+            System.out.println("Changing slides.");
+            if (!presenting && zoom == 1) {
+                 System.out.println("Saving a new thumbnail.");
+                 menu.updateThumbnail(currentSlide, getSlideImage());
+                 slides.get(currentSlide + slideOffset).setPosition(preScreenshotPosition[0], preScreenshotPosition[1]);
+                 zoom = preScreenshotZoom;
+            }
             currentSlide += slideOffset;
             slideOffset = 0;
         }
@@ -302,6 +313,7 @@ public class Window {
         DrawSpace slide = this.slides.get(currentSlide);
         slide.setPosition(sketch.width / 2 - slide.pixelWidth / 2, sketch.height / 2 - slide.pixelHeight / 2);
         selected.clear();
+        if (presenting) zoom = (sketch.height / slides.get(currentSlide).pixelHeight);
         this.display();
     }
 
@@ -825,14 +837,15 @@ public class Window {
       if (obj != null){
         if (presenting) {
             if (obj.link != null) sketch.link(obj.link);
-            else slides.get(currentSlide).playNextAnimation();
+            else next();
         }
         else {
             if(selected.contains(obj)) selected.remove(obj);
             else selected.add(obj);
         }
       }
-      else if (presenting) slides.get(currentSlide).playNextAnimation();
+      else if (presenting) 
+        next();
       else if(withinCanvas(x, y)) selected.clear();
     }
 
@@ -1084,11 +1097,29 @@ public class Window {
      }
 
     /**
-     * Go to the slide after the current slide, edit mode allows for slide modification
+     * Go to the slide (or next anim) after the current slide/anim, edit mode allows for slide modification
      * @return Whether the slide change was successful.
      */
     public boolean nextSlide() {
-        return goToSlide(currentSlide + 1);
+        if (presenting) return next();
+        else return goToSlide(currentSlide + 1);
+    }
+
+    /**
+     * In present mode, go to the next animation or the next slide.
+     * @return Whether some change was successfully made. If returns false, end presentation.
+     */
+    public boolean next() {
+        if (bonusClick == 0) {
+            boolean wasAnimation = slides.get(currentSlide).playNextAnimation();
+            System.out.println(wasAnimation);
+            if (!wasAnimation) {
+                return goToSlide(currentSlide + 1);
+            }
+            return wasAnimation;
+        }
+        else bonusClick -= 1;
+        return true;
     }
 
     /**
@@ -1110,12 +1141,14 @@ public class Window {
     }
 
     private boolean goToSlide(int slide) {
+        System.out.println(slide);
         if (slide >= 0 && slide < slides.size()) {
             selected.clear();
             preScreenshotPosition = slides.get(currentSlide).getPosition();
             preScreenshotZoom = zoom;
             slideOffset = slide - currentSlide;
             reCenter();
+            bonusClick = 1;
             return true;
         }
         else return false;
@@ -1128,6 +1161,8 @@ public class Window {
         if (!(currentSlide - 1 < 0)) {
             Collections.swap(slides, currentSlide, currentSlide - 1);
             menu.swapSlides(currentSlide, currentSlide - 1);
+            menu.selectSlide(currentSlide - 1);
+            currentSlide--;
         }
     }
 
@@ -1138,6 +1173,8 @@ public class Window {
         if (currentSlide + 1 < slides.size()) {
             Collections.swap(slides, currentSlide, currentSlide + 1);
             menu.swapSlides(currentSlide, currentSlide + 1);
+            menu.selectSlide(currentSlide + 1);
+            currentSlide++;
         }
     }
 
@@ -1172,7 +1209,6 @@ public class Window {
             editingPosition = slides.get(currentSlide).getPosition();
             editingZoom = zoom;
             reCenter();
-            zoom = (sketch.height / slides.get(currentSlide).pixelHeight);
         }
     }
 
