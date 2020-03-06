@@ -116,7 +116,7 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
 		//System.out.println(this.key=='c'&&ctrl);
 
 		if(this.keyCode == 127 && ctrl) this.win.delete();
-		else if(this.keyCode == 82 && ctrl) this.win.restore();
+//		else if(this.keyCode == 82 && ctrl) this.win.restore();
 		else if(this.keyCode == 67 && ctrl) gui.copy();
 		else if(this.keyCode == 88 && ctrl) this.win.cut();
 		else if(this.keyCode == 86 && ctrl) gui.paste();
