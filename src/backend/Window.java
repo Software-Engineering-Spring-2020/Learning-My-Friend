@@ -153,7 +153,6 @@ public class Window {
             curvePoints.clear();
         }
 
-        if (!presenting) slides.get(currentSlide).showAnimationBoundingBoxes();
         ArrayList<PollyObject> objs = slides.get(currentSlide).getAllObjects();
         for(PollyObject obj : objs) {
             if (obj.link != null) obj.showBoundingBox(0, 0, 255);
@@ -172,7 +171,8 @@ public class Window {
                 break;
             }
         }
-        for(PollyObject obj : selected) obj.showBoundingBox(215,165,0);
+        for(PollyObject obj : selected) obj.showBoundingBox(215, 165, 0);
+        if (!presenting) slides.get(currentSlide).showAnimationBoundingBoxes();
 
         if(export && zoom == 1 && selected.size() == 0){
           menu.updateThumbnail(currentSlide, getSlideImage());
@@ -303,6 +303,11 @@ public class Window {
     */
     public void canvasPan(float xo, float yo) { // (this.mouseX - this.pmouseX), (this.mouseY - this.pmouseY)
         if (!presenting) this.slides.get(currentSlide).pan(xo, yo);
+    }
+
+
+    public void setWidth(float x) {
+        zoom = (sketch.height / slides.get(currentSlide).pixelHeight);
     }
 
     /**
@@ -1101,7 +1106,10 @@ public class Window {
      * @return Whether the slide change was successful.
      */
     public boolean nextSlide() {
-        if (presenting) return true;
+        if (presenting) {
+            bonusClick = 0;
+            return true;
+        }
         else return goToSlide(currentSlide + 1);
     }
 
