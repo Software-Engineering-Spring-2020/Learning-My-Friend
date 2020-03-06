@@ -950,7 +950,7 @@ public Window.TextMode getTextMode(){
  * [setupPresentModeToolbar description]
  */
   private void setupPresentModeToolbar(){
-    presentModeToolbar = toolbarFactory("PresentMode", (float).1, (float).05, (float).9, (float).9);
+    presentModeToolbar = toolbarFactory("PresentMode", (float).13, (float).08, (float).85, (float).9);
     presentModeToolbar.setVisable(false);
     presentModeToolbar.addFController(new PrevSlideButton(cp5, presentModeToolbar, this));
     presentModeToolbar.addFController(new NextSlideButton(cp5, presentModeToolbar, this));
