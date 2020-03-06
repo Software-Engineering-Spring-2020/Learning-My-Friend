@@ -1101,7 +1101,7 @@ public class Window {
      * @return Whether the slide change was successful.
      */
     public boolean nextSlide() {
-        if (presenting) return next();
+        if (presenting) return true;
         else return goToSlide(currentSlide + 1);
     }
 
@@ -1126,6 +1126,7 @@ public class Window {
      * Go to the slide before the current slide, edit mode allows for slide modification
      */
     public void previousSlide() {
+        if (currentSlide == 0) goToSlide(0);
         goToSlide(currentSlide - 1);
     }
 
@@ -1141,7 +1142,6 @@ public class Window {
     }
 
     private boolean goToSlide(int slide) {
-        System.out.println(slide);
         if (slide >= 0 && slide < slides.size()) {
             selected.clear();
             preScreenshotPosition = slides.get(currentSlide).getPosition();
