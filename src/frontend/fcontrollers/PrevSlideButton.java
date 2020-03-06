@@ -14,8 +14,8 @@ import frontend.controlP5.*;
 
 public class PrevSlideButton extends FButton{
   public PrevSlideButton(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "prev", parrent, gui);
-    super.button.plugTo(this);
+    super(cp5, "Prev", parrent, gui);
+    super.button.plugTo(this, "prev");
   }
 
 

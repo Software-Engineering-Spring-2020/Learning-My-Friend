@@ -14,8 +14,8 @@ import frontend.controlP5.*;
 
 public class FadeOutButton extends FButton{
   public FadeOutButton(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "FadeOut", parrent, gui);
-    super.button.plugTo(this);
+    super(cp5, "Fade Out", parrent, gui);
+    super.button.plugTo(this, "FadeOut");
   }
 
 

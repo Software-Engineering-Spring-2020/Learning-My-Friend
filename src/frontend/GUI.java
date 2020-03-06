@@ -117,8 +117,9 @@ public class GUI {
   public GUI(PApplet sketch, Window win) {
   this.sketch = sketch;
   this.win = win;
+  Label.setUpperCaseDefault(false);
   cp5 = new ControlP5(sketch);
-  cp5.setFont(sketch.createFont("Arial", 12));
+  cp5.setFont(sketch.createFont("Lal-Sabuj.ttf", 15));
   tbList = new LinkedList<FToolbar>();
   activeTbList = new LinkedList<FToolbar>();
 
@@ -128,7 +129,7 @@ public class GUI {
 
   setup();
   textMode = Window.TextMode.PLAIN;
-  font = "AmarBangla.ttf";
+  font = "Lal-Sabuj.ttf";
 
   win.initScrollMenu(getCurrentMenuPosX(), getCurrentMenuPosY(), getCurrentMenuSizeX(), getCurrentMenuSizeY());
 }
@@ -896,7 +897,7 @@ public Window.TextMode getTextMode(){
       ft.addFController(new OpenButton(cp5, ft, this));
       ft.addFController(new ExportButton(cp5, ft, this));
 
-      String[] importMethods = {"Picture", "Sound", "Youtube"};
+      String[] importMethods = {"Picture ছবি", "Sound শব্দ  ", "Youtube"};
       FDropdown fd = new ImportDropdown(cp5, ft, this);
       fd.setItems(importMethods);
       ft.addFController(fd);

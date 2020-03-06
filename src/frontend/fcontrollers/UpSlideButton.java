@@ -14,7 +14,7 @@ import frontend.controlP5.*;
 
 public class UpSlideButton extends FButton{
   public UpSlideButton(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "up", parrent, gui);
+    super(cp5, "Up", parrent, gui);
     super.button.plugTo(this);
   }
 

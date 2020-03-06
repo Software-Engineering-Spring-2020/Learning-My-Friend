@@ -14,8 +14,8 @@ import frontend.controlP5.*;
 
 public class DelSlideButton extends FButton{
   public DelSlideButton(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "del", parrent, gui);
-    super.button.plugTo(this);
+    super(cp5, "Del", parrent, gui);
+    super.button.plugTo(this, "del");
   }
 
 

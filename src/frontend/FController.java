@@ -18,7 +18,7 @@ public abstract class FController{
   protected float sizeX, sizeY, posX, posY;
 
   //name of the controller
-  protected String name;
+  protected String name, bengali;
 
   //sizePriority is 1 by default. The larger sizePriority is the more space it takes from other FControllers in the group.
   protected float sizePriority = 1;

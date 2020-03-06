@@ -14,7 +14,7 @@ import frontend.controlP5.*;
 
 public class TrashButton extends FButton{
   public TrashButton(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "trash", parrent, gui);
+    super(cp5, "Trash", parrent, gui);
     super.button.plugTo(this);
   }
 

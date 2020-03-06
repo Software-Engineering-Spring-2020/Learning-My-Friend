@@ -14,8 +14,8 @@ import frontend.controlP5.*;
 
 public class DownSlideButton extends FButton{
   public DownSlideButton(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "down", parrent, gui);
-    super.button.plugTo(this);
+    super(cp5, "Down", parrent, gui);
+    super.button.plugTo(this, "down");
   }
 
 

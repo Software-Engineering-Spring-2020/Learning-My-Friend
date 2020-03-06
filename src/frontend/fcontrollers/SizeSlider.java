@@ -14,7 +14,7 @@ import frontend.controlP5.*;
 
 public class SizeSlider extends FSlider{
   public SizeSlider(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "size", parrent, gui);
+    super(cp5, "Size", parrent, gui);
     super.slider.plugTo(this);
     super.slider.setMin(-1);
     super.slider.setMax(5);

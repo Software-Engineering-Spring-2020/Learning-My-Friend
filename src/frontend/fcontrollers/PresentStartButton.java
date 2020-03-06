@@ -14,7 +14,7 @@ import frontend.controlP5.*;
 
 public class PresentStartButton extends FButton{
   public PresentStartButton(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "From Beginning", parrent, gui);
+    super(cp5, "From Beginning শুরু থেকে", parrent, gui);
     super.button.plugTo(this, "present");
   }
 

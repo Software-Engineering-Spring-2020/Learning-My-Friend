@@ -14,8 +14,8 @@ import frontend.controlP5.*;
 
 public class ExportButton extends FButton{
   public ExportButton(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "export", parrent, gui);
-    super.button.plugTo(this);
+    super(cp5, "Export", parrent, gui);
+    super.button.plugTo(this, "export");
   }
 
 

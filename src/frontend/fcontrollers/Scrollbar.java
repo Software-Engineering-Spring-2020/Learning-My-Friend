@@ -14,8 +14,8 @@ import frontend.controlP5.*;
 
 public class Scrollbar extends FSlider{
   public Scrollbar(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "scrollbar", parrent, gui);
-    super.slider.plugTo(this);
+    super(cp5, "Scrollbar", parrent, gui);
+    super.slider.plugTo(this, "scrollbar");
     setMin(-10);
     setMax(-1);
     super.slider.snapToTickMarks(true);

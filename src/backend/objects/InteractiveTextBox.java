@@ -37,7 +37,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
 
     /**
      * Constructor for InteractiveTextBox
-     * 
+     *
      * @param x            A float to represent the initial x starting position (in
      *                     pixels) of the object, should be a slide-relative
      *                     coordinate
@@ -89,7 +89,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
 
     /**
      * Adjusts the width of the InteractiveTextBox. FORBIDDEN!!!!!!!!!
-     * 
+     *
      * @param width The new (abolute) width.
      */
     protected void changeWidth(float width) {
@@ -121,7 +121,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
 
     /**
      * ASK FOR CLARITY Replace the line the cursor is currently on.
-     * 
+     *
      * @param newCurrentLine
      */
     private void setCurrentLine(String newCurrentLine) {
@@ -166,7 +166,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
 
     /**
      * ASK FOR CLARIFICATION
-     * 
+     *
      * @return The String starting with the last PConstants.ENTER or
      *         PConstants.RETURN, not a Processing line.
      */
@@ -295,7 +295,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
 
     /**
      * Moves the text cursor UP, DOWN, LEFT, or RIGHT. Use the `Directionss` enum.
-     * 
+     *
      * @param Directions The Directions to move the text cursor in.
      * @see Directionss
      */
@@ -333,7 +333,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
     /**
      * Scans in the specified Directions for a newline or the beginning/end of the
      * string in this text box, starting at the cursor.
-     * 
+     *
      * @param d Directions.LEFT or Directions.RIGHT. The direction to scan in.
      * @return The index of the first encountered newline, or the beginning of the
      *         string, or the end of the string.
@@ -488,7 +488,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
 
     /**
      * Handles user input to add text and move the cursor around.
-     * 
+     *
      * @param key     A character representation of the key currently pressed
      *                (capital and lower case letters are different, all function
      *                keys are the same)
@@ -569,7 +569,7 @@ public class InteractiveTextBox extends TextObject implements ListenerObject {
             int offset = 0;
             long nowTime = System.currentTimeMillis();
             if (nowTime - cursorStartTime >= CURSOR_BLINK_RATE) {
-                if (cursor == '|') cursor = '\u202F';
+                if (cursor == '|') cursor = '\u2009';
                 else cursor = '|';
                 cursorStartTime = nowTime;
             }

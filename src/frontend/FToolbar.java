@@ -341,6 +341,7 @@ public class FToolbar{
  */
   protected void addFController(FController con){
     conList.add(con);
+
   }
 
   /**

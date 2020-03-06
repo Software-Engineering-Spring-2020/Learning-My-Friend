@@ -15,8 +15,8 @@ import frontend.controlP5.*;
 public class PenButton extends FButton{
   public PenButton(ControlP5 cp5, FToolbar parrent, GUI gui){
 
-    super(cp5, "pen", parrent, gui);
-    super.button.plugTo(this);
+    super(cp5, "Pen", parrent, gui);
+    super.button.plugTo(this, "pen");
   }
 
 /**

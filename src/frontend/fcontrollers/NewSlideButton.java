@@ -14,7 +14,7 @@ import frontend.controlP5.*;
 
 public class NewSlideButton extends FButton{
   public NewSlideButton(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "new", parrent, gui);
+    super(cp5, "New", parrent, gui);
     super.button.plugTo(this, "newSlide");
   }
 

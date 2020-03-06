@@ -53,10 +53,10 @@ public class IOHandler{
   }
 
   public void mouseClicked(){
-    if(onCanvas()){
+
       if(gui.getTool() == 's')
         win.select(sketch.mouseX, sketch.mouseY);
-    }
+
   }
 
   public void mousePressed(){
@@ -76,7 +76,7 @@ public class IOHandler{
     //if pan tool is selected
     if(gui.getTool() == 'p' && onCanvas())
       win.freeDraw(sketch.mouseX, sketch.mouseY);
-    else if(onCanvas())
+    else //if(onCanvas())
       win.pan(sketch.mouseX, sketch.mouseY, sketch.pmouseX, sketch.pmouseY);
   }
 

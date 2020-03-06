@@ -14,8 +14,8 @@ import frontend.controlP5.*;
 
 public class OpenButton extends FButton{
   public OpenButton(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "open", parrent, gui);
-    super.button.plugTo(this);
+    super(cp5, "Open খোলা", parrent, gui);
+    super.button.plugTo(this, "open");
   }
 
 

@@ -16,8 +16,8 @@ import processing.core.*;
 public class FadeInButton extends FButton{
   public FadeInButton(ControlP5 cp5, FToolbar parrent, GUI gui){
 
-    super(cp5, "FadeIn", parrent, gui);
-    super.button.plugTo(this);
+    super(cp5, "Fade In", parrent, gui);
+    super.button.plugTo(this, "FadeIn");
     //super.button.setImages(loadImage("times-square.png"), loadImage("times-square.png"), loadImage("times-square.png"));
   }
 

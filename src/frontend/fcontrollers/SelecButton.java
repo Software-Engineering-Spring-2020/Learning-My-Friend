@@ -14,7 +14,7 @@ import frontend.controlP5.*;
 
 public class SelecButton extends FButton{
   public SelecButton(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "select", parrent, gui);
+    super(cp5, "Select", parrent, gui);
     super.button.plugTo(this);
   }
 

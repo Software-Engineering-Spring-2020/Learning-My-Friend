@@ -14,8 +14,8 @@ import frontend.controlP5.*;
 
 public class NextSlideButton extends FButton{
   public NextSlideButton(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "next", parrent, gui);
-    super.button.plugTo(this);
+    super(cp5, "Next", parrent, gui);
+    super.button.plugTo(this, "next");
   }
 
 
