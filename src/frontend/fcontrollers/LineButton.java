@@ -14,7 +14,7 @@ import frontend.controlP5.*;
 
 public class LineButton extends FButton{
   public LineButton(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "Line লাইন", parrent, gui);
+    super(cp5, "Line", parrent, gui);
     super.button.plugTo(this, "line");
   }
 

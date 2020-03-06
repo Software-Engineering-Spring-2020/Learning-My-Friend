@@ -15,7 +15,7 @@ import frontend.controlP5.*;
 public class FontDropdown extends FDropdown{
   public FontDropdown(ControlP5 cp5, FToolbar parrent, GUI gui){
 
-    super(cp5, "Font ফন্ট", parrent, gui);
+    super(cp5, "Font", parrent, gui);
     super.dropdown.plugTo(this, "font");
   }
 

@@ -14,7 +14,7 @@ import frontend.controlP5.*;
 
 public class BFillSlider extends FSlider{
   public BFillSlider(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "Blue নীল", parrent, gui);
+    super(cp5, "Blue", parrent, gui);
     super.slider.plugTo(this, "Bfill");
     super.slider.setMax(255);
     //super.slider.setColor(PApplet.color(100, 0, 0));

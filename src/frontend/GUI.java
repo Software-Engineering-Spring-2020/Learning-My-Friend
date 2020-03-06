@@ -897,7 +897,7 @@ public Window.TextMode getTextMode(){
       ft.addFController(new OpenButton(cp5, ft, this));
       ft.addFController(new ExportButton(cp5, ft, this));
 
-      String[] importMethods = {"Picture ছবি", "Sound শব্দ  ", "Youtube"};
+      String[] importMethods = {"Picture", "Sound", "Youtube"};
       FDropdown fd = new ImportDropdown(cp5, ft, this);
       fd.setItems(importMethods);
       ft.addFController(fd);

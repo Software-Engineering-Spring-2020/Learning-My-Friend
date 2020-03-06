@@ -14,7 +14,7 @@ import frontend.controlP5.*;
 
 public class PresentCurrentButton extends FButton{
   public PresentCurrentButton(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "From Current কারেন্ট থেকে", parrent, gui);
+    super(cp5, "From Current", parrent, gui);
     super.button.plugTo(this, "present");
   }
 
