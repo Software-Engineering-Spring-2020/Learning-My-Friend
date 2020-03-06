@@ -24,6 +24,7 @@ public class Video extends ColorfulObject {
   String videoPath;
   String[] file;
   boolean downloaded;
+  private boolean broken;
 
   /**
   * Constructor for Video
@@ -54,6 +55,7 @@ public class Video extends ColorfulObject {
             }
         }
     } catch (YoutubeException | IOException e) {
+        broken = true;
         e.printStackTrace();
     }
   }
@@ -73,11 +75,15 @@ public class Video extends ColorfulObject {
   }
 
   public void play() {
-    pvideo.play();
+    if (pvideo != null) pvideo.play();
   }
 
   public void stop() {
-    pvideo.stop();
+    if (pvideo != null) pvideo.stop();
+  }
+
+  public boolean broken() {
+    return broken;
   }
 
   /**
