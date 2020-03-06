@@ -102,7 +102,7 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
 
 	public void keyReleased(){
 		if(this.keyCode == 17) ctrl = false;
-		if(this.keyCode == 16) shift = false;
+	//	if(this.keyCode == 16) shift = false;
 	}
 
 	public void keyPressed(){
@@ -110,13 +110,13 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
 		win.keyPressed(this.key, this.keyCode);
 
 		if(this.keyCode == 17)  ctrl = true;
-		if(this.keyCode == 16) shift = true;
+//		if(this.keyCode == 16) shift = true;
 
-		//System.out.println(this.key+ ", "+this.keyCode + " : "+ctrl);
+		System.out.println(this.key+ ", "+this.keyCode + " : "+ctrl);
 		//System.out.println(this.key=='c'&&ctrl);
 
-		if(this.keyCode == 90 && ctrl) this.win.delete();
-		else if(this.keyCode == 89 && ctrl) this.win.restoreLast();
+		if(this.keyCode == 127 && ctrl) this.win.delete();
+		else if(this.keyCode == 82 && ctrl) this.win.restore();
 		else if(this.keyCode == 67 && ctrl) gui.copy();
 		else if(this.keyCode == 88 && ctrl) this.win.cut();
 		else if(this.keyCode == 86 && ctrl) gui.paste();
@@ -139,26 +139,26 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
 			}
 		}
 
-		else if(this.keyCode == 69 && ctrl) gui.export();
-		else if(this.keyCode == 71 && ctrl) gui.group();
-		else if(this.keyCode == 65 && ctrl) this.win.toggleComments(); //Toggles Annotations
-		else if(this.keyCode == 66 && ctrl) this.win.toggleGrid();  //Toggles boxes on screen (grid)
+//		else if(this.keyCode == 69 && ctrl) gui.export();
+	//	else if(this.keyCode == 71 && ctrl) gui.group();
+	//	else if(this.keyCode == 65 && ctrl) this.win.toggleComments(); //Toggles Annotations
+	//	else if(this.keyCode == 66 && ctrl) this.win.toggleGrid();  //Toggles boxes on screen (grid)
 
-		else if(this.key == '<') this.win.changeThickness(-.5F);
-		else if(this.key == '>') this.win.changeThickness(0.5F);
-		else if(this.key == '{') this.win.changeGridSpacing(-5);
-		else if(this.key == '}') this.win.changeGridSpacing(5);
-		else if(this.key == '|') this.win.createLine(this.mouseX, this.mouseY);
-		else if(this.key == 'P' && ctrl) this.win.createPollyGon(this.mouseX, this.mouseY, 3);
+	//	else if(this.key == '<') this.win.changeThickness(-.5F);
+	//	else if(this.key == '>') this.win.changeThickness(0.5F);
+	//	else if(this.key == '{') this.win.changeGridSpacing(-5);
+	//	else if(this.key == '}') this.win.changeGridSpacing(5);
+	//	else if(this.key == '|') this.win.createLine(this.mouseX, this.mouseY);
+	//	else if(this.key == 'P' && ctrl) this.win.createPollyGon(this.mouseX, this.mouseY, 3);
 
 
 		//else if(this.key == 'R') this.win.createRect(this.mouseX, this.mouseY);
-		else if(this.key == 'T' && ctrl) this.win.createTextBox(this.mouseX, this.mouseY, "This is Text!", "arial", 12);
-		else if(this.key == 'I' && ctrl) this.win.createInteractiveTextBox(this.mouseX, this.mouseY, "arial", 12);
+	//	else if(this.key == 'T' && ctrl) this.win.createTextBox(this.mouseX, this.mouseY, "This is Text!", "arial", 12);
+	//	else if(this.key == 'I' && ctrl) this.win.createInteractiveTextBox(this.mouseX, this.mouseY, "arial", 12);
 		//else if(this.key == 'A') this.win.createComment(this.mouseX, this.mouseY, "This is Comment!", "arial", 12);
 		//else if(this.key == 'C') this.win.createEllipse(this.mouseX, this.mouseY);
 
-		else if(this.keyCode == 127) this.win.delete();  //delete
+	//	else if(this.keyCode == 127) this.win.delete();  //delete
 		else if(this.keyCode == 37 && false) this.win.previousSlide(); //left
 		else if(this.keyCode == 39 && false) this.win.nextSlide();  //right
 		//else if(this.keyCode == 38) this.win.resize(0.01F);  //up
@@ -166,7 +166,7 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
 		else if(this.keyCode == 155) this.win.importImage("grayscrunchie",".png");
 
 		//else if(this.keyCode == 10) this.win.reCenter();   //enter
-		else if(this.keyCode == 192) this.win.createCurve(this.mouseX, this.mouseY); //tilde
+	//	else if(this.keyCode == 192) this.win.createCurve(this.mouseX, this.mouseY); //tilde
 	}
 
 
