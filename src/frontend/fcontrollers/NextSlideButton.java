@@ -20,8 +20,8 @@ public class NextSlideButton extends FButton{
 
 
   public void next(int val){
-    getGUI().nextSlide();
-
+    //getGUI().nextSlide();
+    //doenst have to be called with the way the backend handles presenting
   }
 
 }
