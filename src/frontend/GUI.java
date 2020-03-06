@@ -604,6 +604,7 @@ public Window.TextMode getTextMode(){
    */
   public void newSlide(){
     win.createSlideAt();
+    updateScrollbar();
   }
 
 
@@ -612,6 +613,7 @@ public Window.TextMode getTextMode(){
    */
   public void delSlide(){
     win.deleteSlide();
+    updateScrollbar();
   }
 
 
@@ -705,6 +707,14 @@ public Window.TextMode getTextMode(){
     */
    public void toggleGrid(){
     win.toggleGrid();
+   }
+
+
+/**
+ * [updateScrollbar updatest the number of slides one can scroll to]
+ */
+   public void updateScrollbar(){
+    // sb.setMin(getSlideCount())
    }
 
 

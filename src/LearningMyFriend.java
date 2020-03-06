@@ -68,7 +68,7 @@ public float canvasX, canvasY, canvasWidth, canvasHeight;
 		size(1000, 500);
 		// The size here is good for hidpi monitors
 		//size(1500, 1500/2);
-		smooth(8);
+		//smooth(2);
 	}
 
 
