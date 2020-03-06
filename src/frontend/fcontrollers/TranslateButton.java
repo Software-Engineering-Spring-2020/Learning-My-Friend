@@ -15,7 +15,7 @@ import frontend.controlP5.*;
 public class TranslateButton extends FButton{
   public TranslateButton(ControlP5 cp5, FToolbar parrent, GUI gui){
     super(cp5, "Move", parrent, gui);
-    super.button.plugTo(this);
+    super.button.plugTo(this, "Translate");
   }
 
 

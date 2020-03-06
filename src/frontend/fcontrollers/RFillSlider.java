@@ -14,7 +14,7 @@ import frontend.controlP5.*;
 
 public class RFillSlider extends FSlider{
   public RFillSlider(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "Red লাল", parrent, gui);
+    super(cp5, "Red", parrent, gui);
     super.slider.plugTo(this, "Rfill");
     super.slider.setMax(255);
     //super.slider.setColor(new CColor(0, 0,))

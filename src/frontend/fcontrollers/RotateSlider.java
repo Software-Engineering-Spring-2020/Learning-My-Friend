@@ -14,7 +14,7 @@ import frontend.controlP5.*;
 
 public class RotateSlider extends FSlider{
   public RotateSlider(ControlP5 cp5, FToolbar parrent, GUI gui){
-    super(cp5, "Rotate ঘুরা", parrent, gui);
+    super(cp5, "Rotate", parrent, gui);
     super.slider.plugTo(this, "rotatel");
     super.slider.setMin(-180);
     super.slider.setMax(180);
