@@ -162,7 +162,7 @@ public class GUI {
    * @return [thumbnail menu position in precentage of screen, Y]
    */
   private int getCurrentMenuPosY(){
-    return (int)(sketch.height*.54);
+    return (int)(sketch.height*.56);
   }
   /**
    * [getCurrentMenuSizeX  getst the thumbnail menu size X]
@@ -840,7 +840,7 @@ public Window.TextMode getTextMode(){
  * [setupObjectSettingsToolbar initialises the toolbar for object settings]
  */
    private void setupObjectSettingsToolbar(){
-    FToolbar ft = toolbarFactory("Obj Set", (float).2, (float).8, (float).78, (float).1);
+    FToolbar ft = toolbarFactory("Obj Set", (float).2, (float).8, (float).78, (float).15);
     rSlider = new RFillSlider(cp5, ft, this);
     bSlider = new GFillSlider(cp5, ft, this);
     gSlider = new BFillSlider(cp5, ft, this);
@@ -917,7 +917,7 @@ public Window.TextMode getTextMode(){
  * [setupSlideToolbar initialises the toolbar for slides]
  */
   private void setupSlideToolbar(){
-    FToolbar ft = toolbarFactory("Slides", (float).15, (float).05, (float).0, (float).08);
+    FToolbar ft = toolbarFactory("Slides", (float).15, (float).05, (float).0, (float).1);
     //Disables the users ability to clapse the toolbar
     ft.getGroup().disableCollapse();
     //reduces boarder
