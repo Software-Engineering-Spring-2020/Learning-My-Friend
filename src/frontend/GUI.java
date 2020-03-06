@@ -139,7 +139,7 @@ public class GUI {
  */
   public void animate(int i){
     if(i == 0)
-      win.addAnimation(Window.AnimationOption.FADE_IN, sketch.mouseX, sketch.mouseY);
+      win.addAnimation(Window.AnimationOption.FADE_OUT, sketch.mouseX, sketch.mouseY);
       setTool('s');
     if(i == 1)
       win.addAnimation(Window.AnimationOption.FADE_IN, sketch.mouseX, sketch.mouseY);
