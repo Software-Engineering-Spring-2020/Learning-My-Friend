@@ -11,6 +11,8 @@ public class YouTubeTextBox extends InteractiveTextBox {
     transient private boolean wasSelected;
     transient private boolean isSelected;
 
+    transient private boolean waiting = false;
+
     private boolean readyForVideo;
 
     public YouTubeTextBox(PApplet sketch, float x, float y, float width, float strokeWeight, int[] fillColor, int[] boarderColor, String font, float textSize, TextMode m, String start) {
@@ -30,8 +32,13 @@ public class YouTubeTextBox extends InteractiveTextBox {
             wasSelected = false;
             System.out.println(getVID());
         }
-        sketch.text("You copied:", 0f - pixelWidth / 2, 0f - pixelHeight / 2 - textSize - 5, pixelWidth, pixelHeight + textSize + 1000);
-        sketch.text("Press ENTER to confirm.", 0f - pixelWidth / 2, 0f - pixelHeight / 2 + pixelHeight + 5, pixelWidth + 1000, pixelHeight + textSize + 1000);
+        if (!waiting) {
+            sketch.text("You copied:", 0f - pixelWidth / 2, 0f - pixelHeight / 2 - textSize - 5, pixelWidth, pixelHeight + textSize + 1000);
+            sketch.text("Press ENTER to confirm.", 0f - pixelWidth / 2, 0f - pixelHeight / 2 + pixelHeight + 5, pixelWidth + 1000, pixelHeight + textSize + 1000);
+        }
+        else {
+            sketch.text("Please wait...", 0f - pixelWidth / 2, 0f - pixelHeight / 2 - textSize - 5, pixelWidth, pixelHeight + textSize + 1000);
+        }
         isSelected = false;
     }
     
@@ -46,6 +53,10 @@ public class YouTubeTextBox extends InteractiveTextBox {
     }
 
     public String getVID() {
-        return str.substring(32);
+        // we know that on retrieval, loading must occur
+        waiting = true;
+        String vid = str.substring(32);
+        readyForVideo = false;
+        return vid;
     }
 }

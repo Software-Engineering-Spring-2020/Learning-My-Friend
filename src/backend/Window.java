@@ -154,6 +154,7 @@ public class Window {
         }
 
         ArrayList<PollyObject> objs = slides.get(currentSlide).getAllObjects();
+        ArrayList<PollyObject> toRemove = new ArrayList<PollyObject>();
         for(PollyObject obj : objs) {
             if (obj.link != null) obj.showBoundingBox(0, 0, 255);
             if (obj instanceof Video) {
@@ -165,11 +166,18 @@ public class Window {
             if (obj instanceof YouTubeTextBox) {
                 YouTubeTextBox vobj = (YouTubeTextBox) obj;
                 if (vobj.readyForVideo()) {
-                    importVideo(vobj.getVID(), ".");
-                    slides.get(currentSlide).removeObject(vobj);
+                    importVideo(vobj.getVID(), ".", vobj);
+                    break;
                 }
-                break;
             }
+            else if (obj instanceof Video) {
+                Video v = (Video) obj;
+                if (v.isDone() && v.getYTB() != null)
+                    if (slides.get(currentSlide).getAllObjects().contains(v.getYTB())) toRemove.add(v.getYTB());
+            }
+        }
+        for (PollyObject obj : toRemove) {
+            slides.get(currentSlide).removeObject(obj);
         }
         for(PollyObject obj : selected) obj.showBoundingBox(215, 165, 0);
         if (!presenting) slides.get(currentSlide).showAnimationBoundingBoxes();
@@ -588,8 +596,8 @@ public class Window {
     * @param vid The YouTube video ID.
     * @return Whether or not the object was created and added to the slide successfully
     */
-   public boolean importVideo(String vid, String filepath) {
-    PollyObject obj = of.importVideo(0, 0, vid, filepath);
+   public boolean importVideo(String vid, String filepath, YouTubeTextBox yt) {
+    PollyObject obj = of.importVideo(0, 0, vid, filepath, yt);
     addObjectToCurrentSlide(obj);
     return false;
     }

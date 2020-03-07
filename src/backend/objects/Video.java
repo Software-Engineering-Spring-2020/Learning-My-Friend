@@ -3,6 +3,7 @@ package backend.objects;
 import java.io.File;
 import java.io.IOException;
 
+import com.github.kiulian.downloader.OnYoutubeDownloadListener;
 import com.github.kiulian.downloader.YoutubeDownloader;
 import com.github.kiulian.downloader.YoutubeException;
 import com.github.kiulian.downloader.model.YoutubeVideo;
@@ -24,8 +25,11 @@ public class Video extends ColorfulObject {
   String videoPath;
   String vid;
   transient String[] file;
+  transient YouTubeTextBox yt;
+  transient boolean done;
   boolean downloaded;
   String title;
+  String hashedTitle;
   private boolean broken;
 
   /**
@@ -36,17 +40,29 @@ public class Video extends ColorfulObject {
   * @param vid YouTube's video ID.
   * @param filepath The directory to store the video in.
   */
-  Video(PApplet sketch, float x, float y, float width, float height, String vid, String filepath){
+  Video(PApplet sketch, float x, float y, float width, float height, String vid, String filepath, YouTubeTextBox yt){
     super(sketch, x, y, 1, new int[4], new int[4]);
     fillColor[3] = 255;
     boarderColor[3] = 255;
     pixelWidth = width;
     pixelHeight = height;
     videoPath = filepath;
+    this.yt = yt;
     this.vid = vid;
     File vf = new File(videoPath + "/" + title + ".mp4");
     if (!vf.exists()) downloadVideo();
-    pvideo = new Movie(sketch, videoPath + "/" + title + ".mp4");
+  }
+
+  public void setYTB(YouTubeTextBox yt) {
+    this.yt = yt;
+  }
+
+  public YouTubeTextBox getYTB() {
+    return yt;
+  }
+
+  public boolean isDone() {
+    return done;
   }
 
   private void downloadVideo() {
@@ -58,8 +74,25 @@ public class Video extends ColorfulObject {
         for (Format format : video.formats()) {
             // Itag.i17 is the lowest resolution available
             if (format instanceof AudioVideoFormat) {
-                video.download(format, f);
+                video.downloadAsync(format, f, new OnYoutubeDownloadListener() {
+                  @Override
+                  public void onDownloading(int progress) {
+                    System.out.println("Downloading: " + Integer.toString(progress) + "%");
+                  }
+                          
+                  @Override
+                  public void onFinished(File file) {
+                    pvideo = new Movie(sketch, videoPath + "/" + hashedTitle + ".mp4");
+                    done = true;
+                  }
+              
+                  @Override
+                  public void onError(Throwable throwable) {
+                    System.out.println("Error: " + throwable.getLocalizedMessage());
+                  }
+                });
                 title = video.details().title();
+                hashedTitle = Integer.toString(title.hashCode());
                 break;
             }
         }
@@ -75,9 +108,12 @@ public class Video extends ColorfulObject {
   */
   protected void init(PApplet sketch){
     super.init(sketch);
-    File vf = new File(videoPath + "/" + title + ".mp4");
+    File vf = new File(videoPath + "/" + hashedTitle + ".mp4");
     if (!vf.exists()) downloadVideo();
-    pvideo = new Movie(sketch, videoPath + "/" + title + ".mp4");
+    else {
+      pvideo = new Movie(sketch, videoPath + "/" + hashedTitle + ".mp4");
+      done = true;
+    }
   }
 
   public boolean isPlaying() {

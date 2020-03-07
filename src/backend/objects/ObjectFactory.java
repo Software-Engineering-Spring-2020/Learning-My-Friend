@@ -54,8 +54,8 @@ public class ObjectFactory {
         return new Image(sketch, x, y, filename, extension);
     }
 
-    public Video importVideo(float x, float y, String vid, String filepath) {
-        return new Video(sketch, x, y, 256, 144, vid, filepath);
+    public Video importVideo(float x, float y, String vid, String filepath, YouTubeTextBox yt) {
+        return new Video(sketch, x, y, 256, 144, vid, filepath, yt);
     }
 
     /**
