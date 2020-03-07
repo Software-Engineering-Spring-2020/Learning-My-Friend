@@ -61,7 +61,6 @@ class AnimatedImage extends Image {
     file = new String[]{filename, extension};
     frames = new ArrayList<BufferedImage>();
     images = new ArrayList<PImage>();
-    
     try {
         File gif = new File(filename + extension);
         ImageInputStream gifStream = ImageIO.createImageInputStream(gif);

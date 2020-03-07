@@ -52,6 +52,10 @@ public class BackendDriver extends PApplet {
 	 */
 	public static void main(String[] passedArgs) {
 		// testing the new lib
+		//Syste.out.println();
+		String path = System.getProperty("user.dir").replace("\\", "/");
+		//SSystem.setProperty("gstreamer.library.path", "lib");
+		System.out.println(System.getProperty("gstreamer.library.path"));
 		String[] appletArgs = { "BackendDriver" };
 		if (passedArgs != null) {
 			PApplet.main(concat(appletArgs, passedArgs));

@@ -176,7 +176,7 @@ public class Window {
 
         if(export && zoom == 1 && selected.size() == 0){
           menu.updateThumbnail(currentSlide, getSlideImage());
-          SerialManager.exportThumbnails(slides, savefile);
+          SerialManager.exportThumbnails(sketch, slides, savefile);
           export = false;
         }
 
@@ -297,6 +297,10 @@ public class Window {
         return slides.get(currentSlide).withinScope(coord[0], coord[1]);
     }
 
+    public int getSlideCount() {
+        return slides.size();
+    }
+
     /**
     * @deprecated
     * @see pan(float mouseX, float mouseY, float pmouseX, float pmouseY)
@@ -307,7 +311,7 @@ public class Window {
 
 
     public void setWidth(float x) {
-        zoom = (sketch.height / slides.get(currentSlide).pixelHeight);
+        zoom = (x / slides.get(currentSlide).pixelWidth);
     }
 
     /**
