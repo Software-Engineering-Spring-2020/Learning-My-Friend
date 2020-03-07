@@ -1332,7 +1332,7 @@ public class Window {
       slides = SerialManager.openSlides(sketch, filename);
       slideImages = new ArrayList<PImage>();
       for (DrawSpace slide : slides) {
-          if (slide.getImage() != null) slideImages.add(slide.getImage());
+          if (slide.getImage() != null) slideImages.add(slide.getImage().copy());
       }
       menu.loadSlides(slideImages);
     }

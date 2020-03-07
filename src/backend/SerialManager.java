@@ -114,12 +114,11 @@ public class SerialManager {
             String directoryName = "";
             if (filename.contains(".")) directoryName = filename.substring(0, filename.lastIndexOf('.'));
             else directoryName = filename;
-            directoryName += "Images";
             File directory = new File(directoryName);
             if (directory.exists()){
                 directory.mkdir();
                 for (int i = 0; i < slides.size(); i++) {
-                    slides.get(i).setImage(sketch.loadImage(directoryName + "/" + i + ".pdf"));
+                    slides.get(i).setImage(sketch.loadImage(directoryName + "/" + i + ".png"));
                 }
             }
             return slides;
@@ -140,18 +139,17 @@ public class SerialManager {
             for(File file: directory.listFiles()) if (!file.isDirectory()) file.delete();
         }
         PImage image = slides.get(0).getImage();
-        PGraphicsPDF pdf = (PGraphicsPDF) sketch.createGraphics(image.width, image.height, PConstants.PDF, "C:/Users/isaac/Desktop/sketch_200306a/gloria.pdf");
+        PGraphicsPDF pdf = (PGraphicsPDF) sketch.createGraphics(image.width, image.height, PConstants.PDF, directoryName + "/" + "slides.pdf");
         pdf.beginDraw();
         for (int i = 0; i < slides.size(); i++) {
             image = slides.get(i).getImage();
             if (!(image == null)) {
+                if (i > 0) pdf.nextPage();
                 pdf.image(image, 0, 0);            
                 image.save(directoryName + "/" + i + ".png");
-                pdf.nextPage();
             }
         }
         pdf.dispose();
         pdf.endDraw();
-        System.out.println(pdf);
     }
 }
