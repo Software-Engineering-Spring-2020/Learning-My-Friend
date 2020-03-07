@@ -14,6 +14,8 @@
 	<classpathentry kind="lib" path="src/sound.jar"/>
 	<classpathentry kind="lib" path="src/video.jar"/>
 	<classpathentry kind="lib" path="src/yt.jar"/>
+	<classpathentry kind="lib" path="src/itext.jar"/>
+	<classpathentry kind="lib" path="src/pdf.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
