@@ -714,7 +714,7 @@ public Window.TextMode getTextMode(){
  * [updateScrollbar updatest the number of slides one can scroll to]
  */
    public void updateScrollbar(){
-    // sb.setMin(getSlideCount())
+    /// sb.setMin(getSlideCount())
    }
 
 
@@ -1079,6 +1079,7 @@ public Window.TextMode getTextMode(){
      win.setMenuPosition(getCurrentMenuPosX(), getCurrentMenuPosY());
      win.setMenuSize(getCurrentMenuSizeX(), getCurrentMenuSizeY());
      win.reCenter();
+     win.setWidth(sketch.width/2);
    }
 
 }
