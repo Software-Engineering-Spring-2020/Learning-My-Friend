@@ -12,6 +12,7 @@ public class YouTubeTextBox extends InteractiveTextBox {
     transient private boolean isSelected;
 
     transient private boolean waiting = false;
+    transient private String statusMessage = "You copied:";
 
     private boolean readyForVideo;
 
@@ -33,13 +34,18 @@ public class YouTubeTextBox extends InteractiveTextBox {
             System.out.println(getVID());
         }
         if (!waiting) {
-            sketch.text("You copied:", 0f - pixelWidth / 2, 0f - pixelHeight / 2 - textSize - 5, pixelWidth, pixelHeight + textSize + 1000);
+            sketch.text(statusMessage, 0f - pixelWidth / 2, 0f - pixelHeight / 2 - textSize - 5, pixelWidth, pixelHeight + textSize + 1000);
             sketch.text("Press ENTER to confirm.", 0f - pixelWidth / 2, 0f - pixelHeight / 2 + pixelHeight + 5, pixelWidth + 1000, pixelHeight + textSize + 1000);
         }
         else {
             sketch.text("Please wait...", 0f - pixelWidth / 2, 0f - pixelHeight / 2 - textSize - 5, pixelWidth, pixelHeight + textSize + 1000);
         }
         isSelected = false;
+    }
+
+    public void setStatusMessage(String statusMessage) {
+        this.statusMessage = statusMessage;
+        if (waiting) waiting = false;
     }
     
     protected void addCharacter(char c) {
@@ -55,7 +61,8 @@ public class YouTubeTextBox extends InteractiveTextBox {
     public String getVID() {
         // we know that on retrieval, loading must occur
         waiting = true;
-        String vid = str.substring(32);
+        String vid = "";
+        if (str.length() >= 32) vid = str.substring(32);
         readyForVideo = false;
         return vid;
     }

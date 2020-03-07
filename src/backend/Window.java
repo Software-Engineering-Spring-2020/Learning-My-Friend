@@ -174,6 +174,12 @@ public class Window {
                 Video v = (Video) obj;
                 if (v.isDone() && v.getYTB() != null)
                     if (slides.get(currentSlide).getAllObjects().contains(v.getYTB())) toRemove.add(v.getYTB());
+                if (v.broken()) {
+                    System.out.println("Broken video.");
+                    if (v.getYTB() != null) v.getYTB().setStatusMessage("Invalid URL. Please try again.");
+                    selected.remove(v);
+                    toRemove.add(v);
+                }
             }
         }
         for (PollyObject obj : toRemove) {

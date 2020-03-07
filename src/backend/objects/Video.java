@@ -89,6 +89,7 @@ public class Video extends ColorfulObject {
                   @Override
                   public void onError(Throwable throwable) {
                     System.out.println("Error: " + throwable.getLocalizedMessage());
+                    broken = true;
                   }
                 });
                 title = video.details().title();
@@ -98,6 +99,7 @@ public class Video extends ColorfulObject {
         }
     } catch (YoutubeException | IOException e) {
         broken = true;
+        System.out.println("BROKEN!");
         e.printStackTrace();
     }
   }
